@@ -37,3 +37,8 @@ Desktop.ini
 # remain an explicit decision. For now dist/ stays tracked.
 # Revisit when the release/distribution policy is set.
 # ------------------------------------------------------------
+.agent
+.freebuff
+.claude
+agent
+.foam
