@@ -1,0 +1,194 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>IndigoKit Playground — Cards</title>
+  <link rel="stylesheet" href="../../dist/css/indigokit.css">
+  <link rel="stylesheet" href="../playground.css">
+  <!-- Playground theme persistence (Task 047) — applies the stored
+       indigokit-theme preference before first paint. Playground-only. -->
+  <script src="../theme.js"></script>
+</head>
+<body>
+  <div class="container py-5">
+    <h1>Cards</h1>
+    <p class="lead">Bootstrap's card API with IndigoKit refinement — every section below uses standard Bootstrap classes (<code>.card</code>, <code>.card-header</code>, <code>.card-body</code>, <code>.card-footer</code>, <code>.card-title</code>, <code>.card-subtitle</code>, <code>.card-text</code>, <code>.card-link</code>, <code>.card-img-top</code>, <code>.card-group</code>). The only <code>mu-*</code> card class is <code>.mu-card-interactive</code> for interactive cards.</p>
+
+    <!-- Basic -->
+    <h2 class="h5 mt-5 mb-3">Basic</h2>
+    <div class="row g-3">
+      <div class="col-md-6">
+        <div class="card">
+          <div class="card-body">
+            <p class="card-text">A default <code>.card</code> — white surface, hairline border, 6px radius, no shadow. Integrated with the page, not floating.</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="card shadow-sm">
+          <div class="card-body">
+            <p class="card-text">An elevated card via Bootstrap's own utility — <code>.card.shadow-sm</code> (emits the <code>$mu-shadow-xs</code> token).</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Sections -->
+    <h2 class="h5 mt-5 mb-3">Sections</h2>
+    <div class="col-md-8">
+      <div class="card">
+        <div class="card-header">Card header</div>
+        <div class="card-body">
+          <p class="card-text mb-0">Header and footer use the subtle cap tint (<code>--bs-card-cap-bg</code>) with hairline separators. Body padding is Bootstrap's 1rem spacer.</p>
+        </div>
+        <div class="card-footer">Card footer</div>
+      </div>
+    </div>
+
+    <!-- Content -->
+    <h2 class="h5 mt-5 mb-3">Content</h2>
+    <div class="col-md-8">
+      <div class="card">
+        <div class="card-body">
+          <h3 class="card-title h5">Card title</h3>
+          <h4 class="card-subtitle h6 mb-2">Card subtitle — muted secondary text</h4>
+          <p class="card-text">Some quick example text to demonstrate the title, subtitle and text hierarchy inside a card body.</p>
+          <a href="#" class="card-link">Card link</a>
+          <a href="#" class="card-link">Another link</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Media -->
+    <h2 class="h5 mt-5 mb-3">Media</h2>
+    <div class="row g-3">
+      <div class="col-md-6">
+        <div class="card">
+          <img src="../assets/placeholder-card.svg" class="card-img-top" alt="Placeholder illustration">
+          <div class="card-body">
+            <h3 class="card-title h5">Image on top</h3>
+            <p class="card-text mb-0"><code>.card-img-top</code> — corners follow the card radius.</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="card">
+          <div class="card-body">
+            <h3 class="card-title h5">Image on bottom</h3>
+            <p class="card-text"><code>.card-img-bottom</code> — corners follow the card radius.</p>
+          </div>
+          <img src="../assets/placeholder-card.svg" class="card-img-bottom" alt="Placeholder illustration">
+        </div>
+      </div>
+    </div>
+
+    <!-- Actions -->
+    <h2 class="h5 mt-5 mb-3">Actions</h2>
+    <div class="row g-3">
+      <div class="col-md-6">
+        <div class="card h-100">
+          <div class="card-body">
+            <h3 class="card-title h5">Single action</h3>
+            <p class="card-text">A card with one primary action — a real button, keyboard accessible.</p>
+            <button type="button" class="btn btn-primary">Open</button>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="card h-100">
+          <div class="card-body">
+            <h3 class="card-title h5">Multiple actions</h3>
+            <p class="card-text">Actions sit at the bottom of the body with consistent spacing.</p>
+            <button type="button" class="btn btn-primary">Save</button>
+            <button type="button" class="btn btn-outline-secondary">Cancel</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Layouts -->
+    <h2 class="h5 mt-5 mb-3">Card group</h2>
+    <div class="card-group">
+      <div class="card">
+        <div class="card-body">
+          <h3 class="card-title h5">One</h3>
+          <p class="card-text mb-0">Bootstrap's <code>.card-group</code> — equal-width cards sharing borders.</p>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-body">
+          <h3 class="card-title h5">Two</h3>
+          <p class="card-text mb-0">Cards are flex items inside the group.</p>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-body">
+          <h3 class="card-title h5">Three</h3>
+          <p class="card-text mb-0">Radius corners are handled by Bootstrap's group selectors.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Interactive -->
+    <h2 class="h5 mt-5 mb-3">Interactive</h2>
+    <p class="demo-label">Interactive cards are real links — keyboard-focusable, with the global focus ring around the card. <code>.mu-card-interactive</code> adds a subtle hover (indigo-tinted border + XS shadow). Static cards get no hover.</p>
+    <div class="row g-3">
+      <div class="col-md-6">
+        <a href="#" class="card mu-card-interactive h-100">
+          <div class="card-body">
+            <h3 class="card-title h5">Interactive card</h3>
+            <p class="card-text mb-0">This entire card is a link. Hover shows the indigo border + shadow; <kbd>Tab</kbd> shows the focus ring.</p>
+          </div>
+        </a>
+      </div>
+      <div class="col-md-6">
+        <div class="card h-100">
+          <div class="card-body">
+            <h3 class="card-title h5">Stretched link</h3>
+            <p class="card-text">Bootstrap's own pattern for a whole-card link without styling the card itself.</p>
+            <a href="#" class="stretched-link">Go somewhere</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Responsive -->
+    <h2 class="h5 mt-5 mb-3">Responsive layout</h2>
+    <div class="row g-3">
+      <div class="col-12 col-sm-6 col-lg-3">
+        <div class="card h-100">
+          <div class="card-body">
+            <h3 class="card-title h5">Col 1</h3>
+            <p class="card-text mb-0">Full width on mobile, stacked pairs on tablet, four across on desktop.</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-12 col-sm-6 col-lg-3">
+        <div class="card h-100">
+          <div class="card-body">
+            <h3 class="card-title h5">Col 2</h3>
+            <p class="card-text mb-0">Same markup — Bootstrap grid handles the layout.</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-12 col-sm-6 col-lg-3">
+        <div class="card h-100">
+          <div class="card-body">
+            <h3 class="card-title h5">Col 3</h3>
+            <p class="card-text mb-0">Cards in a grid stretch to equal height via <code>h-100</code>.</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-12 col-sm-6 col-lg-3">
+        <div class="card h-100">
+          <div class="card-body">
+            <h3 class="card-title h5">Col 4</h3>
+            <p class="card-text mb-0">Zero horizontal overflow at every viewport.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

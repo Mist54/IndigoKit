@@ -1,0 +1,649 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>IndigoKit — Data table</title>
+  <link rel="stylesheet" href="../../dist/css/indigokit.css">
+  <link rel="stylesheet" href="../playground.css">
+  <script src="../theme.js"></script>
+  <script src="../assets/lucide.umd.js"></script>
+  <script src="../../node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="../../dist/js/indigokit.js"></script>
+</head>
+<body>
+  <div class="mu-app">
+
+    <header class="mu-app-top">
+      <nav class="navbar mu-app-navbar" aria-label="Main navigation">
+        <div class="container-fluid">
+                    <div class="d-flex align-items-center gap-2">
+            <button type="button" class="btn" data-mu-mobile-toggle aria-controls="app-sidebar" aria-expanded="false" aria-label="Open navigation">
+              <i data-lucide="menu" aria-hidden="true"></i>
+            </button>
+            <button type="button" class="btn" data-mu-sidebar-toggle aria-controls="app-sidebar" aria-expanded="true" aria-label="Collapse sidebar">
+              <i data-lucide="panel-left-close" aria-hidden="true"></i>
+            </button>
+            <a class="navbar-brand" href="../index.html">
+            <i data-lucide="layers" aria-hidden="true"></i>
+            IndigoKit
+          </a>
+          </div>
+          <div class="mu-navbar-main"></div>
+          <div class="mu-navbar-actions">
+            <select class="form-select form-select-sm" data-theme-switch aria-label="Theme">
+              <option value="system">System</option>
+              <option value="light">Light</option>
+              <option value="dark">Dark</option>
+            </select>
+            <button type="button" class="btn d-none d-md-inline-flex" aria-label="Notifications">
+              <i data-lucide="bell" aria-hidden="true"></i>
+            </button>
+            <button type="button" class="btn d-none d-md-inline-flex" aria-label="Help">
+              <i data-lucide="circle-question-mark" aria-hidden="true"></i>
+            </button>
+            <div class="dropdown">
+              <a class="mu-navbar-user" href="#" data-bs-toggle="dropdown" aria-expanded="false" aria-label="User menu">
+                <span class="mu-avatar"><i data-lucide="user" aria-hidden="true"></i></span>
+                <span class="mu-user-name d-none d-lg-inline">Jane Doe</span>
+                <i data-lucide="chevron-down" aria-hidden="true"></i>
+              </a>
+              <ul class="dropdown-menu dropdown-menu-end">
+                <li>
+                  <h6 class="dropdown-header">Jane Doe<span class="d-block small fw-normal text-body-secondary">Software Engineer</span></h6>
+                </li>
+                <li><hr class="dropdown-divider"></li>
+                <li><a class="dropdown-item" href="profile.html">Profile</a></li>
+                <li><a class="dropdown-item" href="settings.html">Account Settings</a></li>
+                <li><a class="dropdown-item" href="settings.html">Notifications</a></li>
+                <li><a class="dropdown-item" href="auth/lock-screen.html">Lock Screen</a></li>
+                <li><hr class="dropdown-divider"></li>
+                <li><a class="dropdown-item text-danger" href="auth/login.html">Sign out</a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <div class="mu-app-body">
+
+      <aside class="mu-app-side">
+        <div class="mu-sidebar" id="app-sidebar">
+          <div class="mu-sidebar-header">
+            <button type="button" class="btn mu-sidebar-close" data-mu-sidebar-close aria-label="Close navigation">
+              <i data-lucide="x" aria-hidden="true"></i>
+            </button>
+          </div>
+          <nav class="mu-sidebar-nav" aria-label="Sidebar navigation">
+            <div class="mu-sidebar-section">
+              <div class="mu-sidebar-label">Application examples</div>
+              <ul class="mu-sidebar-list">
+                <li>
+                  <a class="mu-sidebar-link" href="../index.html">
+                    <i data-lucide="layout-dashboard" aria-hidden="true"></i>
+                    <span class="mu-sidebar-link-text">Dashboard</span>
+                  </a>
+                </li>
+                <li>
+                  <a class="mu-sidebar-link" href="dashboard-analytics.html">
+                    <i data-lucide="chart-no-axes-combined" aria-hidden="true"></i>
+                    <span class="mu-sidebar-link-text">Analytics</span>
+                  </a>
+                </li>
+                <li>
+                  <a class="mu-sidebar-link" href="dashboard-sales.html">
+                    <i data-lucide="chart-column" aria-hidden="true"></i>
+                    <span class="mu-sidebar-link-text">Sales</span>
+                  </a>
+                </li>
+                <li>
+                  <button type="button" class="mu-sidebar-link" data-bs-toggle="collapse" data-bs-target="#nav-auth" aria-expanded="false" aria-controls="nav-auth">
+                    <i data-lucide="shield" aria-hidden="true"></i>
+                    <span class="mu-sidebar-link-text">Authentication</span>
+                    <i data-lucide="chevron-right" class="mu-sidebar-chevron" aria-hidden="true"></i>
+                  </button>
+                  <div class="collapse" id="nav-auth">
+                    <ul class="mu-sidebar-nested">
+                      <li><a class="mu-sidebar-link" href="auth/login.html"><span class="mu-sidebar-link-text">Login</span></a></li>
+                      <li><a class="mu-sidebar-link" href="auth/register.html"><span class="mu-sidebar-link-text">Register</span></a></li>
+                      <li><a class="mu-sidebar-link" href="auth/forgot-password.html"><span class="mu-sidebar-link-text">Forgot password</span></a></li>
+                      <li><a class="mu-sidebar-link" href="auth/reset-password.html"><span class="mu-sidebar-link-text">Reset password</span></a></li>
+                      <li><a class="mu-sidebar-link" href="auth/lock-screen.html"><span class="mu-sidebar-link-text">Lock screen</span></a></li>
+                    </ul>
+                  </div>
+                </li>
+                <li>
+                  <button type="button" class="mu-sidebar-link" data-bs-toggle="collapse" data-bs-target="#nav-pages" aria-expanded="true" aria-controls="nav-pages">
+                    <i data-lucide="files" aria-hidden="true"></i>
+                    <span class="mu-sidebar-link-text">Pages</span>
+                    <i data-lucide="chevron-right" class="mu-sidebar-chevron" aria-hidden="true"></i>
+                  </button>
+                  <div class="collapse show" id="nav-pages">
+                    <ul class="mu-sidebar-nested">
+                      <li><a class="mu-sidebar-link" href="profile.html"><span class="mu-sidebar-link-text">Profile</span></a></li>
+                      <li><a class="mu-sidebar-link" href="settings.html"><span class="mu-sidebar-link-text">Settings</span></a></li>
+                      <li><a class="mu-sidebar-link" href="pricing.html"><span class="mu-sidebar-link-text">Pricing</span></a></li>
+                      <li><a class="mu-sidebar-link" href="faq.html"><span class="mu-sidebar-link-text">FAQ</span></a></li>
+                      <li><a class="mu-sidebar-link" href="invoice.html"><span class="mu-sidebar-link-text">Invoice</span></a></li>
+                      <li><a class="mu-sidebar-link" href="users.html"><span class="mu-sidebar-link-text">User list</span></a></li>
+                      <li><a class="mu-sidebar-link" href="roles.html"><span class="mu-sidebar-link-text">Roles &amp; permissions</span></a></li>
+                      <li><a class="mu-sidebar-link" href="notifications.html"><span class="mu-sidebar-link-text">Notifications</span></a></li>
+                      <li><a class="mu-sidebar-link" href="products.html"><span class="mu-sidebar-link-text">Products</span></a></li>
+                    </ul>
+                  </div>
+                </li>
+                <li>
+                  <button type="button" class="mu-sidebar-link" data-bs-toggle="collapse" data-bs-target="#nav-errors" aria-expanded="false" aria-controls="nav-errors">
+                    <i data-lucide="triangle-alert" aria-hidden="true"></i>
+                    <span class="mu-sidebar-link-text">Error pages</span>
+                    <i data-lucide="chevron-right" class="mu-sidebar-chevron" aria-hidden="true"></i>
+                  </button>
+                  <div class="collapse" id="nav-errors">
+                    <ul class="mu-sidebar-nested">
+                      <li><a class="mu-sidebar-link" href="errors/404.html"><span class="mu-sidebar-link-text">404 Not found</span></a></li>
+                      <li><a class="mu-sidebar-link" href="errors/403.html"><span class="mu-sidebar-link-text">403 Forbidden</span></a></li>
+                      <li><a class="mu-sidebar-link" href="errors/500.html"><span class="mu-sidebar-link-text">500 Server error</span></a></li>
+                      <li><a class="mu-sidebar-link" href="errors/maintenance.html"><span class="mu-sidebar-link-text">Maintenance</span></a></li>
+                    </ul>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="mu-sidebar-section">
+              <div class="mu-sidebar-label">Components</div>
+              <ul class="mu-sidebar-list">
+                <li><a class="mu-sidebar-link" href="tokens.html"><span class="mu-sidebar-link-text">Tokens</span></a></li>
+                <li><a class="mu-sidebar-link" href="base.html"><span class="mu-sidebar-link-text">Base</span></a></li>
+                <li><a class="mu-sidebar-link" href="layout.html"><span class="mu-sidebar-link-text">Layout</span></a></li>
+                <li><a class="mu-sidebar-link" href="navbar.html"><span class="mu-sidebar-link-text">Navbar</span></a></li>
+                <li><a class="mu-sidebar-link" href="sidebar.html"><span class="mu-sidebar-link-text">Sidebar</span></a></li>
+                <li><a class="mu-sidebar-link" href="buttons.html"><span class="mu-sidebar-link-text">Buttons</span></a></li>
+                <li><a class="mu-sidebar-link" href="cards.html"><span class="mu-sidebar-link-text">Cards</span></a></li>
+                <li><a class="mu-sidebar-link" href="alerts.html"><span class="mu-sidebar-link-text">Alerts</span></a></li>
+                <li><a class="mu-sidebar-link" href="badges.html"><span class="mu-sidebar-link-text">Badges</span></a></li>
+                <li><a class="mu-sidebar-link" href="dropdowns.html"><span class="mu-sidebar-link-text">Dropdowns</span></a></li>
+                <li><a class="mu-sidebar-link" href="modals.html"><span class="mu-sidebar-link-text">Modals</span></a></li>
+                <li><a class="mu-sidebar-link" href="tabs.html"><span class="mu-sidebar-link-text">Tabs</span></a></li>
+                <li><a class="mu-sidebar-link" href="breadcrumbs.html"><span class="mu-sidebar-link-text">Breadcrumbs</span></a></li>
+                <li><a class="mu-sidebar-link" href="pagination.html"><span class="mu-sidebar-link-text">Pagination</span></a></li>
+                <li><a class="mu-sidebar-link" href="forms.html"><span class="mu-sidebar-link-text">Forms</span></a></li>
+                <li><a class="mu-sidebar-link" href="tables.html"><span class="mu-sidebar-link-text">Tables</span></a></li>
+                <li><a class="mu-sidebar-link active" href="data-table.html" aria-current="page"><span class="mu-sidebar-link-text">Data table</span></a></li>
+                <li><a class="mu-sidebar-link" href="form-patterns.html"><span class="mu-sidebar-link-text">Form patterns</span></a></li>
+                <li><a class="mu-sidebar-link" href="progress.html"><span class="mu-sidebar-link-text">Progress</span></a></li>
+                <li><a class="mu-sidebar-link" href="loading.html"><span class="mu-sidebar-link-text">Loading</span></a></li>
+                <li><a class="mu-sidebar-link" href="toasts.html"><span class="mu-sidebar-link-text">Toasts</span></a></li>
+                <li><a class="mu-sidebar-link" href="list-groups.html"><span class="mu-sidebar-link-text">List groups</span></a></li>
+                <li><a class="mu-sidebar-link" href="empty-states.html"><span class="mu-sidebar-link-text">Empty states</span></a></li>
+                <li><a class="mu-sidebar-link" href="tooltips-popovers.html"><span class="mu-sidebar-link-text">Tooltips &amp; popovers</span></a></li>
+                <li><a class="mu-sidebar-link" href="accordion.html"><span class="mu-sidebar-link-text">Accordion</span></a></li>
+                <li><a class="mu-sidebar-link" href="offcanvas.html"><span class="mu-sidebar-link-text">Offcanvas</span></a></li>
+                <li><a class="mu-sidebar-link" href="carousel.html"><span class="mu-sidebar-link-text">Carousel</span></a></li>
+                <li><a class="mu-sidebar-link" href="scrollspy.html"><span class="mu-sidebar-link-text">Scrollspy</span></a></li>
+                <li><a class="mu-sidebar-link" href="navigation-patterns.html"><span class="mu-sidebar-link-text">Navigation patterns</span></a></li>
+                <li><a class="mu-sidebar-link" href="themes.html"><span class="mu-sidebar-link-text">Themes</span></a></li>
+              </ul>
+            </div>
+          </nav>
+        </div>
+      </aside>
+
+      <main class="mu-app-main">
+        <div class="mu-app-content">
+          <div class="container-fluid py-4">
+
+            <nav aria-label="Breadcrumb">
+              <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="../index.html">Dashboard</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Data table</li>
+              </ol>
+            </nav>
+
+            <div class="d-flex flex-wrap align-items-center justify-content-between gap-2 mb-3">
+              <div>
+                <h1 class="h3 mb-1">Data table</h1>
+                <p class="text-body-secondary mb-0">A full pattern: filtering, sorting, selection, bulk actions, pagination, and explicit loading / empty / error states — built only from Bootstrap classes and a small vanilla demo script.</p>
+              </div>
+              <div class="d-flex gap-2">
+                <button type="button" class="btn btn-outline-secondary btn-sm">
+                  <i data-lucide="download" aria-hidden="true" width="16" height="16" class="me-1"></i>
+                  Export
+                </button>
+                <button type="button" class="btn btn-primary btn-sm">
+                  <i data-lucide="plus" aria-hidden="true" width="16" height="16" class="me-1"></i>
+                  New order
+                </button>
+              </div>
+            </div>
+
+            <p class="demo-label mb-4">The four table states — <strong>data</strong>, <strong>loading</strong>, <strong>empty</strong>, and <strong>error</strong> — are separate renderings, never guesses. Loading means the system is retrieving data; empty means data loaded but there is nothing to show; error means the operation failed and tells the user what to do next. Try the state switcher, then sort columns, search, select rows, and use the bulk bar.</p>
+
+            <div class="card mb-3">
+              <div class="card-body py-3">
+                <div class="row g-2 align-items-end">
+                  <div class="col-12 col-md-4 col-lg-3">
+                    <label class="form-label small mb-1" for="dt-search">Search</label>
+                    <div class="input-group input-group-sm">
+                      <span class="input-group-text"><i data-lucide="search" aria-hidden="true" width="14" height="14"></i></span>
+                      <input type="search" class="form-control" id="dt-search" placeholder="Order, customer, or email">
+                    </div>
+                  </div>
+                  <div class="col-6 col-md-3 col-lg-2">
+                    <label class="form-label small mb-1" for="dt-status">Status</label>
+                    <select class="form-select form-select-sm" id="dt-status">
+                      <option value="">All statuses</option>
+                      <option value="paid">Paid</option>
+                      <option value="pending">Pending</option>
+                      <option value="shipped">Shipped</option>
+                      <option value="refunded">Refunded</option>
+                      <option value="cancelled">Cancelled</option>
+                    </select>
+                  </div>
+                  <div class="col-6 col-md-3 col-lg-2">
+                    <label class="form-label small mb-1" for="dt-per-page">Rows per page</label>
+                    <select class="form-select form-select-sm" id="dt-per-page">
+                      <option value="5">5</option>
+                      <option value="10">10</option>
+                      <option value="20">20</option>
+                    </select>
+                  </div>
+                  <div class="col-12 col-md-2 d-flex gap-2">
+                    <span id="dt-feedback" class="small text-success align-self-center d-none" role="status"></span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="card">
+              <div class="card-header d-flex flex-wrap align-items-center justify-content-between gap-2">
+                <span class="fw-semibold">Orders</span>
+                <div class="btn-group btn-group-sm" role="group" aria-label="Table state">
+                  <button type="button" class="btn btn-outline-secondary active" data-mu-state="data" aria-pressed="true">Data</button>
+                  <button type="button" class="btn btn-outline-secondary" data-mu-state="loading" aria-pressed="false">Loading</button>
+                  <button type="button" class="btn btn-outline-secondary" data-mu-state="empty" aria-pressed="false">Empty</button>
+                  <button type="button" class="btn btn-outline-secondary" data-mu-state="error" aria-pressed="false">Error</button>
+                </div>
+              </div>
+
+              <div id="dt-bulk" class="border-bottom px-3 py-2 d-flex flex-wrap align-items-center gap-2 d-none" role="region" aria-label="Bulk actions">
+                <span class="small fw-semibold" id="dt-bulk-count">0 selected</span>
+                <span class="vr d-none d-sm-inline-block"></span>
+                <button type="button" class="btn btn-sm btn-outline-success" id="dt-approve">
+                  <i data-lucide="check-circle" aria-hidden="true" width="16" height="16" class="me-1"></i>
+                  Mark paid
+                </button>
+                <button type="button" class="btn btn-sm btn-outline-secondary" id="dt-export">
+                  <i data-lucide="download" aria-hidden="true" width="16" height="16" class="me-1"></i>
+                  Export selected
+                </button>
+                <button type="button" class="btn btn-sm btn-outline-danger" id="dt-delete">
+                  <i data-lucide="trash-2" aria-hidden="true" width="16" height="16" class="me-1"></i>
+                  Delete
+                </button>
+                <button type="button" class="btn btn-sm btn-link" id="dt-clear-selection">Clear selection</button>
+              </div>
+
+              <div class="table-responsive">
+                <table class="table table-hover align-middle mb-0">
+                  <caption class="visually-hidden">Orders with status, total, and date; sortable and selectable</caption>
+                  <thead>
+                    <tr>
+                      <th scope="col" class="ps-3">
+                        <input type="checkbox" class="form-check-input" id="dt-select-all" aria-label="Select all rows on this page">
+                      </th>
+                      <th scope="col" aria-sort="none"><button type="button" class="btn btn-link btn-sm p-0 fw-semibold text-decoration-none" data-sort="id">Order</button></th>
+                      <th scope="col" aria-sort="none"><button type="button" class="btn btn-link btn-sm p-0 fw-semibold text-decoration-none" data-sort="customer">Customer</button></th>
+                      <th scope="col">Status</th>
+                      <th scope="col" class="text-end" aria-sort="none"><button type="button" class="btn btn-link btn-sm p-0 fw-semibold text-decoration-none" data-sort="total">Total</button></th>
+                      <th scope="col" aria-sort="descending"><button type="button" class="btn btn-link btn-sm p-0 fw-semibold text-decoration-none" data-sort="date">Date</button></th>
+                    </tr>
+                  </thead>
+                  <tbody id="dt-body"></tbody>
+                </table>
+              </div>
+              <div class="card-footer d-flex flex-wrap justify-content-between align-items-center gap-2">
+                <span class="text-body-secondary small" id="dt-range"></span>
+                <nav aria-label="Orders page navigation">
+                  <ul class="pagination pagination-sm mb-0" id="dt-pagination"></ul>
+                </nav>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </main>
+
+    </div>
+
+    <div class="mu-app-backdrop" aria-hidden="true"></div>
+  </div>
+
+  <script>
+  (function () {
+    'use strict';
+
+    var orders = [
+      { id: 1041, customer: 'Jane Doe',     email: 'jane.doe@example.com',  status: 'paid',      total: 1240.00, date: '2026-08-12' },
+      { id: 1040, customer: 'Tomás Silva',  email: 'tomas.silva@example.com', status: 'paid',    total: 860.50,  date: '2026-08-11' },
+      { id: 1039, customer: 'Amira Haddad', email: 'amira.haddad@example.com', status: 'pending', total: 2150.00, date: '2026-08-11' },
+      { id: 1038, customer: 'Chen Wei',     email: 'chen.wei@example.com',  status: 'shipped',   total: 430.00,  date: '2026-08-10' },
+      { id: 1037, customer: 'Elena Petrova', email: 'elena.petrova@example.com', status: 'paid', total: 95.00,   date: '2026-08-10' },
+      { id: 1036, customer: 'Marcus Johnson', email: 'marcus.johnson@example.com', status: 'refunded', total: 310.00, date: '2026-08-09' },
+      { id: 1035, customer: 'Aisha Khan',   email: 'aisha.khan@example.com', status: 'paid',     total: 1890.00, date: '2026-08-08' },
+      { id: 1034, customer: "Liam O'Brien", email: 'liam.obrien@example.com', status: 'pending', total: 640.00,  date: '2026-08-08' },
+      { id: 1033, customer: 'Sofia Rossi',  email: 'sofia.rossi@example.com', status: 'shipped', total: 2340.00, date: '2026-08-07' },
+      { id: 1032, customer: 'Noah Kim',     email: 'noah.kim@example.com',  status: 'paid',      total: 120.00,  date: '2026-08-07' },
+      { id: 1031, customer: 'Grace Liu',    email: 'grace.liu@example.com', status: 'paid',      total: 760.00,  date: '2026-08-06' },
+      { id: 1030, customer: 'David Brown',  email: 'david.brown@example.com', status: 'cancelled', total: 1505.00, date: '2026-08-05' }
+    ];
+
+    var state = 'data';
+    var sort = { key: 'date', dir: 'desc' };
+    var perPage = 5;
+    var page = 1;
+    var selected = {};
+
+    var tbody = document.getElementById('dt-body');
+    var searchInput = document.getElementById('dt-search');
+    var statusSelect = document.getElementById('dt-status');
+    var perPageSelect = document.getElementById('dt-per-page');
+    var selectAll = document.getElementById('dt-select-all');
+    var bulkBar = document.getElementById('dt-bulk');
+    var bulkCount = document.getElementById('dt-bulk-count');
+    var rangeInfo = document.getElementById('dt-range');
+    var pagination = document.getElementById('dt-pagination');
+    var feedback = document.getElementById('dt-feedback');
+
+    var sortButtons = Array.prototype.slice.call(document.querySelectorAll('[data-sort]'));
+
+    var STATUS_BADGE = {
+      paid: 'text-bg-success',
+      pending: 'text-bg-warning',
+      shipped: 'text-bg-info',
+      refunded: 'text-bg-secondary',
+      cancelled: 'text-bg-danger'
+    };
+    var STATUS_LABEL = {
+      paid: 'Paid',
+      pending: 'Pending',
+      shipped: 'Shipped',
+      refunded: 'Refunded',
+      cancelled: 'Cancelled'
+    };
+
+    function money(n) {
+      return '$' + n.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+    }
+
+    function fmtDate(iso) {
+      var parts = iso.split('-');
+      return parts[1] + '/' + parts[2] + '/' + parts[0];
+    }
+
+    function esc(s) {
+      return String(s).replace(/[&<>"']/g, function (c) {
+        return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c];
+      });
+    }
+
+    function filtered() {
+      var q = searchInput.value.trim().toLowerCase();
+      var st = statusSelect.value;
+      return orders.filter(function (o) {
+        var matchesStatus = !st || o.status === st;
+        var haystack = (o.id + ' ' + o.customer + ' ' + o.email).toLowerCase();
+        return matchesStatus && (!q || haystack.indexOf(q) !== -1);
+      });
+    }
+
+    function sorted(list) {
+      return list.slice().sort(function (a, b) {
+        var av = a[sort.key];
+        var bv = b[sort.key];
+        if (typeof av === 'string') { av = av.toLowerCase(); bv = bv.toLowerCase(); }
+        var cmp = av < bv ? -1 : av > bv ? 1 : 0;
+        return sort.dir === 'asc' ? cmp : -cmp;
+      });
+    }
+
+    function updateSortButtons() {
+      sortButtons.forEach(function (btn) {
+        var key = btn.getAttribute('data-sort');
+        var th = btn.closest('th');
+        if (th) { th.setAttribute('aria-sort', key === sort.key ? sort.dir : 'none'); }
+      });
+    }
+
+    function rowHtml(o) {
+      var checked = selected[o.id] ? ' checked' : '';
+      var badge = STATUS_BADGE[o.status] || 'text-bg-secondary';
+      var label = STATUS_LABEL[o.status] || o.status;
+      return '<tr>' +
+        '<td class="ps-3"><input type="checkbox" class="form-check-input" value="' + o.id + '" data-row-select aria-label="Select order ' + o.id + '"' + checked + '></td>' +
+        '<td class="fw-semibold">#' + o.id + '</td>' +
+        '<td><div class="fw-semibold">' + esc(o.customer) + '</div><div class="text-body-secondary small">' + esc(o.email) + '</div></td>' +
+        '<td><span class="badge ' + badge + '">' + label + '</span></td>' +
+        '<td class="text-end fw-semibold">' + money(o.total) + '</td>' +
+        '<td class="text-body-secondary small">' + fmtDate(o.date) + '</td>' +
+        '</tr>';
+    }
+
+    function emptyRowHtml(message, action) {
+      return '<tr><td colspan="6">' +
+        '<div class="text-center py-5">' +
+        '<i data-lucide="inbox" aria-hidden="true" width="32" height="32" class="text-secondary mb-3"></i>' +
+        '<p class="fw-semibold mb-1">No orders to show</p>' +
+        '<p class="text-body-secondary mb-3">' + message + '</p>' +
+        (action ? action : '') +
+        '</div></td></tr>';
+    }
+
+    function bindRetry() {
+      var retry = tbody.querySelector('[data-retry]');
+      if (retry) { retry.addEventListener('click', function () { setState('data'); }); }
+    }
+
+    function bindClearFilters() {
+      var clearFilters = tbody.querySelector('[data-clear-filters]');
+      if (clearFilters) {
+        clearFilters.addEventListener('click', function () {
+          searchInput.value = '';
+          statusSelect.value = '';
+          setState('data');
+        });
+      }
+    }
+
+    function showFeedback(text) {
+      feedback.textContent = text;
+      feedback.classList.remove('d-none');
+      clearTimeout(showFeedback._t);
+      showFeedback._t = setTimeout(function () {
+        feedback.classList.add('d-none');
+      }, 2500);
+    }
+
+    function render() {
+      if (state === 'loading') {
+        tbody.innerHTML = '<tr><td colspan="6">' +
+          '<div class="d-flex justify-content-center align-items-center gap-2 py-5">' +
+          '<div class="spinner-border spinner-border-sm" role="status"><span class="visually-hidden">Loading</span></div>' +
+          '<span class="text-body-secondary small">Loading orders…</span>' +
+          '</div></td></tr>';
+        renderFooter(0, 0, 0);
+        return;
+      }
+
+      if (state === 'error') {
+        tbody.innerHTML = '<tr><td colspan="6">' +
+          '<div class="text-center py-5">' +
+          '<i data-lucide="alert-circle" aria-hidden="true" width="32" height="32" class="text-danger mb-3"></i>' +
+          '<p class="fw-semibold mb-1">We could not load orders</p>' +
+          '<p class="text-body-secondary mb-3">The request failed. Check your connection and try again.</p>' +
+          '<button type="button" class="btn btn-primary btn-sm" data-retry>Try again</button>' +
+          '</div></td></tr>';
+        renderFooter(0, 0, 0);
+        bindRetry();
+        return;
+      }
+
+      var list = sorted(filtered());
+      if (state === 'empty' || list.length === 0) {
+        var clearBtn = (searchInput.value || statusSelect.value)
+          ? '<button type="button" class="btn btn-outline-secondary btn-sm" data-clear-filters>Clear filters</button>'
+          : '';
+        tbody.innerHTML = emptyRowHtml('There are no orders matching your filters.', clearBtn);
+        renderFooter(0, 0, 0);
+        bindClearFilters();
+        return;
+      }
+
+      var totalPages = Math.max(1, Math.ceil(list.length / perPage));
+      if (page > totalPages) { page = totalPages; }
+      var start = (page - 1) * perPage;
+      var rows = list.slice(start, start + perPage);
+      tbody.innerHTML = rows.map(rowHtml).join('');
+      renderFooter(start + 1, start + rows.length, list.length);
+
+      // Bind row checkboxes
+      Array.prototype.forEach.call(tbody.querySelectorAll('[data-row-select]'), function (cb) {
+        cb.addEventListener('change', function () {
+          var id = Number(cb.value);
+          if (cb.checked) { selected[id] = true; } else { delete selected[id]; }
+          updateSelectionUi();
+        });
+      });
+      updateSortButtons();
+    }
+
+    function renderFooter(from, to, total) {
+      rangeInfo.textContent = from && to ? 'Showing ' + from + '–' + to + ' of ' + total + ' orders' : 'No orders to show';
+      var totalPages = total ? Math.max(1, Math.ceil(total / perPage)) : 0;
+      var html = '';
+      if (totalPages > 1) {
+        html += '<li class="page-item' + (page === 1 ? ' disabled' : '') + '"><a class="page-link" href="#" data-page="' + (page - 1) + '" aria-label="Previous page">Previous</a></li>';
+        for (var i = 1; i <= totalPages; i++) {
+          html += '<li class="page-item' + (i === page ? ' active' : '') + '"' + (i === page ? ' aria-current="page"' : '') + '><a class="page-link" href="#" data-page="' + i + '">' + i + '</a></li>';
+        }
+        html += '<li class="page-item' + (page === totalPages ? ' disabled' : '') + '"><a class="page-link" href="#" data-page="' + (page + 1) + '" aria-label="Next page">Next</a></li>';
+      }
+      pagination.innerHTML = html;
+      Array.prototype.forEach.call(pagination.querySelectorAll('[data-page]'), function (a) {
+        a.addEventListener('click', function (e) {
+          e.preventDefault();
+          page = Math.min(totalPages, Math.max(1, Number(a.getAttribute('data-page'))));
+          render();
+        });
+      });
+    }
+
+    function updateSelectionUi() {
+      var count = Object.keys(selected).length;
+      bulkBar.classList.toggle('d-none', count === 0);
+      bulkCount.textContent = count + ' selected';
+      var pageRows = Array.prototype.slice.call(tbody.querySelectorAll('[data-row-select]'));
+      var checkedOnPage = pageRows.filter(function (cb) { return cb.checked; }).length;
+      selectAll.checked = pageRows.length > 0 && checkedOnPage === pageRows.length;
+      selectAll.indeterminate = checkedOnPage > 0 && checkedOnPage < pageRows.length;
+    }
+
+    function setState(next) {
+      state = next;
+      selected = {};
+      selectAll.checked = false;
+      selectAll.indeterminate = false;
+      bulkBar.classList.add('d-none');
+      Array.prototype.forEach.call(document.querySelectorAll('[data-mu-state]'), function (btn) {
+        var on = btn.getAttribute('data-mu-state') === state;
+        btn.classList.toggle('active', on);
+        btn.setAttribute('aria-pressed', on ? 'true' : 'false');
+      });
+      render();
+      lucide.createIcons();
+    }
+
+    function init() {
+      sortButtons.forEach(function (btn) {
+        btn.addEventListener('click', function () {
+          var key = btn.getAttribute('data-sort');
+          if (sort.key === key) {
+            sort.dir = sort.dir === 'asc' ? 'desc' : 'asc';
+          } else {
+            sort.key = key;
+            sort.dir = 'asc';
+          }
+          page = 1;
+          render();
+        });
+      });
+
+      searchInput.addEventListener('input', function () { page = 1; setState('data'); });
+      statusSelect.addEventListener('change', function () { page = 1; setState('data'); });
+      perPageSelect.addEventListener('change', function () {
+        perPage = Number(perPageSelect.value);
+        page = 1;
+        setState('data');
+      });
+
+      selectAll.addEventListener('change', function () {
+        Array.prototype.forEach.call(tbody.querySelectorAll('[data-row-select]'), function (cb) {
+          cb.checked = selectAll.checked;
+          if (selectAll.checked) { selected[Number(cb.value)] = true; } else { delete selected[Number(cb.value)]; }
+        });
+        updateSelectionUi();
+      });
+
+      document.getElementById('dt-approve').addEventListener('click', function () {
+        var ids = Object.keys(selected).map(Number);
+        var n = 0;
+        ids.forEach(function (id) {
+          orders.forEach(function (o) { if (o.id === id && o.status !== 'paid') { o.status = 'paid'; n++; } });
+        });
+        selected = {};
+        showFeedback('Marked ' + n + ' order' + (n === 1 ? '' : 's') + ' as paid');
+        render();
+        lucide.createIcons();
+      });
+
+      document.getElementById('dt-export').addEventListener('click', function () {
+        var n = Object.keys(selected).length;
+        selected = {};
+        showFeedback('Exported ' + n + ' order' + (n === 1 ? '' : 's'));
+        render();
+        lucide.createIcons();
+      });
+
+      document.getElementById('dt-delete').addEventListener('click', function () {
+        var ids = Object.keys(selected).map(Number);
+        orders = orders.filter(function (o) { return ids.indexOf(o.id) === -1; });
+        var n = ids.length;
+        selected = {};
+        showFeedback('Deleted ' + n + ' order' + (n === 1 ? '' : 's'));
+        page = 1;
+        render();
+        lucide.createIcons();
+      });
+
+      document.getElementById('dt-clear-selection').addEventListener('click', function () {
+        selected = {};
+        render();
+        lucide.createIcons();
+      });
+
+      Array.prototype.forEach.call(document.querySelectorAll('[data-mu-state]'), function (btn) {
+        btn.addEventListener('click', function () {
+          setState(btn.getAttribute('data-mu-state'));
+        });
+      });
+
+      updateSortButtons();
+      render();
+      lucide.createIcons();
+    }
+
+    init();
+  })();
+  </script>
+</body>
+</html>

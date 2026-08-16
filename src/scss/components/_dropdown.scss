@@ -1,0 +1,48 @@
+// ============================================================
+// IndigoKit — Dropdown System
+// ------------------------------------------------------------
+// Bootstrap-first: .dropdown, .dropdown-toggle, .dropdown-menu,
+// .dropdown-item, .dropdown-item-text, .dropdown-divider,
+// .dropdown-header, .dropdown-menu-end/-start, .dropup/.dropend/
+// .dropstart, .btn-group + .dropdown-toggle-split all keep their
+// names, behavior, and Bootstrap's JavaScript (data-bs-toggle).
+// No IndigoKit dropdown JavaScript exists — Bootstrap's own
+// positioning, keyboard and outside-click handling are used.
+//
+// Bootstrap's dropdown already inherits our tokens (white
+// surface, hairline border, 6px radius, indigo active item,
+// tertiary-bg hover). This partial adds the shadow that
+// $enable-shadows: false suppresses, and icon-item alignment.
+// ============================================================
+
+// ------------------------------------------------------------
+// Menu shadow
+// ------------------------------------------------------------
+// $dropdown-box-shadow resolves to $mu-shadow-sm via the tokens
+// (§5 wiring), but Bootstrap's box-shadow() mixin emits nothing
+// while $enable-shadows: false — so the menu renders border-only.
+// Dropdowns are exactly the "small pop" the shadow scale exists
+// for, so apply the token directly here rather than flipping the
+// global $enable-shadows flag (which would silently change form
+// controls and other future components).
+.dropdown-menu {
+  box-shadow: var(--bs-dropdown-box-shadow);
+}
+
+// ------------------------------------------------------------
+// Icon items
+// ------------------------------------------------------------
+// Mirror the .btn pattern: flex centers icon+text items on one
+// axis with a consistent 8px gap. Right-aligned extras (badges,
+// shortcut hints) still work via Bootstrap's ms-auto utility.
+.dropdown-item {
+  display: flex;
+  align-items: center;
+  gap: $spacer * 0.5;
+}
+
+.dropdown-item [data-lucide] {
+  width: 1em;
+  height: 1em;
+  flex-shrink: 0;
+}

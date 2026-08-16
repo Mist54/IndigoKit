@@ -1,0 +1,586 @@
+// ============================================================
+// IndigoKit — Application Sidebar (.mu-sidebar)
+// ------------------------------------------------------------
+// The static enterprise navigation sidebar. Fills the
+// .mu-app-side slot of the .mu-app shell (Task 004) and sits
+// beside the .mu-app-navbar (Task 005).
+//
+// Scope: static navigation (006/007), desktop collapse (008), and
+// the mobile drawer (009). The architecture is collapse-ready: the
+// width is a design token, and the shell's `:has(.mu-app-side)`
+// column collapses to zero automatically when the sidebar is
+// hidden.
+// ============================================================
+
+.mu-sidebar {
+  // Width comes from the layout token (256px). The side slot is
+  // grid-stretched to the full body-row height, so the sidebar
+  // fills it and owns its own scrolling: long navigation lists
+  // scroll independently of main content. overflow-x hidden
+  // guards against horizontal bleed from long labels.
+  width: $mu-sidebar-width;
+  height: 100%;
+  overflow-y: auto;
+  overflow-x: hidden;
+
+  // Surface: Bootstrap's subtle-surface token (--bs-tertiary-bg,
+  // light gray in light mode) plus a hairline right border that
+  // matches the navbar's border treatment. Both are --bs-*
+  // variables, so the future dark theme flips them cleanly. The
+  // sidebar stays quieter than the main content surface.
+  background-color: var(--bs-tertiary-bg);
+  border-right: 1px solid var(--bs-border-color);
+
+  // Collapse/expand (desktop, Task 008): only the width animates;
+  // labels clip cleanly via overflow-x: hidden above. Bootstrap's
+  // transition() mixin also emits the prefers-reduced-motion
+  // `transition: none` override (there is no global clamp in
+  // Bootstrap 5.3 — reduced motion is handled per transition).
+  @include transition(width $mu-motion-normal ease);
+}
+
+// ------------------------------------------------------------
+// Navigation container — vertical rhythm between groups
+// ------------------------------------------------------------
+.mu-sidebar-nav {
+  display: flex;
+  flex-direction: column;
+  gap: $spacer * 1.25; // 20px between sections
+  padding: $spacer;    // 16px
+
+  // Collapse/expand: the rail tightens the vertical rhythm
+  // (top padding 16px → 8px). Transitioning padding-top keeps the
+  // icons from snapping up/down while the width animates — one
+  // smooth motion instead of a width glide plus an instant 8px
+  // jump (the transition mixin also emits the reduced-motion
+  // override).
+  @include transition(padding-top $mu-motion-normal ease);
+}
+
+// ------------------------------------------------------------
+// Section — label + item list
+// ------------------------------------------------------------
+.mu-sidebar-section {
+  display: flex;
+  flex-direction: column;
+  gap: $spacer * .25; // 4px
+}
+
+// Section label — muted uppercase micro-label for enterprise
+// scannability. 12px caption size (0.75 × base, not a Bootstrap
+// token — see AGENT_KNOWLEDGE note; candidate for a token when
+// more components need it). Horizontal padding 12px aligns the
+// label with the icon column (nav 16px + label 12px = 28px),
+// deliberately one level above the icon gutter rather than the
+// link text — labels frame the section, links carry it.
+.mu-sidebar-label {
+  padding: 0 $spacer * .75; // 12px
+  font-size: .75rem;
+  font-weight: $font-weight-semibold;
+  letter-spacing: .04em;
+  text-transform: uppercase;
+  color: var(--bs-secondary-color);
+}
+
+// Item list — list reset with a tight 4px rhythm between links.
+.mu-sidebar-list {
+  display: flex;
+  flex-direction: column;
+  gap: $spacer * .25;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+// ------------------------------------------------------------
+// Nav link — compact 36px rows (20px icon + 8px padding)
+// ------------------------------------------------------------
+// Text color inherits the base-layer body token; hover mirrors
+// the navbar's subtle slate surface. Focus comes from the global
+// :focus-visible outline (solid indigo) — no second focus
+// system. Bootstrap has no app-sidebar link concept, hence the
+// mu-* name; the `.active` class name follows Bootstrap's
+// convention for active navigation items.
+.mu-sidebar-link {
+  display: flex;
+  align-items: center;
+  gap: $spacer * .75; // 12px
+  padding: $spacer * .5 $spacer * .75; // 8px 12px
+  // Full-row geometry for group toggles (Task 055B): <button>
+  // elements size to their content by default, so the group
+  // toggles shrink-wrapped to their label while the sibling
+  // <a> links stretched to the row width — the collapse/expand
+  // chevron then sat at a different x per row instead of a
+  // clean column at the row end. width: 100% forces the same
+  // fill for both element types; anchors are already full-row
+  // (no-op for them).
+  width: 100%;
+  font-weight: $font-weight-medium; // approved weight 500 — denser lists scan better
+  color: var(--bs-body-color);
+  text-decoration: none;
+  border-radius: $border-radius;
+  // Element resets so the disabled pattern can reuse this class on
+  // a real <button> without UA chrome (no-ops for <a> links).
+  border: 0;
+  background-color: transparent;
+
+  svg {
+    flex-shrink: 0;
+    width: $spacer * 1.25; // 20px — matches navbar action icons
+    height: $spacer * 1.25;
+    color: var(--bs-secondary-color); // icons slightly muted next to text
+  }
+
+  // Hover surface: subtle slate, same as the navbar actions.
+  // :not(:disabled) so disabled items never gain the hover
+  // treatment; :not(.active) so the active item keeps its solid
+  // indigo pill. The white active icon would otherwise sit on the
+  // gray hover surface (invisible in light mode) — the active
+  // pill is the state marker and intentionally doesn't change on
+  // hover (same rule in the dark theme, base/_base.scss).
+  &:not(:disabled):not(.active):hover {
+    color: var(--bs-body-color);
+    text-decoration: none;
+    background-color: rgba($mu-slate, .08);
+  }
+
+  // Disabled items: real <button disabled> elements (native
+  // semantics — not focusable, not clickable, announced as
+  // disabled). Muted to the secondary text color; contrast stays
+  // above the disabled-state recommendation.
+  &:disabled {
+    color: var(--bs-secondary-color);
+
+    svg {
+      color: var(--bs-secondary-color);
+    }
+  }
+
+  // Active: solid indigo pill — clear and enterprise-standard.
+  // Contrast: white on indigo ≈ 7:1 (passes AA). Weight 600 adds
+  // the icon/text emphasis. The page author marks the active
+  // item; aria-current carries the semantics (no JS route
+  // detection).
+  &.active {
+    font-weight: $font-weight-semibold;
+    color: $white;
+    background-color: var(--bs-primary);
+
+    svg {
+      color: $white;
+    }
+  }
+}
+
+// ------------------------------------------------------------
+// Nested hierarchy — children read as a second level
+// ------------------------------------------------------------
+// Parents carry an icon + chevron and use the base medium (500)
+// weight; children are icon-free indented links and drop to the
+// regular (400) weight so the two levels read clearly. The active
+// child re-asserts its 600 weight (equal specificity, later source
+// order) so the active pill never loses its emphasis.
+.mu-sidebar-nested .mu-sidebar-link {
+  font-weight: $font-weight-normal;
+}
+
+.mu-sidebar-nested .mu-sidebar-link.active {
+  font-weight: $font-weight-semibold;
+}
+
+// ------------------------------------------------------------
+// Badge — right-aligned counter / label inside a nav link
+// ------------------------------------------------------------
+// The pill itself is Bootstrap's .badge + text-bg-* utilities
+// (no new component). This class only handles placement inside
+// the flex row: margin-left: auto pushes the badge to the right
+// edge, mirroring the text/icon gap.
+.mu-sidebar-badge {
+  margin-left: auto;
+  flex-shrink: 0;
+}
+
+// Badge on the active item: white pill + indigo text so a badge
+// stays visible on the solid indigo surface.
+.mu-sidebar-link.active .mu-sidebar-badge {
+  color: var(--bs-primary);
+  background-color: $white;
+}
+
+// ------------------------------------------------------------
+// Chevron — expand/collapse indicator on group toggles
+// ------------------------------------------------------------
+// A structural class inside the sanctioned sidebar family: the
+// group toggle button carries the parent icon + label + this
+// chevron. Bootstrap's Collapse data API flips aria-expanded on
+// the toggle; the chevron points right (collapsed) and rotates
+// 90° to point down (expanded). margin-left: auto pushes it to
+// the row's end, mirroring .mu-sidebar-badge. A slightly smaller
+// glyph than the 20px item icon keeps it a quiet utility
+// indicator rather than a third competing icon. The transition
+// mixin emits the prefers-reduced-motion override.
+.mu-sidebar-chevron {
+  margin-left: auto;
+  flex-shrink: 0;
+
+  @include transition(transform $mu-motion-fast ease);
+}
+
+// 16px chevron — overrides the generic 20px link-icon size
+// (specificity: .mu-sidebar-link .mu-sidebar-chevron 0,2,0 >
+// .mu-sidebar-link svg 0,1,1).
+.mu-sidebar-link .mu-sidebar-chevron {
+  width: $spacer; // 16px
+  height: $spacer;
+}
+
+// Group toggle states: Bootstrap sets aria-expanded on the
+// toggle; the chevron derives its direction from it (90° =
+// chevron-right → chevron-down).
+.mu-sidebar-link[aria-expanded="true"] .mu-sidebar-chevron {
+  transform: rotate(90deg);
+}
+
+// ------------------------------------------------------------
+// Nested navigation — Bootstrap Collapse groups
+// ------------------------------------------------------------
+// A parent <li> contains a toggle button (data-bs-toggle="collapse"
+// — Bootstrap's own Collapse data API, no custom engine) and a
+// .collapse wrapper holding the nested <ul>. Level-2 items have no
+// icons; the indent aligns their text with the parent item's text
+// (16px nav padding + 12px link padding + 20px icon + 12px gap =
+// 44px → 28px list indent + 16px link padding). All values stay
+// on the approved $spacer scale. Bootstrap Collapse owns the
+// height transition and already respects prefers-reduced-motion.
+.mu-sidebar-nested {
+  display: flex;
+  flex-direction: column;
+  gap: $spacer * .25; // 4px
+  margin: 0;
+  padding: $spacer * .25 0 0 $spacer * 1.75; // 4px top, 28px left
+  list-style: none;
+}
+
+// Nested links keep the base row height but shift text to align
+// with the parent item's text.
+.mu-sidebar-nested .mu-sidebar-link {
+  padding-left: $spacer; // 16px
+}
+
+// ------------------------------------------------------------
+// Collapsed state (desktop) — .is-collapsed
+// ------------------------------------------------------------
+// DESKTOP ONLY (md and up, Task 008). JavaScript toggles the
+// class; every visual lives here. The shell's :has(.mu-app-side)
+// column is auto-sized, so main content gains space automatically
+// as the width changes — no duplicate layout logic anywhere.
+//
+// Scoped to md+ so the mobile drawer ALWAYS renders the expanded
+// sidebar — a desktop-collapsed icon rail must never leak into
+// the mobile drawer (Task 009).
+//
+// ONE navigation grid, two presentations (Task 055A alignment
+// refinement): the icon column keeps its EXPANDED anchor (16px
+// nav padding + 12px link padding = 28px → 38px centerline) and
+// the rail token (76px = 2 × 38px) is derived from that grid, so
+// the icon centerline is identical in both states and icons
+// never shift horizontally when collapsing — only the label,
+// chevron, badge, and nested content disappear. Link text uses
+// Bootstrap's .visually-hidden technique (NOT display:none) so
+// every item keeps its accessible name; section labels, badges,
+// and nested lists are hidden entirely — reaching nested items
+// in collapsed mode needs a flyout/tooltip system (a future
+// task).
+@include media-breakpoint-up(md) {
+  .mu-sidebar.is-collapsed {
+    width: $mu-sidebar-width-collapsed; // 76px
+
+    .mu-sidebar-nav {
+      // Vertical 8px keeps the rail dense; horizontal stays 16px
+      // so the icon column keeps its expanded anchor. Do not
+      // reduce the horizontal padding — it is half of the grid.
+      padding: $spacer * .5 $spacer; // 8px 16px
+    }
+
+    .mu-sidebar-label,
+    .mu-sidebar-badge,
+    .mu-sidebar-chevron {
+      display: none;
+    }
+
+    // Nested groups are unreachable in the icon rail: the whole
+    // collapse region (open or not) is hidden here (specificity
+    // beats Bootstrap's .collapse.show, 0,2,0), and the group
+    // toggle becomes an icon-only button. The deferred flyout
+    // system restores access — clicking/hovering a group toggle
+    // opens .mu-sidebar-flyout beside the rail (see below; the
+    // shell JS manages state + position).
+    .collapse {
+      display: none;
+    }
+
+    // Open-flyout affordance: a group toggle whose flyout is open
+    // reads as a pressed control — tinted surface + primary icon,
+    // mirroring the expanded-state toggle without a full pill.
+    // aria-expanded is owned by the flyout integration in rail
+    // mode (Bootstrap's Collapse never runs there — the flyout
+    // click handler stops propagation). The :not(:disabled) also
+    // levels specificity with the dark-theme hover rule
+    // (base/_base.scss) so a hover never erases the pressed tint
+    // (later source order breaks the tie).
+    .mu-sidebar-link:not(:disabled)[aria-expanded="true"] {
+      color: var(--bs-primary);
+      background-color: var(--bs-primary-bg-subtle);
+
+      svg {
+        color: var(--bs-primary);
+      }
+    }
+
+    // Compact icon-button geometry (Task 055B follow-up): the
+    // link keeps its expanded padding (8px 12px) but takes a
+    // fixed 44px width (20px icon + 2 × 12px padding) and centers
+    // itself in the rail. The icon stays at the expanded grid
+    // anchor — 16px nav + 12px link padding = 28px → 38px
+    // centerline — IDENTICAL to the expanded state, and now
+    // independent of the sidebar's vertical scrollbar: a
+    // width: 100% link stretched to the scrollbar-shrunken content
+    // box and left the icon flush against the pill's right edge.
+    // Centering the pill in the rail keeps the icon centerline on
+    // the same 38px in both states.
+    .mu-sidebar-link {
+      width: $spacer * 2.75; // 44px
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    // The accessible name survives collapse: the same technique
+    // as Bootstrap's .visually-hidden (NOT display:none), inlined
+    // because Sass cannot @extend across a media-query boundary.
+    .mu-sidebar-link-text {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      margin: -1px;
+      padding: 0;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap;
+      border: 0;
+    }
+  }
+}
+
+// ------------------------------------------------------------
+// Collapsed-rail flyout — nested groups in the icon rail
+// ------------------------------------------------------------
+// The icon rail hides collapse regions (above), so a group
+// toggle cannot reach its children. This flyout restores that
+// access: in collapsed mode only, the shell JS (indigokit.js,
+// initCollapsedFlyout) opens a compact panel to the right of the
+// rail containing the group's links (cloned from the collapse
+// target — no markup duplication).
+//
+// One structural class, styled with existing tokens so it reads
+// as the same "menu" language as Bootstrap's .dropdown-menu:
+// body background, hairline border, radius, and shadow flip
+// light/dark for free. Position is fixed + computed from the
+// toggle's rect at open time (the sidebar clips absolutely
+// positioned children via overflow-x: hidden), so the panel
+// overlays the content column and never gets clipped.
+.mu-sidebar-flyout {
+  position: fixed;
+  z-index: $zindex-dropdown;
+  min-width: 11rem;
+  padding: $spacer * .25; // 4px, like .dropdown-menu
+  background-color: var(--bs-body-bg);
+  border: 1px solid var(--bs-border-color);
+  border-radius: $border-radius;
+  box-shadow: var(--bs-box-shadow);
+
+  // Panel header — the group's name, styled like .dropdown-header.
+  .mu-sidebar-flyout-label {
+    padding: $spacer * .5 $spacer * .75; // 8px 12px
+    font-size: .75rem;
+    font-weight: $font-weight-semibold;
+    letter-spacing: .04em;
+    text-transform: uppercase;
+    color: var(--bs-secondary-color);
+  }
+
+  // The cloned nested list — links become compact menu items
+  // (the parent's icon-column indent has no meaning here).
+  .mu-sidebar-nested {
+    gap: $spacer * .125; // 2px
+    padding: 0;
+  }
+
+  .mu-sidebar-link {
+    padding: $spacer * .375 $spacer * .75; // 6px 12px
+    font-weight: $font-weight-normal;
+  }
+}
+
+// ------------------------------------------------------------
+// Navbar toggle controls — desktop vs mobile
+// ------------------------------------------------------------
+// Both navigation toggles live in the navbar's left cluster
+// (before the brand — the conventional admin placement, see
+// Task 055A refinement): the desktop collapse toggle
+// ([data-mu-sidebar-toggle], md+) and the mobile drawer toggle
+// ([data-mu-mobile-toggle], < md). They never appear together.
+// The compact icon-button language mirrors .mu-navbar-actions
+// .btn and .mu-sidebar-close (32px target, 20px glyph) so the
+// shell's icon buttons read as one family.
+.mu-app-navbar [data-mu-mobile-toggle],
+.mu-app-navbar [data-mu-sidebar-toggle] {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: $spacer * 2; // 32px
+  height: $spacer * 2;
+  padding: 0;
+  color: var(--bs-secondary-color);
+  background: transparent;
+  border: 0;
+  border-radius: $border-radius;
+
+  &:hover {
+    color: var(--bs-body-color);
+    background-color: rgba($mu-slate, .08);
+  }
+
+  svg {
+    width: $spacer * 1.25; // 20px
+    height: $spacer * 1.25;
+  }
+}
+
+// Desktop: only the sidebar-collapse control shows.
+.mu-app-navbar [data-mu-mobile-toggle] {
+  display: none;
+}
+
+// Mobile (< md): the drawer toggle shows; the desktop collapse
+// control is meaningless and hides. Later source order wins over
+// the sizing rule above at equal specificity.
+@include media-breakpoint-down(md) {
+  .mu-app-navbar [data-mu-mobile-toggle] {
+    display: inline-flex;
+  }
+
+  .mu-app-navbar [data-mu-sidebar-toggle] {
+    display: none;
+  }
+}
+
+// ------------------------------------------------------------
+// Mobile drawer header — close control (mobile only)
+// ------------------------------------------------------------
+// Desktop keeps its clean, header-less sidebar (branding lives in
+// the navbar — Task 006). The header appears only inside the
+// mobile drawer. Sticky + opaque so nav content scrolls under it
+// cleanly.
+.mu-sidebar-header {
+  display: none;
+}
+
+@include media-breakpoint-down(md) {
+  .mu-sidebar-header {
+    position: sticky;
+    top: 0;
+    z-index: 1; // above scrolling nav content
+    display: flex;
+    justify-content: flex-end;
+    padding: $spacer * .5;
+    background-color: var(--bs-tertiary-bg); // opaque — matches the sidebar surface
+    border-bottom: 1px solid var(--bs-border-color);
+  }
+}
+
+// Close button — the same compact icon-button language as the
+// navbar action buttons (Bootstrap's .btn focus ring applies
+// automatically via the base layer override). NOTE: mirrors the
+// .mu-navbar-actions .btn sizing; a shared icon-button component
+// could unify both in a future task.
+.mu-sidebar-close {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: $spacer * 2;  // 32px
+  height: $spacer * 2;
+  padding: 0;
+  color: var(--bs-secondary-color);
+  background: transparent;
+  border: 0;
+  border-radius: $border-radius;
+
+  &:hover {
+    color: var(--bs-body-color);
+    background-color: rgba($mu-slate, .08);
+  }
+
+  svg {
+    width: $spacer * 1.25; // 20px
+    height: $spacer * 1.25;
+  }
+}
+
+// ------------------------------------------------------------
+// Mobile drawer — offcanvas behavior below md
+// ------------------------------------------------------------
+// Below Bootstrap's md breakpoint the sidebar becomes a
+// full-height drawer sliding in from the left. The .is-open class
+// is toggled by JavaScript (src/js/indigokit.js) together with the
+// `inert` attribute — a closed drawer is neither focusable nor
+// exposed to assistive technology. Every visual (transform,
+// backdrop, scroll lock) derives from .is-open via :has(), so JS
+// manages state only.
+//
+// The drawer is position:fixed and viewport-covering (standard
+// offcanvas), so it stacks above the shell — including the
+// navbar — via Bootstrap's offcanvas z-index tokens.
+.mu-app-backdrop {
+  display: none; // desktop: never shown
+}
+
+@include media-breakpoint-down(md) {
+  .mu-app-side {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    z-index: $zindex-offcanvas;
+
+    @include transition(transform $mu-motion-normal ease);
+    transform: translateX(-100%);
+  }
+
+  .mu-app-side.is-open {
+    transform: translateX(0);
+  }
+
+  .mu-app-backdrop {
+    position: fixed;
+    inset: 0;
+    z-index: $zindex-offcanvas-backdrop; // below the drawer
+    display: block;
+    background-color: $mu-backdrop-bg;
+    opacity: 0;
+    visibility: hidden;
+
+    @include transition(opacity $mu-motion-normal ease, visibility $mu-motion-normal ease);
+  }
+
+  // Open state: show the backdrop and lock the shell's only scroll
+  // region (main). Removing .is-open restores everything — pure
+  // class state, so repeated open/close cycles are safe.
+  .mu-app:has(.mu-app-side.is-open) .mu-app-backdrop {
+    opacity: 1;
+    visibility: visible;
+  }
+
+  .mu-app:has(.mu-app-side.is-open) .mu-app-main {
+    overflow: hidden; // body scroll lock while the drawer is open
+  }
+}

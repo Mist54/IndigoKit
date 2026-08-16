@@ -1,0 +1,30 @@
+// ============================================================
+// IndigoKit — Modal System
+// ------------------------------------------------------------
+// Bootstrap-first: .modal, .modal-dialog, .modal-dialog-centered,
+// .modal-dialog-scrollable, .modal-content, .modal-header,
+// .modal-body, .modal-footer, .modal-title, .modal-sm/-lg/-xl,
+// .btn-close and the data-bs-* API all keep their names and
+// behavior. Bootstrap's Modal JavaScript handles focus
+// management, scroll locking, Escape and the backdrop — IndigoKit
+// ships no modal engine.
+//
+// Bootstrap's modal already inherits our tokens (white surface,
+// hairline border, 8px lg radius, 1rem section padding,
+// theme-aware backdrop token). This partial adds the shadow that
+// $enable-shadows: false suppresses.
+// ============================================================
+
+// ------------------------------------------------------------
+// Modal shadow
+// ------------------------------------------------------------
+// $modal-content-box-shadow-xs / -sm-up resolve to $mu-shadow-xs
+// (mobile) and $mu-shadow-sm (sm and up) via the tokens (§5
+// wiring) — Bootstrap swaps --bs-modal-box-shadow inside its own
+// sm-up media query. But the box-shadow() mixin emits nothing
+// while $enable-shadows: false. Apply the var directly here
+// (same deliberate bypass as .dropdown-menu) so the elevated
+// surface reads correctly without flipping the global flag.
+.modal-content {
+  box-shadow: var(--bs-modal-box-shadow);
+}

@@ -1,0 +1,96 @@
+// ============================================================
+// IndigoKit — Theme Architecture (Task 045)
+// ------------------------------------------------------------
+// The theme foundation, build-time half.
+//
+// This file holds ONLY the BUILD-TIME dark variables — they must
+// run BEFORE the Bootstrap import (same `!default` pattern as
+// _tokens.scss) so Bootstrap's own [data-bs-theme="dark"] root
+// block emits them as --bs-* custom properties. No runtime
+// engine, no .mu-theme* classes, Bootstrap's mechanism stays the
+// API.
+//
+// The RUNTIME half — the handful of [data-bs-theme="dark"]
+// selectors Bootstrap cannot express at build time (baked SVG
+// validation icons, the dark focus ring, shell hover surfaces,
+// the backdrop, scrollbars) — lives at the end of base/_base.scss,
+// which runs AFTER the Bootstrap import where Bootstrap's
+// escape-svg() and every variable resolve.
+//
+// Light theme: the existing visual system is the baseline and is
+// untouched by this file (verified: light output only changes
+// where component focus rings start emitting the --bs-focus-ring
+// color var instead of a baked literal — same visual value).
+// ============================================================
+
+// ============================================================
+// SECTION 1 — BUILD-TIME dark variables
+// ============================================================
+// The dark neutral scale stays inside the approved slate family
+// (the IndigoKit neutral foundation — $mu-slate is slate-500).
+// Bootstrap's dark order is preserved: secondary-bg is the
+// lightest neutral, body the darkest.
+//
+//   slate-900 #0F172A — body / content surfaces (cards, tables,
+//                       forms, navbar) — mirrors light mode where
+//                       cards and body are both white
+//   slate-800 #1E293B — raised: sidebar (tertiary) + overlays
+//                       (modal/offcanvas/dropdown/popover/toast) —
+//                       dark elevation is surface lightness, since
+//                       the slate shadow family disappears on dark
+//   slate-700 #334155 — hover / disabled / track (secondary)
+//   slate-600 #475569 — borders (visible, never harsh)
+//   slate-200 #E2E8F0 — primary text (≈14.5:1 on slate-900)
+//   slate-50  #F8FAFC — emphasis text (headers, table th)
+// ------------------------------------------------------------
+
+$mu-dark-bg:       #0F172A !default; // slate-900
+$mu-dark-surface:  #1E293B !default; // slate-800
+$mu-dark-hover:    #334155 !default; // slate-700
+$mu-dark-border:   #475569 !default; // slate-600
+$mu-dark-text:     #E2E8F0 !default; // slate-200
+$mu-dark-emphasis: #F8FAFC !default; // slate-50
+
+// Bootstrap dark wiring — all override Bootstrap's stock gray
+// defaults (gray-900 body, gray-300 text, gray-800/700 surfaces,
+// gray-700 borders) with the slate scale above.
+$body-bg-dark:               $mu-dark-bg !default;
+$body-color-dark:            $mu-dark-text !default;
+$body-emphasis-color-dark:   $mu-dark-emphasis !default;
+$body-secondary-bg-dark:     $mu-dark-hover !default;
+$body-tertiary-bg-dark:      $mu-dark-surface !default;
+$border-color-dark:          $mu-dark-border !default;
+
+// Semantic emphasis tints (primary/success/… text-emphasis,
+// bg-subtle, border-subtle) auto-derive from the IndigoKit palette
+// via Bootstrap's tint/shade — nothing to override. EXCEPT the
+// form-validation colors, which Bootstrap defaults to stock
+// green-300/red-300: pin them to the palette emphasis tints so
+// feedback text, borders, labels and check backgrounds stay
+// on-brand (light emerald / light red in dark mode).
+// NOTE: tint-color() is used directly (identical to Bootstrap's
+// $*-text-emphasis-dark) because Bootstrap's _variables-dark.scss
+// runs AFTER this file in the import order.
+$form-valid-color-dark:          tint-color($success, 40%) !default;
+$form-valid-border-color-dark:   tint-color($success, 40%) !default;
+$form-invalid-color-dark:        tint-color($danger, 40%) !default;
+$form-invalid-border-color-dark: tint-color($danger, 40%) !default;
+
+// Switch off-knob (dark): Bootstrap's default rgba(white, .25)
+// measures ≈2.6:1 against the dark track — the same weak value
+// we rejected in light mode. Slate-300 (≈10:1 on slate-900,
+// ≈7:1 on slate-800) keeps the off-state indicator clearly
+// visible. Checked stays indigo + white knob.
+$form-switch-color-dark: #CBD5E1 !default; // slate-300
+
+// ------------------------------------------------------------
+// Focus ring (dark) — measured, not assumed
+// ------------------------------------------------------------
+// Solid indigo #4F46E5 measures ≈2.85:1 on slate-900 — below the
+// WCAG 2.2 focus-appearance 3:1 bar; Bootstrap's baked
+// rgba(indigo, .85) ring is ≈1.7:1 on dark. The dark ring uses
+// indigo-300 (#A5B4FC): ≈9:1 as a solid outline on slate-900 and
+// ≈5.7:1 as the .85-alpha ring on slate-800. The light theme's
+// solid indigo is NOT weakened — the dark override is additive.
+$mu-dark-focus: #A5B4FC !default; // indigo-300
+

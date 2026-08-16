@@ -1,0 +1,71 @@
+// Form foundation refinements.
+//
+// Bootstrap's form controls are already token-wired: 6px radius,
+// hairline borders, muted theme-adaptive placeholder, the strong
+// indigo focus ring, and muted disabled states. Two IndigoKit additions:
+//
+// 1. `.form-label` gains a medium weight — labels are the primary
+//    orientation for form fields, so they sit between body text (400)
+//    and headings (600) in the type hierarchy. Bootstrap ships no
+//    label weight.
+// 2. Textareas resize vertically only — horizontal resize is how a
+//    user accidentally breaks a 100%-width control's layout.
+
+.form-label {
+  font-weight: 500;
+}
+
+textarea.form-control {
+  resize: vertical;
+}
+
+// Icons inside input-group addons render at 1em (16px) so they sit
+// on the addon's text baseline (mirrors the .btn / .dropdown-item /
+// .nav-link / .page-link pattern).
+.input-group-text [data-lucide] {
+  width: 1em;
+  height: 1em;
+  flex-shrink: 0;
+}
+
+// Validation tooltips: Bootstrap's defaults are white text on the
+// vivid $success/$danger (#10B981 ≈2.3:1, #EF4444 ≈3.1:1 — both fail
+// AA for text). Use the emphasis colors instead; plain
+// background-color accepts CSS vars, so these stay theme-adaptive
+// (light: dark emerald/red surface, dark: light emerald/red surface).
+// The text color is body-bg rather than Bootstrap's fixed #fff so it
+// flips with the theme too — white on dark-emphasis in light, dark
+// slate on light-emphasis in dark (both ≈8:1+, measured).
+.valid-tooltip {
+  color: var(--bs-body-bg);
+  background-color: var(--bs-success-text-emphasis);
+}
+
+.invalid-tooltip {
+  color: var(--bs-body-bg);
+  background-color: var(--bs-danger-text-emphasis);
+}
+
+// Validated-state FOCUS rings: Bootstrap's semantic success/danger
+// rings (rgba(color, .85)) measure ≈2.2:1 (valid, light) and ≈3.2:1
+// (invalid, light) on white — below the 3:1 focus-appearance bar.
+// Keep the ONE theme-aware focus ring on focused validated controls:
+// validation state stays visible via the colored border + feedback
+// icon/text (never color-only), and focus stays ≥3:1 in both themes
+// (same var all other components consume, Task 045 wiring). Later
+// source order (this partial runs after Bootstrap) wins at equal
+// specificity.
+.was-validated .form-control:valid:focus,
+.form-control.is-valid:focus,
+.was-validated .form-select:valid:focus,
+.form-select.is-valid:focus,
+.was-validated .form-check-input:valid:focus,
+.form-check-input.is-valid:focus,
+.was-validated .form-control:invalid:focus,
+.form-control.is-invalid:focus,
+.was-validated .form-select:invalid:focus,
+.form-select.is-invalid:focus,
+.was-validated .form-check-input:invalid:focus,
+.form-check-input.is-invalid:focus {
+  box-shadow: $focus-ring-box-shadow;
+}

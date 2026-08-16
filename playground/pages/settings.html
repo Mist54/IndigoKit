@@ -1,0 +1,439 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>IndigoKit — Settings</title>
+  <link rel="stylesheet" href="../../dist/css/indigokit.css">
+  <link rel="stylesheet" href="../playground.css">
+  <script src="../theme.js"></script>
+  <script src="../assets/lucide.umd.js"></script>
+  <script src="../../node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="../../dist/js/indigokit.js"></script>
+</head>
+<body>
+  <div class="mu-app">
+
+    <header class="mu-app-top">
+      <nav class="navbar mu-app-navbar" aria-label="Main navigation">
+        <div class="container-fluid">
+                    <div class="d-flex align-items-center gap-2">
+            <button type="button" class="btn" data-mu-mobile-toggle aria-controls="app-sidebar" aria-expanded="false" aria-label="Open navigation">
+              <i data-lucide="menu" aria-hidden="true"></i>
+            </button>
+            <button type="button" class="btn" data-mu-sidebar-toggle aria-controls="app-sidebar" aria-expanded="true" aria-label="Collapse sidebar">
+              <i data-lucide="panel-left-close" aria-hidden="true"></i>
+            </button>
+            <a class="navbar-brand" href="../index.html">
+            <i data-lucide="layers" aria-hidden="true"></i>
+            IndigoKit
+          </a>
+          </div>
+          <div class="mu-navbar-main"></div>
+          <div class="mu-navbar-actions">
+            <select class="form-select form-select-sm" data-theme-switch aria-label="Theme">
+              <option value="system">System</option>
+              <option value="light">Light</option>
+              <option value="dark">Dark</option>
+            </select>
+            <button type="button" class="btn d-none d-md-inline-flex" aria-label="Notifications">
+              <i data-lucide="bell" aria-hidden="true"></i>
+            </button>
+            <button type="button" class="btn d-none d-md-inline-flex" aria-label="Help">
+              <i data-lucide="circle-question-mark" aria-hidden="true"></i>
+            </button>
+            <div class="dropdown">
+              <a class="mu-navbar-user" href="#" data-bs-toggle="dropdown" aria-expanded="false" aria-label="User menu">
+                <span class="mu-avatar"><i data-lucide="user" aria-hidden="true"></i></span>
+                <span class="mu-user-name d-none d-lg-inline">Jane Doe</span>
+                <i data-lucide="chevron-down" aria-hidden="true"></i>
+              </a>
+              <ul class="dropdown-menu dropdown-menu-end">
+                <li>
+                  <h6 class="dropdown-header">Jane Doe<span class="d-block small fw-normal text-body-secondary">Software Engineer</span></h6>
+                </li>
+                <li><hr class="dropdown-divider"></li>
+                <li><a class="dropdown-item" href="profile.html">Profile</a></li>
+                <li><a class="dropdown-item" href="settings.html">Account Settings</a></li>
+                <li><a class="dropdown-item" href="settings.html">Notifications</a></li>
+                <li><a class="dropdown-item" href="auth/lock-screen.html">Lock Screen</a></li>
+                <li><hr class="dropdown-divider"></li>
+                <li><a class="dropdown-item text-danger" href="auth/login.html">Sign out</a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <div class="mu-app-body">
+
+      <aside class="mu-app-side">
+        <div class="mu-sidebar" id="app-sidebar">
+          <div class="mu-sidebar-header">
+            <button type="button" class="btn mu-sidebar-close" data-mu-sidebar-close aria-label="Close navigation">
+              <i data-lucide="x" aria-hidden="true"></i>
+            </button>
+          </div>
+          <nav class="mu-sidebar-nav" aria-label="Sidebar navigation">
+            <div class="mu-sidebar-section">
+              <div class="mu-sidebar-label">Application examples</div>
+              <ul class="mu-sidebar-list">
+                <li>
+                  <a class="mu-sidebar-link" href="../index.html">
+                    <i data-lucide="layout-dashboard" aria-hidden="true"></i>
+                    <span class="mu-sidebar-link-text">Dashboard</span>
+                  </a>
+                </li>
+                <li>
+                  <a class="mu-sidebar-link" href="dashboard-analytics.html">
+                    <i data-lucide="chart-no-axes-combined" aria-hidden="true"></i>
+                    <span class="mu-sidebar-link-text">Analytics</span>
+                  </a>
+                </li>
+                <li>
+                  <a class="mu-sidebar-link" href="dashboard-sales.html">
+                    <i data-lucide="chart-column" aria-hidden="true"></i>
+                    <span class="mu-sidebar-link-text">Sales</span>
+                  </a>
+                </li>
+                <li>
+                  <button type="button" class="mu-sidebar-link" data-bs-toggle="collapse" data-bs-target="#nav-auth" aria-expanded="false" aria-controls="nav-auth">
+                    <i data-lucide="shield" aria-hidden="true"></i>
+                    <span class="mu-sidebar-link-text">Authentication</span>
+                    <i data-lucide="chevron-right" class="mu-sidebar-chevron" aria-hidden="true"></i>
+                  </button>
+                  <div class="collapse" id="nav-auth">
+                    <ul class="mu-sidebar-nested">
+                      <li><a class="mu-sidebar-link" href="auth/login.html"><span class="mu-sidebar-link-text">Login</span></a></li>
+                      <li><a class="mu-sidebar-link" href="auth/register.html"><span class="mu-sidebar-link-text">Register</span></a></li>
+                      <li><a class="mu-sidebar-link" href="auth/forgot-password.html"><span class="mu-sidebar-link-text">Forgot password</span></a></li>
+                      <li><a class="mu-sidebar-link" href="auth/reset-password.html"><span class="mu-sidebar-link-text">Reset password</span></a></li>
+                      <li><a class="mu-sidebar-link" href="auth/lock-screen.html"><span class="mu-sidebar-link-text">Lock screen</span></a></li>
+                    </ul>
+                  </div>
+                </li>
+                <li>
+                  <button type="button" class="mu-sidebar-link" data-bs-toggle="collapse" data-bs-target="#nav-pages" aria-expanded="true" aria-controls="nav-pages">
+                    <i data-lucide="files" aria-hidden="true"></i>
+                    <span class="mu-sidebar-link-text">Pages</span>
+                    <i data-lucide="chevron-right" class="mu-sidebar-chevron" aria-hidden="true"></i>
+                  </button>
+                  <div class="collapse show" id="nav-pages">
+                    <ul class="mu-sidebar-nested">
+                      <li><a class="mu-sidebar-link" href="profile.html"><span class="mu-sidebar-link-text">Profile</span></a></li>
+                      <li><a class="mu-sidebar-link active" href="settings.html" aria-current="page"><span class="mu-sidebar-link-text">Settings</span></a></li>
+                      <li><a class="mu-sidebar-link" href="pricing.html"><span class="mu-sidebar-link-text">Pricing</span></a></li>
+                      <li><a class="mu-sidebar-link" href="faq.html"><span class="mu-sidebar-link-text">FAQ</span></a></li>
+                      <li><a class="mu-sidebar-link" href="invoice.html"><span class="mu-sidebar-link-text">Invoice</span></a></li>
+                      <li><a class="mu-sidebar-link" href="users.html"><span class="mu-sidebar-link-text">User list</span></a></li>
+                      <li><a class="mu-sidebar-link" href="roles.html"><span class="mu-sidebar-link-text">Roles &amp; permissions</span></a></li>
+                      <li><a class="mu-sidebar-link" href="notifications.html"><span class="mu-sidebar-link-text">Notifications</span></a></li>
+                      <li><a class="mu-sidebar-link" href="products.html"><span class="mu-sidebar-link-text">Products</span></a></li>
+                    </ul>
+                  </div>
+                </li>
+                <li>
+                  <button type="button" class="mu-sidebar-link" data-bs-toggle="collapse" data-bs-target="#nav-errors" aria-expanded="false" aria-controls="nav-errors">
+                    <i data-lucide="triangle-alert" aria-hidden="true"></i>
+                    <span class="mu-sidebar-link-text">Error pages</span>
+                    <i data-lucide="chevron-right" class="mu-sidebar-chevron" aria-hidden="true"></i>
+                  </button>
+                  <div class="collapse" id="nav-errors">
+                    <ul class="mu-sidebar-nested">
+                      <li><a class="mu-sidebar-link" href="errors/404.html"><span class="mu-sidebar-link-text">404 Not found</span></a></li>
+                      <li><a class="mu-sidebar-link" href="errors/403.html"><span class="mu-sidebar-link-text">403 Forbidden</span></a></li>
+                      <li><a class="mu-sidebar-link" href="errors/500.html"><span class="mu-sidebar-link-text">500 Server error</span></a></li>
+                      <li><a class="mu-sidebar-link" href="errors/maintenance.html"><span class="mu-sidebar-link-text">Maintenance</span></a></li>
+                    </ul>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="mu-sidebar-section">
+              <div class="mu-sidebar-label">Components</div>
+              <ul class="mu-sidebar-list">
+                <li><a class="mu-sidebar-link" href="tokens.html"><span class="mu-sidebar-link-text">Tokens</span></a></li>
+                <li><a class="mu-sidebar-link" href="base.html"><span class="mu-sidebar-link-text">Base</span></a></li>
+                <li><a class="mu-sidebar-link" href="layout.html"><span class="mu-sidebar-link-text">Layout</span></a></li>
+                <li><a class="mu-sidebar-link" href="navbar.html"><span class="mu-sidebar-link-text">Navbar</span></a></li>
+                <li><a class="mu-sidebar-link" href="sidebar.html"><span class="mu-sidebar-link-text">Sidebar</span></a></li>
+                <li><a class="mu-sidebar-link" href="buttons.html"><span class="mu-sidebar-link-text">Buttons</span></a></li>
+                <li><a class="mu-sidebar-link" href="cards.html"><span class="mu-sidebar-link-text">Cards</span></a></li>
+                <li><a class="mu-sidebar-link" href="alerts.html"><span class="mu-sidebar-link-text">Alerts</span></a></li>
+                <li><a class="mu-sidebar-link" href="badges.html"><span class="mu-sidebar-link-text">Badges</span></a></li>
+                <li><a class="mu-sidebar-link" href="dropdowns.html"><span class="mu-sidebar-link-text">Dropdowns</span></a></li>
+                <li><a class="mu-sidebar-link" href="modals.html"><span class="mu-sidebar-link-text">Modals</span></a></li>
+                <li><a class="mu-sidebar-link" href="tabs.html"><span class="mu-sidebar-link-text">Tabs</span></a></li>
+                <li><a class="mu-sidebar-link" href="breadcrumbs.html"><span class="mu-sidebar-link-text">Breadcrumbs</span></a></li>
+                <li><a class="mu-sidebar-link" href="pagination.html"><span class="mu-sidebar-link-text">Pagination</span></a></li>
+                <li><a class="mu-sidebar-link" href="forms.html"><span class="mu-sidebar-link-text">Forms</span></a></li>
+                <li><a class="mu-sidebar-link" href="tables.html"><span class="mu-sidebar-link-text">Tables</span></a></li>
+                <li><a class="mu-sidebar-link" href="data-table.html"><span class="mu-sidebar-link-text">Data table</span></a></li>
+                <li><a class="mu-sidebar-link" href="form-patterns.html"><span class="mu-sidebar-link-text">Form patterns</span></a></li>
+                <li><a class="mu-sidebar-link" href="progress.html"><span class="mu-sidebar-link-text">Progress</span></a></li>
+                <li><a class="mu-sidebar-link" href="loading.html"><span class="mu-sidebar-link-text">Loading</span></a></li>
+                <li><a class="mu-sidebar-link" href="toasts.html"><span class="mu-sidebar-link-text">Toasts</span></a></li>
+                <li><a class="mu-sidebar-link" href="list-groups.html"><span class="mu-sidebar-link-text">List groups</span></a></li>
+                <li><a class="mu-sidebar-link" href="empty-states.html"><span class="mu-sidebar-link-text">Empty states</span></a></li>
+                <li><a class="mu-sidebar-link" href="tooltips-popovers.html"><span class="mu-sidebar-link-text">Tooltips &amp; popovers</span></a></li>
+                <li><a class="mu-sidebar-link" href="accordion.html"><span class="mu-sidebar-link-text">Accordion</span></a></li>
+                <li><a class="mu-sidebar-link" href="offcanvas.html"><span class="mu-sidebar-link-text">Offcanvas</span></a></li>
+                <li><a class="mu-sidebar-link" href="carousel.html"><span class="mu-sidebar-link-text">Carousel</span></a></li>
+                <li><a class="mu-sidebar-link" href="scrollspy.html"><span class="mu-sidebar-link-text">Scrollspy</span></a></li>
+                <li><a class="mu-sidebar-link" href="navigation-patterns.html"><span class="mu-sidebar-link-text">Navigation patterns</span></a></li>
+                <li><a class="mu-sidebar-link" href="themes.html"><span class="mu-sidebar-link-text">Themes</span></a></li>
+              </ul>
+            </div>
+          </nav>
+        </div>
+      </aside>
+
+      <main class="mu-app-main">
+        <div class="mu-app-content">
+          <div class="container-fluid py-4">
+
+            <nav aria-label="Breadcrumb">
+              <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="../index.html">Dashboard</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Settings</li>
+              </ol>
+            </nav>
+
+            <h1 class="h3 mb-1">Settings</h1>
+            <p class="text-body-secondary mb-4">Manage your account, preferences, notifications, security, and appearance.</p>
+
+            <div class="row g-4">
+              <div class="col-12 col-lg-3">
+                <ul class="nav nav-pills flex-column" role="tablist" aria-label="Settings sections">
+                  <li class="nav-item" role="presentation">
+                    <button class="nav-link active" id="tab-profile" data-bs-toggle="tab" data-bs-target="#panel-profile" type="button" role="tab" aria-selected="true">
+                      <i data-lucide="user" aria-hidden="true" width="16" height="16" class="me-1"></i>
+                      Profile
+                    </button>
+                  </li>
+                  <li class="nav-item" role="presentation">
+                    <button class="nav-link" id="tab-preferences" data-bs-toggle="tab" data-bs-target="#panel-preferences" type="button" role="tab" aria-selected="false" tabindex="-1">
+                      <i data-lucide="sliders-horizontal" aria-hidden="true" width="16" height="16" class="me-1"></i>
+                      Preferences
+                    </button>
+                  </li>
+                  <li class="nav-item" role="presentation">
+                    <button class="nav-link" id="tab-notifications" data-bs-toggle="tab" data-bs-target="#panel-notifications" type="button" role="tab" aria-selected="false" tabindex="-1">
+                      <i data-lucide="bell" aria-hidden="true" width="16" height="16" class="me-1"></i>
+                      Notifications
+                    </button>
+                  </li>
+                  <li class="nav-item" role="presentation">
+                    <button class="nav-link" id="tab-security" data-bs-toggle="tab" data-bs-target="#panel-security" type="button" role="tab" aria-selected="false" tabindex="-1">
+                      <i data-lucide="shield" aria-hidden="true" width="16" height="16" class="me-1"></i>
+                      Security
+                    </button>
+                  </li>
+                  <li class="nav-item" role="presentation">
+                    <button class="nav-link" id="tab-appearance" data-bs-toggle="tab" data-bs-target="#panel-appearance" type="button" role="tab" aria-selected="false" tabindex="-1">
+                      <i data-lucide="sun" aria-hidden="true" width="16" height="16" class="me-1"></i>
+                      Appearance
+                    </button>
+                  </li>
+                </ul>
+              </div>
+
+              <div class="col-12 col-lg-9">
+                <div class="tab-content">
+
+                  <div class="tab-pane fade show active" id="panel-profile" role="tabpanel" aria-labelledby="tab-profile" tabindex="0">
+                    <div class="card">
+                      <div class="card-header">
+                        <h2 class="h6 mb-0">Profile settings</h2>
+                      </div>
+                      <div class="card-body">
+                        <div class="row g-3">
+                          <div class="col-12 col-md-6">
+                            <label class="form-label" for="set-name">Full name</label>
+                            <input type="text" class="form-control" id="set-name" value="Jane Doe">
+                          </div>
+                          <div class="col-12 col-md-6">
+                            <label class="form-label" for="set-role">Role</label>
+                            <select class="form-select" id="set-role">
+                              <option value="pm" selected>Product Manager</option>
+                              <option value="eng">Engineer</option>
+                              <option value="design">Designer</option>
+                            </select>
+                          </div>
+                          <div class="col-12">
+                            <label class="form-label" for="set-email">Work email</label>
+                            <input type="email" class="form-control" id="set-email" value="jane.doe@example.com">
+                          </div>
+                          <div class="col-12">
+                            <label class="form-label" for="set-bio">Bio</label>
+                            <textarea class="form-control" id="set-bio" rows="3">Leads the platform team and the design system.</textarea>
+                            <div class="form-text">Shown on your public profile. 140 characters max.</div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="card-footer d-flex justify-content-end gap-2">
+                        <button type="button" class="btn btn-outline-secondary btn-sm">Cancel</button>
+                        <button type="button" class="btn btn-primary btn-sm">Save changes</button>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="tab-pane fade" id="panel-preferences" role="tabpanel" aria-labelledby="tab-preferences" tabindex="0">
+                    <div class="card">
+                      <div class="card-header">
+                        <h2 class="h6 mb-0">Preferences</h2>
+                      </div>
+                      <div class="card-body">
+                        <div class="row g-3">
+                          <div class="col-12 col-md-6">
+                            <label class="form-label" for="set-language">Language</label>
+                            <select class="form-select" id="set-language">
+                              <option value="en" selected>English</option>
+                              <option value="es">Español</option>
+                              <option value="de">Deutsch</option>
+                              <option value="fr">Français</option>
+                            </select>
+                          </div>
+                          <div class="col-12 col-md-6">
+                            <label class="form-label" for="set-timezone">Timezone</label>
+                            <select class="form-select" id="set-timezone">
+                              <option value="pt" selected>(GMT-08:00) Pacific Time</option>
+                              <option value="et">(GMT-05:00) Eastern Time</option>
+                              <option value="utc">(GMT+00:00) UTC</option>
+                              <option value="cet">(GMT+01:00) Central European</option>
+                            </select>
+                          </div>
+                          <div class="col-12">
+                            <div class="form-check form-switch">
+                              <input class="form-check-input" type="checkbox" role="switch" id="set-compact" checked>
+                              <label class="form-check-label" for="set-compact">Use compact tables in reports</label>
+                            </div>
+                            <div class="form-check form-switch">
+                              <input class="form-check-input" type="checkbox" role="switch" id="set-weekstart">
+                              <label class="form-check-label" for="set-weekstart">Start the week on Monday</label>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="card-footer d-flex justify-content-end">
+                        <button type="button" class="btn btn-primary btn-sm">Save preferences</button>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="tab-pane fade" id="panel-notifications" role="tabpanel" aria-labelledby="tab-notifications" tabindex="0">
+                    <div class="card">
+                      <div class="card-header">
+                        <h2 class="h6 mb-0">Notifications</h2>
+                      </div>
+                      <div class="card-body">
+                        <div class="form-check form-switch mb-2">
+                          <input class="form-check-input" type="checkbox" role="switch" id="set-n1" checked>
+                          <label class="form-check-label" for="set-n1">Email — project activity</label>
+                        </div>
+                        <div class="form-check form-switch mb-2">
+                          <input class="form-check-input" type="checkbox" role="switch" id="set-n2" checked>
+                          <label class="form-check-label" for="set-n2">Email — weekly digest</label>
+                        </div>
+                        <div class="form-check form-switch mb-2">
+                          <input class="form-check-input" type="checkbox" role="switch" id="set-n3">
+                          <label class="form-check-label" for="set-n3">Push — mentions and replies</label>
+                        </div>
+                        <div class="form-check form-switch mb-2">
+                          <input class="form-check-input" type="checkbox" role="switch" id="set-n4" checked>
+                          <label class="form-check-label" for="set-n4">Push — deployment failures</label>
+                        </div>
+                        <div class="form-check form-switch">
+                          <input class="form-check-input" type="checkbox" role="switch" id="set-n5">
+                          <label class="form-check-label" for="set-n5">Marketing — product updates</label>
+                        </div>
+                      </div>
+                      <div class="card-footer d-flex justify-content-end">
+                        <button type="button" class="btn btn-primary btn-sm">Save preferences</button>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="tab-pane fade" id="panel-security" role="tabpanel" aria-labelledby="tab-security" tabindex="0">
+                    <div class="card mb-3">
+                      <div class="card-header">
+                        <h2 class="h6 mb-0">Change password</h2>
+                      </div>
+                      <div class="card-body">
+                        <div class="row g-3">
+                          <div class="col-12 col-md-4">
+                            <label class="form-label" for="set-pass-current">Current password</label>
+                            <input type="password" class="form-control" id="set-pass-current">
+                          </div>
+                          <div class="col-12 col-md-4">
+                            <label class="form-label" for="set-pass-new">New password</label>
+                            <input type="password" class="form-control" id="set-pass-new" aria-describedby="pass-help">
+                            <div class="form-text" id="pass-help">At least 12 characters, with a mix of letters and numbers.</div>
+                          </div>
+                          <div class="col-12 col-md-4">
+                            <label class="form-label" for="set-pass-confirm">Confirm new password</label>
+                            <input type="password" class="form-control" id="set-pass-confirm">
+                          </div>
+                        </div>
+                      </div>
+                      <div class="card-footer d-flex justify-content-end">
+                        <button type="button" class="btn btn-primary btn-sm">Update password</button>
+                      </div>
+                    </div>
+                    <div class="card">
+                      <div class="card-header">
+                        <h2 class="h6 mb-0">Two-factor authentication</h2>
+                      </div>
+                      <div class="card-body">
+                        <div class="form-check form-switch">
+                          <input class="form-check-input" type="checkbox" role="switch" id="set-2fa" checked>
+                          <label class="form-check-label" for="set-2fa">Require a one-time code at sign-in</label>
+                        </div>
+                        <p class="text-body-secondary small mb-0 mt-2">Recovery codes were last rotated on June 3, 2026.</p>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="tab-pane fade" id="panel-appearance" role="tabpanel" aria-labelledby="tab-appearance" tabindex="0">
+                    <div class="card">
+                      <div class="card-header">
+                        <h2 class="h6 mb-0">Appearance</h2>
+                      </div>
+                      <div class="card-body">
+                        <label class="form-label" for="set-theme">Theme</label>
+                        <select class="form-select w-auto" id="set-theme" data-theme-switch>
+                          <option value="system">System</option>
+                          <option value="light">Light</option>
+                          <option value="dark">Dark</option>
+                        </select>
+                        <div class="form-text">Light and dark are Bootstrap's native themes; System follows your OS preference. This page updates live.</div>
+                        <hr class="my-4">
+                        <div class="form-check form-switch">
+                          <input class="form-check-input" type="checkbox" role="switch" id="set-reduced">
+                          <label class="form-check-label" for="set-reduced">Reduce motion</label>
+                        </div>
+                        <div class="form-check form-switch">
+                          <input class="form-check-input" type="checkbox" role="switch" id="set-density" checked>
+                          <label class="form-check-label" for="set-density">Compact density for data tables</label>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </main>
+
+    </div>
+
+    <div class="mu-app-backdrop" aria-hidden="true"></div>
+  </div>
+
+  <script>lucide.createIcons();</script>
+</body>
+</html>

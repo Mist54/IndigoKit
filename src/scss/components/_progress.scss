@@ -1,0 +1,28 @@
+// Progress refinements.
+//
+// Bootstrap's progress is already token-wired: 1rem track on
+// --bs-secondary-bg with the inset shadow, 6px radius, indigo bar,
+// 0.75rem label, striped/animated machinery, and its own
+// prefers-reduced-motion block. Two IndigoKit additions:
+//
+// 1. Semantic-bar text contrast — `.bg-warning` / `.bg-danger` /
+//    `.bg-info` override the bar background but NOT the bar's white
+//    text, which fails AA on those light-vivid fills (amber ≈3.7:1,
+//    red ≈3.4:1, cyan ≈2.3:1). Dark ink (`$body-color`, ≈#0F1115)
+//    restores the palette's established auto-contrast pairs. `bg-primary`
+//    keeps white text (6.3:1 ✓) and gets no entry; `bg-success` is
+//    included because white on emerald is only ≈2.5:1 (measured live).
+// 2. Leading-edge radius — the track clips the bar with
+//    `overflow: hidden`, so rounding just the bar's leading edge
+//    mirrors the track radius without a new token.
+
+.progress-bar.bg-warning,
+.progress-bar.bg-danger,
+.progress-bar.bg-info,
+.progress-bar.bg-success {
+  color: $body-color;
+}
+
+.progress-bar {
+  border-radius: var(--bs-progress-border-radius);
+}

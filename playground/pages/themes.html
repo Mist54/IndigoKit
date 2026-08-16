@@ -1,0 +1,724 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>IndigoKit Playground — Themes</title>
+  <link rel="stylesheet" href="../../dist/css/indigokit.css">
+  <link rel="stylesheet" href="../playground.css">
+  <!-- Playground theme persistence (Task 047) — applies the stored
+       indigokit-theme preference before first paint. Playground-only; the
+       framework ships no theme JavaScript. -->
+  <script src="../theme.js"></script>
+  <script src="../assets/lucide.umd.js"></script>
+  <!-- Bootstrap's JS powers the modal/offcanvas demos (consumer-side load —
+       IndigoKit ships no theme JavaScript). -->
+  <script src="../../node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+</head>
+<body>
+  <!-- Playground-only theme switcher (Task 047) — NOT a IndigoKit API. Native
+       .form-select semantics (label + keyboard + announced value); persists
+       via the shared playground/theme.js utility (localStorage: indigokit-theme). -->
+  <div class="theme-toggle">
+    <label class="small text-body-secondary" for="theme-select">Theme</label>
+    <select class="form-select form-select-sm" id="theme-select">
+      <option value="system">System</option>
+      <option value="light">Light</option>
+      <option value="dark">Dark</option>
+    </select>
+  </div>
+
+  <div class="container py-5 theme-page">
+
+    <h1>Themes</h1>
+    <p class="lead">IndigoKit's theme architecture. The mechanism is Bootstrap's native <code>data-bs-theme</code> attribute on <code>&lt;html&gt;</code> — no IndigoKit theme classes, no runtime engine. This page flips the whole document so every surface inconsistency is visible. Use the switcher above; the choice persists across playground pages (localStorage key <code>indigokit-theme</code>).</p>
+
+    <!-- Live status: current mode + applied theme (Task 047) -->
+    <p class="demo-label d-flex align-items-center gap-2 flex-wrap" id="theme-status" role="status">
+      <span>Mode:</span>
+      <span class="badge text-bg-secondary" id="theme-mode-badge">System</span>
+      <span>→ applied:</span>
+      <strong id="theme-applied-label">Light</strong>
+      <span class="text-body-secondary" id="theme-system-hint" hidden>(following your OS preference)</span>
+    </p>
+
+    <!-- Mechanism -->
+    <h2 class="h5 mt-5 mb-3">How it works</h2>
+    <p class="demo-label">Build-time dark variables (<code>base/_themes.scss</code>, before the Bootstrap import) drive Bootstrap's own <code>[data-bs-theme="dark"]</code> root block — body, text, surfaces, borders, emphasis tints, validation colors. Runtime dark rules (end of <code>base/_base.scss</code>) cover the handful of things Bootstrap cannot express at build time: baked-SVG validation icons, the focus ring, backdrop, shell hover surfaces. Light mode output is unchanged except focus rings now emit <code>var(--bs-focus-ring-color)</code> (same value).</p>
+
+    <!-- Surface hierarchy -->
+    <h2 class="h5 mt-5 mb-3">Surface hierarchy</h2>
+    <p class="demo-label">Three dark neutrals in the slate family (body → raised → hover), demonstrated with Bootstrap's <code>bg-body</code> / <code>bg-body-secondary</code> / <code>bg-body-tertiary</code> utilities. Overlays (modal/offcanvas/dropdown/popover/toast) sit on the raised surface; borders use slate-600.</p>
+    <div class="row g-3 mb-2">
+      <div class="col-md-4">
+        <div class="p-3 border rounded bg-body">
+          <p class="mb-0"><strong>Body</strong> — slate-900</p>
+          <p class="text-body-secondary mb-0">Cards, tables, forms, navbar</p>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="p-3 border rounded bg-body-tertiary">
+          <p class="mb-0"><strong>Raised</strong> — slate-800</p>
+          <p class="text-body-secondary mb-0">Sidebar, modals, dropdowns, offcanvas</p>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="p-3 border rounded bg-body-secondary">
+          <p class="mb-0"><strong>Hover</strong> — slate-700</p>
+          <p class="text-body-secondary mb-0">Item hovers, disabled inputs, tracks</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Typography -->
+    <h2 class="h5 mt-5 mb-3">Typography</h2>
+    <p class="demo-label">Headings, lead, body and muted text all flow from <code>--bs-body-color</code> / <code>--bs-secondary-color</code>; links stay indigo (Bootstrap lightens the link tint in dark); selection, <code>&lt;mark&gt;</code>, blockquote and code flip via token-driven tints.</p>
+    <div class="row g-4">
+      <div class="col-lg-6">
+        <h3 class="h4">Heading hierarchy</h3>
+        <p class="lead">Lead paragraph — the muted lead hierarchy reads the same in both themes.</p>
+        <p>Body text with <strong>strong</strong>, <em>emphasized</em> and <a href="#">a link</a> — all token-driven.</p>
+        <p class="text-body-secondary mb-0">Secondary text — rgba of the body color, re-derived per theme.</p>
+      </div>
+      <div class="col-lg-6">
+        <blockquote class="mb-3">“Blockquote — hairline left border and secondary text, both theme-adaptive.”</blockquote>
+        <p class="mb-2"><mark>Highlighted</mark> text uses the amber token at low alpha; Bootstrap's dark block flips the tint.</p>
+        <p class="mb-0"><code>Inline code</code> flips via <code>--bs-code-color</code>.</p>
+      </div>
+    </div>
+
+    <!-- Buttons -->
+    <h2 class="h5 mt-5 mb-3">Buttons</h2>
+    <p class="demo-label">Semantic colors are constant across themes (indigo stays indigo) — only neutrals, surfaces and emphasis tints flip. Contrast measured in dark: white on indigo 6.3:1; dark ink on emerald/amber/red/cyan 5.0–8.8:1.</p>
+    <div class="d-flex flex-wrap gap-2 mb-3">
+      <button type="button" class="btn btn-primary">Primary</button>
+      <button type="button" class="btn btn-secondary">Secondary</button>
+      <button type="button" class="btn btn-success">Success</button>
+      <button type="button" class="btn btn-danger">Danger</button>
+      <button type="button" class="btn btn-outline-primary">Outline</button>
+      <button type="button" class="btn btn-outline-secondary">Outline secondary</button>
+    </div>
+
+    <!-- Card with form -->
+    <h2 class="h5 mt-5 mb-3">Card + form</h2>
+    <div class="row g-4">
+      <div class="col-lg-6">
+        <div class="card">
+          <div class="card-body">
+            <h3 class="card-title h5">Profile</h3>
+            <form class="row g-3">
+              <div class="col-12">
+                <label class="form-label" for="th-name">Full name</label>
+                <input type="text" class="form-control" id="th-name" value="Jane Doe">
+              </div>
+              <div class="col-md-6">
+                <label class="form-label" for="th-email">Email</label>
+                <input type="email" class="form-control is-valid" id="th-email" value="jane@example.com" aria-describedby="th-email-help">
+                <div class="valid-feedback" id="th-email-help">Looks good — the icon must stay visible in dark mode.</div>
+              </div>
+              <div class="col-md-6">
+                <label class="form-label" for="th-role">Role</label>
+                <select class="form-select is-invalid" id="th-role" aria-describedby="th-role-help">
+                  <option selected>Choose…</option>
+                  <option>Admin</option>
+                  <option>Editor</option>
+                </select>
+                <div class="invalid-feedback" id="th-role-help">Please choose a role — the dark chevron and icon live in baked SVGs.</div>
+              </div>
+              <div class="col-12">
+                <label class="form-label" for="th-bio">Bio</label>
+                <textarea class="form-control" id="th-bio" rows="3">Enterprise front-end engineer.</textarea>
+              </div>
+              <div class="col-12">
+                <div class="form-check form-switch">
+                  <input class="form-check-input" type="checkbox" role="switch" id="th-switch" checked>
+                  <label class="form-check-label" for="th-switch">Email notifications</label>
+                </div>
+              </div>
+              <div class="col-12 d-flex justify-content-end gap-2">
+                <button type="button" class="btn btn-secondary">Cancel</button>
+                <button type="button" class="btn btn-primary">Save changes</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-6">
+        <div class="card">
+          <div class="card-body">
+            <h3 class="card-title h5">Range &amp; checks</h3>
+            <label class="form-label" for="th-range">Volume <span class="text-body-secondary">(live value example)</span></label>
+            <input type="range" class="form-range" min="0" max="100" step="5" value="60" id="th-range">
+            <div class="form-check">
+              <input class="form-check-input" type="checkbox" id="th-check1" checked>
+              <label class="form-check-label" for="th-check1">Deploy on merge</label>
+            </div>
+            <div class="form-check">
+              <input class="form-check-input" type="checkbox" id="th-check2">
+              <label class="form-check-label" for="th-check2">Notify the team</label>
+            </div>
+            <fieldset class="mt-3">
+              <legend class="fs-6 fw-medium">Environment</legend>
+              <div class="form-check">
+                <input class="form-check-input" type="radio" name="th-env" id="th-radio1" checked>
+                <label class="form-check-label" for="th-radio1">Production</label>
+              </div>
+              <div class="form-check">
+                <input class="form-check-input" type="radio" name="th-env" id="th-radio2">
+                <label class="form-check-label" for="th-radio2">Staging</label>
+              </div>
+            </fieldset>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Progress -->
+    <h2 class="h5 mt-5 mb-3">Progress</h2>
+    <p class="demo-label">The track is <code>--bs-secondary-bg</code> (slate-700 in dark); bars keep their semantic fills and auto-contrast ink. Striped/animated variants stay Bootstrap stock, reduced-motion included.</p>
+    <div class="d-flex flex-column gap-3 mb-3">
+      <div>
+        <div class="d-flex justify-content-between mb-1">
+          <span class="small fw-medium">Uploading assets</span>
+          <span class="small text-body-secondary">75%</span>
+        </div>
+        <div class="progress" role="progressbar" aria-label="Uploading assets" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100">
+          <div class="progress-bar w-75"></div>
+        </div>
+      </div>
+      <div>
+        <div class="d-flex justify-content-between mb-1">
+          <span class="small fw-medium">Deployment</span>
+          <span class="small text-body-secondary">100%</span>
+        </div>
+        <div class="progress" role="progressbar" aria-label="Deployment complete" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100">
+          <div class="progress-bar bg-success w-100"></div>
+        </div>
+      </div>
+      <div>
+        <div class="d-flex justify-content-between mb-1">
+          <span class="small fw-medium">Quota</span>
+          <span class="small text-body-secondary">82%</span>
+        </div>
+        <div class="progress" role="progressbar" aria-label="Quota used" aria-valuenow="82" aria-valuemin="0" aria-valuemax="100">
+          <div class="progress-bar bg-warning demo-w-82"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Loading -->
+    <h2 class="h5 mt-5 mb-3">Loading</h2>
+    <p class="demo-label">Spinners inherit <code>currentcolor</code> (body text in both themes); the accessible pattern is spinner + visible or <code>.visually-hidden</code> text — never animation alone.</p>
+    <div class="d-flex flex-wrap align-items-center gap-3 mb-3">
+      <div class="spinner-border" role="status"><span class="visually-hidden">Loading…</span></div>
+      <div class="spinner-grow" role="status"><span class="visually-hidden">Loading…</span></div>
+      <div class="d-inline-flex align-items-center gap-2 text-body-secondary">
+        <span class="spinner-border spinner-border-sm" aria-hidden="true"></span>
+        Fetching rows…
+      </div>
+      <button type="button" class="btn btn-primary" disabled>
+        <span class="spinner-border spinner-border-sm" aria-hidden="true"></span>
+        Saving…
+      </button>
+      <div class="card border p-4">
+        <div class="spinner-border" role="status"><span class="visually-hidden">Loading card…</span></div>
+      </div>
+    </div>
+
+    <!-- Table -->
+    <h2 class="h5 mt-5 mb-3">Table</h2>
+    <p class="demo-label">Striping and hover derive from emphasis factors on <code>--bs-body-color-rgb</code>, so they flip automatically; headers use <code>--bs-emphasis-color</code> (slate-50 in dark).</p>
+    <div class="card">
+      <div class="table-responsive">
+        <table class="table table-striped table-hover align-middle mb-0">
+          <caption class="px-3 pt-3">Deployment status</caption>
+          <thead>
+            <tr>
+              <th scope="col">Project</th>
+              <th scope="col">Status</th>
+              <th scope="col">Updated</th>
+              <th scope="col">Owner</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>IndigoKit</td>
+              <td><span class="badge text-bg-success">Live</span></td>
+              <td>2 min ago</td>
+              <td>Jane</td>
+            </tr>
+            <tr>
+              <td>Atlas</td>
+              <td><span class="badge text-bg-warning">Building</span></td>
+              <td>14 min ago</td>
+              <td>Devon</td>
+            </tr>
+            <tr>
+              <td>Northwind</td>
+              <td><span class="badge text-bg-danger">Failed</span></td>
+              <td>1 hr ago</td>
+              <td>Sam</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- Contextual table variants -->
+    <h2 class="h5 mt-5 mb-3">Table — contextual variants</h2>
+    <p class="demo-label">Bootstrap's <code>table-variant()</code> mixin bakes light tints at build time — Task 046 re-maps the six semantic variants onto the emphasis/subtle variable family, so <code>.table-primary</code> &amp; co. flip in dark the same way alerts and badges do. Striped/hover/active stay factor-derived.</p>
+    <div class="card mb-3">
+      <div class="table-responsive">
+        <table class="table align-middle mb-0">
+          <thead>
+            <tr>
+              <th scope="col">Service</th>
+              <th scope="col">State</th>
+              <th scope="col">Region</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="table-primary">
+              <td>api-gateway</td>
+              <td>Healthy</td>
+              <td>us-east-1</td>
+            </tr>
+            <tr class="table-success">
+              <td>billing-sync</td>
+              <td>Synced</td>
+              <td>eu-west-1</td>
+            </tr>
+            <tr class="table-warning">
+              <td>search-index</td>
+              <td>Rebuilding</td>
+              <td>us-west-2</td>
+            </tr>
+            <tr class="table-danger">
+              <td>notify-worker</td>
+              <td>Down</td>
+              <td>ap-southeast-1</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- List groups -->
+    <h2 class="h5 mt-5 mb-3">List groups</h2>
+    <p class="demo-label">Surfaces flip via <code>--bs-body-bg</code>; hover uses <code>--bs-tertiary-bg</code>; active stays white-on-indigo; contextual items use the same emphasis family as the tables above.</p>
+    <div class="row g-4 mb-3">
+      <div class="col-lg-6">
+        <ul class="list-group">
+          <li class="list-group-item">Documentation</li>
+          <li class="list-group-item">Release notes</li>
+          <li class="list-group-item list-group-item-primary">Primary context item</li>
+          <li class="list-group-item list-group-item-danger">Danger context item</li>
+        </ul>
+      </div>
+      <div class="col-lg-6">
+        <ul class="list-group list-group-flush border rounded">
+          <li class="list-group-item d-flex align-items-center gap-3">
+            <i data-lucide="upload-cloud" aria-hidden="true" class="text-secondary"></i>
+            <div class="flex-grow-1">
+              <div class="fw-medium">Deployment completed</div>
+              <div class="small text-body-secondary">2 minutes ago</div>
+            </div>
+            <span class="badge text-bg-success">Done</span>
+          </li>
+          <li class="list-group-item d-flex align-items-center gap-3">
+            <i data-lucide="user-plus" aria-hidden="true" class="text-secondary"></i>
+            <div class="flex-grow-1">
+              <div class="fw-medium">Member invited</div>
+              <div class="small text-body-secondary">1 hour ago</div>
+            </div>
+          </li>
+          <li class="list-group-item d-flex align-items-center gap-3">
+            <i data-lucide="triangle-alert" aria-hidden="true" class="text-secondary"></i>
+            <div class="flex-grow-1">
+              <div class="fw-medium">Build failed</div>
+              <div class="small text-body-secondary">3 hours ago</div>
+            </div>
+            <span class="badge text-bg-danger">Failed</span>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Empty state -->
+    <h2 class="h5 mt-5 mb-3">Empty state</h2>
+    <p class="demo-label">Bootstrap utilities only — no dark-specific classes. The icon/title/description/action hierarchy flips with the theme automatically.</p>
+    <div class="card mb-3">
+      <div class="card-body text-center py-5">
+        <i data-lucide="inbox" aria-hidden="true" class="demo-empty-icon text-secondary mb-3"></i>
+        <h3 class="h5">No notifications yet</h3>
+        <p class="text-body-secondary mb-3">We'll let you know when something needs your attention.</p>
+        <button type="button" class="btn btn-primary"><i data-lucide="bell" aria-hidden="true"></i> Enable notifications</button>
+      </div>
+    </div>
+
+    <!-- Alerts -->
+    <h2 class="h5 mt-5 mb-3">Alerts</h2>
+    <p class="demo-label">Alert variants ride the emphasis/subtle system — dark mode flips them to dark tinted surfaces with light-emphasis text automatically.</p>
+    <div class="d-flex flex-column gap-2 mb-3">
+      <div class="alert alert-primary d-flex align-items-start gap-2 mb-0" role="alert">
+        <i data-lucide="info"></i>
+        <div><strong>Primary</strong> — a contextual note with an icon.</div>
+      </div>
+      <div class="alert alert-success d-flex align-items-start gap-2 mb-0" role="alert">
+        <i data-lucide="check-circle-2"></i>
+        <div><strong>Success</strong> — the deployment finished cleanly.</div>
+      </div>
+      <div class="alert alert-warning d-flex align-items-start gap-2 mb-0" role="alert">
+        <i data-lucide="triangle-alert"></i>
+        <div><strong>Warning</strong> — quota at 85%.</div>
+      </div>
+      <div class="alert alert-danger d-flex align-items-start gap-2 mb-0" role="alert">
+        <i data-lucide="octagon-alert"></i>
+        <div><strong>Danger</strong> — the build failed.</div>
+      </div>
+    </div>
+
+    <!-- Badges -->
+    <h2 class="h5 mt-5 mb-3">Badges</h2>
+    <p class="demo-label">Semantic badges keep their vivid fills in both themes (white/dark ink auto-pairs); subtle badges follow the emphasis tints.</p>
+    <div class="d-flex flex-wrap gap-2 mb-3">
+      <span class="badge text-bg-primary">Primary</span>
+      <span class="badge text-bg-success">Success</span>
+      <span class="badge text-bg-warning">Warning</span>
+      <span class="badge text-bg-danger">Danger</span>
+      <span class="badge text-bg-info">Info</span>
+      <span class="badge text-bg-secondary">Secondary</span>
+      <span class="badge bg-primary-subtle text-primary-emphasis">Subtle</span>
+    </div>
+
+    <!-- Breadcrumb & pagination -->
+    <h2 class="h5 mt-5 mb-3">Breadcrumb &amp; pagination</h2>
+    <p class="demo-label">Breadcrumb separators/current and pagination surfaces all resolve to <code>--bs-secondary-color</code> / <code>--bs-body-bg</code> — nothing is baked, so both flip cleanly.</p>
+    <nav aria-label="breadcrumb" class="mb-3">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="#">Dashboard</a></li>
+        <li class="breadcrumb-item"><a href="#">Projects</a></li>
+        <li class="breadcrumb-item active" aria-current="page">IndigoKit</li>
+      </ol>
+    </nav>
+    <nav aria-label="Pagination example">
+      <ul class="pagination">
+        <li class="page-item disabled"><a class="page-link" href="#" tabindex="-1" aria-disabled="true">Previous</a></li>
+        <li class="page-item active" aria-current="page"><a class="page-link" href="#">1</a></li>
+        <li class="page-item"><a class="page-link" href="#">2</a></li>
+        <li class="page-item"><a class="page-link" href="#">3</a></li>
+        <li class="page-item"><a class="page-link" href="#">Next</a></li>
+      </ul>
+    </nav>
+
+    <!-- Toasts -->
+    <h2 class="h5 mt-5 mb-3">Toasts</h2>
+    <p class="demo-label">Neutral surface + semantic icon/text via utilities — the same approach as toasts.html. Header/body flip via <code>--bs-body-bg-rgb</code>; semantic icons use the emphasis tints (light green/red in dark). Live regions: <code>role="status"</code> for non-urgent, <code>role="alert"</code> for errors.</p>
+    <div class="d-flex flex-wrap gap-3 mb-3">
+      <div class="toast show" role="status" aria-live="polite" aria-atomic="true">
+        <div class="toast-header">
+          <i data-lucide="circle-check" aria-hidden="true" class="text-success me-2"></i>
+          <strong class="me-auto">Saved</strong>
+          <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+        </div>
+        <div class="toast-body">Project saved successfully.</div>
+      </div>
+      <div class="toast show" role="alert" aria-live="assertive" aria-atomic="true">
+        <div class="toast-header">
+          <i data-lucide="octagon-alert" aria-hidden="true" class="text-danger me-2"></i>
+          <strong class="me-auto">Build failed</strong>
+          <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+        </div>
+        <div class="toast-body">Unable to deploy. Check the logs and retry.</div>
+      </div>
+      <div class="toast show" role="status" aria-live="polite" aria-atomic="true">
+        <div class="toast-header">
+          <i data-lucide="info" aria-hidden="true" class="text-primary me-2"></i>
+          <strong class="me-auto">Maintenance</strong>
+          <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+        </div>
+        <div class="toast-body">Scheduled maintenance at 02:00 UTC.</div>
+      </div>
+    </div>
+    <button type="button" class="btn btn-outline-secondary" id="theme-toast-btn">
+      <i data-lucide="bell" aria-hidden="true"></i> Show a toast
+    </button>
+    <div class="toast mt-3" role="status" aria-live="polite" aria-atomic="true" id="theme-toast-dynamic">
+      <div class="toast-header">
+        <i data-lucide="bell" aria-hidden="true" class="me-2"></i>
+        <strong class="me-auto">Reminder</strong>
+        <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+      </div>
+      <div class="toast-body">Shown with Bootstrap's JS — dismissible and auto-hiding (default 5s).</div>
+    </div>
+
+    <!-- Tooltips & popovers -->
+    <h2 class="h5 mt-5 mb-3">Tooltips &amp; popovers</h2>
+    <p class="demo-label">Tooltips invert in dark (light surface, dark text — both ≈14:1); popovers sit on the raised surface with the emphasis header. Both are supplementary — every trigger keeps a real label.</p>
+    <div class="d-flex flex-wrap gap-2 mb-3">
+      <button type="button" class="btn btn-outline-secondary" data-bs-toggle="tooltip" data-bs-placement="top" title="Refreshes the current view">Refresh</button>
+      <button type="button" class="btn btn-outline-secondary" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Opens the export menu">Export</button>
+      <button type="button" class="btn btn-outline-secondary" data-bs-toggle="popover" data-bs-placement="right" data-bs-title="Account" data-bs-content="jane@example.com — last signed in 2 days ago.">Account info</button>
+      <button type="button" class="btn btn-outline-secondary" data-bs-toggle="popover" data-bs-placement="top" data-bs-title="Why is this here?" data-bs-content="Popovers carry richer context than tooltips; both stay supplementary to the control's own label.">Learn more</button>
+    </div>
+
+    <!-- Accordion -->
+    <h2 class="h5 mt-5 mb-3">Accordion</h2>
+    <p class="demo-label">Item surfaces flip via <code>--bs-accordion-bg</code>; the open state keeps indigo emphasis (chevron + tint — never color alone); Bootstrap's dark block flips the chevron.</p>
+    <div class="accordion mb-3" id="theme-accordion">
+      <div class="accordion-item">
+        <h3 class="accordion-header">
+          <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#theme-collapse-1" aria-expanded="true" aria-controls="theme-collapse-1">
+            Account settings
+          </button>
+        </h3>
+        <div id="theme-collapse-1" class="accordion-collapse collapse show" data-bs-parent="#theme-accordion">
+          <div class="accordion-body">
+            <p class="mb-0">Email, password and session preferences live here. Content flips with the theme — no form control is left light.</p>
+          </div>
+        </div>
+      </div>
+      <div class="accordion-item">
+        <h3 class="accordion-header">
+          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#theme-collapse-2" aria-expanded="false" aria-controls="theme-collapse-2">
+            Notification preferences
+          </button>
+        </h3>
+        <div id="theme-collapse-2" class="accordion-collapse collapse" data-bs-parent="#theme-accordion">
+          <div class="accordion-body">
+            <div class="form-check form-switch">
+              <input class="form-check-input" type="checkbox" role="switch" id="theme-acc-switch" checked>
+              <label class="form-check-label" for="theme-acc-switch">Email me about deployments</label>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Carousel -->
+    <h2 class="h5 mt-5 mb-3">Carousel</h2>
+    <p class="demo-label">Content slides built from theme-flipping surfaces, so the carousel reads in both themes (the caption color itself flips black ↔ white via Bootstrap's block — captions are shown on carousel.html). Controls/indicators stay Bootstrap stock.</p>
+    <div id="theme-carousel" class="carousel slide demo-theme-carousel" data-bs-ride="false">
+      <div class="carousel-indicators">
+        <button type="button" data-bs-target="#theme-carousel" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+        <button type="button" data-bs-target="#theme-carousel" data-bs-slide-to="1" aria-label="Slide 2"></button>
+        <button type="button" data-bs-target="#theme-carousel" data-bs-slide-to="2" aria-label="Slide 3"></button>
+      </div>
+      <div class="carousel-inner rounded border">
+        <div class="carousel-item active">
+          <div class="p-5 text-center bg-body-tertiary">
+            <i data-lucide="rocket" aria-hidden="true" class="demo-empty-icon text-primary mb-3"></i>
+            <h3 class="h5 mb-2">Launch ready</h3>
+            <p class="text-body-secondary mb-0">Everything deploys in one click.</p>
+          </div>
+        </div>
+        <div class="carousel-item">
+          <div class="p-5 text-center bg-body-tertiary">
+            <i data-lucide="activity" aria-hidden="true" class="demo-empty-icon text-success mb-3"></i>
+            <h3 class="h5 mb-2">All systems healthy</h3>
+            <p class="text-body-secondary mb-0">Latency and error rates inside targets.</p>
+          </div>
+        </div>
+        <div class="carousel-item">
+          <div class="p-5 text-center bg-body-tertiary">
+            <i data-lucide="layers" aria-hidden="true" class="demo-empty-icon text-primary mb-3"></i>
+            <h3 class="h5 mb-2">3 environments</h3>
+            <p class="text-body-secondary mb-0">Development, staging and production.</p>
+          </div>
+        </div>
+      </div>
+      <button class="carousel-control-prev" type="button" data-bs-target="#theme-carousel" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Previous</span>
+      </button>
+      <button class="carousel-control-next" type="button" data-bs-target="#theme-carousel" data-bs-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Next</span>
+      </button>
+    </div>
+
+    <!-- Navigation -->
+    <h2 class="h5 mt-5 mb-3">Navigation</h2>
+    <p class="demo-label">Navbar and sidebar surfaces flip via <code>--bs-body-bg</code> and <code>--bs-tertiary-bg</code> (the shell on layout.html inherits this automatically). Tabs/pills keep the indigo active treatment in both themes.</p>
+    <div class="d-flex flex-column gap-3">
+      <nav class="navbar mu-app-navbar px-3 py-2 rounded border" aria-label="Theme demo navbar">
+        <a class="navbar-brand" href="#">
+          <i data-lucide="layers" aria-hidden="true"></i>
+          IndigoKit
+        </a>
+        <div class="ms-auto d-flex align-items-center gap-2">
+          <div class="mu-navbar-actions">
+            <button type="button" class="btn" aria-label="Notifications"><i data-lucide="bell"></i></button>
+            <button type="button" class="btn" aria-label="Help"><i data-lucide="circle-help"></i></button>
+          </div>
+          <div class="mu-avatar" aria-hidden="true"><i data-lucide="user"></i></div>
+        </div>
+      </nav>
+      <div class="row g-3">
+        <div class="col-md-4">
+          <div class="p-3 rounded border bg-body-tertiary">
+            <p class="small text-uppercase fw-semibold text-body-secondary mb-2">Workspace</p>
+            <ul class="nav flex-column gap-1">
+              <li class="nav-item">
+                <a class="nav-link active" href="#" aria-current="page"><i data-lucide="layout-dashboard"></i> Dashboard</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#"><i data-lucide="folder"></i> Projects</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#"><i data-lucide="settings"></i> Settings</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class="col-md-8">
+          <!-- Static filter-style pills (NOT tabs — no panel switching, so
+               no tablist semantics; the selected choice is marked with
+               aria-pressed). Active state = indigo pill + weight + state,
+               never color alone. -->
+          <ul class="nav nav-pills gap-1">
+            <li class="nav-item">
+              <button class="nav-link active" type="button" aria-pressed="true">Overview</button>
+            </li>
+            <li class="nav-item">
+              <button class="nav-link" type="button" aria-pressed="false">Activity</button>
+            </li>
+            <li class="nav-item">
+              <button class="nav-link" type="button" aria-pressed="false">Settings</button>
+            </li>
+          </ul>
+          <div class="mt-3 p-3 border rounded">
+            <p class="mb-0 text-body-secondary">Content surface — same color as the page body in both themes, differentiated by borders (the light theme's white-on-white relationship is preserved).</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Overlays -->
+    <h2 class="h5 mt-5 mb-3">Overlay surfaces</h2>
+    <p class="demo-label">Modals, offcanvas, dropdowns, popovers and toasts sit on the raised surface in dark mode (elevation is expressed as surface lightness — shadows disappear on dark). The backdrop switches to a black scrim so dimming stays visible.</p>
+    <div class="d-flex flex-wrap gap-2 mb-3">
+      <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#theme-modal">Open modal</button>
+      <button type="button" class="btn btn-outline-secondary" data-bs-toggle="offcanvas" data-bs-target="#theme-offcanvas">Open offcanvas</button>
+      <div class="dropdown">
+        <button type="button" class="btn btn-outline-secondary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">Dropdown</button>
+        <ul class="dropdown-menu">
+          <li><h6 class="dropdown-header">Surface check</h6></li>
+          <li><a class="dropdown-item" href="#"><i data-lucide="user"></i> Profile</a></li>
+          <li><a class="dropdown-item" href="#"><i data-lucide="settings"></i> Settings</a></li>
+          <li><hr class="dropdown-divider"></li>
+          <li><a class="dropdown-item text-danger" href="#"><i data-lucide="log-out"></i> Sign out</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Modal -->
+    <div class="modal fade" id="theme-modal" tabindex="-1" aria-labelledby="theme-modal-title" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h1 class="modal-title fs-5" id="theme-modal-title">Theme modal</h1>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <p class="mb-0">In dark mode this panel is slate-800 — raised above the slate-900 page, with the black backdrop dimming behind it.</p>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-primary">Confirm</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Offcanvas -->
+    <div class="offcanvas offcanvas-end" tabindex="-1" id="theme-offcanvas" aria-labelledby="theme-offcanvas-title">
+      <div class="offcanvas-header">
+        <h2 class="offcanvas-title" id="theme-offcanvas-title">Theme offcanvas</h2>
+        <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+      </div>
+      <div class="offcanvas-body">
+        <p>Same raised surface as the modal — check the header/border treatment against the page body.</p>
+        <button type="button" class="btn btn-primary" data-bs-dismiss="offcanvas">Done</button>
+      </div>
+    </div>
+
+    <!-- Focus -->
+    <h2 class="h5 mt-5 mb-3">Focus states</h2>
+    <p class="demo-label">Tab through the controls. Light keeps the solid indigo ring (≈6.3:1); dark switches to indigo-300 — solid outline ≈9:1 on slate-900, component ring ≈5.7:1 on raised surfaces (both ≥3:1 WCAG 2.2). The light theme is not weakened — the dark ring is additive.</p>
+    <div class="d-flex flex-wrap gap-2 mb-2">
+      <button type="button" class="btn btn-primary">Focusable button</button>
+      <input type="text" class="form-control demo-focus-input" placeholder="Focusable input" aria-label="Focusable input">
+      <a class="nav-link border rounded" href="#">Focusable link</a>
+    </div>
+
+    <!-- Accessibility notes -->
+    <h2 class="h5 mt-5 mb-3">Accessibility notes</h2>
+    <ul class="mb-3">
+      <li><strong>Text contrast (measured):</strong> primary slate-200 on slate-900 ≈ 14.5:1; secondary ≈ 8.5:1; tertiary ≈ 4.2:1 (used for muted/large text — above the 3:1 non-text bar).</li>
+      <li><strong>Validation:</strong> feedback text/borders/labels flip to the light-emphasis tints; the feedback icons are re-emitted for dark (baked SVG fix); tooltip text flips to dark ink on the light tint (≈8:1).</li>
+      <li><strong>Borders:</strong> slate-600 on body ≈ 2.4:1 — visible but soft (Bootstrap's own dark borders measure ≈ 2.3:1).</li>
+      <li><strong>Backdrop:</strong> black at 50% in dark (the light slate scrim would vanish against the dark body).</li>
+      <li><strong>Semantics:</strong> theming changes no markup, roles or behavior — every control keeps its accessible name, label, focus and keyboard model from the light theme.</li>
+      <li><strong>Theme modes (Task 047):</strong> <code>Light</code> / <code>Dark</code> force a theme; <code>System</code> follows <code>prefers-color-scheme</code> via <code>matchMedia()</code> and reacts to OS changes. The choice persists in <code>localStorage</code> under <code>indigokit-theme</code> (allowlist-validated; invalid values fall back to System; blocked storage degrades to session-only). The stored preference applies before first paint on every playground page via the shared <code>playground/theme.js</code> — no flash of the wrong theme. The switcher is a native <code>.form-select</code> with a visible label, keyboard access and announced value. IndigoKit itself still ships no theme JavaScript.</li>
+    </ul>
+
+  </div>
+
+  <script>
+    lucide.createIcons();
+  </script>
+  <script>
+    // Playground-only switcher binding (Task 047) — binds the native
+    // .form-select to the shared playground/theme.js utility. NOT a IndigoKit
+    // API; the framework ships no theme JavaScript.
+    (function () {
+      var select = document.getElementById('theme-select');
+      var modeBadge = document.getElementById('theme-mode-badge');
+      var appliedLabel = document.getElementById('theme-applied-label');
+      var systemHint = document.getElementById('theme-system-hint');
+      if (!select || !modeBadge || !appliedLabel || !systemHint) return;
+
+      function title(s) {
+        return s.charAt(0).toUpperCase() + s.slice(1);
+      }
+
+      function sync() {
+        var mode = window.playgroundTheme.get();
+        var applied = document.documentElement.getAttribute('data-bs-theme') || 'light';
+        select.value = mode;
+        modeBadge.textContent = title(mode);
+        appliedLabel.textContent = title(applied);
+        systemHint.hidden = mode !== 'system';
+      }
+
+      select.addEventListener('change', function () {
+        window.playgroundTheme.set(select.value);
+        sync();
+      });
+
+      sync();
+    })();
+  </script>
+  <script>
+    // Playground-only init for Bootstrap's interactive demos — Bootstrap's
+    // own APIs (tooltips/popovers need explicit init; toasts are triggered
+    // with the stock Toast API).
+    (function () {
+      document.querySelectorAll('[data-bs-toggle="tooltip"]').forEach(function (el) {
+        new bootstrap.Tooltip(el);
+      });
+      document.querySelectorAll('[data-bs-toggle="popover"]').forEach(function (el) {
+        new bootstrap.Popover(el);
+      });
+      var toastBtn = document.getElementById('theme-toast-btn');
+      var toastEl = document.getElementById('theme-toast-dynamic');
+      if (toastBtn && toastEl) {
+        toastBtn.addEventListener('click', function () {
+          bootstrap.Toast.getOrCreateInstance(toastEl).show();
+        });
+      }
+    })();
+  </script>
+</body>
+</html>

@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>IndigoKit Playground — Toasts</title>
+  <link rel="stylesheet" href="../../dist/css/indigokit.css">
+  <link rel="stylesheet" href="../playground.css">
+  <!-- Playground theme persistence (Task 047) — applies the stored
+       indigokit-theme preference before first paint. Playground-only. -->
+  <script src="../theme.js"></script>
+  <script src="../assets/lucide.umd.js"></script>
+  <script src="../../node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+</head>
+<body>
+  <div class="container py-4 demo-table-page">
+    <h1 class="h4 mb-1">Toasts &amp; notifications</h1>
+    <p class="demo-label mb-4">Bootstrap's <code>.toast</code> API with IndigoKit styling — token-wired translucent surface, hairline borders, muted header, small elevation. Toasts are <strong>transient</strong> event notifications; persistent page-level information belongs in an alert (see the comparison at the bottom).</p>
+
+    <!-- Basic + semantic -->
+    <h2 class="h5 mt-5" id="basic">Basic toasts</h2>
+    <p class="demo-label">Static examples first — each carries the correct live-region semantics. <code>role="status"</code> (polite) for non-urgent, <code>role="alert"</code> for the error.</p>
+    <div class="d-flex flex-wrap gap-3 mb-4">
+      <div class="toast show" role="status" aria-live="polite" aria-atomic="true">
+        <div class="toast-header">
+          <i data-lucide="circle-check" aria-hidden="true" class="text-success me-2"></i>
+          <strong class="me-auto">Saved</strong>
+          <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+        </div>
+        <div class="toast-body">Project saved successfully.</div>
+      </div>
+      <div class="toast show" role="status" aria-live="polite" aria-atomic="true">
+        <div class="toast-header">
+          <i data-lucide="info" aria-hidden="true" class="text-primary me-2"></i>
+          <strong class="me-auto">Build complete</strong>
+          <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+        </div>
+        <div class="toast-body">IndigoKit compiled in 1.8s — no warnings.</div>
+      </div>
+      <div class="toast show" role="status" aria-live="polite" aria-atomic="true">
+        <div class="toast-header">
+          <i data-lucide="triangle-alert" aria-hidden="true" class="text-warning me-2"></i>
+          <strong class="me-auto">Usage notice</strong>
+          <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+        </div>
+        <div class="toast-body">You have used 85% of your monthly build minutes.</div>
+      </div>
+      <div class="toast show" role="alert" aria-live="assertive" aria-atomic="true" data-bs-autohide="false">
+        <div class="toast-header">
+          <i data-lucide="circle-x" aria-hidden="true" class="text-danger me-2"></i>
+          <strong class="me-auto">Save failed</strong>
+          <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+        </div>
+        <div class="toast-body">Unable to save the project. Check your connection and try again.</div>
+      </div>
+    </div>
+
+    <!-- Triggers -->
+    <h2 class="h5 mt-5" id="triggers">Live examples</h2>
+    <p class="demo-label">Trigger buttons use Bootstrap's own <code>new bootstrap.Toast(el)</code> — no notification framework. Success/info auto-dismiss after 5s; the error persists until dismissed (urgent errors should not vanish).</p>
+    <div class="d-flex flex-wrap gap-2 mb-4">
+      <button type="button" class="btn btn-primary" data-demo-toast="toastSuccess">Show success toast</button>
+      <button type="button" class="btn btn-outline-secondary" data-demo-toast="toastInfo">Show info toast</button>
+      <button type="button" class="btn btn-outline-warning" data-demo-toast="toastWarning">Show warning toast</button>
+      <button type="button" class="btn btn-outline-danger" data-demo-toast="toastError">Show error toast</button>
+    </div>
+
+    <!-- Placements -->
+    <h2 class="h5 mt-5" id="placements">Placements</h2>
+    <p class="demo-label">Bootstrap positioning utilities on <code>.toast-container</code> — top-right, top-center, bottom-right, bottom-center. Each container is a stacking context; toasts inside it stack with spacing.</p>
+    <div class="d-flex flex-wrap gap-2 mb-4">
+      <button type="button" class="btn btn-outline-secondary" data-demo-toast="toastTopEnd">Top-right</button>
+      <button type="button" class="btn btn-outline-secondary" data-demo-toast="toastTopCenter">Top-center</button>
+      <button type="button" class="btn btn-outline-secondary" data-demo-toast="toastBottomEnd">Bottom-right</button>
+      <button type="button" class="btn btn-outline-secondary" data-demo-toast="toastBottomCenter">Bottom-center</button>
+    </div>
+
+    <!-- Stacked -->
+    <h2 class="h5 mt-5" id="stacked">Stacked notifications</h2>
+    <p class="demo-label">Three events arriving together — newest at the top, each with its own icon, message, and dismiss button.</p>
+    <div class="toast-container position-static d-flex flex-column gap-2 mb-4">
+      <div class="toast show" role="status" aria-live="polite" aria-atomic="true">
+        <div class="toast-header">
+          <i data-lucide="circle-check" aria-hidden="true" class="text-success me-2"></i>
+          <strong class="me-auto">Deploy finished</strong>
+          <small class="text-body-secondary">just now</small>
+          <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+        </div>
+        <div class="toast-body">api-gateway v2.4.1 is live in ap-south-1.</div>
+      </div>
+      <div class="toast show" role="status" aria-live="polite" aria-atomic="true">
+        <div class="toast-header">
+          <i data-lucide="user-plus" aria-hidden="true" class="text-primary me-2"></i>
+          <strong class="me-auto">Member joined</strong>
+          <small class="text-body-secondary">2 min ago</small>
+          <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+        </div>
+        <div class="toast-body">Grace Hopper accepted the invitation to IndigoKit.</div>
+      </div>
+      <div class="toast show" role="status" aria-live="polite" aria-atomic="true">
+        <div class="toast-header">
+          <i data-lucide="download" aria-hidden="true" class="text-info me-2"></i>
+          <strong class="me-auto">Export ready</strong>
+          <small class="text-body-secondary">5 min ago</small>
+          <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+        </div>
+        <div class="toast-body">Q3 report export is ready to download.</div>
+      </div>
+    </div>
+
+    <!-- Alert vs toast -->
+    <h2 class="h5 mt-5" id="compare">Alerts vs toasts</h2>
+    <p class="demo-label">The distinction: an <strong>alert</strong> is persistent page-level information that stays until dismissed or the page changes; a <strong>toast</strong> is a transient notification about an event. Neither replaces the other.</p>
+    <div class="alert alert-warning d-flex align-items-start gap-2 mb-3" role="alert">
+      <i data-lucide="triangle-alert" aria-hidden="true"></i>
+      <div><strong>Persistent warning:</strong> your plan renews in 3 days. This stays on the page — an alert, not a toast.</div>
+    </div>
+    <div class="toast show" role="status" aria-live="polite" aria-atomic="true">
+      <div class="toast-header">
+        <i data-lucide="triangle-alert" aria-hidden="true" class="text-warning me-2"></i>
+        <strong class="me-auto">Transient notice</strong>
+        <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+      </div>
+      <div class="toast-body">A build finished — a toast that can safely disappear.</div>
+    </div>
+
+    <!-- A11y -->
+    <h2 class="h5 mt-5" id="accessibility">Accessibility notes</h2>
+    <ul class="mb-0">
+      <li><code>role="status"</code> (polite live region) for non-urgent information — announcements queue behind the user's current task; <code>role="alert"</code> (assertive) only for urgent/error messages. Applied deliberately, not blanket-applied.</li>
+      <li><code>aria-atomic="true"</code> makes the region announce the whole toast as one unit — the header + body are announced together, avoiding duplicate or fragmented announcements.</li>
+      <li>Icons are decorative (<code>aria-hidden</code>); the text carries the meaning. There are no icon-only toasts.</li>
+      <li>The dismiss button is Bootstrap's real <code>.btn-close</code> — keyboard-focusable, named "Close", 32px+ hit area.</li>
+      <li>Auto-dismiss: 5s for success/info; errors persist until dismissed (urgent information must not vanish). <code>data-bs-autohide="false"</code> on the error toast.</li>
+      <li>Live regions announce only when a toast <em>appears</em> — the static examples on this page are already <code>show</code>n, so they announce on load in the order shown; in a real app, toasts are created/triggered by events.</li>
+    </ul>
+  </div>
+
+  <!-- Toast containers for the live demo -->
+  <div class="toast-container position-fixed top-0 end-0 p-3" id="toastTopEndBox"></div>
+  <div class="toast-container position-fixed top-0 start-50 translate-middle-x p-3" id="toastTopCenterBox"></div>
+  <div class="toast-container position-fixed bottom-0 end-0 p-3" id="toastBottomEndBox"></div>
+  <div class="toast-container position-fixed bottom-0 start-50 translate-middle-x p-3" id="toastBottomCenterBox"></div>
+
+  <script>
+    lucide.createIcons();
+
+    // Trigger buttons use Bootstrap's own Toast JS — the toasts are
+    // created by cloning a template, then shown with new bootstrap.Toast().
+    // Playground demo only; IndigoKit ships no toast framework.
+    var toastTemplate = {
+      success: '<div class="toast" role="status" aria-live="polite" aria-atomic="true"><div class="toast-header"><i data-lucide="circle-check" aria-hidden="true" class="text-success me-2"></i><strong class="me-auto">Saved</strong><button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button></div><div class="toast-body">Project saved successfully.</div></div>',
+      info: '<div class="toast" role="status" aria-live="polite" aria-atomic="true"><div class="toast-header"><i data-lucide="info" aria-hidden="true" class="text-primary me-2"></i><strong class="me-auto">Build complete</strong><button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button></div><div class="toast-body">IndigoKit compiled in 1.8s — no warnings.</div></div>',
+      warning: '<div class="toast" role="status" aria-live="polite" aria-atomic="true"><div class="toast-header"><i data-lucide="triangle-alert" aria-hidden="true" class="text-warning me-2"></i><strong class="me-auto">Usage notice</strong><button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button></div><div class="toast-body">You have used 85% of your monthly build minutes.</div></div>',
+      error: '<div class="toast" role="alert" aria-live="assertive" aria-atomic="true" data-bs-autohide="false"><div class="toast-header"><i data-lucide="circle-x" aria-hidden="true" class="text-danger me-2"></i><strong class="me-auto">Save failed</strong><button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button></div><div class="toast-body">Unable to save the project. Check your connection and try again.</div></div>'
+    };
+
+    var boxFor = {
+      toastSuccess: 'toastTopEndBox',
+      toastInfo: 'toastTopEndBox',
+      toastWarning: 'toastTopEndBox',
+      toastError: 'toastTopEndBox',
+      toastTopEnd: 'toastTopEndBox',
+      toastTopCenter: 'toastTopCenterBox',
+      toastBottomEnd: 'toastBottomEndBox',
+      toastBottomCenter: 'toastBottomCenterBox'
+    };
+
+    document.querySelectorAll('[data-demo-toast]').forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        var name = btn.getAttribute('data-demo-toast');
+        var kind = name.replace('toast', '').toLowerCase();
+        var html = toastTemplate[kind] || toastTemplate.info;
+        var box = document.getElementById(boxFor[name] || 'toastTopEndBox');
+        var el = document.createElement('div');
+        el.innerHTML = html.trim();
+        var toast = el.firstChild;
+        box.appendChild(toast);
+        new bootstrap.Toast(toast).show();
+        if (window.lucide) lucide.createIcons({ root: toast });
+        toast.addEventListener('hidden.bs.toast', function () { toast.remove(); });
+      });
+    });
+  </script>
+</body>
+</html>

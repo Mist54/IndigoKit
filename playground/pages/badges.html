@@ -1,0 +1,125 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>IndigoKit Playground — Badges</title>
+  <link rel="stylesheet" href="../../dist/css/indigokit.css">
+  <link rel="stylesheet" href="../playground.css">
+  <!-- Playground theme persistence (Task 047) — applies the stored
+       indigokit-theme preference before first paint. Playground-only. -->
+  <script src="../theme.js"></script>
+  <script src="../assets/lucide.umd.js"></script>
+</head>
+<body>
+  <div class="container py-5">
+    <h1>Badges</h1>
+    <p class="lead">Bootstrap's badge API with IndigoKit's token system — every badge below uses standard Bootstrap classes (<code>.badge</code> + <code>.text-bg-*</code>, optionally <code>.rounded-pill</code>) and Bootstrap positioning/spacing utilities. Badges are always paired with a <code>.text-bg-*</code> variant — a bare <code>.badge</code> has no visible background.</p>
+
+    <!-- Semantic variants -->
+    <h2 class="h5 mt-5 mb-3">Semantic variants</h2>
+    <p class="demo-label">Text colors come from Bootstrap's <code>color-contrast()</code> on the approved palette — dark text on emerald/cyan/amber/red/light, white on indigo/slate/dark.</p>
+    <div class="d-flex flex-wrap gap-2">
+      <span class="badge text-bg-primary">Primary</span>
+      <span class="badge text-bg-secondary">Secondary</span>
+      <span class="badge text-bg-success">Success</span>
+      <span class="badge text-bg-info">Info</span>
+      <span class="badge text-bg-warning">Warning</span>
+      <span class="badge text-bg-danger">Danger</span>
+      <span class="badge text-bg-light">Light</span>
+      <span class="badge text-bg-dark">Dark</span>
+    </div>
+    <p class="demo-label mt-2">Pill form via Bootstrap's <code>.rounded-pill</code> (IndigoKit pill radius token):</p>
+    <div class="d-flex flex-wrap gap-2">
+      <span class="badge rounded-pill text-bg-primary">Pill</span>
+      <span class="badge rounded-pill text-bg-success">Pill</span>
+      <span class="badge rounded-pill text-bg-danger">Pill</span>
+    </div>
+
+    <!-- Status badges -->
+    <h2 class="h5 mt-5 mb-3">Status examples</h2>
+    <p class="demo-label">The text itself communicates the status — color is reinforcement, never the only cue.</p>
+    <div class="d-flex flex-wrap gap-2">
+      <span class="badge text-bg-success">Active</span>
+      <span class="badge text-bg-warning">Pending</span>
+      <span class="badge text-bg-success">Completed</span>
+      <span class="badge text-bg-danger">Failed</span>
+      <span class="badge text-bg-secondary">Draft</span>
+      <span class="badge text-bg-secondary">Archived</span>
+    </div>
+
+    <!-- Count badges -->
+    <h2 class="h5 mt-5 mb-3">Count badges</h2>
+    <p class="demo-label">Screen readers read the label and count together ("Notifications, 4") — no extra ARIA needed.</p>
+    <div class="d-flex flex-column gap-2">
+      <div>Notifications <span class="badge text-bg-primary rounded-pill">4</span></div>
+      <div>Messages <span class="badge text-bg-primary rounded-pill">8</span></div>
+      <div>Tasks <span class="badge text-bg-primary rounded-pill">12</span></div>
+    </div>
+
+    <!-- Navigation badges -->
+    <h2 class="h5 mt-5 mb-3">Navigation badges</h2>
+    <p class="demo-label">The same pattern used by the sidebar (see the Sidebar showcase) — badges ride along in flex nav links.</p>
+    <div class="col-md-6">
+      <ul class="list-unstyled mb-0">
+        <li class="py-1 d-flex align-items-center"><a href="#" class="me-auto">Messages</a> <span class="badge text-bg-primary rounded-pill">8</span></li>
+        <li class="py-1 d-flex align-items-center"><a href="#" class="me-auto">Tasks</a> <span class="badge text-bg-primary rounded-pill">12</span></li>
+        <li class="py-1 d-flex align-items-center"><a href="#" class="me-auto">Updates</a> <span class="badge text-bg-primary">NEW</span></li>
+      </ul>
+    </div>
+
+    <!-- Card badges -->
+    <h2 class="h5 mt-5 mb-3">Card badges</h2>
+    <div class="row g-3">
+      <div class="col-md-6">
+        <div class="card h-100">
+          <div class="card-header d-flex align-items-center">
+            <span class="me-auto">Quarterly report</span>
+            <span class="badge text-bg-success">Completed</span>
+          </div>
+          <div class="card-body">
+            <p class="card-text mb-0">A badge in the card header shows status without disturbing the card content.</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="card h-100">
+          <div class="card-body">
+            <h3 class="card-title h5 d-flex align-items-center gap-2">Deployment <span class="badge text-bg-danger rounded-pill">Failed</span></h3>
+            <p class="card-text mb-0">A badge beside the card title stays visually quiet while carrying meaning.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Button + badge -->
+    <h2 class="h5 mt-5 mb-3">Button + badge</h2>
+    <p class="demo-label">A badge may supplement button content. The badge is never the sole accessible label — the button keeps its own text/aria-label.</p>
+    <div class="d-flex flex-wrap gap-2">
+      <button type="button" class="btn btn-primary">Messages <span class="badge text-bg-light rounded-pill">8</span></button>
+      <button type="button" class="btn btn-outline-secondary">Tasks <span class="badge text-bg-primary rounded-pill">12</span></button>
+    </div>
+
+    <!-- Positioned -->
+    <h2 class="h5 mt-5 mb-3">Positioned badge</h2>
+    <p class="demo-label">Bootstrap utilities only — <code>position-relative</code> parent, <code>position-absolute top-0 start-100 translate-middle rounded-pill</code> badge. The icon button's accessible name includes the count ("Notifications, 4 unread").</p>
+    <button type="button" class="btn btn-outline-secondary position-relative" aria-label="Notifications, 4 unread">
+      <i data-lucide="bell" aria-hidden="true"></i>
+      <span class="badge text-bg-danger rounded-pill position-absolute top-0 start-100 translate-middle">4</span>
+    </button>
+
+    <!-- Long content -->
+    <h2 class="h5 mt-5 mb-3">Long content</h2>
+    <p class="demo-label">Badges default to <code>white-space: nowrap</code> — for longer statuses, opt in to wrapping with Bootstrap's <code>.text-wrap</code> utility.</p>
+    <div class="col-md-8">
+      <span class="badge text-bg-secondary text-wrap">12 unread messages across 3 workspaces</span>
+    </div>
+
+    <!-- Contrast / accessibility -->
+    <h2 class="h5 mt-5 mb-3">Contrast &amp; accessibility</h2>
+    <p class="demo-label">Every variant pair is AA-compliant (measured): white on indigo ≈ 7:1; black on slate ≈ 4.9:1; black on emerald ≈ 4.9:1; black on cyan ≈ 8.7:1; black on amber ≈ 9.4:1; black on red ≈ 5.6:1; black on light ≈ 19:1; white on dark ≈ 12:1. Badges are supplementary text — they add no ARIA of their own, and their text naturally joins the surrounding accessible name.</p>
+  </div>
+
+  <script>lucide.createIcons();</script>
+</body>
+</html>

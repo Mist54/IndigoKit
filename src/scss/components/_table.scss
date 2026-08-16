@@ -1,0 +1,25 @@
+// Table refinements.
+//
+// Bootstrap's table system is already token-wired: hairline cell borders,
+// striped/hover/active states via emphasis-rgb factors, contextual tinted
+// variants, .table-sm density, .table-responsive overflow handling, and a
+// muted caption color. Two IndigoKit additions:
+//
+// 1. Header hierarchy — Bootstrap 5.3.8 ships no `th` treatment at all
+//    (headers render at body weight 400, indistinguishable from data rows).
+//    The 600 weight matches the IndigoKit "stronger text" hierarchy pattern
+//    (headings, active tabs, labels) and the emphasis color keeps headers
+//    at full body contrast.
+// 2. .table-group-divider emphasis — the divider is a double-width hairline
+//    using `currentcolor`, which defaults to body text; pinning it to the
+//    emphasis variable makes the section boundary intentional and
+//    theme-adaptive (same convention as the dropdown divider).
+
+.table > :not(caption) > * > th {
+  font-weight: 600;
+  color: var(--bs-emphasis-color);
+}
+
+.table-group-divider {
+  color: var(--bs-emphasis-color);
+}

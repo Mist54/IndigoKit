@@ -1,0 +1,28 @@
+// ============================================================
+// IndigoKit — Alert System
+// ------------------------------------------------------------
+// Bootstrap-first: .alert, .alert-{variant}, .alert-heading,
+// .alert-link, .alert-dismissible and .btn-close all keep their
+// names and behavior.
+//
+// Bootstrap 5.3.8's alerts already use the text-emphasis /
+// bg-subtle / border-subtle variable system, which derives from
+// the IndigoKit palette tokens — every variant renders as a subtle
+// tinted surface with high-contrast dark variant-colored text
+// without any IndigoKit overrides. .alert-link is weight 700 with
+// the per-variant emphasis color; .alert-heading inherits the
+// 600 heading weight; .btn-close inherits the strong indigo
+// focus ring. This partial only adds icon sizing.
+// ============================================================
+
+// Icons inside alerts scale with the font size (16px) so
+// icon+text alerts stay compact — mirrors the button rule.
+// Alignment is handled with Bootstrap flex utilities in the
+// markup (.d-flex .align-items-start .gap-2). flex-shrink: 0
+// keeps the icon from being squeezed by long text in the flex
+// row (SVGs default to flex-shrink: 1).
+.alert [data-lucide] {
+  width: 1em;
+  height: 1em;
+  flex-shrink: 0;
+}

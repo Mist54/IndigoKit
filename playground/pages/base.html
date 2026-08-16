@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>IndigoKit Playground — Base Elements</title>
+  <link rel="stylesheet" href="../../dist/css/indigokit.css">
+  <link rel="stylesheet" href="../playground.css">
+  <!-- Playground theme persistence (Task 047) — applies the stored
+       indigokit-theme preference before first paint. Playground-only. -->
+  <script src="../theme.js"></script>
+</head>
+<body>
+  <div class="container py-5">
+
+    <h1>IndigoKit Base Elements</h1>
+    <p class="lead">Global base layer test — plain HTML styled by indigokit.css. Not a component showcase.</p>
+
+    <h2 class="h5 mt-5 mb-3">Headings</h2>
+    <h1>Heading 1 — 2.5rem</h1>
+    <h2>Heading 2 — 2rem</h2>
+    <h3>Heading 3 — 1.75rem</h3>
+    <h4>Heading 4 — 1.5rem</h4>
+    <h5>Heading 5 — 1.25rem</h5>
+    <h6>Heading 6 — 1rem</h6>
+
+    <h2 class="h5 mt-5 mb-3">Paragraphs</h2>
+    <p>Primary body text. This is a plain paragraph using the default text color, which is a dark slate derived from the approved <code>$mu-slate</code> token. The line height and base size come from Bootstrap's body defaults.</p>
+    <p class="text-body-secondary">Muted / secondary text via <code>.text-body-secondary</code> — derived from the body color at reduced opacity.</p>
+    <p class="text-secondary">Slate text via <code>.text-secondary</code> — the approved <code>$mu-slate</code> token.</p>
+
+    <h2 class="h5 mt-5 mb-3">Links</h2>
+    <p><a href="#">A regular link</a> — indigo, no underline by default, underline on hover, indigo focus ring on keyboard. <a href="#">Another link</a> for tabbing.</p>
+    <p class="demo-note">Keyboard focus test: press <kbd>Tab</kbd> repeatedly to move focus between the two links above (and the links below).</p>
+    <p><a href="#base-elements">In-page anchor link</a> · <a href="#focus-target" class="ms-2">Focus target link</a></p>
+
+    <h2 class="h5 mt-5 mb-3">Inline elements</h2>
+    <p>
+      <small>Small text</small> · <strong>strong text</strong> ·
+      <mark>highlighted text (mark)</mark> ·
+      <code>const tokens = true;</code> ·
+      <kbd>Tab</kbd>
+    </p>
+
+    <h2 class="h5 mt-5 mb-3">Blockquote</h2>
+    <blockquote>
+      A restrained, enterprise-friendly blockquote: quiet left rule, muted text, and whitespace that matches the IndigoKit design direction.
+    </blockquote>
+
+    <h2 class="h5 mt-5 mb-3">Horizontal rule</h2>
+    <hr>
+    <p>Content after the rule — Bootstrap's default <code>hr</code> styling is kept.</p>
+
+    <div id="focus-target" tabindex="-1" class="mt-5">
+      <h2 class="h5 mb-2">Keyboard focus — all interactive elements</h2>
+      <p class="demo-note">Tab through everything on this page: links, this target, and the input below. Every element must show a visible indigo focus treatment.</p>
+      <input type="text" class="form-control demo-input" placeholder="Form control (Bootstrap focus ring)" aria-label="Demo input">
+    </div>
+
+  </div>
+</body>
+</html>

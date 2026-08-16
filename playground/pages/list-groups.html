@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>IndigoKit Playground — List Groups</title>
+  <link rel="stylesheet" href="../../dist/css/indigokit.css">
+  <link rel="stylesheet" href="../playground.css">
+  <!-- Playground theme persistence (Task 047) — applies the stored
+       indigokit-theme preference before first paint. Playground-only. -->
+  <script src="../theme.js"></script>
+  <script src="../assets/lucide.umd.js"></script>
+</head>
+<body>
+  <div class="container py-4 demo-table-page">
+    <h1 class="h4 mb-1">List groups</h1>
+    <p class="demo-label mb-4">Bootstrap's <code>.list-group</code> API with IndigoKit styling — token-wired surfaces, hairline separators, the global indigo focus ring on action items, and contextual variants driven by the emphasis color system. No list framework, no JS.</p>
+
+    <!-- Basic -->
+    <h2 class="h5 mt-5" id="basic">Basic list</h2>
+    <p class="demo-label">A semantic <code>&lt;ul&gt;</code> — plain items, no implied interactivity.</p>
+    <ul class="list-group demo-list">
+      <li class="list-group-item">Ada Lovelace</li>
+      <li class="list-group-item">Alan Turing</li>
+      <li class="list-group-item">Grace Hopper</li>
+      <li class="list-group-item">Katherine Johnson</li>
+    </ul>
+
+    <!-- Action + nav -->
+    <h2 class="h5 mt-5" id="actions">Action &amp; navigation lists</h2>
+    <p class="demo-label">Links navigate, buttons trigger actions — never clickable divs. Both get the global indigo focus ring and a tertiary hover surface.</p>
+    <div class="row g-4">
+      <div class="col-md-6">
+        <div class="list-group demo-list">
+          <a href="#" class="list-group-item list-group-item-action" aria-current="true">Documentation</a>
+          <a href="#" class="list-group-item list-group-item-action">Guides</a>
+          <a href="#" class="list-group-item list-group-item-action">Components</a>
+          <a href="#" class="list-group-item list-group-item-action">Templates</a>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="list-group demo-list">
+          <button type="button" class="list-group-item list-group-item-action" aria-current="true">Open project</button>
+          <button type="button" class="list-group-item list-group-item-action">Duplicate project</button>
+          <button type="button" class="list-group-item list-group-item-action">Export report</button>
+          <button type="button" class="list-group-item list-group-item-action text-danger">Delete project</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Active / disabled -->
+    <h2 class="h5 mt-5" id="states">Active &amp; disabled</h2>
+    <p class="demo-label">Active = solid indigo + white text (never color alone — it's also marked with <code>aria-current</code> where it's a navigation item). Disabled = muted and <code>pointer-events: none</code>, not focusable.</p>
+    <div class="list-group demo-list">
+      <a href="#" class="list-group-item list-group-item-action active" aria-current="true">Dashboard</a>
+      <a href="#" class="list-group-item list-group-item-action">Projects</a>
+      <a href="#" class="list-group-item list-group-item-action disabled" aria-disabled="true" tabindex="-1">Archived (disabled)</a>
+      <a href="#" class="list-group-item list-group-item-action">Reports</a>
+    </div>
+
+    <!-- Flush -->
+    <h2 class="h5 mt-5" id="flush">Flush inside a card</h2>
+    <p class="demo-label"><code>.list-group-flush</code> drops the outer borders so the list sits naturally inside a card body.</p>
+    <div class="card demo-list">
+      <div class="card-header">Project files</div>
+      <div class="card-body p-0">
+        <ul class="list-group list-group-flush">
+          <li class="list-group-item">design-system.scss</li>
+          <li class="list-group-item">tokens.scss</li>
+          <li class="list-group-item">components/</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Numbered -->
+    <h2 class="h5 mt-5" id="numbered">Numbered</h2>
+    <p class="demo-label"><code>.list-group-numbered</code> uses CSS counters — the numbers are generated, aligned, and never part of the item text.</p>
+    <ol class="list-group list-group-numbered demo-list">
+      <li class="list-group-item">Define the token scale</li>
+      <li class="list-group-item">Build the component library</li>
+      <li class="list-group-item">Write the playground reference</li>
+      <li class="list-group-item">Run the accessibility audit</li>
+    </ol>
+
+    <!-- Horizontal -->
+    <h2 class="h5 mt-5" id="horizontal">Horizontal</h2>
+    <p class="demo-label"><code>.list-group-horizontal-md</code> stacks on mobile and becomes a row at <code>md</code> — Bootstrap's responsive variant, no custom API.</p>
+    <ul class="list-group list-group-horizontal-md demo-list">
+      <li class="list-group-item">Overview</li>
+      <li class="list-group-item">Activity</li>
+      <li class="list-group-item">Settings</li>
+      <li class="list-group-item">Billing</li>
+    </ul>
+
+    <!-- Contextual -->
+    <h2 class="h5 mt-5" id="contextual">Contextual states</h2>
+    <p class="demo-label">Semantic meaning via the emphasis color system — tinted surface, strong variant text, tinted border. Used sparingly and meaningfully.</p>
+    <ul class="list-group demo-list">
+      <li class="list-group-item list-group-item-success">All checks passed — deployment ready.</li>
+      <li class="list-group-item list-group-item-warning">Review capacity is at 85%.</li>
+      <li class="list-group-item list-group-item-danger">Storage quota exceeded on 2 repositories.</li>
+      <li class="list-group-item list-group-item-info">New version 2.4.1 available.</li>
+    </ul>
+
+    <!-- Badges + icons -->
+    <h2 class="h5 mt-5" id="badges">Badges &amp; icons</h2>
+    <p class="demo-label">Existing Bootstrap badges right-aligned with <code>ms-auto</code>; icons decorative with text carrying the name.</p>
+    <ul class="list-group demo-list">
+      <li class="list-group-item d-flex align-items-center gap-2">
+        <i data-lucide="inbox" aria-hidden="true" class="text-secondary"></i>
+        Inbox
+        <span class="badge text-bg-primary rounded-pill ms-auto">12</span>
+      </li>
+      <li class="list-group-item d-flex align-items-center gap-2">
+        <i data-lucide="clock" aria-hidden="true" class="text-secondary"></i>
+        Drafts
+        <span class="badge text-bg-secondary rounded-pill ms-auto">3</span>
+      </li>
+      <li class="list-group-item d-flex align-items-center gap-2">
+        <i data-lucide="check-circle" aria-hidden="true" class="text-secondary"></i>
+        Done
+        <span class="badge text-bg-success rounded-pill ms-auto">27</span>
+      </li>
+    </ul>
+
+    <!-- Activity -->
+    <h2 class="h5 mt-5" id="activity">Activity list</h2>
+    <p class="demo-label">A realistic feed — icon + verb, subject, and a muted timestamp. No activity-feed framework.</p>
+    <ul class="list-group list-group-flush demo-list">
+      <li class="list-group-item d-flex align-items-start gap-2">
+        <i data-lucide="folder-plus" aria-hidden="true" class="text-primary mt-1"></i>
+        <div>
+          <div>Ada created project <strong>IndigoKit — Data Tables</strong></div>
+          <small class="text-body-secondary">2 hours ago</small>
+        </div>
+      </li>
+      <li class="list-group-item d-flex align-items-start gap-2">
+        <i data-lucide="rocket" aria-hidden="true" class="text-success mt-1"></i>
+        <div>
+          <div>Deployment completed — <strong>api-gateway v2.4.1</strong></div>
+          <small class="text-body-secondary">3 hours ago</small>
+        </div>
+      </li>
+      <li class="list-group-item d-flex align-items-start gap-2">
+        <i data-lucide="user-plus" aria-hidden="true" class="text-info mt-1"></i>
+        <div>
+          <div>Grace joined the <strong>Design Systems</strong> team</div>
+          <small class="text-body-secondary">Yesterday</small>
+        </div>
+      </li>
+      <li class="list-group-item d-flex align-items-start gap-2">
+        <i data-lucide="list-checks" aria-hidden="true" class="text-warning mt-1"></i>
+        <div>
+          <div>Task assigned — <strong>Audit contrast ratios</strong></div>
+          <small class="text-body-secondary">Yesterday</small>
+        </div>
+      </li>
+    </ul>
+
+    <!-- Settings -->
+    <h2 class="h5 mt-5" id="settings">Settings list</h2>
+    <p class="demo-label">Navigation-style settings with supporting text — a real anchor per item, active state marked.</p>
+    <div class="list-group demo-list">
+      <a href="#" class="list-group-item list-group-item-action active" aria-current="true">
+        <div class="d-flex w-100 justify-content-between align-items-center">
+          <div>
+            <div class="fw-medium">Profile</div>
+            <small class="text-body-secondary">Name, email, phone</small>
+          </div>
+          <i data-lucide="chevron-right" aria-hidden="true" class="text-secondary"></i>
+        </div>
+      </a>
+      <a href="#" class="list-group-item list-group-item-action">
+        <div class="d-flex w-100 justify-content-between align-items-center">
+          <div>
+            <div class="fw-medium">Security</div>
+            <small class="text-body-secondary">Password, two-factor authentication</small>
+          </div>
+          <i data-lucide="chevron-right" aria-hidden="true" class="text-secondary"></i>
+        </div>
+      </a>
+      <a href="#" class="list-group-item list-group-item-action">
+        <div class="d-flex w-100 justify-content-between align-items-center">
+          <div>
+            <div class="fw-medium">Notifications</div>
+            <small class="text-body-secondary">Email and Slack preferences</small>
+          </div>
+          <i data-lucide="chevron-right" aria-hidden="true" class="text-secondary"></i>
+        </div>
+      </a>
+      <a href="#" class="list-group-item list-group-item-action">
+        <div class="d-flex w-100 justify-content-between align-items-center">
+          <div>
+            <div class="fw-medium">Appearance</div>
+            <small class="text-body-secondary">Theme and density</small>
+          </div>
+          <i data-lucide="chevron-right" aria-hidden="true" class="text-secondary"></i>
+        </div>
+      </a>
+    </div>
+
+    <!-- Long content -->
+    <h2 class="h5 mt-5" id="long">Long content</h2>
+    <p class="demo-label">Supporting text wraps naturally; the flex row keeps the primary line and timestamp readable at every width.</p>
+    <ul class="list-group demo-list">
+      <li class="list-group-item">
+        <div class="fw-medium">Design tokens review — Q3</div>
+        <small class="text-body-secondary">A quarterly pass over the color, spacing, radius, and motion tokens with the design system team, including the dark-mode preflight checklist and the SVG-literal audit for the select chevron, switch knob, and validation icons.</small>
+      </li>
+      <li class="list-group-item">
+        <div class="fw-medium">Component library audit</div>
+        <small class="text-body-secondary">Verifying every Bootstrap component ships with the IndigoKit treatment: focus rings, contrast, responsive behavior, and playground coverage across the full component set.</small>
+      </li>
+    </ul>
+
+    <!-- A11y -->
+    <h2 class="h5 mt-5" id="accessibility">Accessibility notes</h2>
+    <ul class="mb-0">
+      <li>Plain lists are <code>&lt;ul&gt;</code>/<code>&lt;li&gt;</code>; action items are real <code>&lt;a&gt;</code> (navigation) or <code>&lt;button&gt;</code> (actions) — no clickable divs, no unnecessary ARIA.</li>
+      <li>Active state is solid indigo + white text <em>and</em> <code>aria-current="true"</code> on navigation items — never color alone. Disabled items are muted with <code>pointer-events: none</code> and <code>tabindex="-1"</code> (not keyboard-reachable).</li>
+      <li>Action items get the global indigo <code>:focus-visible</code> ring (2px solid) plus the tertiary hover surface — keyboard focus is always visible.</li>
+      <li>Icons are decorative (<code>aria-hidden</code>); text carries names and meaning. Badges are existing Bootstrap badges — <code>ms-auto</code> aligns them, text stays adjacent for screen readers.</li>
+      <li>Numbered lists are a real <code>&lt;ol&gt;</code> with CSS counters — the numbering is generated, never typed into the item text.</li>
+    </ul>
+  </div>
+
+  <script>
+    lucide.createIcons();
+  </script>
+</body>
+</html>

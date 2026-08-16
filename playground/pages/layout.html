@@ -1,0 +1,240 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>IndigoKit Playground — Application Layout</title>
+  <link rel="stylesheet" href="../../dist/css/indigokit.css">
+  <link rel="stylesheet" href="../playground.css">
+  <!-- Playground theme persistence (Task 047) — applies the stored
+       indigokit-theme preference before first paint. Playground-only. -->
+  <script src="../theme.js"></script>
+  <script src="../assets/lucide.umd.js"></script>
+  <script src="../../node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="../../dist/js/indigokit.js"></script>
+</head>
+<body>
+  <div class="mu-app">
+
+    <!-- Top area — the real IndigoKit navbar component -->
+    <header class="mu-app-top">
+            <nav class="navbar mu-app-navbar" aria-label="Main navigation">
+        <div class="container-fluid">
+          <div class="d-flex align-items-center gap-2">
+            <button type="button" class="btn" data-mu-mobile-toggle aria-controls="app-sidebar" aria-expanded="false" aria-label="Open navigation">
+              <i data-lucide="menu" aria-hidden="true"></i>
+            </button>
+            <button type="button" class="btn" data-mu-sidebar-toggle aria-controls="app-sidebar" aria-expanded="true" aria-label="Collapse sidebar">
+              <i data-lucide="panel-left-close" aria-hidden="true"></i>
+            </button>
+            <a class="navbar-brand" href="#">
+              <i data-lucide="layers" aria-hidden="true"></i>
+              IndigoKit
+            </a>
+          </div>
+          <div class="mu-navbar-main"></div>
+          <div class="mu-navbar-actions">
+            <select class="form-select form-select-sm" data-theme-switch aria-label="Theme">
+              <option value="system">System</option>
+              <option value="light">Light</option>
+              <option value="dark">Dark</option>
+            </select>
+            <button type="button" class="btn d-none d-md-inline-flex" aria-label="Notifications">
+              <i data-lucide="bell" aria-hidden="true"></i>
+            </button>
+            <button type="button" class="btn d-none d-md-inline-flex" aria-label="Help">
+              <i data-lucide="circle-question-mark" aria-hidden="true"></i>
+            </button>
+            <div class="dropdown">
+              <a class="mu-navbar-user" href="#" data-bs-toggle="dropdown" aria-expanded="false" aria-label="User menu">
+                <span class="mu-avatar"><i data-lucide="user" aria-hidden="true"></i></span>
+                <span class="mu-user-name d-none d-lg-inline">Jane Doe</span>
+                <i data-lucide="chevron-down" aria-hidden="true"></i>
+              </a>
+              <ul class="dropdown-menu dropdown-menu-end">
+                <li>
+                  <h6 class="dropdown-header">Jane Doe<span class="d-block small fw-normal text-body-secondary">Software Engineer</span></h6>
+                </li>
+                <li><hr class="dropdown-divider"></li>
+                <li><a class="dropdown-item" href="profile.html">Profile</a></li>
+                <li><a class="dropdown-item" href="settings.html">Account Settings</a></li>
+                <li><a class="dropdown-item" href="settings.html">Notifications</a></li>
+                <li><a class="dropdown-item" href="auth/lock-screen.html">Lock Screen</a></li>
+                <li><hr class="dropdown-divider"></li>
+                <li><a class="dropdown-item text-danger" href="auth/login.html">Sign out</a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <div class="mu-app-body">
+
+      <!-- Application sidebar — real IndigoKit component (Task 006 + 007) -->
+      <aside class="mu-app-side">
+        <div class="mu-sidebar" id="app-sidebar">
+          <!-- Drawer header — mobile only (close control) -->
+          <div class="mu-sidebar-header">
+            <button type="button" class="btn mu-sidebar-close" data-mu-sidebar-close aria-label="Close navigation">
+              <i data-lucide="x" aria-hidden="true"></i>
+            </button>
+          </div>
+          <nav class="mu-sidebar-nav" aria-label="Sidebar navigation">
+
+            <div class="mu-sidebar-section">
+              <div class="mu-sidebar-label">Workspace</div>
+              <ul class="mu-sidebar-list">
+                <li>
+                  <a class="mu-sidebar-link active" href="#" aria-current="page">
+                    <i data-lucide="layout-dashboard" aria-hidden="true"></i>
+                    <span class="mu-sidebar-link-text">Dashboard</span>
+                  </a>
+                </li>
+                <li>
+                  <a class="mu-sidebar-link" href="#">
+                    <i data-lucide="chart-line" aria-hidden="true"></i>
+                    <span class="mu-sidebar-link-text">Analytics</span>
+                    <span class="badge text-bg-primary mu-sidebar-badge">NEW</span>
+                  </a>
+                </li>
+                <li>
+                  <button type="button" class="mu-sidebar-link" data-bs-toggle="collapse" data-bs-target="#nav-projects" aria-expanded="false" aria-controls="nav-projects">
+                    <i data-lucide="folder-kanban" aria-hidden="true"></i>
+                    <span class="mu-sidebar-link-text">Projects</span>
+                    <i data-lucide="chevron-right" class="mu-sidebar-chevron" aria-hidden="true"></i>
+                  </button>
+                  <div class="collapse" id="nav-projects">
+                    <ul class="mu-sidebar-nested">
+                      <li>
+                        <a class="mu-sidebar-link" href="#">
+                          <span class="mu-sidebar-link-text">Active Projects</span>
+                          <span class="badge text-bg-secondary mu-sidebar-badge">4</span>
+                        </a>
+                      </li>
+                      <li>
+                        <a class="mu-sidebar-link" href="#"><span class="mu-sidebar-link-text">Archived</span></a>
+                      </li>
+                      <li>
+                        <button type="button" class="mu-sidebar-link" disabled><span class="mu-sidebar-link-text">Templates</span></button>
+                      </li>
+                    </ul>
+                  </div>
+                </li>
+              </ul>
+            </div>
+
+            <div class="mu-sidebar-section">
+              <div class="mu-sidebar-label">Management</div>
+              <ul class="mu-sidebar-list">
+                <li>
+                  <a class="mu-sidebar-link" href="#">
+                    <i data-lucide="users" aria-hidden="true"></i>
+                    <span class="mu-sidebar-link-text">Users</span>
+                  </a>
+                </li>
+                <li>
+                  <a class="mu-sidebar-link" href="#">
+                    <i data-lucide="users-round" aria-hidden="true"></i>
+                    <span class="mu-sidebar-link-text">Teams</span>
+                    <span class="badge text-bg-secondary mu-sidebar-badge">8</span>
+                  </a>
+                </li>
+                <li>
+                  <a class="mu-sidebar-link" href="#">
+                    <i data-lucide="file-text" aria-hidden="true"></i>
+                    <span class="mu-sidebar-link-text">Reports</span>
+                  </a>
+                </li>
+              </ul>
+            </div>
+
+            <div class="mu-sidebar-section">
+              <div class="mu-sidebar-label">System</div>
+              <ul class="mu-sidebar-list">
+                <li>
+                  <a class="mu-sidebar-link" href="#">
+                    <i data-lucide="settings" aria-hidden="true"></i>
+                    <span class="mu-sidebar-link-text">Settings</span>
+                  </a>
+                </li>
+                <li>
+                  <a class="mu-sidebar-link" href="#">
+                    <i data-lucide="scroll-text" aria-hidden="true"></i>
+                    <span class="mu-sidebar-link-text">Audit Logs</span>
+                  </a>
+                </li>
+              </ul>
+            </div>
+
+          </nav>
+        </div>
+      </aside>
+
+      <!-- Main content — the only scrolling region -->
+      <main class="mu-app-main">
+        <div class="mu-app-content">
+
+          <p class="mb-0"><a href="../index.html">← Playground home</a></p>
+
+          <h1 class="mt-2">Application Shell</h1>
+          <p class="lead">The canonical IndigoKit shell — the real navbar and sidebar inside the reusable <code>.mu-app</code> layout, with collapse and the mobile drawer wired up.</p>
+
+          <h2 class="h5 mt-4 mb-3">Shell behavior</h2>
+          <ul>
+            <li><strong>Scrolling:</strong> only <code>.mu-app-main</code> scrolls — navbar and sidebar stay fixed</li>
+            <li><strong>Collapse (desktop ≥768px):</strong> the <code>panel-left</code> button narrows the sidebar to icons and main gains the space</li>
+            <li><strong>Mobile (&lt;768px):</strong> the <code>menu</code> button opens the drawer with a backdrop; Escape, the backdrop, or <code>x</code> closes it and focus returns to the trigger</li>
+            <li><strong>Bootstrap compatibility:</strong> containers, rows, columns, and utilities keep working inside the shell</li>
+          </ul>
+
+          <h2 class="h5 mt-5 mb-3">Bootstrap grid still works inside the layout</h2>
+          <div class="row g-2 grid-demo">
+            <div class="col-6 col-md-3">col-6 col-md-3</div>
+            <div class="col-6 col-md-3">col-6 col-md-3</div>
+            <div class="col-6 col-md-3">col-6 col-md-3</div>
+            <div class="col-6 col-md-3">col-6 col-md-3</div>
+            <div class="col-12">col-12</div>
+          </div>
+
+          <h2 class="h5 mt-5 mb-3">Scrolling content</h2>
+          <p>This page contains enough content to demonstrate that only the main region scrolls — the top area and nav area stay in place, and the page itself never scrolls.</p>
+
+          <h3 class="h6 mt-4">Section one</h3>
+          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+          <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+
+          <h3 class="h6 mt-4">Section two</h3>
+          <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.</p>
+          <p>Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet.</p>
+
+          <h3 class="h6 mt-4">Section three</h3>
+          <p>At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident.</p>
+          <p>Similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga. Et harum quidem rerum facilis est et expedita distinctio. Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit.</p>
+
+          <h3 class="h6 mt-4">Section four</h3>
+          <p>Temporibus autem quibusdam et aut officiis debitis aut rerum necessitatibus saepe eveniet ut et voluptates repudiandae sint et molestiae non recusandae. Itaque earum rerum hic tenetur a sapiente delectus.</p>
+          <p>Ut aut reiciendis voluptatibus maiores alias consequatur aut perferendis doloribus asperiores repellat. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+
+          <h3 class="h6 mt-4">Section five</h3>
+          <p>Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur. Sed ut perspiciatis unde omnis iste natus error.</p>
+          <p>At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa.</p>
+
+          <h3 class="h6 mt-4">Section six</h3>
+          <p>Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur. Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur.</p>
+          <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+
+          <p class="mt-4 mb-0 text-body-secondary">End of long content — the main region should have scrolled, the top and nav areas stayed fixed.</p>
+
+        </div>
+      </main>
+
+    </div>
+
+    <!-- Mobile drawer backdrop (framework CSS + JS; visible below md) -->
+    <div class="mu-app-backdrop" aria-hidden="true"></div>
+  </div>
+
+  <script>lucide.createIcons();</script>
+</body>
+</html>

@@ -1,0 +1,345 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>IndigoKit Playground — Tabs</title>
+  <link rel="stylesheet" href="../../dist/css/indigokit.css">
+  <link rel="stylesheet" href="../playground.css">
+  <!-- Playground theme persistence (Task 047) — applies the stored
+       indigokit-theme preference before first paint. Playground-only. -->
+  <script src="../theme.js"></script>
+  <script src="../assets/lucide.umd.js"></script>
+  <!-- Bootstrap's own JS bundle powers tab behavior (data-bs-toggle="tab",
+       the ARIA tabs keyboard model, aria-selected/roving tabindex) and the
+       modal demo. Consumer-side load — IndigoKit ships no tab JavaScript. -->
+  <script src="../../node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+</head>
+<body>
+  <div class="container py-5">
+    <h1>Tabs</h1>
+    <p class="lead">Bootstrap's nav/tab API with IndigoKit refinement — all classes are standard Bootstrap (<code>.nav</code>, <code>.nav-tabs</code>, <code>.nav-pills</code>, <code>.nav-underline</code>, <code>.nav-item</code>, <code>.nav-link</code>, <code>.tab-content</code>, <code>.tab-pane</code>, <code>.fade</code>, <code>.show</code>). Behavior — including the full keyboard model — comes from Bootstrap's own Tab JavaScript.</p>
+
+    <!-- Basic -->
+    <h2 class="h5 mt-5 mb-3">Basic nav-tabs</h2>
+    <p class="demo-label">Standard Bootstrap markup. The active tab is identified by the notch border treatment plus the stronger IndigoKit text weight — never by color alone.</p>
+    <ul class="nav nav-tabs" role="tablist">
+      <li class="nav-item" role="presentation">
+        <button class="nav-link active" id="overview-tab" data-bs-toggle="tab" data-bs-target="#overview" type="button" role="tab" aria-controls="overview" aria-selected="true" tabindex="0">Overview</button>
+      </li>
+      <li class="nav-item" role="presentation">
+        <button class="nav-link" id="activity-tab" data-bs-toggle="tab" data-bs-target="#activity" type="button" role="tab" aria-controls="activity" aria-selected="false" tabindex="-1">Activity</button>
+      </li>
+      <li class="nav-item" role="presentation">
+        <button class="nav-link" id="settings-tab" data-bs-toggle="tab" data-bs-target="#settings" type="button" role="tab" aria-controls="settings" aria-selected="false" tabindex="-1">Settings</button>
+      </li>
+    </ul>
+    <div class="tab-content pt-3">
+      <div class="tab-pane fade show active" id="overview" role="tabpanel" aria-labelledby="overview-tab">
+        <p class="mb-0">Overview content — the summary view of the project: recent commits, open issues and current sprint progress.</p>
+      </div>
+      <div class="tab-pane fade" id="activity" role="tabpanel" aria-labelledby="activity-tab">
+        <p class="mb-0">Activity content — a chronological feed of events from the team.</p>
+      </div>
+      <div class="tab-pane fade" id="settings" role="tabpanel" aria-labelledby="settings-tab">
+        <p class="mb-0">Settings content — project configuration and member management.</p>
+      </div>
+    </div>
+
+    <!-- Multiple + disabled -->
+    <h2 class="h5 mt-5 mb-3">Multiple tabs, active state &amp; disabled tab</h2>
+    <p class="demo-label">Disabled tabs use the <code>disabled</code> attribute: they are muted, skipped by the arrow-key navigation, and not interactive.</p>
+    <ul class="nav nav-tabs" role="tablist">
+      <li class="nav-item" role="presentation">
+        <button class="nav-link active" id="mt-home-tab" data-bs-toggle="tab" data-bs-target="#mt-home" type="button" role="tab" aria-controls="mt-home" aria-selected="true" tabindex="0">Home</button>
+      </li>
+      <li class="nav-item" role="presentation">
+        <button class="nav-link" id="mt-profile-tab" data-bs-toggle="tab" data-bs-target="#mt-profile" type="button" role="tab" aria-controls="mt-profile" aria-selected="false" tabindex="-1">Profile</button>
+      </li>
+      <li class="nav-item" role="presentation">
+        <button class="nav-link" id="mt-messages-tab" data-bs-toggle="tab" data-bs-target="#mt-messages" type="button" role="tab" aria-controls="mt-messages" aria-selected="false" tabindex="-1">Messages</button>
+      </li>
+      <li class="nav-item" role="presentation">
+        <button class="nav-link" id="mt-billing-tab" data-bs-toggle="tab" data-bs-target="#mt-billing" type="button" role="tab" aria-controls="mt-billing" aria-selected="false" tabindex="-1">Billing</button>
+      </li>
+      <li class="nav-item" role="presentation">
+        <button class="nav-link" id="mt-archive-tab" data-bs-toggle="tab" data-bs-target="#mt-archive" type="button" role="tab" aria-controls="mt-archive" aria-selected="false" tabindex="-1" disabled>Archived</button>
+      </li>
+    </ul>
+    <div class="tab-content pt-3">
+      <div class="tab-pane fade show active" id="mt-home" role="tabpanel" aria-labelledby="mt-home-tab">
+        <p class="mb-0">Home tab content.</p>
+      </div>
+      <div class="tab-pane fade" id="mt-profile" role="tabpanel" aria-labelledby="mt-profile-tab">
+        <p class="mb-0">Profile tab content.</p>
+      </div>
+      <div class="tab-pane fade" id="mt-messages" role="tabpanel" aria-labelledby="mt-messages-tab">
+        <p class="mb-0">Messages tab content.</p>
+      </div>
+      <div class="tab-pane fade" id="mt-billing" role="tabpanel" aria-labelledby="mt-billing-tab">
+        <p class="mb-0">Billing tab content.</p>
+      </div>
+      <div class="tab-pane fade" id="mt-archive" role="tabpanel" aria-labelledby="mt-archive-tab">
+        <p class="mb-0">Archived tab content (unreachable — the tab is disabled).</p>
+      </div>
+    </div>
+
+    <!-- Icons -->
+    <h2 class="h5 mt-5 mb-3">Tabs with icons</h2>
+    <p class="demo-label">Lucide icons are decorative (<code>aria-hidden="true"</code>) — the label text remains the accessible name.</p>
+    <ul class="nav nav-tabs" role="tablist">
+      <li class="nav-item" role="presentation">
+        <button class="nav-link active" id="ic-overview-tab" data-bs-toggle="tab" data-bs-target="#ic-overview" type="button" role="tab" aria-controls="ic-overview" aria-selected="true" tabindex="0">
+          <i data-lucide="layout-dashboard" aria-hidden="true"></i> Overview
+        </button>
+      </li>
+      <li class="nav-item" role="presentation">
+        <button class="nav-link" id="ic-activity-tab" data-bs-toggle="tab" data-bs-target="#ic-activity" type="button" role="tab" aria-controls="ic-activity" aria-selected="false" tabindex="-1">
+          <i data-lucide="activity" aria-hidden="true"></i> Activity
+        </button>
+      </li>
+      <li class="nav-item" role="presentation">
+        <button class="nav-link" id="ic-team-tab" data-bs-toggle="tab" data-bs-target="#ic-team" type="button" role="tab" aria-controls="ic-team" aria-selected="false" tabindex="-1">
+          <i data-lucide="users" aria-hidden="true"></i> Team
+        </button>
+      </li>
+      <li class="nav-item" role="presentation">
+        <button class="nav-link" id="ic-settings-tab" data-bs-toggle="tab" data-bs-target="#ic-settings" type="button" role="tab" aria-controls="ic-settings" aria-selected="false" tabindex="-1">
+          <i data-lucide="settings" aria-hidden="true"></i> Settings
+        </button>
+      </li>
+    </ul>
+    <div class="tab-content pt-3">
+      <div class="tab-pane fade show active" id="ic-overview" role="tabpanel" aria-labelledby="ic-overview-tab">
+        <p class="mb-0">Overview — the dashboard view.</p>
+      </div>
+      <div class="tab-pane fade" id="ic-activity" role="tabpanel" aria-labelledby="ic-activity-tab">
+        <p class="mb-0">Activity — the event stream.</p>
+      </div>
+      <div class="tab-pane fade" id="ic-team" role="tabpanel" aria-labelledby="ic-team-tab">
+        <p class="mb-0">Team — members and roles.</p>
+      </div>
+      <div class="tab-pane fade" id="ic-settings" role="tabpanel" aria-labelledby="ic-settings-tab">
+        <p class="mb-0">Settings — workspace configuration.</p>
+      </div>
+    </div>
+
+    <!-- Badges -->
+    <h2 class="h5 mt-5 mb-3">Badges in tabs</h2>
+    <p class="demo-label">Badges use the existing <code>.badge</code> API and sit on the label's baseline without overpowering it.</p>
+    <ul class="nav nav-tabs" role="tablist">
+      <li class="nav-item" role="presentation">
+        <button class="nav-link active" id="bd-inbox-tab" data-bs-toggle="tab" data-bs-target="#bd-inbox" type="button" role="tab" aria-controls="bd-inbox" aria-selected="true" tabindex="0">
+          <i data-lucide="inbox" aria-hidden="true"></i> Inbox <span class="badge text-bg-primary">12</span>
+        </button>
+      </li>
+      <li class="nav-item" role="presentation">
+        <button class="nav-link" id="bd-sent-tab" data-bs-toggle="tab" data-bs-target="#bd-sent" type="button" role="tab" aria-controls="bd-sent" aria-selected="false" tabindex="-1">
+          <i data-lucide="send" aria-hidden="true"></i> Sent
+        </button>
+      </li>
+      <li class="nav-item" role="presentation">
+        <button class="nav-link" id="bd-drafts-tab" data-bs-toggle="tab" data-bs-target="#bd-drafts" type="button" role="tab" aria-controls="bd-drafts" aria-selected="false" tabindex="-1">
+          <i data-lucide="file-text" aria-hidden="true"></i> Drafts <span class="badge text-bg-secondary">3</span>
+        </button>
+      </li>
+    </ul>
+    <div class="tab-content pt-3">
+      <div class="tab-pane fade show active" id="bd-inbox" role="tabpanel" aria-labelledby="bd-inbox-tab">
+        <p class="mb-0">Inbox content — 12 unread messages.</p>
+      </div>
+      <div class="tab-pane fade" id="bd-sent" role="tabpanel" aria-labelledby="bd-sent-tab">
+        <p class="mb-0">Sent content.</p>
+      </div>
+      <div class="tab-pane fade" id="bd-drafts" role="tabpanel" aria-labelledby="bd-drafts-tab">
+        <p class="mb-0">Drafts content — 3 drafts saved.</p>
+      </div>
+    </div>
+
+    <!-- Pills -->
+    <h2 class="h5 mt-5 mb-3">Nav pills</h2>
+    <p class="demo-label">Bootstrap's <code>.nav-pills</code> — active pill is solid indigo with white text (≈ 6.5:1 contrast) — same system, distinct treatment from tabs.</p>
+    <ul class="nav nav-pills" role="tablist">
+      <li class="nav-item" role="presentation">
+        <button class="nav-link active" id="np-home-tab" data-bs-toggle="pill" data-bs-target="#np-home" type="button" role="tab" aria-controls="np-home" aria-selected="true" tabindex="0">Home</button>
+      </li>
+      <li class="nav-item" role="presentation">
+        <button class="nav-link" id="np-api-tab" data-bs-toggle="pill" data-bs-target="#np-api" type="button" role="tab" aria-controls="np-api" aria-selected="false" tabindex="-1">API keys</button>
+      </li>
+      <li class="nav-item" role="presentation">
+        <button class="nav-link" id="np-webhooks-tab" data-bs-toggle="pill" data-bs-target="#np-webhooks" type="button" role="tab" aria-controls="np-webhooks" aria-selected="false" tabindex="-1">Webhooks</button>
+      </li>
+      <li class="nav-item" role="presentation">
+        <button class="nav-link" id="np-logs-tab" data-bs-toggle="pill" data-bs-target="#np-logs" type="button" role="tab" aria-controls="np-logs" aria-selected="false" tabindex="-1">Logs</button>
+      </li>
+    </ul>
+    <div class="tab-content pt-3">
+      <div class="tab-pane fade show active" id="np-home" role="tabpanel" aria-labelledby="np-home-tab">
+        <p class="mb-0">Home — account overview.</p>
+      </div>
+      <div class="tab-pane fade" id="np-api" role="tabpanel" aria-labelledby="np-api-tab">
+        <p class="mb-0">API keys — manage credentials.</p>
+      </div>
+      <div class="tab-pane fade" id="np-webhooks" role="tabpanel" aria-labelledby="np-webhooks-tab">
+        <p class="mb-0">Webhooks — outbound event delivery.</p>
+      </div>
+      <div class="tab-pane fade" id="np-logs" role="tabpanel" aria-labelledby="np-logs-tab">
+        <p class="mb-0">Logs — request history.</p>
+      </div>
+    </div>
+
+    <!-- Underline -->
+    <h2 class="h5 mt-5 mb-3">Underline tabs (Bootstrap <code>.nav-underline</code>)</h2>
+    <p class="demo-label">The restrained enterprise treatment: bold text plus a subtle indigo indicator on the active tab.</p>
+    <ul class="nav nav-underline" role="tablist">
+      <li class="nav-item" role="presentation">
+        <button class="nav-link active" id="nu-overview-tab" data-bs-toggle="tab" data-bs-target="#nu-overview" type="button" role="tab" aria-controls="nu-overview" aria-selected="true" tabindex="0">Overview</button>
+      </li>
+      <li class="nav-item" role="presentation">
+        <button class="nav-link" id="nu-analytics-tab" data-bs-toggle="tab" data-bs-target="#nu-analytics" type="button" role="tab" aria-controls="nu-analytics" aria-selected="false" tabindex="-1">Analytics</button>
+      </li>
+      <li class="nav-item" role="presentation">
+        <button class="nav-link" id="nu-reports-tab" data-bs-toggle="tab" data-bs-target="#nu-reports" type="button" role="tab" aria-controls="nu-reports" aria-selected="false" tabindex="-1">Reports</button>
+      </li>
+      <li class="nav-item" role="presentation">
+        <button class="nav-link" id="nu-export-tab" data-bs-toggle="tab" data-bs-target="#nu-export" type="button" role="tab" aria-controls="nu-export" aria-selected="false" tabindex="-1">Export</button>
+      </li>
+    </ul>
+    <div class="tab-content pt-3">
+      <div class="tab-pane fade show active" id="nu-overview" role="tabpanel" aria-labelledby="nu-overview-tab">
+        <p class="mb-0">Overview — headline metrics.</p>
+      </div>
+      <div class="tab-pane fade" id="nu-analytics" role="tabpanel" aria-labelledby="nu-analytics-tab">
+        <p class="mb-0">Analytics — traffic and conversion.</p>
+      </div>
+      <div class="tab-pane fade" id="nu-reports" role="tabpanel" aria-labelledby="nu-reports-tab">
+        <p class="mb-0">Reports — scheduled and ad-hoc exports.</p>
+      </div>
+      <div class="tab-pane fade" id="nu-export" role="tabpanel" aria-labelledby="nu-export-tab">
+        <p class="mb-0">Export — build a new export job.</p>
+      </div>
+    </div>
+
+    <!-- Inside a card -->
+    <h2 class="h5 mt-5 mb-3">Tabs inside a card</h2>
+    <div class="card">
+      <div class="card-body">
+        <ul class="nav nav-tabs" role="tablist">
+          <li class="nav-item" role="presentation">
+            <button class="nav-link active" id="cd-details-tab" data-bs-toggle="tab" data-bs-target="#cd-details" type="button" role="tab" aria-controls="cd-details" aria-selected="true" tabindex="0">Details</button>
+          </li>
+          <li class="nav-item" role="presentation">
+            <button class="nav-link" id="cd-members-tab" data-bs-toggle="tab" data-bs-target="#cd-members" type="button" role="tab" aria-controls="cd-members" aria-selected="false" tabindex="-1">Members</button>
+          </li>
+          <li class="nav-item" role="presentation">
+            <button class="nav-link" id="cd-history-tab" data-bs-toggle="tab" data-bs-target="#cd-history" type="button" role="tab" aria-controls="cd-history" aria-selected="false" tabindex="-1">History</button>
+          </li>
+        </ul>
+        <div class="tab-content pt-3">
+          <div class="tab-pane fade show active" id="cd-details" role="tabpanel" aria-labelledby="cd-details-tab">
+            <p class="mb-0">Project details — description, repository, default branch.</p>
+          </div>
+          <div class="tab-pane fade" id="cd-members" role="tabpanel" aria-labelledby="cd-members-tab">
+            <p class="mb-0">Members — the people with access to this project.</p>
+          </div>
+          <div class="tab-pane fade" id="cd-history" role="tabpanel" aria-labelledby="cd-history-tab">
+            <p class="mb-0">History — audit trail of project changes.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Inside a modal -->
+    <h2 class="h5 mt-5 mb-3">Tabs inside a modal</h2>
+    <p class="demo-label">Tabs compose with the modal system — Bootstrap's Modal focus trap keeps focus inside the dialog while tabs operate normally.</p>
+    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#tabsModal">Open tabbed modal</button>
+
+    <div class="modal fade" id="tabsModal" tabindex="-1" aria-labelledby="tabsModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h1 class="modal-title fs-5" id="tabsModalLabel">Project settings</h1>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <ul class="nav nav-tabs" role="tablist">
+              <li class="nav-item" role="presentation">
+                <button class="nav-link active" id="md-general-tab" data-bs-toggle="tab" data-bs-target="#md-general" type="button" role="tab" aria-controls="md-general" aria-selected="true" tabindex="0">General</button>
+              </li>
+              <li class="nav-item" role="presentation">
+                <button class="nav-link" id="md-permissions-tab" data-bs-toggle="tab" data-bs-target="#md-permissions" type="button" role="tab" aria-controls="md-permissions" aria-selected="false" tabindex="-1">Permissions</button>
+              </li>
+            </ul>
+            <div class="tab-content pt-3">
+              <div class="tab-pane fade show active" id="md-general" role="tabpanel" aria-labelledby="md-general-tab">
+                <p class="mb-0">General settings — name, description, visibility.</p>
+              </div>
+              <div class="tab-pane fade" id="md-permissions" role="tabpanel" aria-labelledby="md-permissions-tab">
+                <p class="mb-0">Permissions — who can read, write and administer.</p>
+              </div>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+            <button type="button" class="btn btn-primary">Save changes</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Long labels / responsive -->
+    <h2 class="h5 mt-5 mb-3">Long labels &amp; many tabs (responsive)</h2>
+    <p class="demo-label">Bootstrap's <code>.nav</code> wraps naturally — long labels and many tabs stack onto new rows instead of overflowing the viewport.</p>
+    <ul class="nav nav-tabs" role="tablist">
+      <li class="nav-item" role="presentation">
+        <button class="nav-link active" id="lg-project-settings-tab" data-bs-toggle="tab" data-bs-target="#lg-project-settings" type="button" role="tab" aria-controls="lg-project-settings" aria-selected="true" tabindex="0">Project settings and configuration</button>
+      </li>
+      <li class="nav-item" role="presentation">
+        <button class="nav-link" id="lg-team-permissions-tab" data-bs-toggle="tab" data-bs-target="#lg-team-permissions" type="button" role="tab" aria-controls="lg-team-permissions" aria-selected="false" tabindex="-1">Team permissions and access control</button>
+      </li>
+      <li class="nav-item" role="presentation">
+        <button class="nav-link" id="lg-notifications-tab" data-bs-toggle="tab" data-bs-target="#lg-notifications" type="button" role="tab" aria-controls="lg-notifications" aria-selected="false" tabindex="-1">Notifications and email preferences</button>
+      </li>
+      <li class="nav-item" role="presentation">
+        <button class="nav-link" id="lg-audit-tab" data-bs-toggle="tab" data-bs-target="#lg-audit" type="button" role="tab" aria-controls="lg-audit" aria-selected="false" tabindex="-1">Audit log and security history</button>
+      </li>
+      <li class="nav-item" role="presentation">
+        <button class="nav-link" id="lg-integrations-tab" data-bs-toggle="tab" data-bs-target="#lg-integrations" type="button" role="tab" aria-controls="lg-integrations" aria-selected="false" tabindex="-1">Third-party integrations and API keys</button>
+      </li>
+    </ul>
+    <div class="tab-content pt-3">
+      <div class="tab-pane fade show active" id="lg-project-settings" role="tabpanel" aria-labelledby="lg-project-settings-tab">
+        <p class="mb-0">Project settings content.</p>
+      </div>
+      <div class="tab-pane fade" id="lg-team-permissions" role="tabpanel" aria-labelledby="lg-team-permissions-tab">
+        <p class="mb-0">Team permissions content.</p>
+      </div>
+      <div class="tab-pane fade" id="lg-notifications" role="tabpanel" aria-labelledby="lg-notifications-tab">
+        <p class="mb-0">Notification preferences content.</p>
+      </div>
+      <div class="tab-pane fade" id="lg-audit" role="tabpanel" aria-labelledby="lg-audit-tab">
+        <p class="mb-0">Audit log content.</p>
+      </div>
+      <div class="tab-pane fade" id="lg-integrations" role="tabpanel" aria-labelledby="lg-integrations-tab">
+        <p class="mb-0">Integrations content.</p>
+      </div>
+    </div>
+
+    <!-- Keyboard -->
+    <h2 class="h5 mt-5 mb-3">Keyboard interaction</h2>
+    <p class="demo-label">Bootstrap's Tab JavaScript implements the ARIA tabs pattern: <kbd>→</kbd>/<kbd>←</kbd> (and <kbd>↑</kbd>/<kbd>↓</kbd>) move to the next/previous tab and activate it; <kbd>Home</kbd>/<kbd>End</kbd> jump to the first/last; disabled tabs are skipped; focus stays on the tab list (hidden panels are <code>display: none</code>, never keyboard-reachable). <code>aria-selected</code> and the roving <code>tabindex</code> are managed by Bootstrap — try it on any example above.</p>
+
+    <!-- Accessibility -->
+    <h2 class="h5 mt-5 mb-3">Accessibility notes</h2>
+    <ul class="mb-0">
+      <li>Tabs that switch content use <code>&lt;button&gt;</code>; use <code>&lt;a&gt;</code> only when the tab changes the URL (navigation).</li>
+      <li>Each tab links its panel with <code>aria-controls</code>; each panel is named by its tab via <code>aria-labelledby</code>.</li>
+      <li><code>aria-selected</code> reflects the active tab; inactive tabs are removed from the tab order (roving tabindex).</li>
+      <li>Icons are decorative (<code>aria-hidden="true"</code>); the label text is the accessible name.</li>
+      <li>Active state is communicated by shape, weight and position — never by color alone.</li>
+    </ul>
+  </div>
+
+  <script>lucide.createIcons();</script>
+</body>
+</html>

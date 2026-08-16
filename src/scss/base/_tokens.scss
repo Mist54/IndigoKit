@@ -1,0 +1,280 @@
+// ============================================================
+// IndigoKit — Design Tokens
+// ------------------------------------------------------------
+// Central token definitions for IndigoKit (Modern + Enterprise).
+//
+// This file runs BEFORE Bootstrap's variable defaults are set
+// (see indigokit.scss import order). Because Bootstrap variables
+// use `!default` and its $theme-colors map is built from
+// $primary, $secondary, etc., overrides defined here flow into
+// Bootstrap's :root custom properties and every component
+// automatically — no competing design system.
+//
+// Future IndigoKit components MUST reference these tokens (or the
+// Bootstrap variables derived from them) — never hard-code
+// colors, spacing, radius, shadow, or timing values in
+// component files.
+// ============================================================
+
+// ------------------------------------------------------------
+// 1. Colors
+// ------------------------------------------------------------
+// Approved IndigoKit palette (Task 002). Slate doubles as the
+// neutral / secondary foundation.
+$mu-indigo:   #4F46E5 !default;
+$mu-slate:    #64748B !default;
+$mu-cyan:     #06B6D4 !default;
+$mu-emerald:  #10B981 !default;
+$mu-amber:    #F59E0B !default;
+$mu-red:      #EF4444 !default;
+
+// Map the IndigoKit palette onto Bootstrap's semantic color roles.
+$primary:   $mu-indigo   !default;
+$secondary: $mu-slate    !default;
+$success:   $mu-emerald  !default;
+$info:      $mu-cyan     !default;
+$warning:   $mu-amber    !default;
+$danger:    $mu-red      !default;
+
+// NOTE: Foreground/background contrast is NOT assumed WCAG AA
+// compliant at this stage (e.g. white text on amber). Contrast
+// will be verified per component later.
+
+// ------------------------------------------------------------
+// 2. Typography
+// ------------------------------------------------------------
+// Inter is the default face but is NOT bundled. When Inter is
+// unavailable, the stack falls back through Roboto, Segoe UI,
+// and Bootstrap's system stack (which ships with the default).
+$font-family-sans-serif: "Inter", system-ui, -apple-system, "Segoe UI", Roboto,
+  "Helvetica Neue", "Noto Sans", "Liberation Sans", Arial, sans-serif,
+  "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji" !default;
+
+// Approved weights 400 / 500 / 600 / 700 already map to
+// Bootstrap's $font-weight-normal / medium / semibold / bold
+// defaults — no overrides needed.
+
+// ------------------------------------------------------------
+// 3. Spacing
+// ------------------------------------------------------------
+// Approved base unit: 4px. Bootstrap's scale is already
+// 4px-based ($spacer: 1rem; $spacers: 0 .25 .5 1 1.5 3 →
+// 0 / 4 / 8 / 16 / 24 / 48px), so IndigoKit reuses Bootstrap's
+// spacing system instead of duplicating it. Future components
+// reference $spacer / $spacers.
+
+// ------------------------------------------------------------
+// 4. Border radius
+// ------------------------------------------------------------
+// Approved scale: 4 / 6 / 8 / 12 / pill.
+// Bootstrap's sm / base / lg already equal 4 / 6 / 8px; xl and
+// pill are overridden below to complete the approved scale.
+// Values use px to match the approved scale exactly.
+$border-radius-sm:   4px    !default;
+$border-radius:      6px    !default;
+$border-radius-lg:   8px    !default;
+$border-radius-xl:   12px   !default; // was 1rem (16px)
+$border-radius-pill: 9999px !default; // was 50rem
+// $border-radius-xxl (2rem) intentionally left at Bootstrap's
+// default — it is outside the approved scale.
+
+// ------------------------------------------------------------
+// 5. Shadows
+// ------------------------------------------------------------
+// The IndigoKit shadow scale is the single source of truth for
+// shadows. Values stay subtle and are built on the slate family
+// rgba(15, 23, 42, ...). Bootstrap's shadow variables are wired
+// to this scale so dropdowns, popovers, modals, and inputs
+// inherit it instead of Bootstrap's stronger defaults.
+$mu-shadow-none: none !default;
+$mu-shadow-xs: 0 1px 2px rgba(15, 23, 42, 0.04) !default;
+$mu-shadow-sm: 0 1px 3px rgba(15, 23, 42, 0.07) !default;
+$mu-shadow-md: 0 4px 8px rgba(15, 23, 42, 0.08) !default;
+$mu-shadow-lg: 0 12px 24px rgba(15, 23, 42, 0.12) !default;
+
+// Bootstrap wiring:
+$box-shadow-sm:    $mu-shadow-xs !default; // small pops (dropdowns, small menus)
+$box-shadow:       $mu-shadow-sm !default; // default (modals, focus states)
+$box-shadow-lg:    $mu-shadow-md !default; // large (popovers, toasts)
+$box-shadow-inset: inset 0 1px 2px rgba(15, 23, 42, 0.05) !default; // form controls
+
+// ------------------------------------------------------------
+// 6. Motion
+// ------------------------------------------------------------
+// Reserved for future IndigoKit components. Bootstrap's own
+// transition variables are intentionally NOT overridden at this
+// stage (their defaults already sit inside the approved ranges).
+// Bootstrap's reduced-motion support stays enabled.
+$mu-motion-fast:   125ms !default;
+$mu-motion-normal: 200ms !default;
+$mu-motion-slow:   300ms !default;
+
+$enable-reduced-motion: true !default;
+
+// ------------------------------------------------------------
+// 7. Base layer — body, headings, links
+// ------------------------------------------------------------
+// Values that Bootstrap emits directly into Sass (not CSS vars)
+// must be overridden BEFORE the Bootstrap import, so they live
+// here rather than in base/base.scss.
+
+// Default page background: clean white (#fff = Bootstrap's
+// $white, which is not yet defined at this point in the import
+// order). Surface tinting is a future layout/theme concern, not
+// a base-layer one.
+$body-bg: #fff !default;
+
+// Default text color: dark slate derived from the approved
+// $mu-slate token via Bootstrap's shift-color() (≈ #0F1115,
+// high contrast on white).
+$body-color: shift-color($mu-slate, 85%) !default;
+
+// Heading hierarchy: approved weight 600 for all levels.
+// (Bootstrap's $font-weight-semibold is not available here —
+// it is defined after this file runs — so the approved literal
+// value 600 is used.)
+$headings-font-weight: 600 !default;
+
+// Links: no underline by default (enterprise look), underline on
+// hover. Hover color stays Bootstrap's auto-derived darker indigo.
+$link-decoration: none !default;
+$link-hover-decoration: underline !default;
+
+// Focus ring: raised from Bootstrap's default .25 alpha so the ring
+// meets the ≥3:1 WCAG 2.2 focus-appearance bar on light surfaces
+// (blended indigo at .85 ≈ 3.5:1 on white). Keeps the Indigo visual
+// identity. Dark surfaces are handled by base/themes.scss (dark ring
+// = indigo-300, measured ≈5.7:1 on raised surfaces).
+$focus-ring-opacity: .85 !default;
+
+// Component focus rings: Bootstrap bakes $focus-ring-box-shadow into
+// every :focus/:focus-visible rule at build time (form controls, nav
+// links, pagination, btn-close, accordion — 10+ literals). Emit the
+// theme-aware --bs-focus-ring-color custom property instead of the
+// literal so every ring flips with [data-bs-theme="dark"]. The light
+// value is unchanged (the var equals the same rgba(indigo,.85)).
+// Width/blur are pinned here (identical to Bootstrap's defaults)
+// because Sass interpolates them eagerly — Bootstrap defines them
+// later in the import order.
+$focus-ring-width: 0.25rem !default;
+$focus-ring-blur: 0 !default;
+$focus-ring-box-shadow: 0 0 #{$focus-ring-blur} #{$focus-ring-width} var(--bs-focus-ring-color) !default;
+
+// .form-select:focus is the ONE component Bootstrap wires to the
+// focus COLOR literal ($input-btn-focus-color) instead of
+// $focus-ring-box-shadow — pin it to the same var so the select
+// ring flips with the theme too (light value unchanged).
+$form-select-focus-box-shadow: 0 0 #{$focus-ring-blur} #{$focus-ring-width} var(--bs-focus-ring-color) !default;
+
+// ------------------------------------------------------------
+// 8. Layout tokens
+// ------------------------------------------------------------
+// Application-shell dimensions shared by future components.
+// 16rem (256px) is the classic enterprise sidebar width: room for
+// icons, labels, future badges, and future nested navigation
+// without feeling oversized. A token so the future collapse/
+// mobile behavior and any navbar offset can reference the same
+// value instead of duplicating it.
+$mu-sidebar-width: 16rem !default;
+
+// Collapsed sidebar width: 4.75rem (76px). Not a padding-based
+// value — it is DERIVED from the navigation grid (Task 055A
+// alignment refinement): the 20px icon column sits at 28px from
+// the rail's left edge (16px nav padding + 12px link padding),
+// so its centerline is 38px. 2 × 38px = 76px makes the rail's
+// centerline equal the icon column's centerline, so collapsed
+// and expanded icons share ONE horizontal grid and never shift
+// when the sidebar collapses. A token because the collapsed
+// state (Task 008) and mobile/offcanvas work share this
+// dimension — do not hard-code it in components.
+$mu-sidebar-width-collapsed: 4.75rem !default;
+
+// Backdrop overlay: the approved slate-family dark scrim used by
+// overlays (mobile drawer now; any future modal/popover can reuse
+// it). Subtle 45% opacity on the same rgba(15, 23, 42, ...)
+// family as every shadow token.
+$mu-backdrop-bg: rgba(15, 23, 42, 0.45) !default;
+
+// ------------------------------------------------------------
+// 9. Button tokens (Task 011)
+// ------------------------------------------------------------
+// Bootstrap buttons already compile flat in this build
+// ($enable-shadows: false), but the emitted --bs-btn-* shadow
+// custom properties still declare Bootstrap's legacy inset 3D
+// shadows. Override them to `none` so the declared values are
+// honest about IndigoKit's flat enterprise look — and so buttons
+// stay flat if $enable-shadows is ever enabled for future
+// components (cards, dropdowns, modals).
+$btn-box-shadow:      none !default;
+$btn-active-box-shadow: none !default;
+
+// Wire the button transition to the approved fast motion token
+// (125ms) instead of Bootstrap's hard-coded 150ms. Bootstrap's
+// transition() mixin still emits the prefers-reduced-motion
+// `transition: none` override for .btn automatically.
+$btn-transition: color $mu-motion-fast ease-in-out,
+  background-color $mu-motion-fast ease-in-out,
+  border-color $mu-motion-fast ease-in-out,
+  box-shadow $mu-motion-fast ease-in-out !default;
+
+// Dropdown menu headers: Bootstrap's default is a fixed gray
+// (#6c757d) that does not adapt to dark themes. Use the
+// theme-aware secondary-color token instead (same muted
+// hierarchy as --bs-secondary-color everywhere else).
+$dropdown-header-color: var(--bs-secondary-color) !default;
+
+// Tooltip background: Bootstrap's default is pure black
+// (--bs-emphasis-color). Use the palette-derived body color
+// (dark slate #0F1115 in light mode) instead — same near-black
+// readability (white text ≈ 17:1), on-palette, and still
+// theme-adaptive (flips with --bs-body-color in dark mode).
+$tooltip-bg: var(--bs-body-color) !default;
+
+// Modal backdrop: Bootstrap's default is pure black at 50%.
+// Use the approved slate scrim token at full opacity so the
+// effective result is rgba(15,23,42,.45) — identical to the
+// mobile drawer backdrop, one consistent overlay language.
+$modal-backdrop-bg:     $mu-backdrop-bg !default;
+$modal-backdrop-opacity: 1 !default;
+
+// Breadcrumbs are supporting navigation: size them down to the
+// -sm type scale (14px) so they stay subordinate to the page
+// title and primary content. (Literal, not $font-size-sm — that
+// Bootstrap variable is defined after this file runs.)
+$breadcrumb-font-size: 0.875rem !default;
+
+// Form validation feedback: Bootstrap's defaults use $success/$danger
+// directly (#10B981 / #EF4444), which fail AA as text on white
+// (≈2.3:1 / ≈3.0:1 — measured). Use the text-emphasis variants
+// instead (dark emerald #064A34 ≈8.5:1, dark red #601B1B ≈8.8:1)
+// so the feedback text, state border (3:1) and validated
+// check/radio background all clear the contrast bar while staying
+// theme-adaptive (the emphasis vars flip in dark mode). The vivid
+// state icons keep using $success/$danger directly.
+$form-feedback-valid-color:   var(--bs-success-text-emphasis) !default;
+$form-feedback-invalid-color: var(--bs-danger-text-emphasis) !default;
+
+// Validation state ICONS: Bootstrap bakes the icon color into a
+// data-URI SVG at build time, and CSS custom properties cannot
+// resolve inside a data-URI — so the override above (a var) leaked
+// into the icon and made it render invisible (canvas-verified: 0
+// opaque pixels). Use literal emphasis colors matching the feedback
+// text and border (#064A34 / #601B1B). Same build-time constraint
+// as the switch knob and the select chevron; documented dark-mode
+// note: revisit the literals with the themes task.
+$form-feedback-icon-valid-color:   #064A34 !default;
+$form-feedback-icon-invalid-color: #601B1B !default;
+
+// Switch off-knob: Bootstrap's default is rgba(black, .25), which
+// measures ≈1.9:1 against the white track — the off-state indicator
+// fails WCAG 1.4.11. Use the slate secondary token instead (solid
+// #64748B, ≈4.8:1 on white — measured). The knob color is baked
+// into the encoded SVG at build time, so it must be a literal (a CSS
+// var cannot resolve inside a data-URI). Checked stays indigo + white.
+$form-switch-color: $mu-slate !default;
+
+// Floating-label disabled color: Bootstrap's default is a fixed gray
+// ($gray-600 #6c757d) that does not adapt to dark themes. Use the
+// theme-aware secondary-color token instead (same fix as the
+// dropdown header, Task 015).
+$form-floating-label-disabled-color: var(--bs-secondary-color) !default;

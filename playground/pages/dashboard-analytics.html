@@ -1,0 +1,565 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>IndigoKit — Analytics</title>
+  <link rel="stylesheet" href="../../dist/css/indigokit.css">
+  <link rel="stylesheet" href="../playground.css">
+  <script src="../theme.js"></script>
+  <script src="../assets/lucide.umd.js"></script>
+  <script src="../../node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="../../dist/js/indigokit.js"></script>
+  <!-- Optional page-level chart library: loaded only by pages that
+       chart. Never bundled into indigokit.js (Task 057). -->
+  <script src="../../node_modules/chart.js/dist/chart.umd.min.js"></script>
+</head>
+<body>
+  <div class="mu-app">
+
+    <header class="mu-app-top">
+      <nav class="navbar mu-app-navbar" aria-label="Main navigation">
+        <div class="container-fluid">
+                    <div class="d-flex align-items-center gap-2">
+            <button type="button" class="btn" data-mu-mobile-toggle aria-controls="app-sidebar" aria-expanded="false" aria-label="Open navigation">
+              <i data-lucide="menu" aria-hidden="true"></i>
+            </button>
+            <button type="button" class="btn" data-mu-sidebar-toggle aria-controls="app-sidebar" aria-expanded="true" aria-label="Collapse sidebar">
+              <i data-lucide="panel-left-close" aria-hidden="true"></i>
+            </button>
+            <a class="navbar-brand" href="../index.html">
+            <i data-lucide="layers" aria-hidden="true"></i>
+            IndigoKit
+          </a>
+          </div>
+          <div class="mu-navbar-main"></div>
+          <div class="mu-navbar-actions">
+            <select class="form-select form-select-sm" data-theme-switch aria-label="Theme">
+              <option value="system">System</option>
+              <option value="light">Light</option>
+              <option value="dark">Dark</option>
+            </select>
+            <button type="button" class="btn d-none d-md-inline-flex" aria-label="Notifications">
+              <i data-lucide="bell" aria-hidden="true"></i>
+            </button>
+            <button type="button" class="btn d-none d-md-inline-flex" aria-label="Help">
+              <i data-lucide="circle-question-mark" aria-hidden="true"></i>
+            </button>
+            <div class="dropdown">
+              <a class="mu-navbar-user" href="#" data-bs-toggle="dropdown" aria-expanded="false" aria-label="User menu">
+                <span class="mu-avatar"><i data-lucide="user" aria-hidden="true"></i></span>
+                <span class="mu-user-name d-none d-lg-inline">Jane Doe</span>
+                <i data-lucide="chevron-down" aria-hidden="true"></i>
+              </a>
+              <ul class="dropdown-menu dropdown-menu-end">
+                <li>
+                  <h6 class="dropdown-header">Jane Doe<span class="d-block small fw-normal text-body-secondary">Software Engineer</span></h6>
+                </li>
+                <li><hr class="dropdown-divider"></li>
+                <li><a class="dropdown-item" href="profile.html">Profile</a></li>
+                <li><a class="dropdown-item" href="settings.html">Account Settings</a></li>
+                <li><a class="dropdown-item" href="settings.html">Notifications</a></li>
+                <li><a class="dropdown-item" href="auth/lock-screen.html">Lock Screen</a></li>
+                <li><hr class="dropdown-divider"></li>
+                <li><a class="dropdown-item text-danger" href="auth/login.html">Sign out</a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <div class="mu-app-body">
+
+      <aside class="mu-app-side">
+        <div class="mu-sidebar" id="app-sidebar">
+          <div class="mu-sidebar-header">
+            <button type="button" class="btn mu-sidebar-close" data-mu-sidebar-close aria-label="Close navigation">
+              <i data-lucide="x" aria-hidden="true"></i>
+            </button>
+          </div>
+          <nav class="mu-sidebar-nav" aria-label="Sidebar navigation">
+            <div class="mu-sidebar-section">
+              <div class="mu-sidebar-label">Application examples</div>
+              <ul class="mu-sidebar-list">
+                <li>
+                  <a class="mu-sidebar-link" href="../index.html">
+                    <i data-lucide="layout-dashboard" aria-hidden="true"></i>
+                    <span class="mu-sidebar-link-text">Dashboard</span>
+                  </a>
+                </li>
+                <li>
+                  <a class="mu-sidebar-link active" href="dashboard-analytics.html" aria-current="page">
+                    <i data-lucide="chart-no-axes-combined" aria-hidden="true"></i>
+                    <span class="mu-sidebar-link-text">Analytics</span>
+                  </a>
+                </li>
+                <li>
+                  <a class="mu-sidebar-link" href="dashboard-sales.html">
+                    <i data-lucide="chart-column" aria-hidden="true"></i>
+                    <span class="mu-sidebar-link-text">Sales</span>
+                  </a>
+                </li>
+                <li>
+                  <button type="button" class="mu-sidebar-link" data-bs-toggle="collapse" data-bs-target="#nav-auth" aria-expanded="false" aria-controls="nav-auth">
+                    <i data-lucide="shield" aria-hidden="true"></i>
+                    <span class="mu-sidebar-link-text">Authentication</span>
+                    <i data-lucide="chevron-right" class="mu-sidebar-chevron" aria-hidden="true"></i>
+                  </button>
+                  <div class="collapse" id="nav-auth">
+                    <ul class="mu-sidebar-nested">
+                      <li><a class="mu-sidebar-link" href="auth/login.html"><span class="mu-sidebar-link-text">Login</span></a></li>
+                      <li><a class="mu-sidebar-link" href="auth/register.html"><span class="mu-sidebar-link-text">Register</span></a></li>
+                      <li><a class="mu-sidebar-link" href="auth/forgot-password.html"><span class="mu-sidebar-link-text">Forgot password</span></a></li>
+                      <li><a class="mu-sidebar-link" href="auth/reset-password.html"><span class="mu-sidebar-link-text">Reset password</span></a></li>
+                      <li><a class="mu-sidebar-link" href="auth/lock-screen.html"><span class="mu-sidebar-link-text">Lock screen</span></a></li>
+                    </ul>
+                  </div>
+                </li>
+                <li>
+                  <button type="button" class="mu-sidebar-link" data-bs-toggle="collapse" data-bs-target="#nav-pages" aria-expanded="true" aria-controls="nav-pages">
+                    <i data-lucide="files" aria-hidden="true"></i>
+                    <span class="mu-sidebar-link-text">Pages</span>
+                    <i data-lucide="chevron-right" class="mu-sidebar-chevron" aria-hidden="true"></i>
+                  </button>
+                  <div class="collapse show" id="nav-pages">
+                    <ul class="mu-sidebar-nested">
+                      <li><a class="mu-sidebar-link" href="profile.html"><span class="mu-sidebar-link-text">Profile</span></a></li>
+                      <li><a class="mu-sidebar-link" href="settings.html"><span class="mu-sidebar-link-text">Settings</span></a></li>
+                      <li><a class="mu-sidebar-link" href="pricing.html"><span class="mu-sidebar-link-text">Pricing</span></a></li>
+                      <li><a class="mu-sidebar-link" href="faq.html"><span class="mu-sidebar-link-text">FAQ</span></a></li>
+                      <li><a class="mu-sidebar-link" href="invoice.html"><span class="mu-sidebar-link-text">Invoice</span></a></li>
+                      <li><a class="mu-sidebar-link" href="users.html"><span class="mu-sidebar-link-text">User list</span></a></li>
+                      <li><a class="mu-sidebar-link" href="roles.html"><span class="mu-sidebar-link-text">Roles &amp; permissions</span></a></li>
+                      <li><a class="mu-sidebar-link" href="notifications.html"><span class="mu-sidebar-link-text">Notifications</span></a></li>
+                      <li><a class="mu-sidebar-link" href="products.html"><span class="mu-sidebar-link-text">Products</span></a></li>
+                    </ul>
+                  </div>
+                </li>
+                <li>
+                  <button type="button" class="mu-sidebar-link" data-bs-toggle="collapse" data-bs-target="#nav-errors" aria-expanded="false" aria-controls="nav-errors">
+                    <i data-lucide="triangle-alert" aria-hidden="true"></i>
+                    <span class="mu-sidebar-link-text">Error pages</span>
+                    <i data-lucide="chevron-right" class="mu-sidebar-chevron" aria-hidden="true"></i>
+                  </button>
+                  <div class="collapse" id="nav-errors">
+                    <ul class="mu-sidebar-nested">
+                      <li><a class="mu-sidebar-link" href="errors/404.html"><span class="mu-sidebar-link-text">404 Not found</span></a></li>
+                      <li><a class="mu-sidebar-link" href="errors/403.html"><span class="mu-sidebar-link-text">403 Forbidden</span></a></li>
+                      <li><a class="mu-sidebar-link" href="errors/500.html"><span class="mu-sidebar-link-text">500 Server error</span></a></li>
+                      <li><a class="mu-sidebar-link" href="errors/maintenance.html"><span class="mu-sidebar-link-text">Maintenance</span></a></li>
+                    </ul>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="mu-sidebar-section">
+              <div class="mu-sidebar-label">Components</div>
+              <ul class="mu-sidebar-list">
+                <li><a class="mu-sidebar-link" href="tokens.html"><span class="mu-sidebar-link-text">Tokens</span></a></li>
+                <li><a class="mu-sidebar-link" href="base.html"><span class="mu-sidebar-link-text">Base</span></a></li>
+                <li><a class="mu-sidebar-link" href="layout.html"><span class="mu-sidebar-link-text">Layout</span></a></li>
+                <li><a class="mu-sidebar-link" href="navbar.html"><span class="mu-sidebar-link-text">Navbar</span></a></li>
+                <li><a class="mu-sidebar-link" href="sidebar.html"><span class="mu-sidebar-link-text">Sidebar</span></a></li>
+                <li><a class="mu-sidebar-link" href="buttons.html"><span class="mu-sidebar-link-text">Buttons</span></a></li>
+                <li><a class="mu-sidebar-link" href="cards.html"><span class="mu-sidebar-link-text">Cards</span></a></li>
+                <li><a class="mu-sidebar-link" href="alerts.html"><span class="mu-sidebar-link-text">Alerts</span></a></li>
+                <li><a class="mu-sidebar-link" href="badges.html"><span class="mu-sidebar-link-text">Badges</span></a></li>
+                <li><a class="mu-sidebar-link" href="dropdowns.html"><span class="mu-sidebar-link-text">Dropdowns</span></a></li>
+                <li><a class="mu-sidebar-link" href="modals.html"><span class="mu-sidebar-link-text">Modals</span></a></li>
+                <li><a class="mu-sidebar-link" href="tabs.html"><span class="mu-sidebar-link-text">Tabs</span></a></li>
+                <li><a class="mu-sidebar-link" href="breadcrumbs.html"><span class="mu-sidebar-link-text">Breadcrumbs</span></a></li>
+                <li><a class="mu-sidebar-link" href="pagination.html"><span class="mu-sidebar-link-text">Pagination</span></a></li>
+                <li><a class="mu-sidebar-link" href="forms.html"><span class="mu-sidebar-link-text">Forms</span></a></li>
+                <li><a class="mu-sidebar-link" href="tables.html"><span class="mu-sidebar-link-text">Tables</span></a></li>
+                <li><a class="mu-sidebar-link" href="data-table.html"><span class="mu-sidebar-link-text">Data table</span></a></li>
+                <li><a class="mu-sidebar-link" href="form-patterns.html"><span class="mu-sidebar-link-text">Form patterns</span></a></li>
+                <li><a class="mu-sidebar-link" href="progress.html"><span class="mu-sidebar-link-text">Progress</span></a></li>
+                <li><a class="mu-sidebar-link" href="loading.html"><span class="mu-sidebar-link-text">Loading</span></a></li>
+                <li><a class="mu-sidebar-link" href="toasts.html"><span class="mu-sidebar-link-text">Toasts</span></a></li>
+                <li><a class="mu-sidebar-link" href="list-groups.html"><span class="mu-sidebar-link-text">List groups</span></a></li>
+                <li><a class="mu-sidebar-link" href="empty-states.html"><span class="mu-sidebar-link-text">Empty states</span></a></li>
+                <li><a class="mu-sidebar-link" href="tooltips-popovers.html"><span class="mu-sidebar-link-text">Tooltips &amp; popovers</span></a></li>
+                <li><a class="mu-sidebar-link" href="accordion.html"><span class="mu-sidebar-link-text">Accordion</span></a></li>
+                <li><a class="mu-sidebar-link" href="offcanvas.html"><span class="mu-sidebar-link-text">Offcanvas</span></a></li>
+                <li><a class="mu-sidebar-link" href="carousel.html"><span class="mu-sidebar-link-text">Carousel</span></a></li>
+                <li><a class="mu-sidebar-link" href="scrollspy.html"><span class="mu-sidebar-link-text">Scrollspy</span></a></li>
+                <li><a class="mu-sidebar-link" href="navigation-patterns.html"><span class="mu-sidebar-link-text">Navigation patterns</span></a></li>
+                <li><a class="mu-sidebar-link" href="themes.html"><span class="mu-sidebar-link-text">Themes</span></a></li>
+              </ul>
+            </div>
+          </nav>
+        </div>
+      </aside>
+
+      <main class="mu-app-main">
+        <div class="mu-app-content">
+          <div class="container-fluid py-4">
+
+            <nav aria-label="Breadcrumb">
+              <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="../index.html">Dashboard</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Analytics</li>
+              </ol>
+            </nav>
+
+            <div class="d-flex flex-wrap align-items-center justify-content-between gap-2 mb-4">
+              <div>
+                <h1 class="h3 mb-1">Analytics</h1>
+                <p class="text-body-secondary mb-0">Traffic, conversion, and campaign performance for the last 30 days.</p>
+              </div>
+              <div class="d-flex gap-2">
+                <select class="form-select form-select-sm" aria-label="Reporting period">
+                  <option value="30" selected>Last 30 days</option>
+                  <option value="90">Last 90 days</option>
+                  <option value="365">Last 12 months</option>
+                </select>
+                <button type="button" class="btn btn-outline-secondary btn-sm">
+                  <i data-lucide="download" aria-hidden="true" width="16" height="16" class="me-1"></i>
+                  Report
+                </button>
+              </div>
+            </div>
+
+            <div class="row g-3 mb-4">
+              <div class="col-12 col-sm-6 col-xl-3">
+                <div class="card h-100">
+                  <div class="card-body">
+                    <div class="d-flex align-items-center justify-content-between mb-2">
+                      <span class="text-body-secondary small">Visitors</span>
+                      <i data-lucide="users" aria-hidden="true" width="18" height="18" class="text-secondary"></i>
+                    </div>
+                    <div class="h4 mb-1">48,302</div>
+                    <div class="small text-success">
+                      <i data-lucide="trending-up" aria-hidden="true" width="14" height="14" class="me-1"></i>+12.4% vs last month
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-12 col-sm-6 col-xl-3">
+                <div class="card h-100">
+                  <div class="card-body">
+                    <div class="d-flex align-items-center justify-content-between mb-2">
+                      <span class="text-body-secondary small">Page views</span>
+                      <i data-lucide="eye" aria-hidden="true" width="18" height="18" class="text-secondary"></i>
+                    </div>
+                    <div class="h4 mb-1">128,440</div>
+                    <div class="small text-success">
+                      <i data-lucide="trending-up" aria-hidden="true" width="14" height="14" class="me-1"></i>+8.1% vs last month
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-12 col-sm-6 col-xl-3">
+                <div class="card h-100">
+                  <div class="card-body">
+                    <div class="d-flex align-items-center justify-content-between mb-2">
+                      <span class="text-body-secondary small">Conversion rate</span>
+                      <i data-lucide="percent" aria-hidden="true" width="18" height="18" class="text-secondary"></i>
+                    </div>
+                    <div class="h4 mb-1">3.62%</div>
+                    <div class="small text-danger">
+                      <i data-lucide="trending-down" aria-hidden="true" width="14" height="14" class="me-1"></i>0.4 pts vs last month
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-12 col-sm-6 col-xl-3">
+                <div class="card h-100">
+                  <div class="card-body">
+                    <div class="d-flex align-items-center justify-content-between mb-2">
+                      <span class="text-body-secondary small">Avg. session</span>
+                      <i data-lucide="clock" aria-hidden="true" width="18" height="18" class="text-secondary"></i>
+                    </div>
+                    <div class="h4 mb-1">4m 32s</div>
+                    <div class="small text-success">
+                      <i data-lucide="trending-up" aria-hidden="true" width="14" height="14" class="me-1"></i>+48s vs last month
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="row g-3 mb-4">
+              <div class="col-12 col-lg-8">
+                <div class="card h-100">
+                  <div class="card-header d-flex flex-wrap align-items-center justify-content-between gap-2">
+                    <span class="fw-semibold">Revenue</span>
+                    <span class="small text-body-secondary d-flex align-items-center gap-3">
+                      <span class="d-flex align-items-center gap-1"><i data-lucide="circle" aria-hidden="true" width="10" height="10" class="text-primary"></i> This year</span>
+                      <span class="d-flex align-items-center gap-1"><i data-lucide="circle" aria-hidden="true" width="10" height="10" class="text-secondary"></i> Last year</span>
+                    </span>
+                  </div>
+                  <div class="card-body">
+                    <canvas id="revenue-chart" role="img" aria-label="Line chart of monthly revenue: this year rising from $50,000 in January to $95,000 in December, consistently above last year"></canvas>
+                    <table class="visually-hidden">
+                      <caption>Monthly revenue in US dollars, this year and last year</caption>
+                      <thead>
+                        <tr><th scope="col">Month</th><th scope="col">This year</th><th scope="col">Last year</th></tr>
+                      </thead>
+                      <tbody>
+                        <tr><th scope="row">Jan</th><td>$50,000</td><td>$41,000</td></tr>
+                        <tr><th scope="row">Feb</th><td>$54,000</td><td>$39,000</td></tr>
+                        <tr><th scope="row">Mar</th><td>$52,000</td><td>$43,000</td></tr>
+                        <tr><th scope="row">Apr</th><td>$58,000</td><td>$47,000</td></tr>
+                        <tr><th scope="row">May</th><td>$61,000</td><td>$44,000</td></tr>
+                        <tr><th scope="row">Jun</th><td>$63,000</td><td>$50,000</td></tr>
+                        <tr><th scope="row">Jul</th><td>$68,000</td><td>$53,000</td></tr>
+                        <tr><th scope="row">Aug</th><td>$66,000</td><td>$51,000</td></tr>
+                        <tr><th scope="row">Sep</th><td>$72,000</td><td>$56,000</td></tr>
+                        <tr><th scope="row">Oct</th><td>$79,000</td><td>$60,000</td></tr>
+                        <tr><th scope="row">Nov</th><td>$85,000</td><td>$64,000</td></tr>
+                        <tr><th scope="row">Dec</th><td>$95,000</td><td>$70,000</td></tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+              <div class="col-12 col-lg-4">
+                <div class="card h-100">
+                  <div class="card-header">
+                    <span class="fw-semibold">Traffic sources</span>
+                  </div>
+                  <div class="card-body">
+                    <div class="mb-3">
+                      <div class="d-flex justify-content-between small mb-1"><span>Organic search</span><span class="fw-semibold">46%</span></div>
+                      <div class="progress" role="progressbar" aria-label="Organic search" aria-valuenow="46" aria-valuemin="0" aria-valuemax="100">
+                        <div class="progress-bar" style="width: 46%"></div>
+                      </div>
+                    </div>
+                    <div class="mb-3">
+                      <div class="d-flex justify-content-between small mb-1"><span>Direct</span><span class="fw-semibold">24%</span></div>
+                      <div class="progress" role="progressbar" aria-label="Direct" aria-valuenow="24" aria-valuemin="0" aria-valuemax="100">
+                        <div class="progress-bar" style="width: 24%"></div>
+                      </div>
+                    </div>
+                    <div class="mb-3">
+                      <div class="d-flex justify-content-between small mb-1"><span>Referral</span><span class="fw-semibold">15%</span></div>
+                      <div class="progress" role="progressbar" aria-label="Referral" aria-valuenow="15" aria-valuemin="0" aria-valuemax="100">
+                        <div class="progress-bar" style="width: 15%"></div>
+                      </div>
+                    </div>
+                    <div class="mb-3">
+                      <div class="d-flex justify-content-between small mb-1"><span>Social</span><span class="fw-semibold">10%</span></div>
+                      <div class="progress" role="progressbar" aria-label="Social" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100">
+                        <div class="progress-bar" style="width: 10%"></div>
+                      </div>
+                    </div>
+                    <div class="mb-0">
+                      <div class="d-flex justify-content-between small mb-1"><span>Email</span><span class="fw-semibold">5%</span></div>
+                      <div class="progress" role="progressbar" aria-label="Email" aria-valuenow="5" aria-valuemin="0" aria-valuemax="100">
+                        <div class="progress-bar" style="width: 5%"></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="row g-3">
+              <div class="col-12 col-lg-8">
+                <div class="card">
+                  <div class="card-header">
+                    <span class="fw-semibold">Top pages</span>
+                  </div>
+                  <div class="table-responsive">
+                    <table class="table table-hover align-middle mb-0">
+                      <caption class="visually-hidden">Top pages by views with bounce rate and trend</caption>
+                      <thead>
+                        <tr>
+                          <th scope="col">Page</th>
+                          <th scope="col" class="text-end">Views</th>
+                          <th scope="col" class="text-end">Bounce</th>
+                          <th scope="col" class="text-end">Trend</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr>
+                          <th scope="row"><a href="../index.html" class="text-decoration-none">/dashboard</a></th>
+                          <td class="text-end">12,400</td>
+                          <td class="text-end">58%</td>
+                          <td class="text-end"><span class="small text-success"><i data-lucide="arrow-up-right" aria-hidden="true" width="14" height="14" class="me-1"></i>Up 8%</span></td>
+                        </tr>
+                        <tr>
+                          <th scope="row"><a href="pricing.html" class="text-decoration-none">/pricing</a></th>
+                          <td class="text-end">8,910</td>
+                          <td class="text-end">42%</td>
+                          <td class="text-end"><span class="small text-danger"><i data-lucide="arrow-down-right" aria-hidden="true" width="14" height="14" class="me-1"></i>Down 3%</span></td>
+                        </tr>
+                        <tr>
+                          <th scope="row"><a href="forms.html" class="text-decoration-none">/docs/forms</a></th>
+                          <td class="text-end">6,320</td>
+                          <td class="text-end">51%</td>
+                          <td class="text-end"><span class="small text-success"><i data-lucide="arrow-up-right" aria-hidden="true" width="14" height="14" class="me-1"></i>Up 5%</span></td>
+                        </tr>
+                        <tr>
+                          <th scope="row"><a href="base.html" class="text-decoration-none">/docs/base</a></th>
+                          <td class="text-end">4,780</td>
+                          <td class="text-end">66%</td>
+                          <td class="text-end"><span class="small text-success"><i data-lucide="arrow-up-right" aria-hidden="true" width="14" height="14" class="me-1"></i>Up 11%</span></td>
+                        </tr>
+                        <tr>
+                          <th scope="row"><a href="auth/login.html" class="text-decoration-none">/signup</a></th>
+                          <td class="text-end">3,210</td>
+                          <td class="text-end">35%</td>
+                          <td class="text-end"><span class="small text-danger"><i data-lucide="arrow-down-right" aria-hidden="true" width="14" height="14" class="me-1"></i>Down 2%</span></td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+              <div class="col-12 col-lg-4">
+                <div class="card h-100">
+                  <div class="card-header">
+                    <span class="fw-semibold">Campaigns</span>
+                  </div>
+                  <ul class="list-group list-group-flush">
+                    <li class="list-group-item">
+                      <div class="d-flex justify-content-between align-items-center mb-1">
+                        <span class="fw-semibold">Spring launch</span>
+                        <span class="badge text-bg-success">Active</span>
+                      </div>
+                      <div class="progress" role="progressbar" aria-label="Spring launch progress" aria-valuenow="72" aria-valuemin="0" aria-valuemax="100">
+                        <div class="progress-bar" style="width: 72%"></div>
+                      </div>
+                      <div class="text-body-secondary small mt-1">72% of goal</div>
+                    </li>
+                    <li class="list-group-item">
+                      <div class="d-flex justify-content-between align-items-center mb-1">
+                        <span class="fw-semibold">Newsletter June</span>
+                        <span class="badge text-bg-warning">Paused</span>
+                      </div>
+                      <div class="progress" role="progressbar" aria-label="Newsletter June progress" aria-valuenow="45" aria-valuemin="0" aria-valuemax="100">
+                        <div class="progress-bar" style="width: 45%"></div>
+                      </div>
+                      <div class="text-body-secondary small mt-1">45% of goal</div>
+                    </li>
+                    <li class="list-group-item">
+                      <div class="d-flex justify-content-between align-items-center mb-1">
+                        <span class="fw-semibold">Summer promo</span>
+                        <span class="badge text-bg-info">Scheduled</span>
+                      </div>
+                      <div class="progress" role="progressbar" aria-label="Summer promo progress" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">
+                        <div class="progress-bar" style="width: 0%"></div>
+                      </div>
+                      <div class="text-body-secondary small mt-1">Starts Aug 21</div>
+                    </li>
+                    <li class="list-group-item">
+                      <div class="d-flex justify-content-between align-items-center mb-1">
+                        <span class="fw-semibold">Webinar invites</span>
+                        <span class="badge text-bg-secondary">Ended</span>
+                      </div>
+                      <div class="progress" role="progressbar" aria-label="Webinar invites progress" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100">
+                        <div class="progress-bar" style="width: 100%"></div>
+                      </div>
+                      <div class="text-body-secondary small mt-1">100% of goal</div>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </main>
+
+    </div>
+
+    <div class="mu-app-backdrop" aria-hidden="true"></div>
+  </div>
+
+  <script>lucide.createIcons();</script>
+
+  <script>
+  (function () {
+    'use strict';
+
+    // Chart.js integration (Task 057) — page-level and guarded:
+    // if the optional chart library is absent the native fallback
+    // (the visually-hidden data table above) remains the content.
+    var canvas = document.getElementById('revenue-chart');
+    if (!canvas || !window.Chart) { return; }
+
+    var MONTHS = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+    var THIS_YEAR = [50000, 54000, 52000, 58000, 61000, 63000, 68000, 66000, 72000, 79000, 85000, 95000];
+    var LAST_YEAR = [41000, 39000, 43000, 47000, 44000, 50000, 53000, 51000, 56000, 60000, 64000, 70000];
+
+    function cssVar(name) {
+      return getComputedStyle(document.documentElement).getPropertyValue(name).trim();
+    }
+
+    var reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    function buildChart() {
+      // Never leave a duplicate instance on the same canvas.
+      var existing = Chart.getChart(canvas);
+      if (existing) { existing.destroy(); }
+
+      var primary = cssVar('--bs-primary') || '#4F46E5';
+      var secondary = cssVar('--bs-secondary') || '#64748B';
+      var grid = cssVar('--bs-border-color') || '#dee2e6';
+      var tick = cssVar('--bs-secondary-color') || 'rgba(0,0,0,0.75)';
+      var bg = cssVar('--bs-body-bg') || '#ffffff';
+      var bodyColor = cssVar('--bs-body-color') || '#0F172A';
+
+      new Chart(canvas.getContext('2d'), {
+        type: 'line',
+        data: {
+          labels: MONTHS,
+          datasets: [
+            { label: 'This year', data: THIS_YEAR, borderColor: primary, backgroundColor: primary, tension: 0.35, borderWidth: 2.5, pointRadius: 0, pointHoverRadius: 4 },
+            { label: 'Last year', data: LAST_YEAR, borderColor: secondary, backgroundColor: secondary, tension: 0.35, borderWidth: 2, borderDash: [5, 5], pointRadius: 0, pointHoverRadius: 4 }
+          ]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: true,
+          aspectRatio: 2.2,
+          animation: reduceMotion ? false : { duration: 400 },
+          interaction: { mode: 'index', intersect: false },
+          plugins: {
+            legend: { display: false }, // the card header legend names the series
+            tooltip: {
+              backgroundColor: bg,
+              titleColor: bodyColor,
+              bodyColor: bodyColor,
+              borderColor: grid,
+              borderWidth: 1,
+              padding: 10,
+              callbacks: {
+                label: function (ctx) { return ctx.dataset.label + ': $' + ctx.parsed.y.toLocaleString(); }
+              }
+            }
+          },
+          scales: {
+            x: {
+              grid: { display: false },
+              ticks: { color: tick, font: { size: 12 } }
+            },
+            y: {
+              grid: { color: grid },
+              border: { display: false },
+              ticks: {
+                color: tick,
+                font: { size: 12 },
+                callback: function (v) { return '$' + (v / 1000) + 'k'; }
+              }
+            }
+          }
+        }
+      });
+    }
+
+    buildChart();
+
+    // Theme changes re-render the chart with the current tokens.
+    // Observing data-bs-theme on <html> catches the theme select,
+    // system-mode OS changes, and any other theme source without
+    // coupling to the theme utility's implementation.
+    new MutationObserver(function () { buildChart(); })
+      .observe(document.documentElement, { attributes: true, attributeFilter: ['data-bs-theme'] });
+  })();
+  </script>
+</body>
+</html>

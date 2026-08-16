@@ -1,0 +1,226 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>IndigoKit Playground — Dropdowns</title>
+  <link rel="stylesheet" href="../../dist/css/indigokit.css">
+  <link rel="stylesheet" href="../playground.css">
+  <!-- Playground theme persistence (Task 047) — applies the stored
+       indigokit-theme preference before first paint. Playground-only. -->
+  <script src="../theme.js"></script>
+  <script src="../assets/lucide.umd.js"></script>
+  <!-- Bootstrap's own JS bundle powers dropdown behavior (data-bs-toggle,
+       positioning, keyboard, outside-click, Escape). Consumer-side load —
+       IndigoKit ships no dropdown JavaScript and no second dropdown engine. -->
+  <script src="../../node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+</head>
+<body>
+  <div class="container py-5">
+    <h1>Dropdowns</h1>
+    <p class="lead">Bootstrap's dropdown API with IndigoKit refinement — all classes are standard Bootstrap (<code>.dropdown</code>, <code>.dropdown-toggle</code>, <code>.dropdown-menu</code>, <code>.dropdown-item</code>, <code>.dropdown-divider</code>, <code>.dropdown-header</code>, <code>.dropup/.dropend/.dropstart</code>, <code>.btn-group</code>, <code>.dropdown-toggle-split</code>). Behavior comes from Bootstrap's own JavaScript.</p>
+
+    <!-- Basic -->
+    <h2 class="h5 mt-5 mb-3">Basic</h2>
+    <div class="dropdown">
+      <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+        Actions
+      </button>
+      <ul class="dropdown-menu">
+        <li><a class="dropdown-item" href="#">Edit</a></li>
+        <li><a class="dropdown-item" href="#">Duplicate</a></li>
+        <li><a class="dropdown-item" href="#">Archive</a></li>
+        <li><a class="dropdown-item text-danger" href="#">Delete</a></li>
+      </ul>
+    </div>
+
+    <!-- Toggle variants -->
+    <h2 class="h5 mt-5 mb-3">Toggle variants</h2>
+    <div class="d-flex flex-wrap gap-3">
+      <div class="dropdown">
+        <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">Primary</button>
+        <ul class="dropdown-menu"><li><a class="dropdown-item" href="#">Item</a></li></ul>
+      </div>
+      <div class="dropdown">
+        <button type="button" class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">Secondary</button>
+        <ul class="dropdown-menu"><li><a class="dropdown-item" href="#">Item</a></li></ul>
+      </div>
+      <div class="dropdown">
+        <button type="button" class="btn btn-outline-primary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">Outline</button>
+        <ul class="dropdown-menu"><li><a class="dropdown-item" href="#">Item</a></li></ul>
+      </div>
+      <div class="dropdown">
+        <button type="button" class="btn btn-outline-secondary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">Outline secondary</button>
+        <ul class="dropdown-menu"><li><a class="dropdown-item" href="#">Item</a></li></ul>
+      </div>
+      <div class="dropdown">
+        <button type="button" class="btn btn-light dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">Light</button>
+        <ul class="dropdown-menu"><li><a class="dropdown-item" href="#">Item</a></li></ul>
+      </div>
+      <div class="dropdown">
+        <button type="button" class="btn btn-dark dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">Dark</button>
+        <ul class="dropdown-menu"><li><a class="dropdown-item" href="#">Item</a></li></ul>
+      </div>
+    </div>
+
+    <!-- Menu content -->
+    <h2 class="h5 mt-5 mb-3">Menu content</h2>
+    <div class="dropdown">
+      <button type="button" class="btn btn-outline-secondary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+        Account
+      </button>
+      <ul class="dropdown-menu">
+        <li><h6 class="dropdown-header">Signed in as Jane</h6></li>
+        <li><a class="dropdown-item" href="#">Profile</a></li>
+        <li><a class="dropdown-item" href="#">Account settings</a></li>
+        <li><hr class="dropdown-divider"></li>
+        <li><a class="dropdown-item disabled" aria-disabled="true" href="#">Help center</a></li>
+        <li><a class="dropdown-item" href="#">Sign out</a></li>
+      </ul>
+    </div>
+
+    <!-- Icons -->
+    <h2 class="h5 mt-5 mb-3">Icons</h2>
+    <p class="demo-label">Icons are decorative (<code>aria-hidden</code>), sized 16px, aligned via the IndigoKit item flex rule. Right-aligned extras use <code>ms-auto</code>.</p>
+    <div class="dropdown">
+      <button type="button" class="btn btn-outline-secondary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+        Project
+      </button>
+      <ul class="dropdown-menu">
+        <li><a class="dropdown-item" href="#"><i data-lucide="edit" aria-hidden="true"></i> Edit project</a></li>
+        <li><a class="dropdown-item" href="#"><i data-lucide="copy" aria-hidden="true"></i> Duplicate</a></li>
+        <li><a class="dropdown-item" href="#"><i data-lucide="archive" aria-hidden="true"></i> Archive <span class="badge text-bg-secondary rounded-pill ms-auto">2</span></a></li>
+        <li><hr class="dropdown-divider"></li>
+        <li><a class="dropdown-item text-danger" href="#"><i data-lucide="trash-2" aria-hidden="true"></i> Delete project</a></li>
+      </ul>
+    </div>
+
+    <!-- End alignment -->
+    <h2 class="h5 mt-5 mb-3">End alignment</h2>
+    <p class="demo-label"><code>.dropdown-menu-end</code> aligns the menu to the toggle's right edge — Popper keeps it inside the viewport.</p>
+    <div class="dropdown text-end">
+      <button type="button" class="btn btn-outline-secondary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+        Right-aligned
+      </button>
+      <ul class="dropdown-menu dropdown-menu-end">
+        <li><a class="dropdown-item" href="#">Export CSV</a></li>
+        <li><a class="dropdown-item" href="#">Export XLSX</a></li>
+        <li><a class="dropdown-item" href="#">Print</a></li>
+      </ul>
+    </div>
+
+    <!-- Directions -->
+    <h2 class="h5 mt-5 mb-3">Directions</h2>
+    <div class="d-flex flex-wrap gap-3 align-items-start">
+      <div class="dropup">
+        <button type="button" class="btn btn-outline-secondary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">Dropup</button>
+        <ul class="dropdown-menu"><li><a class="dropdown-item" href="#">Up item</a></li><li><a class="dropdown-item" href="#">Up item</a></li></ul>
+      </div>
+      <div class="dropend">
+        <button type="button" class="btn btn-outline-secondary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">Dropend</button>
+        <ul class="dropdown-menu"><li><a class="dropdown-item" href="#">Right item</a></li><li><a class="dropdown-item" href="#">Right item</a></li></ul>
+      </div>
+      <div class="dropstart">
+        <button type="button" class="btn btn-outline-secondary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">Dropstart</button>
+        <ul class="dropdown-menu"><li><a class="dropdown-item" href="#">Left item</a></li><li><a class="dropdown-item" href="#">Left item</a></li></ul>
+      </div>
+    </div>
+
+    <!-- Split button -->
+    <h2 class="h5 mt-5 mb-3">Split button</h2>
+    <div class="btn-group">
+      <button type="button" class="btn btn-primary">Save changes</button>
+      <button type="button" class="btn btn-primary dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false">
+        <span class="visually-hidden">Toggle dropdown</span>
+      </button>
+      <ul class="dropdown-menu">
+        <li><a class="dropdown-item" href="#">Save as draft</a></li>
+        <li><a class="dropdown-item" href="#">Save and publish</a></li>
+        <li><a class="dropdown-item" href="#">Save and schedule</a></li>
+      </ul>
+    </div>
+
+    <!-- Long menu -->
+    <h2 class="h5 mt-5 mb-3">Long menu</h2>
+    <div class="dropdown">
+      <button type="button" class="btn btn-outline-secondary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+        Open report
+      </button>
+      <ul class="dropdown-menu">
+        <li><h6 class="dropdown-header">Financial</h6></li>
+        <li><a class="dropdown-item" href="#">Revenue summary</a></li>
+        <li><a class="dropdown-item" href="#">Expense breakdown</a></li>
+        <li><a class="dropdown-item" href="#">Cash flow</a></li>
+        <li><hr class="dropdown-divider"></li>
+        <li><h6 class="dropdown-header">Operations</h6></li>
+        <li><a class="dropdown-item" href="#">Order volume</a></li>
+        <li><a class="dropdown-item" href="#">Fulfillment SLA</a></li>
+        <li><a class="dropdown-item" href="#">Return rate</a></li>
+        <li><a class="dropdown-item" href="#">Inventory aging</a></li>
+        <li><hr class="dropdown-divider"></li>
+        <li><a class="dropdown-item" href="#">Full report archive</a></li>
+      </ul>
+    </div>
+
+    <!-- Inside a card -->
+    <h2 class="h5 mt-5 mb-3">Inside a card</h2>
+    <div class="col-md-8">
+      <div class="card">
+        <div class="card-header d-flex align-items-center">
+          <span class="me-auto">Recent activity</span>
+          <div class="dropdown">
+            <button type="button" class="btn btn-outline-secondary btn-sm dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+              Filter
+            </button>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="#">All activity</a></li>
+              <li><a class="dropdown-item" href="#">Mine</a></li>
+              <li><a class="dropdown-item" href="#">Mentions</a></li>
+            </ul>
+          </div>
+        </div>
+        <div class="card-body">
+          <p class="card-text mb-0">Dropdowns sit naturally inside card headers — the menu is positioned above surrounding content.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Navbar context -->
+    <h2 class="h5 mt-5 mb-3">Inside the navbar</h2>
+    <p class="demo-label">A compact <code>.mu-app-navbar</code> snippet with a user dropdown as the right-hand action. On mobile the user name hides via Bootstrap utilities (same behavior as the shell navbar).</p>
+    <nav class="navbar mu-app-navbar rounded-2" aria-label="Navbar dropdown demo">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="#">
+          <i data-lucide="layers" aria-hidden="true"></i>
+          IndigoKit
+        </a>
+        <div class="mu-navbar-main"></div>
+        <div class="mu-navbar-actions">
+          <button type="button" class="btn" aria-label="Notifications">
+            <i data-lucide="bell" aria-hidden="true"></i>
+          </button>
+          <div class="dropdown">
+            <button type="button" class="btn dropdown-toggle d-inline-flex align-items-center gap-2" data-bs-toggle="dropdown" aria-expanded="false" aria-label="User menu">
+              <span class="mu-avatar"><i data-lucide="user" aria-hidden="true"></i></span>
+              <span class="d-none d-md-inline">Jane Doe</span>
+            </button>
+            <ul class="dropdown-menu dropdown-menu-end">
+              <li><h6 class="dropdown-header">Signed in as Jane</h6></li>
+              <li><a class="dropdown-item" href="#"><i data-lucide="user" aria-hidden="true"></i> Profile</a></li>
+              <li><a class="dropdown-item" href="#"><i data-lucide="settings" aria-hidden="true"></i> Settings</a></li>
+              <li><hr class="dropdown-divider"></li>
+              <li><a class="dropdown-item" href="#"><i data-lucide="log-out" aria-hidden="true"></i> Sign out</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Keyboard -->
+    <h2 class="h5 mt-5 mb-3">Keyboard interaction</h2>
+    <p class="demo-label">Bootstrap's dropdown JavaScript handles the full keyboard model: <kbd>Enter</kbd>/<kbd>Space</kbd> toggles; <kbd>↓</kbd>/<kbd>↑</kbd> move between items; <kbd>Esc</kbd> closes and returns focus to the toggle; <kbd>Tab</kbd> closes and moves on. <code>aria-expanded</code> is kept accurate by Bootstrap — try it on any menu above.</p>
+  </div>
+
+  <script>lucide.createIcons();</script>
+</body>
+</html>

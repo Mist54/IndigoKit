@@ -1,0 +1,287 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>IndigoKit Playground — Pagination</title>
+  <link rel="stylesheet" href="../../dist/css/indigokit.css">
+  <link rel="stylesheet" href="../playground.css">
+  <!-- Playground theme persistence (Task 047) — applies the stored
+       indigokit-theme preference before first paint. Playground-only. -->
+  <script src="../theme.js"></script>
+  <script src="../assets/lucide.umd.js"></script>
+</head>
+<body>
+  <div class="container py-5">
+    <h1>Pagination</h1>
+    <p class="lead">Bootstrap's pagination API with IndigoKit refinement — all classes are standard Bootstrap (<code>.pagination</code>, <code>.page-item</code>, <code>.page-link</code>, <code>.pagination-sm</code>, <code>.pagination-lg</code>, <code>.active</code>, <code>.disabled</code>). Pure HTML/CSS — no JavaScript, no state management.</p>
+
+    <!-- Basic -->
+    <h2 class="h5 mt-5 mb-3">Basic pagination</h2>
+    <p class="demo-label">Joined hairline segments with a solid indigo current page. The current item is a real link with <code>aria-current="page"</code>.</p>
+    <nav aria-label="Page navigation">
+      <ul class="pagination">
+        <li class="page-item"><a class="page-link" href="#">Previous</a></li>
+        <li class="page-item"><a class="page-link" href="#">1</a></li>
+        <li class="page-item active" aria-current="page"><a class="page-link" href="#">2</a></li>
+        <li class="page-item"><a class="page-link" href="#">3</a></li>
+        <li class="page-item"><a class="page-link" href="#">Next</a></li>
+      </ul>
+    </nav>
+
+    <!-- First page -->
+    <h2 class="h5 mt-5 mb-3">First-page state</h2>
+    <p class="demo-label">On the first page, <em>Previous</em> is a <code>&lt;span&gt;</code> (no <code>href</code>) — muted, not keyboard-reachable, and never a live navigation link.</p>
+    <nav aria-label="Page navigation">
+      <ul class="pagination">
+        <li class="page-item disabled"><span class="page-link">Previous</span></li>
+        <li class="page-item active" aria-current="page"><a class="page-link" href="#">1</a></li>
+        <li class="page-item"><a class="page-link" href="#">2</a></li>
+        <li class="page-item"><a class="page-link" href="#">3</a></li>
+        <li class="page-item"><a class="page-link" href="#">Next</a></li>
+      </ul>
+    </nav>
+
+    <!-- Middle page -->
+    <h2 class="h5 mt-5 mb-3">Middle-page state</h2>
+    <nav aria-label="Page navigation">
+      <ul class="pagination">
+        <li class="page-item"><a class="page-link" href="#">Previous</a></li>
+        <li class="page-item"><a class="page-link" href="#">1</a></li>
+        <li class="page-item"><a class="page-link" href="#">2</a></li>
+        <li class="page-item"><a class="page-link" href="#">3</a></li>
+        <li class="page-item"><a class="page-link" href="#">4</a></li>
+        <li class="page-item"><a class="page-link" href="#">5</a></li>
+        <li class="page-item"><a class="page-link" href="#">6</a></li>
+        <li class="page-item"><a class="page-link" href="#">Next</a></li>
+      </ul>
+    </nav>
+
+    <!-- Last page -->
+    <h2 class="h5 mt-5 mb-3">Last-page state</h2>
+    <p class="demo-label">On the last page, <em>Next</em> is likewise a non-link <code>&lt;span&gt;</code>.</p>
+    <nav aria-label="Page navigation">
+      <ul class="pagination">
+        <li class="page-item"><a class="page-link" href="#">Previous</a></li>
+        <li class="page-item"><a class="page-link" href="#">1</a></li>
+        <li class="page-item"><a class="page-link" href="#">2</a></li>
+        <li class="page-item active" aria-current="page"><a class="page-link" href="#">3</a></li>
+        <li class="page-item disabled"><span class="page-link">Next</span></li>
+      </ul>
+    </nav>
+
+    <!-- Previous / Next -->
+    <h2 class="h5 mt-5 mb-3">Previous / Next</h2>
+    <p class="demo-label">Plain-text labels are accessible by default — no symbols or icons required.</p>
+    <nav aria-label="Page navigation">
+      <ul class="pagination">
+        <li class="page-item"><a class="page-link" href="#">Previous</a></li>
+        <li class="page-item active" aria-current="page"><a class="page-link" href="#">1</a></li>
+        <li class="page-item"><a class="page-link" href="#">2</a></li>
+        <li class="page-item"><a class="page-link" href="#">Next</a></li>
+      </ul>
+    </nav>
+
+    <!-- Ellipsis -->
+    <h2 class="h5 mt-5 mb-3">Ellipsis (large range)</h2>
+    <p class="demo-label">The ellipsis is informational — a <code>&lt;span class="page-link"&gt;</code> inside <code>.page-item.disabled</code>, so it is never a link and never keyboard-focusable. This range also demonstrates the responsive wrap: it reflows onto a second row at narrow widths instead of overflowing.</p>
+    <nav aria-label="Page navigation">
+      <ul class="pagination">
+        <li class="page-item"><a class="page-link" href="#">Previous</a></li>
+        <li class="page-item"><a class="page-link" href="#">1</a></li>
+        <li class="page-item"><a class="page-link" href="#">2</a></li>
+        <li class="page-item"><a class="page-link" href="#">3</a></li>
+        <li class="page-item disabled"><span class="page-link">…</span></li>
+        <li class="page-item"><a class="page-link" href="#">98</a></li>
+        <li class="page-item"><a class="page-link" href="#">99</a></li>
+        <li class="page-item"><a class="page-link" href="#">100</a></li>
+        <li class="page-item"><a class="page-link" href="#">Next</a></li>
+      </ul>
+    </nav>
+
+    <!-- Sizes -->
+    <h2 class="h5 mt-5 mb-3">Small</h2>
+    <nav aria-label="Page navigation">
+      <ul class="pagination pagination-sm">
+        <li class="page-item disabled"><span class="page-link">Previous</span></li>
+        <li class="page-item active" aria-current="page"><a class="page-link" href="#">1</a></li>
+        <li class="page-item"><a class="page-link" href="#">2</a></li>
+        <li class="page-item"><a class="page-link" href="#">3</a></li>
+        <li class="page-item"><a class="page-link" href="#">4</a></li>
+        <li class="page-item"><a class="page-link" href="#">5</a></li>
+        <li class="page-item"><a class="page-link" href="#">Next</a></li>
+      </ul>
+    </nav>
+
+    <h2 class="h5 mt-5 mb-3">Default</h2>
+    <nav aria-label="Page navigation">
+      <ul class="pagination">
+        <li class="page-item disabled"><span class="page-link">Previous</span></li>
+        <li class="page-item active" aria-current="page"><a class="page-link" href="#">1</a></li>
+        <li class="page-item"><a class="page-link" href="#">2</a></li>
+        <li class="page-item"><a class="page-link" href="#">3</a></li>
+        <li class="page-item"><a class="page-link" href="#">4</a></li>
+        <li class="page-item"><a class="page-link" href="#">5</a></li>
+        <li class="page-item"><a class="page-link" href="#">Next</a></li>
+      </ul>
+    </nav>
+
+    <h2 class="h5 mt-5 mb-3">Large</h2>
+    <nav aria-label="Page navigation">
+      <ul class="pagination pagination-lg">
+        <li class="page-item"><a class="page-link" href="#">Previous</a></li>
+        <li class="page-item"><a class="page-link" href="#">1</a></li>
+        <li class="page-item active" aria-current="page"><a class="page-link" href="#">2</a></li>
+        <li class="page-item"><a class="page-link" href="#">3</a></li>
+        <li class="page-item"><a class="page-link" href="#">Next</a></li>
+      </ul>
+    </nav>
+
+    <!-- Alignment -->
+    <h2 class="h5 mt-5 mb-3">Alignment</h2>
+    <p class="demo-label">Bootstrap utilities only — <code>justify-content-start</code>, <code>justify-content-center</code>, <code>justify-content-end</code>.</p>
+    <nav aria-label="Page navigation" class="mb-4">
+      <ul class="pagination justify-content-start">
+        <li class="page-item active" aria-current="page"><a class="page-link" href="#">1</a></li>
+        <li class="page-item"><a class="page-link" href="#">2</a></li>
+        <li class="page-item"><a class="page-link" href="#">3</a></li>
+        <li class="page-item"><a class="page-link" href="#">Next</a></li>
+      </ul>
+    </nav>
+    <nav aria-label="Page navigation" class="mb-4">
+      <ul class="pagination justify-content-center">
+        <li class="page-item active" aria-current="page"><a class="page-link" href="#">1</a></li>
+        <li class="page-item"><a class="page-link" href="#">2</a></li>
+        <li class="page-item"><a class="page-link" href="#">3</a></li>
+        <li class="page-item"><a class="page-link" href="#">Next</a></li>
+      </ul>
+    </nav>
+    <nav aria-label="Page navigation">
+      <ul class="pagination justify-content-end">
+        <li class="page-item active" aria-current="page"><a class="page-link" href="#">1</a></li>
+        <li class="page-item"><a class="page-link" href="#">2</a></li>
+        <li class="page-item"><a class="page-link" href="#">3</a></li>
+        <li class="page-item"><a class="page-link" href="#">Next</a></li>
+      </ul>
+    </nav>
+
+    <!-- Icons -->
+    <h2 class="h5 mt-5 mb-3">Icon-enhanced Previous / Next</h2>
+    <p class="demo-label">Lucide chevrons are decorative (<code>aria-hidden="true"</code>) — the visible labels <em>Previous</em> / <em>Next</em> remain the accessible names.</p>
+    <nav aria-label="Page navigation">
+      <ul class="pagination">
+        <li class="page-item"><a class="page-link" href="#">
+          <i data-lucide="chevron-left" aria-hidden="true"></i>
+          Previous
+        </a></li>
+        <li class="page-item active" aria-current="page"><a class="page-link" href="#">1</a></li>
+        <li class="page-item"><a class="page-link" href="#">2</a></li>
+        <li class="page-item"><a class="page-link" href="#">3</a></li>
+        <li class="page-item"><a class="page-link" href="#">Next
+          <i data-lucide="chevron-right" aria-hidden="true"></i>
+        </a></li>
+      </ul>
+    </nav>
+
+    <!-- Search results -->
+    <h2 class="h5 mt-5 mb-3">Search-results example</h2>
+    <p class="demo-label">Compact pagination for search results, with a results summary above and a specific landmark name.</p>
+    <p class="text-secondary mb-2"><strong>128 results</strong> for <em>"api reference"</em></p>
+    <nav aria-label="Search results pages">
+      <ul class="pagination pagination-sm">
+        <li class="page-item disabled"><span class="page-link">Previous</span></li>
+        <li class="page-item active" aria-current="page"><a class="page-link" href="#">1</a></li>
+        <li class="page-item"><a class="page-link" href="#">2</a></li>
+        <li class="page-item"><a class="page-link" href="#">3</a></li>
+        <li class="page-item"><a class="page-link" href="#">4</a></li>
+        <li class="page-item"><a class="page-link" href="#">5</a></li>
+        <li class="page-item"><a class="page-link" href="#">6</a></li>
+        <li class="page-item"><a class="page-link" href="#">Next</a></li>
+      </ul>
+    </nav>
+
+    <!-- Table-style -->
+    <h2 class="h5 mt-5 mb-3">Table-style example</h2>
+    <p class="demo-label">Pagination below a simple representative table (stock Bootstrap <code>.table</code> — the full IndigoKit table system comes later). Clear spacing via Bootstrap utilities.</p>
+    <div class="card">
+      <div class="card-body">
+        <table class="table align-middle mb-0">
+          <thead>
+            <tr>
+              <th scope="col">Project</th>
+              <th scope="col">Status</th>
+              <th scope="col" class="text-end">Tasks</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>IndigoKit — Application Shell</td>
+              <td><span class="badge text-bg-success">Done</span></td>
+              <td class="text-end">24</td>
+            </tr>
+            <tr>
+              <td>IndigoKit — Components</td>
+              <td><span class="badge text-bg-primary">Active</span></td>
+              <td class="text-end">56</td>
+            </tr>
+            <tr>
+              <td>IndigoKit — Foundation</td>
+              <td><span class="badge text-bg-success">Done</span></td>
+              <td class="text-end">18</td>
+            </tr>
+            <tr>
+              <td>IndigoKit — Docs &amp; packaging</td>
+              <td><span class="badge text-bg-secondary">Planned</span></td>
+              <td class="text-end">9</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="card-footer d-flex justify-content-end">
+        <nav aria-label="Projects table pages">
+          <ul class="pagination pagination-sm mb-0">
+            <li class="page-item disabled"><span class="page-link">Previous</span></li>
+            <li class="page-item active" aria-current="page"><a class="page-link" href="#">1</a></li>
+            <li class="page-item"><a class="page-link" href="#">2</a></li>
+            <li class="page-item"><a class="page-link" href="#">3</a></li>
+            <li class="page-item"><a class="page-link" href="#">Next</a></li>
+          </ul>
+        </nav>
+      </div>
+    </div>
+
+    <!-- Responsive -->
+    <h2 class="h5 mt-5 mb-3">Responsive behavior</h2>
+    <p class="demo-label">At narrow widths the strip wraps onto additional rows via a plain <code>flex-wrap</code> on <code>.pagination</code> — no mobile-specific pagination API, no horizontal overflow, every control stays usable.</p>
+    <nav aria-label="Page navigation">
+      <ul class="pagination justify-content-center">
+        <li class="page-item"><a class="page-link" href="#">Previous</a></li>
+        <li class="page-item active" aria-current="page"><a class="page-link" href="#">1</a></li>
+        <li class="page-item"><a class="page-link" href="#">2</a></li>
+        <li class="page-item"><a class="page-link" href="#">3</a></li>
+        <li class="page-item"><a class="page-link" href="#">4</a></li>
+        <li class="page-item"><a class="page-link" href="#">5</a></li>
+        <li class="page-item"><a class="page-link" href="#">6</a></li>
+        <li class="page-item"><a class="page-link" href="#">7</a></li>
+        <li class="page-item"><a class="page-link" href="#">8</a></li>
+        <li class="page-item"><a class="page-link" href="#">9</a></li>
+        <li class="page-item"><a class="page-link" href="#">10</a></li>
+        <li class="page-item"><a class="page-link" href="#">Next</a></li>
+      </ul>
+    </nav>
+
+    <!-- Accessibility -->
+    <h2 class="h5 mt-5 mb-3">Accessibility notes</h2>
+    <ul class="mb-0">
+      <li>Pagination lives in a <code>&lt;nav&gt;</code> landmark with a specific accessible name (e.g. <code>aria-label="Search results pages"</code>).</li>
+      <li>The current page is a real link with <code>aria-current="page"</code>; it is also visually obvious via the solid indigo fill (never color alone).</li>
+      <li>Disabled <em>Previous</em>/<em>Next</em> are <code>&lt;span class="page-link"&gt;</code> — no <code>href</code>, so they are not links and not keyboard-reachable.</li>
+      <li>The ellipsis is a non-focusable <code>&lt;span&gt;</code> — informational only.</li>
+      <li>All page controls are real <code>&lt;a href&gt;</code> links with normal browser keyboard behavior (Tab / Shift+Tab / Enter) and the global focus ring.</li>
+      <li>Optional chevron icons are decorative; the <em>Previous</em>/<em>Next</em> text remains the accessible label.</li>
+    </ul>
+  </div>
+
+  <script>lucide.createIcons();</script>
+</body>
+</html>

@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>IndigoKit Playground — Loading States</title>
+  <link rel="stylesheet" href="../../dist/css/indigokit.css">
+  <link rel="stylesheet" href="../playground.css">
+  <!-- Playground theme persistence (Task 047) — applies the stored
+       indigokit-theme preference before first paint. Playground-only. -->
+  <script src="../theme.js"></script>
+  <script src="../assets/lucide.umd.js"></script>
+</head>
+<body>
+  <div class="container py-4 demo-table-page">
+    <h1 class="h4 mb-1">Spinners &amp; loading states</h1>
+    <p class="demo-label mb-4">Bootstrap's <code>.spinner-border</code> / <code>.spinner-grow</code> API — token-wired sizes and colors, Bootstrap's own reduced-motion handling, and accessible loading text via <code>.visually-hidden</code>. No loading framework, no JS.</p>
+
+    <!-- Basic -->
+    <h2 class="h5 mt-5" id="basic">Basic spinners</h2>
+    <p class="demo-label">Border and grow, default and small. A spinner alone is not a loading message — every demo pairs it with visible text or <code>.visually-hidden</code> text.</p>
+    <div class="d-flex align-items-center gap-4 mb-4">
+      <div class="text-center">
+        <div class="spinner-border" role="status" aria-label="Loading"></div>
+        <div class="visually-hidden">Loading…</div>
+      </div>
+      <div class="text-center">
+        <div class="spinner-grow" role="status" aria-label="Loading"></div>
+        <div class="visually-hidden">Loading…</div>
+      </div>
+      <div class="text-center">
+        <div class="spinner-border spinner-border-sm" role="status" aria-label="Loading"></div>
+        <div class="visually-hidden">Loading…</div>
+      </div>
+      <div class="text-center">
+        <div class="spinner-grow spinner-grow-sm" role="status" aria-label="Loading"></div>
+        <div class="visually-hidden">Loading…</div>
+      </div>
+    </div>
+    <p class="demo-label">Semantic colors via existing <code>text-*</code> utilities — currentcolor drives the border, nothing custom:</p>
+    <div class="d-flex align-items-center gap-4 mb-3">
+      <div class="spinner-border text-primary" role="status"><span class="visually-hidden">Loading…</span></div>
+      <div class="spinner-border text-secondary" role="status"><span class="visually-hidden">Loading…</span></div>
+      <div class="spinner-border text-success" role="status"><span class="visually-hidden">Loading…</span></div>
+      <div class="spinner-border text-warning" role="status"><span class="visually-hidden">Loading…</span></div>
+      <div class="spinner-border text-danger" role="status"><span class="visually-hidden">Loading…</span></div>
+    </div>
+
+    <!-- Inline -->
+    <h2 class="h5 mt-5" id="inline">Inline loading</h2>
+    <p class="demo-label">Small spinners sit on the text baseline with the existing <code>.btn</code> gap; in prose, <code>aria-hidden</code> keeps the visual spinner decorative while the text carries the message.</p>
+    <div class="d-flex align-items-center gap-2 mb-3">
+      <span class="spinner-border spinner-border-sm" aria-hidden="true"></span>
+      <span>Syncing your workspace…</span>
+    </div>
+    <div class="mb-3">
+      <button class="btn btn-primary" type="button" disabled>
+        <span class="spinner-border spinner-border-sm" aria-hidden="true"></span>
+        Saving…
+      </button>
+      <button class="btn btn-outline-secondary" type="button" disabled>
+        <span class="spinner-border spinner-border-sm" aria-hidden="true"></span>
+        Publishing…
+      </button>
+    </div>
+
+    <!-- Button loading states -->
+    <h2 class="h5 mt-5" id="button">Button loading states</h2>
+    <p class="demo-label">The three static phases of a save action — idle, in-flight (spinner + text + <code>disabled</code>), complete. No state management.</p>
+    <div class="d-flex align-items-center gap-3 mb-3">
+      <button class="btn btn-primary" type="button">Save</button>
+      <button class="btn btn-primary" type="button" disabled>
+        <span class="spinner-border spinner-border-sm" aria-hidden="true"></span>
+        Saving…
+      </button>
+      <button class="btn btn-primary" type="button" disabled>
+        <i data-lucide="check" aria-hidden="true"></i>
+        Saved
+      </button>
+    </div>
+    <p class="demo-label">The loading button is <code>disabled</code> (unclickable, announced as disabled) and the label changes — the spinner is decorative, the text is the state.</p>
+
+    <!-- Card loading -->
+    <h2 class="h5 mt-5" id="card">Card loading</h2>
+    <p class="demo-label">A loading region inside a card — the layout is reserved so nothing shifts, and the accessible message names the region.</p>
+    <div class="card mb-3 demo-load-card">
+      <div class="card-header">Recent activity</div>
+      <div class="card-body text-center py-4" role="status" aria-label="Loading recent activity">
+        <div class="spinner-border text-primary mb-2" aria-hidden="true"></div>
+        <div class="text-secondary small">Loading recent activity…</div>
+      </div>
+    </div>
+
+    <!-- Table loading -->
+    <h2 class="h5 mt-5" id="table">Table loading</h2>
+    <div class="card">
+      <div class="card-body p-0">
+        <div class="table-responsive">
+          <table class="table align-middle mb-0">
+            <thead>
+              <tr>
+                <th scope="col">Member</th>
+                <th scope="col">Role</th>
+                <th scope="col">Status</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td colspan="3" class="text-center text-secondary py-5">
+                  <div class="spinner-border spinner-border-sm text-secondary mb-2" role="status" aria-label="Loading members">
+                    <span class="visually-hidden">Loading members…</span>
+                  </div>
+                  <div class="small">Loading members…</div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- Form loading -->
+    <h2 class="h5 mt-5" id="form">Form loading</h2>
+    <p class="demo-label">A submit button in its loading state inside a real form layout.</p>
+    <div class="card">
+      <div class="card-body">
+        <form class="demo-input" novalidate>
+          <div class="mb-3">
+            <label for="loadEmail" class="form-label">Email address</label>
+            <input type="email" class="form-control" id="loadEmail" value="ada@example.com">
+          </div>
+          <div class="mb-3">
+            <label for="loadRole" class="form-label">Role</label>
+            <select class="form-select" id="loadRole">
+              <option selected>Design lead</option>
+              <option>Engineering</option>
+            </select>
+          </div>
+          <button type="button" class="btn btn-primary" disabled>
+            <span class="spinner-border spinner-border-sm" aria-hidden="true"></span>
+            Inviting…
+          </button>
+        </form>
+      </div>
+    </div>
+
+    <!-- Section loading -->
+    <h2 class="h5 mt-5" id="section">Section loading</h2>
+    <p class="demo-label">A content region in its loading state — the box is reserved (min-height), the spinner is small, and the message is readable at every width.</p>
+    <div class="card">
+      <div class="card-header">Dashboard summary</div>
+      <div class="card-body d-flex align-items-center justify-content-center gap-2 py-5" role="status" aria-label="Loading dashboard summary">
+        <span class="spinner-border spinner-border-sm text-primary" aria-hidden="true"></span>
+        <span class="text-secondary small">Loading dashboard summary…</span>
+      </div>
+    </div>
+
+    <!-- Local overlay -->
+    <h2 class="h5 mt-5" id="overlay">Local overlay</h2>
+    <p class="demo-label">A component-scoped overlay — the card is <code>position-relative</code>, the overlay is an absolutely positioned row with a translucent white scrim and an accessible message. It adds no keyboard traps (the content behind is inert demo markup) and is not a global loading framework.</p>
+    <div class="card position-relative demo-load-card">
+      <div class="card-header">Deploy status</div>
+      <div class="card-body">
+        <div class="mb-2"><span class="text-secondary small">Last deploy</span></div>
+        <div class="mb-1">api-gateway · 3 minutes ago</div>
+        <div class="mb-1">worker-queue · 18 minutes ago</div>
+        <div class="text-secondary small">Region: ap-south-1</div>
+      </div>
+      <div class="position-absolute top-0 start-0 end-0 bottom-0 d-flex align-items-center justify-content-center demo-overlay-scrim" role="status" aria-label="Refreshing deployments">
+        <div class="text-center">
+          <div class="spinner-border text-primary mb-2" aria-hidden="true"></div>
+          <div class="small">Refreshing deployments…</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- A11y -->
+    <h2 class="h5 mt-5" id="accessibility">Accessibility notes</h2>
+    <ul class="mb-0">
+      <li>A spinner alone is not an accessible loading message — every spinner has an accessible name: visible text, a <code>.visually-hidden</code> "Loading…" label, or an <code>aria-label</code> on <code>role="status"</code> (polite live region, announced when it appears).</li>
+      <li>In buttons, the spinner is <code>aria-hidden</code> and decorative — the label text ("Saving…", "Inviting…") communicates the state, and the button is <code>disabled</code> while in flight.</li>
+      <li>Colors come from the existing <code>text-*</code> utilities (currentcolor) — no custom spinner colors; contrast is the palette's established set.</li>
+      <li>Reduced motion: Bootstrap's built-in rule doubles the spinner animation speed under <code>prefers-reduced-motion: reduce</code> (1.5s) instead of stopping it — the state is still communicated by the text, never the motion alone.</li>
+      <li>The overlay demo is local to its card, adds no keyboard trap, and carries its own accessible label; a global loading manager is deliberately out of scope.</li>
+    </ul>
+  </div>
+
+  <script>
+    lucide.createIcons();
+  </script>
+</body>
+</html>

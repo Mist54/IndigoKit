@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>IndigoKit Playground — Navigation Patterns</title>
+  <link rel="stylesheet" href="../../dist/css/indigokit.css">
+  <link rel="stylesheet" href="../playground.css">
+  <!-- Playground theme persistence (Task 047) — applies the stored
+       indigokit-theme preference before first paint. Playground-only. -->
+  <script src="../theme.js"></script>
+  <script src="../assets/lucide.umd.js"></script>
+  <script src="../../node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="../../dist/js/indigokit.js"></script>
+</head>
+<body data-bs-spy="scroll" data-bs-target="#patSpyNav" data-bs-root-margin="0px 0px -40%" tabindex="0">
+  <!-- Navbar + breadcrumbs composition — the shell's navbar pattern
+       as a page header, followed by breadcrumbs and a content title -->
+  <header class="border-bottom bg-white">
+    <nav class="navbar mu-app-navbar" aria-label="Main navigation">
+      <div class="container demo-table-page">
+        <a class="navbar-brand" href="#">
+          <i data-lucide="layers" aria-hidden="true"></i>
+          IndigoKit
+        </a>
+        <div class="mu-navbar-main"></div>
+        <div class="mu-navbar-actions">
+          <button type="button" class="btn btn-outline-secondary d-md-none" data-bs-toggle="offcanvas" data-bs-target="#ocNavPatterns" aria-controls="ocNavPatterns" aria-label="Open navigation">
+            <i data-lucide="menu" aria-hidden="true"></i>
+          </button>
+        </div>
+      </div>
+    </nav>
+  </header>
+
+  <div class="container py-4 demo-table-page">
+    <nav aria-label="breadcrumb" class="mb-2">
+      <ol class="breadcrumb mb-0">
+        <li class="breadcrumb-item"><a href="#">Dashboard</a></li>
+        <li class="breadcrumb-item"><a href="#">Projects</a></li>
+        <li class="breadcrumb-item active" aria-current="page">Project details</li>
+      </ol>
+    </nav>
+    <h1 class="h4 mb-1">Navigation patterns</h1>
+    <p class="demo-label mb-4">Existing Bootstrap/IndigoKit navigation components composed into realistic enterprise patterns — the navbar, breadcrumbs, tabs/pills, dropdowns, pagination, offcanvas, and scrollspy. No new navigation APIs.</p>
+
+    <!-- Admin shell composition -->
+    <h2 class="h5 mt-5" id="admin">1 · Admin shell composition</h2>
+    <p class="demo-label">Navbar (above) + breadcrumbs + a content title — the pattern every admin page uses. The full persistent shell (sidebar + collapse + drawer) is the <a href="layout.html">Application Shell</a> page.</p>
+
+    <!-- Settings navigation -->
+    <h2 class="h5 mt-5" id="settings">2 · Settings navigation</h2>
+    <p class="demo-label">Tabs for switching between related content panels — the settings interface pattern. Each tab is a real button with Bootstrap's roving tabindex and arrow-key behavior.</p>
+    <div class="card">
+      <div class="card-header p-0">
+        <ul class="nav nav-tabs card-header-tabs px-3 pt-2" role="tablist">
+          <li class="nav-item" role="presentation">
+            <button class="nav-link active" id="patAccTab" data-bs-toggle="tab" data-bs-target="#patAccPane" type="button" role="tab" aria-controls="patAccPane" aria-selected="true" tabindex="0">Account</button>
+          </li>
+          <li class="nav-item" role="presentation">
+            <button class="nav-link" id="patSecTab" data-bs-toggle="tab" data-bs-target="#patSecPane" type="button" role="tab" aria-controls="patSecPane" aria-selected="false" tabindex="-1">Security</button>
+          </li>
+          <li class="nav-item" role="presentation">
+            <button class="nav-link" id="patNotTab" data-bs-toggle="tab" data-bs-target="#patNotPane" type="button" role="tab" aria-controls="patNotPane" aria-selected="false" tabindex="-1">Notifications</button>
+          </li>
+        </ul>
+      </div>
+      <div class="card-body">
+        <div class="tab-content">
+          <div class="tab-pane fade show active" id="patAccPane" role="tabpanel" aria-labelledby="patAccTab">
+            <p class="mb-0">Account settings — display name, email, and region. Tabs switch related content panels; they are not decoration.</p>
+          </div>
+          <div class="tab-pane fade" id="patSecPane" role="tabpanel" aria-labelledby="patSecTab">
+            <p class="mb-0">Security settings — password, two-factor authentication, and active sessions.</p>
+          </div>
+          <div class="tab-pane fade" id="patNotPane" role="tabpanel" aria-labelledby="patNotTab">
+            <p class="mb-0">Notification preferences — email and Slack digests.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Tabs vs pills -->
+    <h2 class="h5 mt-5" id="tabs-vs-pills">3 · Tabs vs pills</h2>
+    <p class="demo-label"><strong>Tabs</strong> switch between related content panels (above). <strong>Pills</strong> suit navigation/filter-style choices — like this filter row, where the pill marks the current choice rather than a content panel.</p>
+    <div class="card">
+      <div class="card-body">
+        <ul class="nav nav-pills" role="tablist" aria-label="Filter issues by state">
+          <li class="nav-item" role="presentation">
+            <button class="nav-link active" data-bs-toggle="pill" data-bs-target="#pillOpen" type="button" role="tab" aria-selected="true">Open</button>
+          </li>
+          <li class="nav-item" role="presentation">
+            <button class="nav-link" data-bs-toggle="pill" data-bs-target="#pillClosed" type="button" role="tab" aria-selected="false">Closed</button>
+          </li>
+          <li class="nav-item" role="presentation">
+            <button class="nav-link" data-bs-toggle="pill" data-bs-target="#pillAll" type="button" role="tab" aria-selected="false">All</button>
+          </li>
+        </ul>
+        <div class="tab-content pt-3">
+          <div class="tab-pane fade show active" id="pillOpen" role="tabpanel">3 open issues</div>
+          <div class="tab-pane fade" id="pillClosed" role="tabpanel">27 closed issues</div>
+          <div class="tab-pane fade" id="pillAll" role="tabpanel">30 issues total</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Dropdown navigation -->
+    <h2 class="h5 mt-5" id="dropdown">4 · Dropdown navigation</h2>
+    <p class="demo-label">A small navigation dropdown in the page context — Bootstrap's dropdown JS handles keyboard, focus return, and outside-click.</p>
+    <div class="dropdown">
+      <button class="btn btn-outline-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+        Project menu
+      </button>
+      <ul class="dropdown-menu">
+        <li><a class="dropdown-item" href="#"><i data-lucide="eye" aria-hidden="true"></i> View project</a></li>
+        <li><a class="dropdown-item" href="#"><i data-lucide="users" aria-hidden="true"></i> Members</a></li>
+        <li><a class="dropdown-item" href="#"><i data-lucide="settings" aria-hidden="true"></i> Settings</a></li>
+        <li><hr class="dropdown-divider"></li>
+        <li><a class="dropdown-item text-danger" href="#"><i data-lucide="trash-2" aria-hidden="true"></i> Delete</a></li>
+      </ul>
+    </div>
+
+    <!-- Pagination -->
+    <h2 class="h5 mt-5" id="pagination">5 · Pagination below a list</h2>
+    <p class="demo-label">The established pagination pattern under a results list — real links, current page marked, Previous disabled on the first page.</p>
+    <div class="card">
+      <div class="card-body p-0">
+        <ul class="list-group list-group-flush">
+          <li class="list-group-item d-flex justify-content-between"><span>IndigoKit — Application Shell</span><span class="badge text-bg-success">Done</span></li>
+          <li class="list-group-item d-flex justify-content-between"><span>IndigoKit — Form System</span><span class="badge text-bg-primary">In progress</span></li>
+          <li class="list-group-item d-flex justify-content-between"><span>IndigoKit — Data Tables</span><span class="badge text-bg-warning">Review</span></li>
+          <li class="list-group-item d-flex justify-content-between"><span>IndigoKit — Themes</span><span class="badge text-bg-secondary">Planned</span></li>
+        </ul>
+      </div>
+      <div class="card-footer d-flex justify-content-between align-items-center flex-column flex-sm-row gap-2">
+        <span class="text-secondary small">Showing 1–4 of 128 projects</span>
+        <nav aria-label="Projects table pages">
+          <ul class="pagination pagination-sm mb-0">
+            <li class="page-item disabled"><span class="page-link">Previous</span></li>
+            <li class="page-item active" aria-current="page"><a class="page-link" href="#">1</a></li>
+            <li class="page-item"><a class="page-link" href="#">2</a></li>
+            <li class="page-item"><a class="page-link" href="#">3</a></li>
+            <li class="page-item"><a class="page-link" href="#">Next</a></li>
+          </ul>
+        </nav>
+      </div>
+    </div>
+
+    <!-- Scrollspy settings layout -->
+    <h2 class="h5 mt-5" id="scrollspy">6 · Scrollspy settings layout</h2>
+    <p class="demo-label">A settings/documentation layout where scrolling updates the active nav item — sticky pills on the left, sections on the right (see the <a href="scrollspy.html">Scrollspy</a> page for the pattern in full).</p>
+    <div class="d-flex gap-4">
+      <div class="d-none d-md-block spy-nav-col">
+        <nav class="sticky-top pt-3" id="patSpyNav" aria-label="Settings sections">
+          <ul class="nav nav-pills flex-column">
+            <li class="nav-item"><a class="nav-link active" href="#pat-sec-general">General</a></li>
+            <li class="nav-item"><a class="nav-link" href="#pat-sec-appearance">Appearance</a></li>
+            <li class="nav-item"><a class="nav-link" href="#pat-sec-region">Region</a></li>
+          </ul>
+        </nav>
+      </div>
+      <div class="flex-grow-1 min-vw-0">
+        <section id="pat-sec-general" class="spy-section"><h3 class="h6 mb-2">General</h3><p class="text-body-secondary mb-0">Workspace name, timezone, and default language.</p></section>
+        <section id="pat-sec-appearance" class="spy-section"><h3 class="h6 mb-2">Appearance</h3><p class="text-body-secondary mb-0">Theme, density, and accent preferences.</p></section>
+        <section id="pat-sec-region" class="spy-section"><h3 class="h6 mb-2">Region</h3><p class="text-body-secondary mb-0">Data residency and compliance region for this workspace.</p></section>
+      </div>
+    </div>
+
+    <!-- A11y -->
+    <h2 class="h5 mt-5" id="accessibility">Accessibility notes</h2>
+    <ul class="mb-0">
+      <li>Every navigation system keeps its landmark and name: the navbar is <code>&lt;nav aria-label="Main navigation"&gt;</code>, breadcrumbs are a <code>&lt;nav aria-label="breadcrumb"&gt;</code> with <code>aria-current="page"</code>, pagination is a <code>&lt;nav&gt;</code> with its own label, and the settings/spy nav has <code>aria-label</code> too.</li>
+      <li>Active states never rely on color alone: tabs/pills use weight + notch/pill shape + <code>aria-selected</code>, breadcrumbs use weight + muted + <code>aria-current</code>, pagination uses the solid indigo fill + <code>aria-current</code>.</li>
+      <li>Tabs vs pills: tabs switch related content panels (roving tabindex + arrow keys from Bootstrap's Tab JS); pills mark filter-style choices. Neither is used as decoration.</li>
+      <li>The dropdown is Bootstrap's own — keyboard (Space/Enter opens, arrows move, Escape closes + focus returns), focus ring, and accessible item names all stock.</li>
+      <li>Mobile: the navbar menu button opens the offcanvas drawer with the same section links (see the offcanvas demo on mobile). No second navigation framework.</li>
+      <li>Headings stay in order across every pattern (h1 page title → h2 sections → h3 panes), and no redundant ARIA is added.</li>
+    </ul>
+  </div>
+
+  <!-- Mobile nav offcanvas -->
+  <div class="offcanvas offcanvas-start" tabindex="-1" id="ocNavPatterns" aria-labelledby="ocNavPatternsLabel">
+    <div class="offcanvas-header">
+      <h2 class="offcanvas-title" id="ocNavPatternsLabel">Navigation</h2>
+      <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+    </div>
+    <div class="offcanvas-body">
+      <ul class="nav nav-pills flex-column">
+        <li class="nav-item"><a class="nav-link active" aria-current="true" href="#">Dashboard</a></li>
+        <li class="nav-item"><a class="nav-link" href="#">Projects</a></li>
+        <li class="nav-item"><a class="nav-link" href="#">Teams</a></li>
+        <li class="nav-item"><a class="nav-link" href="#">Reports</a></li>
+        <li class="nav-item"><a class="nav-link" href="#">Settings</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <script>
+    lucide.createIcons();
+  </script>
+</body>
+</html>

@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>IndigoKit Playground — Design Tokens</title>
+  <link rel="stylesheet" href="../../dist/css/indigokit.css">
+  <link rel="stylesheet" href="../playground.css">
+  <!-- Playground theme persistence (Task 047) — applies the stored
+       indigokit-theme preference before first paint. Playground-only. -->
+  <script src="../theme.js"></script>
+</head>
+<body>
+  <div class="container py-5">
+    <h1>IndigoKit Design Tokens</h1>
+    <p class="lead">Validates the Task 002 token foundation — all values shown come from the compiled Bootstrap <code>--bs-*</code> variables.</p>
+
+    <!-- Colors -->
+    <h2 class="h5 mt-5 mb-3">Colors</h2>
+    <div class="row g-3">
+      <div class="col-6 col-sm-4 col-md-2">
+        <div class="swatch swatch-primary"></div>
+        <div class="demo-label"><strong>Primary</strong><br><span class="demo-code">#4F46E5</span><br><span class="demo-code">--bs-primary</span></div>
+      </div>
+      <div class="col-6 col-sm-4 col-md-2">
+        <div class="swatch swatch-secondary"></div>
+        <div class="demo-label"><strong>Secondary / Slate</strong><br><span class="demo-code">#64748B</span><br><span class="demo-code">--bs-secondary</span></div>
+      </div>
+      <div class="col-6 col-sm-4 col-md-2">
+        <div class="swatch swatch-success"></div>
+        <div class="demo-label"><strong>Success / Emerald</strong><br><span class="demo-code">#10B981</span><br><span class="demo-code">--bs-success</span></div>
+      </div>
+      <div class="col-6 col-sm-4 col-md-2">
+        <div class="swatch swatch-info"></div>
+        <div class="demo-label"><strong>Info / Cyan</strong><br><span class="demo-code">#06B6D4</span><br><span class="demo-code">--bs-info</span></div>
+      </div>
+      <div class="col-6 col-sm-4 col-md-2">
+        <div class="swatch swatch-warning"></div>
+        <div class="demo-label"><strong>Warning / Amber</strong><br><span class="demo-code">#F59E0B</span><br><span class="demo-code">--bs-warning</span></div>
+      </div>
+      <div class="col-6 col-sm-4 col-md-2">
+        <div class="swatch swatch-danger"></div>
+        <div class="demo-label"><strong>Danger / Red</strong><br><span class="demo-code">#EF4444</span><br><span class="demo-code">--bs-danger</span></div>
+      </div>
+    </div>
+
+    <!-- Typography -->
+    <h2 class="h5 mt-5 mb-3">Typography</h2>
+    <p class="demo-label mb-2">Font stack (Inter first, not bundled): <span class="demo-code">Inter, system-ui, -apple-system, "Segoe UI", Roboto, …</span></p>
+    <div class="mb-2">
+      <div class="fw-normal">400 — Normal — <span class="demo-code">fw-normal</span></div>
+      <div class="fw-medium">500 — Medium — <span class="demo-code">fw-medium</span></div>
+      <div class="fw-semibold">600 — Semibold — <span class="demo-code">fw-semibold</span></div>
+      <div class="fw-bold">700 — Bold — <span class="demo-code">fw-bold</span></div>
+    </div>
+
+    <!-- Border radius -->
+    <h2 class="h5 mt-5 mb-3">Border radius</h2>
+    <div class="row g-4">
+      <div class="col-6 col-md-2">
+        <div class="radius-box rounded-1"></div>
+        <div class="demo-label">Small — 4px<br><span class="demo-code">rounded-1</span></div>
+      </div>
+      <div class="col-6 col-md-2">
+        <div class="radius-box rounded-2"></div>
+        <div class="demo-label">Default — 6px<br><span class="demo-code">rounded-2</span></div>
+      </div>
+      <div class="col-6 col-md-2">
+        <div class="radius-box rounded-3"></div>
+        <div class="demo-label">Medium — 8px<br><span class="demo-code">rounded-3</span></div>
+      </div>
+      <div class="col-6 col-md-2">
+        <div class="radius-box rounded-4"></div>
+        <div class="demo-label">Large — 12px<br><span class="demo-code">rounded-4</span></div>
+      </div>
+      <div class="col-6 col-md-2">
+        <div class="radius-box rounded-pill"></div>
+        <div class="demo-label">Pill — 9999px<br><span class="demo-code">rounded-pill</span></div>
+      </div>
+    </div>
+
+    <!-- Shadows -->
+    <h2 class="h5 mt-5 mb-3">Shadows</h2>
+    <div class="row g-4">
+      <div class="col-6 col-md-3">
+        <div class="shadow-box demo-shadow-xs"></div>
+        <div class="demo-label">XS — <span class="demo-code">--bs-box-shadow-sm</span></div>
+      </div>
+      <div class="col-6 col-md-3">
+        <div class="shadow-box demo-shadow-sm"></div>
+        <div class="demo-label">SM — <span class="demo-code">--bs-box-shadow</span></div>
+      </div>
+      <div class="col-6 col-md-3">
+        <div class="shadow-box demo-shadow-md"></div>
+        <div class="demo-label">MD — <span class="demo-code">--bs-box-shadow-lg</span></div>
+      </div>
+      <div class="col-6 col-md-3">
+        <!-- mu-lg has no Bootstrap variable equivalent; value mirrors $mu-shadow-lg -->
+        <div class="shadow-box demo-shadow-lg"></div>
+        <div class="demo-label">LG — <span class="demo-code">$mu-shadow-lg</span></div>
+      </div>
+    </div>
+
+    <p class="mt-5 mb-1 demo-label">Note: contrast (e.g. text on colored surfaces) is intentionally not asserted here — it will be verified at component level.</p>
+  </div>
+</body>
+</html>

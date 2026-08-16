@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>IndigoKit Playground — Carousel</title>
+  <link rel="stylesheet" href="../../dist/css/indigokit.css">
+  <link rel="stylesheet" href="../playground.css">
+  <!-- Playground theme persistence (Task 047) — applies the stored
+       indigokit-theme preference before first paint. Playground-only. -->
+  <script src="../theme.js"></script>
+  <script src="../assets/lucide.umd.js"></script>
+  <script src="../../node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+</head>
+<body>
+  <div class="container py-4 demo-table-page">
+    <h1 class="h4 mb-1">Carousel</h1>
+    <p class="demo-label mb-4">Bootstrap's <code>.carousel</code> with IndigoKit styling — restrained, content-focused, Bootstrap's own JS (controls, indicators, transitions, reduced-motion block). Carousel is for a short set of highlights; it is not a media-slider framework.</p>
+
+    <!-- Basic -->
+    <h2 class="h5 mt-5" id="basic">Basic carousel</h2>
+    <p class="demo-label">Three content slides with previous/next controls and indicators. Controls are real buttons with <code>aria-label</code>s and a visible focus ring; indicators are real buttons with <code>aria-label</code>s.</p>
+    <div class="carousel slide demo-carousel rounded-2 overflow-hidden" id="carouselBasic" data-bs-ride="false">
+      <div class="carousel-inner">
+        <div class="carousel-item active">
+          <div class="demo-slide d-flex align-items-center px-4 py-5">
+            <div>
+              <h3 class="h5 mb-2">Design tokens</h3>
+              <p class="mb-0">Colors, spacing, radius, shadows, and motion — one source of truth mapped onto Bootstrap's variables.</p>
+            </div>
+          </div>
+        </div>
+        <div class="carousel-item">
+          <div class="demo-slide d-flex align-items-center px-4 py-5">
+            <div>
+              <h3 class="h5 mb-2">Component library</h3>
+              <p class="mb-0">Every Bootstrap component refined underneath its public API — no parallel classes.</p>
+            </div>
+          </div>
+        </div>
+        <div class="carousel-item">
+          <div class="demo-slide d-flex align-items-center px-4 py-5">
+            <div>
+              <h3 class="h5 mb-2">Playground reference</h3>
+              <p class="mb-0">Each component has a dedicated page with measured contrast, keyboard checks, and responsive notes.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <button class="carousel-control-prev" type="button" data-bs-target="#carouselBasic" data-bs-slide="prev" aria-label="Previous slide">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+      </button>
+      <button class="carousel-control-next" type="button" data-bs-target="#carouselBasic" data-bs-slide="next" aria-label="Next slide">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+      </button>
+      <div class="carousel-indicators">
+        <button type="button" data-bs-target="#carouselBasic" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+        <button type="button" data-bs-target="#carouselBasic" data-bs-slide-to="1" aria-label="Slide 2"></button>
+        <button type="button" data-bs-target="#carouselBasic" data-bs-slide-to="2" aria-label="Slide 3"></button>
+      </div>
+    </div>
+
+    <!-- Captions -->
+    <h2 class="h5 mt-5" id="captions">Captions</h2>
+    <p class="demo-label">A captioned image slide. The caption sits on a light surface (the placeholder art) so the dark caption text stays readable — readability is never left to image contrast alone.</p>
+    <div class="carousel slide demo-carousel rounded-2 overflow-hidden" id="carouselCaptions" data-bs-ride="false">
+      <div class="carousel-inner">
+        <div class="carousel-item active">
+          <img src="../assets/placeholder-card.svg" class="d-block w-100" alt="Abstract indigo gradient artwork" height="240">
+          <div class="carousel-caption d-none d-md-block">
+            <h3 class="h5 mb-1">IndigoKit — a Bootstrap-first design system</h3>
+            <p class="small mb-0">Modern and enterprise, built by refining Bootstrap's own API.</p>
+          </div>
+        </div>
+        <div class="carousel-item">
+          <img src="../assets/placeholder-card.svg" class="d-block w-100" alt="Abstract indigo gradient artwork" height="240">
+          <div class="carousel-caption d-none d-md-block">
+            <h3 class="h5 mb-1">Accessible by measurement</h3>
+            <p class="small mb-0">Contrast, focus, and keyboard behavior are verified in the browser, not assumed.</p>
+          </div>
+        </div>
+        <div class="carousel-item">
+          <img src="../assets/placeholder-card.svg" class="d-block w-100" alt="Abstract indigo gradient artwork" height="240">
+          <div class="carousel-caption d-none d-md-block">
+            <h3 class="h5 mb-1">No parallel APIs</h3>
+            <p class="small mb-0">Bootstrap stays the public surface; IndigoKit refines underneath.</p>
+          </div>
+        </div>
+      </div>
+      <button class="carousel-control-prev" type="button" data-bs-target="#carouselCaptions" data-bs-slide="prev" aria-label="Previous slide">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+      </button>
+      <button class="carousel-control-next" type="button" data-bs-target="#carouselCaptions" data-bs-slide="next" aria-label="Next slide">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+      </button>
+      <div class="carousel-indicators">
+        <button type="button" data-bs-target="#carouselCaptions" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+        <button type="button" data-bs-target="#carouselCaptions" data-bs-slide-to="1" aria-label="Slide 2"></button>
+        <button type="button" data-bs-target="#carouselCaptions" data-bs-slide-to="2" aria-label="Slide 3"></button>
+      </div>
+    </div>
+
+    <!-- Autoplay -->
+    <h2 class="h5 mt-5" id="autoplay">Autoplay (optional)</h2>
+    <p class="demo-label"><code>data-bs-ride="carousel"</code> starts autoplay — opt-in, never the default. Hover and keyboard focus pause it (Bootstrap's built-in behavior). Bootstrap's reduced-motion block disables the slide transition; the visible slide still swaps, so movement-sensitive users aren't forced through animation.</p>
+    <div class="carousel slide demo-carousel rounded-2 overflow-hidden" id="carouselAuto" data-bs-ride="carousel" data-bs-interval="4000">
+      <div class="carousel-inner">
+        <div class="carousel-item active">
+          <div class="demo-slide demo-slide-alt d-flex align-items-center px-4 py-5">
+            <div>
+              <h3 class="h5 mb-2">Ship announcements</h3>
+              <p class="mb-0">Autoplay is fine for a compact highlight banner — keep it short and pause-friendly.</p>
+            </div>
+          </div>
+        </div>
+        <div class="carousel-item">
+          <div class="demo-slide demo-slide-alt d-flex align-items-center px-4 py-5">
+            <div>
+              <h3 class="h5 mb-2">Respect attention</h3>
+              <p class="mb-0">Hover and focus pause the rotation; users can always take control.</p>
+            </div>
+          </div>
+        </div>
+        <div class="carousel-item">
+          <div class="demo-slide demo-slide-alt d-flex align-items-center px-4 py-5">
+            <div>
+              <h3 class="h5 mb-2">Prefer static</h3>
+              <p class="mb-0">When in doubt, ship without autoplay — the controls and indicators work exactly the same.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <button class="carousel-control-prev" type="button" data-bs-target="#carouselAuto" data-bs-slide="prev" aria-label="Previous slide">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+      </button>
+      <button class="carousel-control-next" type="button" data-bs-target="#carouselAuto" data-bs-slide="next" aria-label="Next slide">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+      </button>
+      <div class="carousel-indicators">
+        <button type="button" data-bs-target="#carouselAuto" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+        <button type="button" data-bs-target="#carouselAuto" data-bs-slide-to="1" aria-label="Slide 2"></button>
+        <button type="button" data-bs-target="#carouselAuto" data-bs-slide-to="2" aria-label="Slide 3"></button>
+      </div>
+    </div>
+
+    <!-- A11y -->
+    <h2 class="h5 mt-5" id="accessibility">Accessibility notes</h2>
+    <ul class="mb-0">
+      <li>Controls are real <code>&lt;button&gt;</code>s with <code>aria-label</code>s ("Previous slide"/"Next slide") and a visible focus ring; indicators are real buttons with <code>aria-label</code>s ("Slide 1"…).</li>
+      <li>The placeholder image is decorative here but carries meaningful alt text ("Abstract indigo gradient artwork") — a real image would describe its content instead. Caption text is never the only way to understand a slide.</li>
+      <li>Keyboard: Tab reaches the controls and indicators; Enter/Space activates them — native button behavior, Bootstrap's carousel JS handles the slide change. No custom keyboard engine.</li>
+      <li>Autoplay is opt-in (<code>data-bs-ride</code>), pauses on hover/focus, and Bootstrap's reduced-motion block removes the slide transition under <code>prefers-reduced-motion</code>.</li>
+      <li>Captions stay readable by design — the caption color is dark on the light placeholder surface, and a real deployment would use a scrim or a surface that guarantees contrast rather than relying on the image.</li>
+    </ul>
+  </div>
+
+  <script>
+    lucide.createIcons();
+  </script>
+</body>
+</html>

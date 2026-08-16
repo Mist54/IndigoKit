@@ -1,0 +1,26 @@
+// Breadcrumb refinement.
+//
+// Bootstrap's breadcrumb is already token-wired and dark-adaptive:
+// the `/` separator and the active-item color both resolve to
+// `--bs-secondary-color`, links inherit the global link + focus
+// system, and `flex-wrap` handles long hierarchies. The only
+// IndigoKit addition is a stronger text weight on the current page —
+// alongside `aria-current="page"` and the muted color, this makes
+// the current location distinct without relying on color alone
+// (same "stronger text" treatment as the active tab).
+
+.breadcrumb-item a {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.breadcrumb-item [data-lucide] {
+  width: 1em;
+  height: 1em;
+  flex-shrink: 0;
+}
+
+.breadcrumb-item.active {
+  font-weight: 600;
+}

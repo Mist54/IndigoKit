@@ -1,0 +1,72 @@
+// ============================================================
+// IndigoKit — Button System
+// ------------------------------------------------------------
+// Bootstrap-first: .btn, .btn-primary, .btn-outline-*, .btn-sm,
+// .btn-lg, .btn-group and the w-* width utilities all keep their
+// names and behavior — IndigoKit refines the visual layer beneath
+// them rather than replacing the API. A plain
+//
+//   <button class="btn btn-primary">Save</button>
+//
+// is a IndigoKit button.
+//
+// Variable-level refinements ($btn-box-shadow,
+// $btn-active-box-shadow, $btn-transition) live in
+// _tokens.scss §9 because they must precede the Bootstrap
+// import. This partial only refines the compiled rules.
+// ============================================================
+
+// ------------------------------------------------------------
+// Alignment
+// ------------------------------------------------------------
+// Bootstrap's inline-block leaves icon+text buttons misaligned.
+// Flex centers content on one axis and provides a consistent
+// 8px gap. All Bootstrap classes keep working inside the flex
+// container: .btn-sm/.btn-lg sizes, .btn-group segmentation,
+// .btn-check labels, .dropdown-toggle carets (margin-left on
+// ::after still applies), and w-100 full-width utilities.
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: $spacer * 0.5;
+}
+
+// ------------------------------------------------------------
+// Icon sizing
+// ------------------------------------------------------------
+// Lucide renders 24px icons by default — too large for compact
+// enterprise buttons. Scale icons with the button's font size
+// (16px default / 14px .btn-sm / 20px .btn-lg) via 1em, so
+// icon+text and icon-only buttons share one sizing rule.
+// [data-lucide] matches the <i> before Lucide replaces it AND
+// the resulting <svg> (Lucide copies the attribute across).
+.btn [data-lucide] {
+  width: 1em;
+  height: 1em;
+}
+
+// The application shell's action controls keep their approved
+// 24px icons (Task 005 navbar / Task 009 drawer close design).
+// Scoped exceptions — content buttons still use the 1em scale.
+.mu-navbar-actions .btn [data-lucide],
+.mu-sidebar-close [data-lucide] {
+  width: 24px;
+  height: 24px;
+}
+
+// ------------------------------------------------------------
+// Loading foundation
+// ------------------------------------------------------------
+// No custom loading component: Bootstrap's own spinner is the
+// complete pattern. Use the native disabled attribute so the
+// control is neither focusable nor clickable, and the spinner
+// carries aria-hidden (the label stays the accessible name):
+//
+//   <button type="button" class="btn btn-primary" disabled>
+//     <span class="spinner-border spinner-border-sm" aria-hidden="true"></span>
+//     Saving…
+//   </button>
+//
+// Bootstrap's .btn:disabled dims to --bs-btn-disabled-opacity
+// (.65) and sets pointer-events: none. Nothing further needed.

@@ -1,0 +1,557 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>IndigoKit — Notifications</title>
+  <link rel="stylesheet" href="../../dist/css/indigokit.css">
+  <link rel="stylesheet" href="../playground.css">
+  <script src="../theme.js"></script>
+  <script src="../assets/lucide.umd.js"></script>
+  <script src="../../node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="../../dist/js/indigokit.js"></script>
+</head>
+<body>
+  <div class="mu-app">
+
+    <header class="mu-app-top">
+      <nav class="navbar mu-app-navbar" aria-label="Main navigation">
+        <div class="container-fluid">
+                    <div class="d-flex align-items-center gap-2">
+            <button type="button" class="btn" data-mu-mobile-toggle aria-controls="app-sidebar" aria-expanded="false" aria-label="Open navigation">
+              <i data-lucide="menu" aria-hidden="true"></i>
+            </button>
+            <button type="button" class="btn" data-mu-sidebar-toggle aria-controls="app-sidebar" aria-expanded="true" aria-label="Collapse sidebar">
+              <i data-lucide="panel-left-close" aria-hidden="true"></i>
+            </button>
+            <a class="navbar-brand" href="../index.html">
+            <i data-lucide="layers" aria-hidden="true"></i>
+            IndigoKit
+          </a>
+          </div>
+          <div class="mu-navbar-main"></div>
+          <div class="mu-navbar-actions">
+            <select class="form-select form-select-sm" data-theme-switch aria-label="Theme">
+              <option value="system">System</option>
+              <option value="light">Light</option>
+              <option value="dark">Dark</option>
+            </select>
+            <div class="dropdown">
+              <button type="button" class="btn position-relative d-none d-md-inline-flex" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Notifications, 3 unread" id="notifications-trigger">
+                <i data-lucide="bell" aria-hidden="true"></i>
+                <span class="badge text-bg-danger rounded-pill position-absolute top-0 start-100 translate-middle" id="notifications-badge">3</span>
+              </button>
+              <div class="dropdown-menu dropdown-menu-end p-0">
+                <h6 class="dropdown-header d-flex justify-content-between align-items-center mb-0">
+                  Notifications
+                  <span class="badge text-bg-primary rounded-pill" id="notifications-count">3 unread</span>
+                </h6>
+                <a class="dropdown-item d-flex align-items-start gap-2" href="notifications.html">
+                  <i data-lucide="shopping-cart" aria-hidden="true" width="16" height="16" class="text-success mt-1 flex-shrink-0"></i>
+                  <span class="flex-grow-1">
+                    <span class="d-block">New order received</span>
+                    <span class="d-block small text-body-secondary">Order #10254 for $440.00 &middot; 2m</span>
+                  </span>
+                </a>
+                <a class="dropdown-item d-flex align-items-start gap-2" href="notifications.html">
+                  <i data-lucide="file-text" aria-hidden="true" width="16" height="16" class="text-info mt-1 flex-shrink-0"></i>
+                  <span class="flex-grow-1">
+                    <span class="d-block">Report completed</span>
+                    <span class="d-block small text-body-secondary">Monthly sales report is ready &middot; 1h</span>
+                  </span>
+                </a>
+                <a class="dropdown-item d-flex align-items-start gap-2" href="notifications.html">
+                  <i data-lucide="user-check" aria-hidden="true" width="16" height="16" class="text-success mt-1 flex-shrink-0"></i>
+                  <span class="flex-grow-1">
+                    <span class="d-block">Invitation accepted</span>
+                    <span class="d-block small text-body-secondary">Priya Sharma joined the workspace &middot; 3h</span>
+                  </span>
+                </a>
+                <div class="dropdown-divider m-0"></div>
+                <a class="dropdown-item small text-center" href="notifications.html">View all notifications</a>
+              </div>
+            </div>
+            <button type="button" class="btn d-none d-md-inline-flex" aria-label="Help">
+              <i data-lucide="circle-question-mark" aria-hidden="true"></i>
+            </button>
+            <div class="dropdown">
+              <a class="mu-navbar-user" href="#" data-bs-toggle="dropdown" aria-expanded="false" aria-label="User menu">
+                <span class="mu-avatar"><i data-lucide="user" aria-hidden="true"></i></span>
+                <span class="mu-user-name d-none d-lg-inline">Jane Doe</span>
+                <i data-lucide="chevron-down" aria-hidden="true"></i>
+              </a>
+              <ul class="dropdown-menu dropdown-menu-end">
+                <li>
+                  <h6 class="dropdown-header">Jane Doe<span class="d-block small fw-normal text-body-secondary">Software Engineer</span></h6>
+                </li>
+                <li><hr class="dropdown-divider"></li>
+                <li><a class="dropdown-item" href="profile.html">Profile</a></li>
+                <li><a class="dropdown-item" href="settings.html">Account Settings</a></li>
+                <li><a class="dropdown-item" href="notifications.html">Notifications</a></li>
+                <li><a class="dropdown-item" href="auth/lock-screen.html">Lock Screen</a></li>
+                <li><hr class="dropdown-divider"></li>
+                <li><a class="dropdown-item text-danger" href="auth/login.html">Sign out</a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <div class="mu-app-body">
+
+      <aside class="mu-app-side">
+        <div class="mu-sidebar" id="app-sidebar">
+          <div class="mu-sidebar-header">
+            <button type="button" class="btn mu-sidebar-close" data-mu-sidebar-close aria-label="Close navigation">
+              <i data-lucide="x" aria-hidden="true"></i>
+            </button>
+          </div>
+          <nav class="mu-sidebar-nav" aria-label="Sidebar navigation">
+            <div class="mu-sidebar-section">
+              <div class="mu-sidebar-label">Application examples</div>
+              <ul class="mu-sidebar-list">
+                <li>
+                  <a class="mu-sidebar-link" href="../index.html">
+                    <i data-lucide="layout-dashboard" aria-hidden="true"></i>
+                    <span class="mu-sidebar-link-text">Dashboard</span>
+                  </a>
+                </li>
+                <li>
+                  <a class="mu-sidebar-link" href="dashboard-analytics.html">
+                    <i data-lucide="chart-no-axes-combined" aria-hidden="true"></i>
+                    <span class="mu-sidebar-link-text">Analytics</span>
+                  </a>
+                </li>
+                <li>
+                  <a class="mu-sidebar-link" href="dashboard-sales.html">
+                    <i data-lucide="chart-column" aria-hidden="true"></i>
+                    <span class="mu-sidebar-link-text">Sales</span>
+                  </a>
+                </li>
+                <li>
+                  <button type="button" class="mu-sidebar-link" data-bs-toggle="collapse" data-bs-target="#nav-auth" aria-expanded="false" aria-controls="nav-auth">
+                    <i data-lucide="shield" aria-hidden="true"></i>
+                    <span class="mu-sidebar-link-text">Authentication</span>
+                    <i data-lucide="chevron-right" class="mu-sidebar-chevron" aria-hidden="true"></i>
+                  </button>
+                  <div class="collapse" id="nav-auth">
+                    <ul class="mu-sidebar-nested">
+                      <li><a class="mu-sidebar-link" href="auth/login.html"><span class="mu-sidebar-link-text">Login</span></a></li>
+                      <li><a class="mu-sidebar-link" href="auth/register.html"><span class="mu-sidebar-link-text">Register</span></a></li>
+                      <li><a class="mu-sidebar-link" href="auth/forgot-password.html"><span class="mu-sidebar-link-text">Forgot password</span></a></li>
+                      <li><a class="mu-sidebar-link" href="auth/reset-password.html"><span class="mu-sidebar-link-text">Reset password</span></a></li>
+                      <li><a class="mu-sidebar-link" href="auth/lock-screen.html"><span class="mu-sidebar-link-text">Lock screen</span></a></li>
+                    </ul>
+                  </div>
+                </li>
+                <li>
+                  <button type="button" class="mu-sidebar-link" data-bs-toggle="collapse" data-bs-target="#nav-pages" aria-expanded="true" aria-controls="nav-pages">
+                    <i data-lucide="files" aria-hidden="true"></i>
+                    <span class="mu-sidebar-link-text">Pages</span>
+                    <i data-lucide="chevron-right" class="mu-sidebar-chevron" aria-hidden="true"></i>
+                  </button>
+                  <div class="collapse show" id="nav-pages">
+                    <ul class="mu-sidebar-nested">
+                      <li><a class="mu-sidebar-link" href="profile.html"><span class="mu-sidebar-link-text">Profile</span></a></li>
+                      <li><a class="mu-sidebar-link" href="settings.html"><span class="mu-sidebar-link-text">Settings</span></a></li>
+                      <li><a class="mu-sidebar-link" href="pricing.html"><span class="mu-sidebar-link-text">Pricing</span></a></li>
+                      <li><a class="mu-sidebar-link" href="faq.html"><span class="mu-sidebar-link-text">FAQ</span></a></li>
+                      <li><a class="mu-sidebar-link" href="invoice.html"><span class="mu-sidebar-link-text">Invoice</span></a></li>
+                      <li><a class="mu-sidebar-link" href="users.html"><span class="mu-sidebar-link-text">User list</span></a></li>
+                      <li><a class="mu-sidebar-link" href="roles.html"><span class="mu-sidebar-link-text">Roles &amp; permissions</span></a></li>
+                      <li><a class="mu-sidebar-link active" href="notifications.html" aria-current="page"><span class="mu-sidebar-link-text">Notifications</span></a></li>
+                      <li><a class="mu-sidebar-link" href="products.html"><span class="mu-sidebar-link-text">Products</span></a></li>
+                    </ul>
+                  </div>
+                </li>
+                <li>
+                  <button type="button" class="mu-sidebar-link" data-bs-toggle="collapse" data-bs-target="#nav-errors" aria-expanded="false" aria-controls="nav-errors">
+                    <i data-lucide="triangle-alert" aria-hidden="true"></i>
+                    <span class="mu-sidebar-link-text">Error pages</span>
+                    <i data-lucide="chevron-right" class="mu-sidebar-chevron" aria-hidden="true"></i>
+                  </button>
+                  <div class="collapse" id="nav-errors">
+                    <ul class="mu-sidebar-nested">
+                      <li><a class="mu-sidebar-link" href="errors/404.html"><span class="mu-sidebar-link-text">404 Not found</span></a></li>
+                      <li><a class="mu-sidebar-link" href="errors/403.html"><span class="mu-sidebar-link-text">403 Forbidden</span></a></li>
+                      <li><a class="mu-sidebar-link" href="errors/500.html"><span class="mu-sidebar-link-text">500 Server error</span></a></li>
+                      <li><a class="mu-sidebar-link" href="errors/maintenance.html"><span class="mu-sidebar-link-text">Maintenance</span></a></li>
+                    </ul>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="mu-sidebar-section">
+              <div class="mu-sidebar-label">Components</div>
+              <ul class="mu-sidebar-list">
+                <li><a class="mu-sidebar-link" href="tokens.html"><span class="mu-sidebar-link-text">Tokens</span></a></li>
+                <li><a class="mu-sidebar-link" href="base.html"><span class="mu-sidebar-link-text">Base</span></a></li>
+                <li><a class="mu-sidebar-link" href="layout.html"><span class="mu-sidebar-link-text">Layout</span></a></li>
+                <li><a class="mu-sidebar-link" href="navbar.html"><span class="mu-sidebar-link-text">Navbar</span></a></li>
+                <li><a class="mu-sidebar-link" href="sidebar.html"><span class="mu-sidebar-link-text">Sidebar</span></a></li>
+                <li><a class="mu-sidebar-link" href="buttons.html"><span class="mu-sidebar-link-text">Buttons</span></a></li>
+                <li><a class="mu-sidebar-link" href="cards.html"><span class="mu-sidebar-link-text">Cards</span></a></li>
+                <li><a class="mu-sidebar-link" href="alerts.html"><span class="mu-sidebar-link-text">Alerts</span></a></li>
+                <li><a class="mu-sidebar-link" href="badges.html"><span class="mu-sidebar-link-text">Badges</span></a></li>
+                <li><a class="mu-sidebar-link" href="dropdowns.html"><span class="mu-sidebar-link-text">Dropdowns</span></a></li>
+                <li><a class="mu-sidebar-link" href="modals.html"><span class="mu-sidebar-link-text">Modals</span></a></li>
+                <li><a class="mu-sidebar-link" href="tabs.html"><span class="mu-sidebar-link-text">Tabs</span></a></li>
+                <li><a class="mu-sidebar-link" href="breadcrumbs.html"><span class="mu-sidebar-link-text">Breadcrumbs</span></a></li>
+                <li><a class="mu-sidebar-link" href="pagination.html"><span class="mu-sidebar-link-text">Pagination</span></a></li>
+                <li><a class="mu-sidebar-link" href="forms.html"><span class="mu-sidebar-link-text">Forms</span></a></li>
+                <li><a class="mu-sidebar-link" href="tables.html"><span class="mu-sidebar-link-text">Tables</span></a></li>
+                <li><a class="mu-sidebar-link" href="data-table.html"><span class="mu-sidebar-link-text">Data table</span></a></li>
+                <li><a class="mu-sidebar-link" href="form-patterns.html"><span class="mu-sidebar-link-text">Form patterns</span></a></li>
+                <li><a class="mu-sidebar-link" href="progress.html"><span class="mu-sidebar-link-text">Progress</span></a></li>
+                <li><a class="mu-sidebar-link" href="loading.html"><span class="mu-sidebar-link-text">Loading</span></a></li>
+                <li><a class="mu-sidebar-link" href="toasts.html"><span class="mu-sidebar-link-text">Toasts</span></a></li>
+                <li><a class="mu-sidebar-link" href="list-groups.html"><span class="mu-sidebar-link-text">List groups</span></a></li>
+                <li><a class="mu-sidebar-link" href="empty-states.html"><span class="mu-sidebar-link-text">Empty states</span></a></li>
+                <li><a class="mu-sidebar-link" href="tooltips-popovers.html"><span class="mu-sidebar-link-text">Tooltips &amp; popovers</span></a></li>
+                <li><a class="mu-sidebar-link" href="accordion.html"><span class="mu-sidebar-link-text">Accordion</span></a></li>
+                <li><a class="mu-sidebar-link" href="offcanvas.html"><span class="mu-sidebar-link-text">Offcanvas</span></a></li>
+                <li><a class="mu-sidebar-link" href="carousel.html"><span class="mu-sidebar-link-text">Carousel</span></a></li>
+                <li><a class="mu-sidebar-link" href="scrollspy.html"><span class="mu-sidebar-link-text">Scrollspy</span></a></li>
+                <li><a class="mu-sidebar-link" href="navigation-patterns.html"><span class="mu-sidebar-link-text">Navigation patterns</span></a></li>
+                <li><a class="mu-sidebar-link" href="themes.html"><span class="mu-sidebar-link-text">Themes</span></a></li>
+              </ul>
+            </div>
+          </nav>
+        </div>
+      </aside>
+
+      <main class="mu-app-main">
+        <div class="mu-app-content">
+          <div class="container-fluid py-4">
+
+            <nav aria-label="Breadcrumb">
+              <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="../index.html">Dashboard</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Notifications</li>
+              </ol>
+            </nav>
+
+            <div class="d-flex flex-wrap align-items-center justify-content-between gap-2 mb-4">
+              <div>
+                <h1 class="h3 mb-1">Notifications</h1>
+                <p class="text-body-secondary mb-0">Incoming activity for your workspace, with feedback and confirmation patterns. Static demo — nothing is sent or enforced.</p>
+              </div>
+              <button type="button" class="btn btn-outline-secondary btn-sm" id="mark-all-read">
+                <i data-lucide="check-check" aria-hidden="true" width="16" height="16" class="me-1"></i>
+                Mark all as read
+              </button>
+            </div>
+
+            <div class="row g-3">
+              <div class="col-12 col-lg-8">
+                <div class="card">
+                  <div class="card-header d-flex flex-wrap align-items-center justify-content-between gap-2">
+                    <span class="fw-semibold">Inbox</span>
+                    <div class="btn-group btn-group-sm" role="group" aria-label="Filter notifications">
+                      <button type="button" class="btn btn-outline-secondary active" data-filter="all" aria-pressed="true">All</button>
+                      <button type="button" class="btn btn-outline-secondary" data-filter="unread" aria-pressed="false">Unread</button>
+                    </div>
+                  </div>
+                  <ul class="list-group list-group-flush" id="notification-list">
+                    <li class="list-group-item d-flex align-items-start gap-3" data-read="false">
+                      <i data-lucide="shopping-cart" aria-hidden="true" width="18" height="18" class="text-success mt-1 flex-shrink-0"></i>
+                      <div class="flex-grow-1">
+                        <div class="d-flex justify-content-between gap-2">
+                          <span class="fw-semibold">New order received</span>
+                          <span class="small text-body-secondary flex-shrink-0">2 minutes ago</span>
+                        </div>
+                        <div class="small text-body-secondary mb-1">Order <a href="invoice.html" class="text-decoration-none">#10254</a> for $440.00 was placed by Ana Trujillo.</div>
+                        <span class="small text-primary fw-medium d-inline-flex align-items-center gap-1">
+                          <span class="badge rounded-pill bg-primary" aria-hidden="true">&nbsp;</span>
+                          Unread
+                        </span>
+                      </div>
+                    </li>
+                    <li class="list-group-item d-flex align-items-start gap-3" data-read="false">
+                      <i data-lucide="file-text" aria-hidden="true" width="18" height="18" class="text-info mt-1 flex-shrink-0"></i>
+                      <div class="flex-grow-1">
+                        <div class="d-flex justify-content-between gap-2">
+                          <span class="fw-semibold">Report completed</span>
+                          <span class="small text-body-secondary flex-shrink-0">1 hour ago</span>
+                        </div>
+                        <div class="small text-body-secondary mb-1">The monthly sales report is ready to download.</div>
+                        <span class="small text-primary fw-medium d-inline-flex align-items-center gap-1">
+                          <span class="badge rounded-pill bg-primary" aria-hidden="true">&nbsp;</span>
+                          Unread
+                        </span>
+                      </div>
+                    </li>
+                    <li class="list-group-item d-flex align-items-start gap-3" data-read="false">
+                      <i data-lucide="user-check" aria-hidden="true" width="18" height="18" class="text-success mt-1 flex-shrink-0"></i>
+                      <div class="flex-grow-1">
+                        <div class="d-flex justify-content-between gap-2">
+                          <span class="fw-semibold">Invitation accepted</span>
+                          <span class="small text-body-secondary flex-shrink-0">3 hours ago</span>
+                        </div>
+                        <div class="small text-body-secondary mb-1">Priya Sharma accepted your invitation and joined the workspace.</div>
+                        <span class="small text-primary fw-medium d-inline-flex align-items-center gap-1">
+                          <span class="badge rounded-pill bg-primary" aria-hidden="true">&nbsp;</span>
+                          Unread
+                        </span>
+                      </div>
+                    </li>
+                    <li class="list-group-item d-flex align-items-start gap-3" data-read="true">
+                      <i data-lucide="wrench" aria-hidden="true" width="18" height="18" class="text-warning mt-1 flex-shrink-0"></i>
+                      <div class="flex-grow-1">
+                        <div class="d-flex justify-content-between gap-2">
+                          <span class="fw-semibold">Maintenance reminder</span>
+                          <span class="small text-body-secondary flex-shrink-0">Yesterday</span>
+                        </div>
+                        <div class="small text-body-secondary mb-1">Scheduled maintenance on Aug 20, 02:00–04:00 UTC. Expect brief downtime.</div>
+                        <span class="small text-body-secondary">Read</span>
+                      </div>
+                    </li>
+                    <li class="list-group-item d-flex align-items-start gap-3" data-read="true">
+                      <i data-lucide="credit-card" aria-hidden="true" width="18" height="18" class="text-success mt-1 flex-shrink-0"></i>
+                      <div class="flex-grow-1">
+                        <div class="d-flex justify-content-between gap-2">
+                          <span class="fw-semibold">Payment processed</span>
+                          <span class="small text-body-secondary flex-shrink-0">Yesterday</span>
+                        </div>
+                        <div class="small text-body-secondary mb-1">Payment of $1,872.00 from Antonio Moreno was processed.</div>
+                        <span class="small text-body-secondary">Read</span>
+                      </div>
+                    </li>
+                    <li class="list-group-item d-flex align-items-start gap-3" data-read="true">
+                      <i data-lucide="circle-x" aria-hidden="true" width="18" height="18" class="text-danger mt-1 flex-shrink-0"></i>
+                      <div class="flex-grow-1">
+                        <div class="d-flex justify-content-between gap-2">
+                          <span class="fw-semibold">Payment failed</span>
+                          <span class="small text-body-secondary flex-shrink-0">2 days ago</span>
+                        </div>
+                        <div class="small text-body-secondary mb-1">The card was declined for invoice <a href="invoice.html" class="text-decoration-none">#10244</a>.</div>
+                        <span class="small text-body-secondary">Read</span>
+                      </div>
+                    </li>
+                  </ul>
+                  <p class="card-body small text-body-secondary d-none mb-0" id="notifications-empty">You're all caught up — no unread notifications.</p>
+                </div>
+              </div>
+              <div class="col-12 col-lg-4">
+                <div class="card mb-3">
+                  <div class="card-header">
+                    <span class="fw-semibold">Toast feedback</span>
+                  </div>
+                  <div class="card-body d-grid gap-2">
+                    <p class="small text-body-secondary mb-2">One toast at a time — click to show each outcome.</p>
+                    <button type="button" class="btn btn-outline-success btn-sm" data-toast="toast-success">
+                      <i data-lucide="circle-check" aria-hidden="true" width="16" height="16" class="me-1"></i>
+                      Show success toast
+                    </button>
+                    <button type="button" class="btn btn-outline-warning btn-sm" data-toast="toast-warning">
+                      <i data-lucide="triangle-alert" aria-hidden="true" width="16" height="16" class="me-1"></i>
+                      Show warning toast
+                    </button>
+                    <button type="button" class="btn btn-outline-danger btn-sm" data-toast="toast-error">
+                      <i data-lucide="circle-x" aria-hidden="true" width="16" height="16" class="me-1"></i>
+                      Show error toast
+                    </button>
+                  </div>
+                </div>
+                <div class="card">
+                  <div class="card-header">
+                    <span class="fw-semibold">Confirmation</span>
+                  </div>
+                  <div class="card-body">
+                    <p class="small text-body-secondary mb-3">Dangerous actions open a confirmation dialog with a clear consequence. Nothing is actually deleted.</p>
+                    <ul class="list-group list-group-flush mb-3">
+                      <li class="list-group-item d-flex justify-content-between align-items-center gap-2 px-0">
+                        <span>Ana Trujillo</span>
+                        <button type="button" class="btn btn-outline-danger btn-sm" data-delete-user="Ana Trujillo">
+                          <i data-lucide="trash-2" aria-hidden="true" width="14" height="14" class="me-1"></i>
+                          Delete
+                        </button>
+                      </li>
+                      <li class="list-group-item d-flex justify-content-between align-items-center gap-2 px-0">
+                        <span>Martin Sommer</span>
+                        <button type="button" class="btn btn-outline-danger btn-sm" data-delete-user="Martin Sommer">
+                          <i data-lucide="trash-2" aria-hidden="true" width="14" height="14" class="me-1"></i>
+                          Delete
+                        </button>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </main>
+
+    </div>
+
+    <div class="mu-app-backdrop" aria-hidden="true"></div>
+  </div>
+
+  <!-- Toast container (Bootstrap Toast, one at a time) -->
+  <div class="toast-container position-fixed bottom-0 end-0 p-3">
+    <div class="toast" id="toast-success" role="status" aria-live="polite" aria-atomic="true">
+      <div class="toast-header">
+        <i data-lucide="circle-check" aria-hidden="true" width="16" height="16" class="text-success me-2"></i>
+        <strong class="me-auto">Success</strong>
+        <small>just now</small>
+        <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+      </div>
+      <div class="toast-body">Changes saved successfully.</div>
+    </div>
+    <div class="toast" id="toast-warning" role="status" aria-live="polite" aria-atomic="true">
+      <div class="toast-header">
+        <i data-lucide="triangle-alert" aria-hidden="true" width="16" height="16" class="text-warning me-2"></i>
+        <strong class="me-auto">Warning</strong>
+        <small>just now</small>
+        <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+      </div>
+      <div class="toast-body">Your session will expire soon.</div>
+    </div>
+    <div class="toast" id="toast-error" role="alert" aria-live="assertive" aria-atomic="true">
+      <div class="toast-header">
+        <i data-lucide="circle-x" aria-hidden="true" width="16" height="16" class="text-danger me-2"></i>
+        <strong class="me-auto">Error</strong>
+        <small>just now</small>
+        <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+      </div>
+      <div class="toast-body">Unable to save changes.</div>
+    </div>
+  </div>
+
+  <!-- Confirmation modal (Bootstrap Modal) -->
+  <div class="modal fade" id="confirm-delete" tabindex="-1" aria-labelledby="confirm-delete-title" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h2 class="modal-title fs-5" id="confirm-delete-title">Delete user?</h2>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <p class="mb-0">This action cannot be undone. <strong id="confirm-delete-name">Ana Trujillo</strong> will permanently lose access to the workspace.</p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Cancel</button>
+          <button type="button" class="btn btn-danger" id="confirm-delete-confirm">
+            <i data-lucide="trash-2" aria-hidden="true" width="16" height="16" class="me-1"></i>
+            Delete user
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>lucide.createIcons();</script>
+
+  <script>
+  (function () {
+    'use strict';
+
+    // Notifications & confirmation demo (Task 060) — static only.
+    // Bootstrap does the heavy lifting (Dropdown, Toast, Modal);
+    // this script only wires the demo data and counts.
+
+    var filterButtons = document.querySelectorAll('[data-filter]');
+    var notificationItems = document.querySelectorAll('#notification-list [data-read]');
+    var notificationsEmpty = document.getElementById('notifications-empty');
+    var markAllRead = document.getElementById('mark-all-read');
+    var trigger = document.getElementById('notifications-trigger');
+    var badge = document.getElementById('notifications-badge');
+    var headerCount = document.getElementById('notifications-count');
+
+    function unreadCount() {
+      return document.querySelectorAll('#notification-list [data-read="false"]').length;
+    }
+
+    function syncUnreadUi() {
+      var count = unreadCount();
+      if (badge) { badge.textContent = count; }
+      if (trigger) {
+        trigger.setAttribute('aria-label', 'Notifications, ' + count + (count === 1 ? ' unread' : ' unread'));
+      }
+      if (headerCount) {
+        headerCount.textContent = count + (count === 1 ? ' unread' : ' unread');
+      }
+    }
+
+    function applyFilter() {
+      var active = document.querySelector('[data-filter][aria-pressed="true"]');
+      var filter = active ? active.getAttribute('data-filter') : 'all';
+
+      notificationItems.forEach(function (item) {
+        var show = filter === 'all' || item.getAttribute('data-read') === 'false';
+        item.classList.toggle('d-none', !show);
+      });
+
+      var visible = filter === 'all' ? notificationItems.length : unreadCount();
+      notificationsEmpty.classList.toggle('d-none', visible !== 0);
+    }
+
+    filterButtons.forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        filterButtons.forEach(function (b) {
+          var on = b === btn;
+          b.classList.toggle('active', on);
+          b.setAttribute('aria-pressed', on ? 'true' : 'false');
+        });
+        applyFilter();
+      });
+    });
+
+    markAllRead.addEventListener('click', function () {
+      notificationItems.forEach(function (item) {
+        if (item.getAttribute('data-read') === 'false') {
+          item.setAttribute('data-read', 'true');
+          var unreadTag = item.querySelector('.small.text-primary');
+          if (unreadTag) {
+            // textContent replaces the dot badge child as well.
+            unreadTag.className = 'small text-body-secondary';
+            unreadTag.textContent = 'Read';
+          }
+        }
+      });
+      syncUnreadUi();
+      applyFilter();
+    });
+
+    // Toasts — one per click, Bootstrap handles show/hide/focus.
+    document.querySelectorAll('[data-toast]').forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        var toastEl = document.getElementById(btn.getAttribute('data-toast'));
+        if (toastEl) { new bootstrap.Toast(toastEl).show(); }
+      });
+    });
+
+    // Confirmation modal — set the subject, then let Bootstrap
+    // manage focus (trap, Escape, return to trigger).
+    var deleteModal = document.getElementById('confirm-delete');
+    var deleteName = document.getElementById('confirm-delete-name');
+    var confirmDelete = document.getElementById('confirm-delete-confirm');
+    var modal = deleteModal ? bootstrap.Modal.getOrCreateInstance(deleteModal) : null;
+
+    document.querySelectorAll('[data-delete-user]').forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        deleteName.textContent = btn.getAttribute('data-delete-user');
+        if (modal) { modal.show(); }
+      });
+    });
+
+    if (confirmDelete && modal) {
+      confirmDelete.addEventListener('click', function () {
+        var name = deleteName.textContent;
+        modal.hide();
+        var toastEl = document.getElementById('toast-success');
+        var body = toastEl.querySelector('.toast-body');
+        body.textContent = name + ' deleted. Demo only — no account was removed.';
+        if (toastEl) { new bootstrap.Toast(toastEl).show(); }
+      });
+    }
+
+    syncUnreadUi();
+    applyFilter();
+  })();
+  </script>
+</body>
+</html>

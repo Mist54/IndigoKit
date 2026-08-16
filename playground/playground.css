@@ -1,0 +1,244 @@
+/* ============================================================
+   IndigoKit Playground — Playground-only presentation styles
+   ------------------------------------------------------------
+   This file holds styling that exists ONLY to present/test IndigoKit
+   in the playground. It is NOT part of the IndigoKit framework:
+   framework styles live in src/scss/ and compile into
+   dist/css/indigokit.css, which the playground consumes.
+
+   Never implement or duplicate IndigoKit components here.
+   ============================================================ */
+
+/* ------------------------------------------------------------
+   tokens.html — token showcase demo helpers
+   ------------------------------------------------------------ */
+.demo-label {
+  font-size: .8125rem;
+  color: var(--bs-secondary);
+  margin-top: .375rem;
+}
+
+.demo-code {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font-size: .75rem;
+}
+
+.swatch {
+  height: 64px;
+  border-radius: var(--bs-border-radius);
+  border: 1px solid rgba(15, 23, 42, .08);
+}
+
+.swatch-primary   { background-color: var(--bs-primary); }
+.swatch-secondary { background-color: var(--bs-secondary); }
+.swatch-success   { background-color: var(--bs-success); }
+.swatch-info      { background-color: var(--bs-info); }
+.swatch-warning   { background-color: var(--bs-warning); }
+.swatch-danger    { background-color: var(--bs-danger); }
+
+.radius-box {
+  width: 140px;
+  height: 72px;
+  background: var(--bs-primary);
+}
+
+.shadow-box {
+  width: 140px;
+  height: 72px;
+  background: var(--bs-body-bg);
+  border: 1px solid rgba(15, 23, 42, .08);
+}
+
+/* NOTE: names avoid Bootstrap's shadow utilities (.shadow-sm/.shadow-lg
+   exist in Bootstrap with !important and would win over these). */
+.demo-shadow-xs { box-shadow: var(--bs-box-shadow-sm); }
+.demo-shadow-sm { box-shadow: var(--bs-box-shadow); }
+.demo-shadow-md { box-shadow: var(--bs-box-shadow-lg); }
+/* mu-lg has no Bootstrap variable equivalent; mirrors $mu-shadow-lg */
+.demo-shadow-lg { box-shadow: 0 12px 24px rgba(15, 23, 42, .12); }
+
+/* ------------------------------------------------------------
+   index.html — home page demo helpers
+   ------------------------------------------------------------ */
+.demo-card {
+  max-width: 24rem;
+}
+
+.demo-links {
+  margin: 0;
+  padding-left: 1.25rem;
+}
+
+.demo-links li {
+  margin-bottom: .25rem;
+}
+
+/* ------------------------------------------------------------
+   base.html — base-elements demo helpers
+   ------------------------------------------------------------ */
+/* Tables page — constrain the reference content column without touching the page body */
+.demo-table-page { max-width: 960px; }
+
+/* List-groups page — demo lists get a sensible reference width (playground presentation only) */
+.demo-list { max-width: 28rem; }
+
+/* Empty-states page — reference widths + the restrained icon treatment
+   (playground presentation only, never framework styling) */
+.demo-empty-card  { max-width: 30rem; }
+.demo-empty-desc  { max-width: 26rem; }
+.demo-empty-icon  { width: 2rem; height: 2rem; }
+
+/* Accordion page — demo reference width (playground presentation only) */
+.demo-acc { max-width: 36rem; }
+
+/* ------------------------------------------------------------
+   themes.html — theme page helpers
+   ------------------------------------------------------------ */
+/* Fixed playground-only theme switcher (NOT a IndigoKit API; Task 047). A
+   native .form-select behind a visible label. The surface hierarchy demo
+   uses Bootstrap's own bg-body / bg-body-secondary / bg-body-tertiary
+   utilities directly. */
+.theme-toggle {
+  position: fixed;
+  top: 1rem;
+  right: 1rem;
+  z-index: 1080;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.theme-toggle .form-select {
+  width: auto;
+  min-width: 7.5rem;
+  padding-top: 0.25rem;
+  padding-bottom: 0.25rem;
+}
+
+.demo-focus-input {
+  width: 14rem;
+}
+
+/* Top clearance so the fixed toggle never covers the heading on small
+   screens. !important beats Bootstrap's py-5 utility (which is emitted
+   with !important); playground-only file, not framework CSS. */
+.theme-page {
+  padding-top: 4.5rem !important;
+}
+
+/* Carousel page — demo slides (playground presentation only): light
+   surfaces keep the dark caption/body text readable. The control icons
+   are white by default, so a subtle slate tint makes them visible on
+   the light slides without touching framework CSS. */
+.demo-carousel { max-width: 40rem; }
+
+/* Themes page carousel — slides are theme-flipping light surfaces, so the
+   white Bootstrap control icons need a slate treatment in light and stay
+   white in dark (playground presentation only; the framework carousel
+   keeps Bootstrap's stock controls). Indicators use --bs-body-color, which
+   is dark slate in light and light slate in dark — visible in both. */
+.demo-theme-carousel { max-width: 40rem; }
+.demo-theme-carousel .carousel-control-prev-icon,
+.demo-theme-carousel .carousel-control-next-icon {
+  filter: invert(1) opacity(0.6);
+}
+.demo-theme-carousel .carousel-control-prev:hover .carousel-control-prev-icon,
+.demo-theme-carousel .carousel-control-next:hover .carousel-control-next-icon {
+  filter: invert(1) opacity(0.9);
+}
+[data-bs-theme="dark"] .demo-theme-carousel .carousel-control-prev-icon,
+[data-bs-theme="dark"] .demo-theme-carousel .carousel-control-next-icon,
+[data-bs-theme="dark"] .demo-theme-carousel .carousel-control-prev:hover .carousel-control-prev-icon,
+[data-bs-theme="dark"] .demo-theme-carousel .carousel-control-next:hover .carousel-control-next-icon {
+  filter: none;
+  opacity: 0.7;
+}
+.demo-theme-carousel .carousel-indicators [data-bs-target] {
+  background-color: var(--bs-body-color);
+}
+.demo-theme-carousel .carousel-indicators .active {
+  opacity: 1;
+}
+.demo-slide { min-height: 12rem; background-color: #eef2ff; color: var(--bs-body-color); }
+.demo-slide-alt { background-color: #ecfdf5; }
+.demo-carousel .carousel-control-prev-icon,
+.demo-carousel .carousel-control-next-icon {
+  filter: invert(1) opacity(0.6);
+}
+.demo-carousel .carousel-control-prev:hover .carousel-control-prev-icon,
+.demo-carousel .carousel-control-next:hover .carousel-control-next-icon,
+.demo-carousel .carousel-control-prev:focus .carousel-control-prev-icon,
+.demo-carousel .carousel-control-next:focus .carousel-control-next-icon {
+  filter: invert(1) opacity(0.9);
+}
+.demo-carousel .carousel-indicators [data-bs-target] {
+  background-color: var(--bs-body-color);
+}
+
+/* Scrollspy page — demo nav column, section spacing, nested subnav
+   (playground presentation only) */
+.spy-nav-col { width: 14rem; flex-shrink: 0; }
+.spy-section { padding-top: 1rem; margin-top: 1rem; border-top: 1px solid var(--bs-border-color); }
+.spy-section:first-of-type { border-top: 0; }
+.spy-subnav .nav-link { font-size: 0.875rem; padding-top: 0.2rem; padding-bottom: 0.2rem; }
+
+/* Loading page — demo-only widths and the local overlay scrim (playground
+   presentation, never framework styling) */
+.demo-load-card  { width: 22rem; max-width: 100%; }
+.demo-overlay-scrim { background-color: #fff; opacity: 0.85; }
+
+
+/* Progress page — demo-only intermediate widths (Bootstrap ships only
+   w-25/50/75/100/auto; these cover the arbitrary percentages a progress
+   bar shows, e.g. 30% or 82%. Playground-only, never framework styling.) */
+.demo-w-0   { width: 0% !important; }
+.demo-w-12  { width: 12% !important; }
+.demo-w-30  { width: 30% !important; }
+.demo-w-40  { width: 40% !important; }
+.demo-w-42  { width: 42% !important; }
+.demo-w-45  { width: 45% !important; }
+.demo-w-60  { width: 60% !important; }
+.demo-w-65  { width: 65% !important; }
+.demo-w-82  { width: 82% !important; }
+
+
+
+.demo-note {
+  font-size: .8125rem;
+  color: var(--bs-secondary);
+}
+
+.demo-input {
+  max-width: 20rem;
+}
+
+/* ------------------------------------------------------------
+   layout.html + navbar.html + sidebar.html — app-shell demos
+   ------------------------------------------------------------
+   The navbar and sidebar are real IndigoKit components; the shell
+   consumes them from the compiled framework CSS. Nothing here
+   implements either component. (The mobile drawer/backdrop
+   behavior is framework CSS in dist/css/indigokit.css + JS in
+   dist/js/indigokit.js — the old demo-only sidebar-hide rule was
+   removed when the real mobile behavior landed in Task 009.) */
+
+.grid-demo > [class*="col"] {
+  background: rgba(79, 70, 229, .08);
+  border: 1px solid rgba(79, 70, 229, .25);
+  border-radius: var(--bs-border-radius);
+  padding: .5rem;
+  font-size: .8125rem;
+  color: var(--bs-secondary);
+  text-align: center;
+}
+
+/* forms.html — floating-label textarea demo height. Content-dependent
+   per instance (Bootstrap docs use an inline height); playground-only
+   class keeps the page free of inline framework styles. The doubled
+   selector matches Bootstrap's `.form-floating > .form-control`
+   specificity; playground.css loads after indigokit.css so it wins. */
+.form-floating > .demo-fl-textarea {
+  height: 7rem;
+}
+
+

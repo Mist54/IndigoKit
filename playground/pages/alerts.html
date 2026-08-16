@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>IndigoKit Playground — Alerts</title>
+  <link rel="stylesheet" href="../../dist/css/indigokit.css">
+  <link rel="stylesheet" href="../playground.css">
+  <!-- Playground theme persistence (Task 047) — applies the stored
+       indigokit-theme preference before first paint. Playground-only. -->
+  <script src="../theme.js"></script>
+  <script src="../assets/lucide.umd.js"></script>
+  <!-- Bootstrap's own JS bundle — loaded here so the dismissible
+       alert demo uses Bootstrap's built-in dismissal behavior
+       (data-bs-dismiss="alert"). Consumer-side only; IndigoKit ships
+       no alert JavaScript. -->
+  <script src="../../node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+</head>
+<body>
+  <div class="container py-5">
+    <h1>Alerts</h1>
+    <p class="lead">Bootstrap's alert API with IndigoKit refinement — every class below is standard Bootstrap (<code>.alert</code>, <code>.alert-*</code>, <code>.alert-heading</code>, <code>.alert-link</code>, <code>.alert-dismissible</code>, <code>.btn-close</code>). Variants derive from the IndigoKit palette's emphasis/subtle variable system.</p>
+
+    <!-- Variants -->
+    <h2 class="h5 mt-5 mb-3">Variants</h2>
+    <p class="demo-label">Static showcase blocks — no <code>role="alert"</code> (see the semantic usage section below).</p>
+    <div class="alert alert-primary">Primary — an informational highlight.</div>
+    <div class="alert alert-secondary">Secondary — neutral context.</div>
+    <div class="alert alert-success">Success — a positive outcome.</div>
+    <div class="alert alert-info">Info — additional context.</div>
+    <div class="alert alert-warning">Warning — proceed with care.</div>
+    <div class="alert alert-danger">Danger — an error needs attention.</div>
+    <div class="alert alert-light">Light — subtle, quiet surface.</div>
+    <div class="alert alert-dark">Dark — strong contrast surface.</div>
+
+    <!-- Heading + link -->
+    <h2 class="h5 mt-5 mb-3">Heading and link</h2>
+    <div class="alert alert-success">
+      <h3 class="alert-heading">Changes saved</h3>
+      <p>Your changes were saved successfully. You can continue working.</p>
+      <hr>
+      <p class="mb-0">You can <a href="#" class="alert-link">review the audit trail</a> at any time.</p>
+    </div>
+
+    <!-- With icons -->
+    <h2 class="h5 mt-5 mb-3">With icons</h2>
+    <p class="demo-label">Icons are decorative (<code>aria-hidden</code>) — the text carries the meaning. Alignment uses Bootstrap flex utilities.</p>
+    <div class="alert alert-info d-flex align-items-start gap-2">
+      <i data-lucide="info" aria-hidden="true"></i>
+      <span>Your plan renews on the first of the month. You can change it anytime.</span>
+    </div>
+    <div class="alert alert-success d-flex align-items-start gap-2">
+      <i data-lucide="circle-check" aria-hidden="true"></i>
+      <span>All checks passed — the deployment is live.</span>
+    </div>
+    <div class="alert alert-warning d-flex align-items-start gap-2">
+      <i data-lucide="triangle-alert" aria-hidden="true"></i>
+      <span>This environment is shared — changes affect everyone using it.</span>
+    </div>
+    <div class="alert alert-danger d-flex align-items-start gap-2">
+      <i data-lucide="shield-alert" aria-hidden="true"></i>
+      <span>Access to this workspace has been restricted. <a href="#" class="alert-link">Contact support</a>.</span>
+    </div>
+
+    <!-- Dismissible -->
+    <h2 class="h5 mt-5 mb-3">Dismissible</h2>
+    <p class="demo-label">Bootstrap's own dismissal behavior via <code>data-bs-dismiss="alert"</code> + <code>.btn-close</code> — Bootstrap's JS bundle is loaded on this page to power it.</p>
+    <div class="alert alert-warning alert-dismissible fade show">
+      <strong>Heads up</strong> — dismiss me with the <code>.btn-close</code> button.
+      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+
+    <!-- Stacked / grouped -->
+    <h2 class="h5 mt-5 mb-3">Stacked alerts</h2>
+    <p class="demo-label">Multiple alerts in a realistic page — consistent 1rem spacing, clear hierarchy, no visual noise.</p>
+    <div class="alert alert-info">New version 2.4.0 is available — see the changelog.</div>
+    <div class="alert alert-warning">Your API key will expire in 7 days. <a href="#" class="alert-link">Renew now</a>.</div>
+    <div class="alert alert-danger">3 integrations failed to sync in the last hour.</div>
+
+    <!-- Long content -->
+    <h2 class="h5 mt-5 mb-3">Long content</h2>
+    <div class="alert alert-secondary">
+      This alert demonstrates long-form content. Text wraps naturally at every viewport width, the icon (when present) stays top-aligned, and there is never horizontal overflow. Enterprise systems regularly surface multi-line messages like this one — imported records, retry summaries, or bulk-operation results — so alerts must remain readable and calm even when the message runs on.
+    </div>
+
+    <!-- Semantics / ARIA -->
+    <h2 class="h5 mt-5 mb-3">Semantic usage</h2>
+    <p class="demo-label">Static informational alerts carry no <code>role</code> — they are ordinary content and should not interrupt screen readers. <code>role="alert"</code> is reserved for messages that genuinely need immediate announcement (an operation result rendered after an action), which is exactly how the examples above are annotated. For a region that updates silently over time (e.g. a status panel), <code>aria-live="polite"</code> is the appropriate pattern.</p>
+    <div class="alert alert-success" role="alert">
+      <i data-lucide="circle-check" aria-hidden="true"></i>
+      <span>Operation completed successfully — <code>role="alert"</code> is appropriate here because this message is announced immediately after an action.</span>
+    </div>
+  </div>
+
+  <script>lucide.createIcons();</script>
+</body>
+</html>

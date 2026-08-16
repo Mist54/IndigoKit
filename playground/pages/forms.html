@@ -1,0 +1,1618 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>IndigoKit Playground — Forms</title>
+  <link rel="stylesheet" href="../../dist/css/indigokit.css">
+  <link rel="stylesheet" href="../playground.css">
+  <!-- Playground theme persistence (Task 047) — applies the stored
+       indigokit-theme preference before first paint. Playground-only. -->
+  <script src="../theme.js"></script>
+  <script src="../assets/lucide.umd.js"></script>
+  <!-- Bootstrap's own JS bundle powers the tabs+form and modal-form
+       demos below (data-bs-toggle="tab" / "modal"). Consumer-side
+       load — IndigoKit ships no form-layout JavaScript. -->
+  <script src="../../node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+</head>
+<body>
+  <div class="container py-5">
+    <h1>Forms</h1>
+    <p class="lead">Bootstrap's form API with IndigoKit refinement — all classes are standard Bootstrap (<code>.form-label</code>, <code>.form-control</code>, <code>.form-select</code>, <code>.form-text</code>, <code>.input-group</code>, size and validation classes). Pure HTML/CSS foundation — no validation JavaScript, no masking, no new APIs.</p>
+
+    <!-- Basic text -->
+    <nav aria-label="Form system contents" class="mb-5">
+      <ul class="mb-0 d-flex flex-wrap gap-2 list-unstyled">
+        <li><a class="badge text-bg-secondary text-decoration-none" href="#basic-controls">Basic controls</a></li>
+        <li><a class="badge text-bg-secondary text-decoration-none" href="#choice-controls">Choice controls</a></li>
+        <li><a class="badge text-bg-secondary text-decoration-none" href="#switches-range">Switches &amp; range</a></li>
+        <li><a class="badge text-bg-secondary text-decoration-none" href="#input-groups">Input groups</a></li>
+        <li><a class="badge text-bg-secondary text-decoration-none" href="#floating-labels">Floating labels</a></li>
+        <li><a class="badge text-bg-secondary text-decoration-none" href="#validation">Validation</a></li>
+        <li><a class="badge text-bg-secondary text-decoration-none" href="#advanced-layouts">Advanced layouts</a></li>
+        <li><a class="badge text-bg-secondary text-decoration-none" href="#accessibility-examples">Accessibility examples</a></li>
+      </ul>
+    </nav>
+
+    <h2 class="h5 mt-5" id="basic-controls">Basic controls</h2>
+
+    <h3 class="h5 mt-4 mb-3">Basic text input</h3>
+    <div class="mb-3 demo-input">
+      <label for="projectName" class="form-label">Project name</label>
+      <input type="text" class="form-control" id="projectName" placeholder="e.g. IndigoKit" value="IndigoKit">
+    </div>
+
+    <!-- Email -->
+    <h3 class="h5 mt-4 mb-3">Email</h3>
+    <div class="mb-3 demo-input">
+      <label for="emailInput" class="form-label">Email address</label>
+      <input type="email" class="form-control" id="emailInput" placeholder="name@example.com">
+    </div>
+
+    <!-- Password -->
+    <h3 class="h5 mt-4 mb-3">Password</h3>
+    <div class="mb-3 demo-input">
+      <label for="passwordInput" class="form-label">Password</label>
+      <input type="password" class="form-control" id="passwordInput" value="hunter2">
+    </div>
+
+    <!-- Number -->
+    <h3 class="h5 mt-4 mb-3">Number</h3>
+    <div class="mb-3 demo-input">
+      <label for="numberInput" class="form-label">Sprint capacity (points)</label>
+      <input type="number" class="form-control" id="numberInput" min="0" max="100" value="42">
+    </div>
+
+    <!-- Search -->
+    <h3 class="h5 mt-4 mb-3">Search</h3>
+    <div class="mb-3 demo-input">
+      <label for="searchInput" class="form-label">Search projects</label>
+      <div class="input-group">
+        <span class="input-group-text"><i data-lucide="search" aria-hidden="true"></i></span>
+        <input type="search" class="form-control" id="searchInput" placeholder="Search…">
+      </div>
+    </div>
+
+    <!-- URL -->
+    <h3 class="h5 mt-4 mb-3">URL</h3>
+    <div class="mb-3 demo-input">
+      <label for="urlInput" class="form-label">Repository URL</label>
+      <input type="url" class="form-control" id="urlInput" placeholder="https://github.com/acme/indigokit">
+    </div>
+
+    <!-- Date -->
+    <h3 class="h5 mt-4 mb-3">Date</h3>
+    <div class="mb-3 demo-input">
+      <label for="dateInput" class="form-label">Due date</label>
+      <input type="date" class="form-control" id="dateInput" value="2026-09-15">
+    </div>
+
+    <!-- Textarea -->
+    <h3 class="h5 mt-4 mb-3">Textarea</h3>
+    <div class="mb-3 demo-input">
+      <label for="notesInput" class="form-label">Notes</label>
+      <textarea class="form-control" id="notesInput" rows="3">Textareas resize vertically only — horizontal resize would break the 100%-width layout.</textarea>
+    </div>
+
+    <!-- Select -->
+    <h3 class="h5 mt-4 mb-3">Select</h3>
+    <div class="mb-3 demo-input">
+      <label for="statusSelect" class="form-label">Status</label>
+      <select class="form-select" id="statusSelect">
+        <option>Active</option>
+        <option>Pending</option>
+        <option>Completed</option>
+        <option>Archived</option>
+      </select>
+    </div>
+
+    <!-- Sizes -->
+    <h3 class="h5 mt-4 mb-3">Small</h3>
+    <div class="mb-3 demo-input">
+      <label for="smInput" class="form-label">Small input</label>
+      <input type="text" class="form-control form-control-sm" id="smInput" placeholder="Compact">
+    </div>
+    <div class="mb-3 demo-input">
+      <label for="smSelect" class="form-label">Small select</label>
+      <select class="form-select form-select-sm" id="smSelect">
+        <option>Active</option>
+        <option>Pending</option>
+        <option>Archived</option>
+      </select>
+    </div>
+
+    <h3 class="h5 mt-4 mb-3">Large</h3>
+    <div class="mb-3 demo-input">
+      <label for="lgInput" class="form-label">Large input</label>
+      <input type="text" class="form-control form-control-lg" id="lgInput" placeholder="Prominent">
+    </div>
+    <div class="mb-3 demo-input">
+      <label for="lgSelect" class="form-label">Large select</label>
+      <select class="form-select form-select-lg" id="lgSelect">
+        <option>Active</option>
+        <option>Pending</option>
+        <option>Archived</option>
+      </select>
+    </div>
+
+    <!-- Help text -->
+    <h3 class="h5 mt-4 mb-3">Help text</h3>
+    <div class="mb-3 demo-input">
+      <label for="usernameInput" class="form-label">Username</label>
+      <input type="text" class="form-control" id="usernameInput" aria-describedby="usernameHelp">
+      <div id="usernameHelp" class="form-text">Use 3–30 characters; letters, numbers, underscores and hyphens.</div>
+    </div>
+
+    <!-- Required -->
+    <h3 class="h5 mt-4 mb-3">Required field</h3>
+    <p class="demo-label">The <code>required</code> attribute carries the meaning for assistive technology; the visible "(required)" text communicates it to everyone — no lone red asterisk.</p>
+    <div class="mb-3 demo-input">
+      <label for="requiredInput" class="form-label">
+        Workspace slug <span class="text-secondary">(required)</span>
+      </label>
+      <input type="text" class="form-control" id="requiredInput" required placeholder="acme">
+    </div>
+
+    <!-- Disabled -->
+    <h3 class="h5 mt-4 mb-3">Disabled</h3>
+    <p class="demo-label">Disabled controls are muted, not focusable, and not interactive.</p>
+    <div class="mb-3 demo-input">
+      <label for="disabledInput" class="form-label">Plan</label>
+      <input type="text" class="form-control" id="disabledInput" value="Enterprise" disabled>
+    </div>
+    <div class="mb-3 demo-input">
+      <label for="disabledSelect" class="form-label">Region</label>
+      <select class="form-select" id="disabledSelect" disabled>
+        <option>eu-west-1</option>
+        <option>us-east-1</option>
+      </select>
+    </div>
+
+    <!-- Readonly -->
+    <h3 class="h5 mt-4 mb-3">Readonly</h3>
+    <p class="demo-label">Readonly controls keep the editable look (Bootstrap 5.3 styles them identically to normal inputs) — they stay focusable and selectable, they just can't be changed. That's the honest distinction from disabled.</p>
+    <div class="mb-3 demo-input">
+      <label for="readonlyInput" class="form-label">Invite link</label>
+      <input type="text" class="form-control" id="readonlyInput" value="https://indigokit.dev/invite/abc123" readonly>
+    </div>
+
+    <!-- Input group -->
+    <h3 class="h5 mt-4 mb-3">Input group</h3>
+    <p class="demo-label">Standard Bootstrap <code>.input-group</code> / <code>.input-group-text</code> — no IndigoKit prefix/suffix API.</p>
+    <div class="mb-3 demo-input">
+      <label for="priceInput" class="form-label">Budget</label>
+      <div class="input-group">
+        <span class="input-group-text">₹</span>
+        <input type="number" class="form-control" id="priceInput" value="25000">
+        <span class="input-group-text">/ month</span>
+      </div>
+    </div>
+    <div class="mb-3 demo-input">
+      <label for="rateInput" class="form-label">Tax rate</label>
+      <div class="input-group">
+        <input type="number" class="form-control" id="rateInput" value="18">
+        <span class="input-group-text">%</span>
+      </div>
+    </div>
+
+    <!-- Valid state -->
+    <h3 class="h5 mt-4 mb-3">Valid state</h3>
+    <div class="mb-3 demo-input">
+      <label for="validInput" class="form-label">Email address</label>
+      <input type="email" class="form-control is-valid" id="validInput" value="alice@example.com" aria-describedby="validFeedback">
+      <div id="validFeedback" class="valid-feedback">Looks good — this email is ready to go.</div>
+    </div>
+
+    <!-- Invalid state -->
+    <h3 class="h5 mt-4 mb-3">Invalid state</h3>
+    <div class="mb-3 demo-input">
+      <label for="invalidInput" class="form-label">Email address</label>
+      <input type="email" class="form-control is-invalid" id="invalidInput" value="alice@" aria-describedby="invalidFeedback">
+      <div id="invalidFeedback" class="invalid-feedback">Please enter a valid email address.</div>
+    </div>
+
+    <!-- Error feedback -->
+    <h3 class="h5 mt-4 mb-3">Error feedback</h3>
+    <p class="demo-label">Error messages explain the problem, are linked to the control with <code>aria-describedby</code>, and never rely on color alone — the text carries the meaning.</p>
+    <div class="mb-3 demo-input">
+      <label for="slugInput" class="form-label">Workspace slug</label>
+      <input type="text" class="form-control is-invalid" id="slugInput" value="ac me" aria-describedby="slugFeedback">
+      <div id="slugFeedback" class="invalid-feedback">The slug can only contain lowercase letters, numbers and hyphens (no spaces).</div>
+    </div>
+
+    <!-- Choice controls -->
+    <h2 class="h5 mt-5" id="choice-controls">Choice controls</h2>
+
+    <h3 class="h5 mt-4 mb-3">Checkbox</h3>
+    <p class="demo-label">Standard Bootstrap <code>.form-check</code> — the checkbox is 16px with a white check on solid indigo when checked (≈6.3:1).</p>
+    <div class="demo-input">
+      <div class="form-check">
+        <input class="form-check-input" type="checkbox" id="checkBasic">
+        <label class="form-check-label" for="checkBasic">Receive security notifications</label>
+      </div>
+    </div>
+
+    <h3 class="h5 mt-4 mb-3">Checked checkbox</h3>
+    <div class="demo-input">
+      <div class="form-check">
+        <input class="form-check-input" type="checkbox" id="checkChecked" checked>
+        <label class="form-check-label" for="checkChecked">Keep me signed in on this device</label>
+      </div>
+    </div>
+
+    <h3 class="h5 mt-4 mb-3">Disabled checkbox</h3>
+    <div class="demo-input">
+      <div class="form-check">
+        <input class="form-check-input" type="checkbox" id="checkDisabled" disabled>
+        <label class="form-check-label" for="checkDisabled">Legacy API access (unavailable)</label>
+      </div>
+      <div class="form-check">
+        <input class="form-check-input" type="checkbox" id="checkDisabledChecked" checked disabled>
+        <label class="form-check-label" for="checkDisabledChecked">Two-factor authentication enforced</label>
+      </div>
+    </div>
+
+    <h3 class="h5 mt-4 mb-3">Checkbox group</h3>
+    <p class="demo-label">Spacing between choices uses Bootstrap utilities — no custom spacing API.</p>
+    <div class="demo-input">
+      <div class="form-check">
+        <input class="form-check-input" type="checkbox" id="permRead" checked>
+        <label class="form-check-label" for="permRead">Read access</label>
+      </div>
+      <div class="form-check">
+        <input class="form-check-input" type="checkbox" id="permWrite" checked>
+        <label class="form-check-label" for="permWrite">Write access</label>
+      </div>
+      <div class="form-check">
+        <input class="form-check-input" type="checkbox" id="permAdmin">
+        <label class="form-check-label" for="permAdmin">Administrator access</label>
+      </div>
+    </div>
+
+    <h3 class="h5 mt-4 mb-3">Inline checkboxes</h3>
+    <div class="demo-input">
+      <div class="form-check form-check-inline">
+        <input class="form-check-input" type="checkbox" id="inlineA" value="a">
+        <label class="form-check-label" for="inlineA">Email</label>
+      </div>
+      <div class="form-check form-check-inline">
+        <input class="form-check-input" type="checkbox" id="inlineB" value="b" checked>
+        <label class="form-check-label" for="inlineB">SMS</label>
+      </div>
+      <div class="form-check form-check-inline">
+        <input class="form-check-input" type="checkbox" id="inlineC" value="c">
+        <label class="form-check-label" for="inlineC">Push</label>
+      </div>
+    </div>
+
+    <h3 class="h5 mt-4 mb-3">Radio group</h3>
+    <p class="demo-label">Related choices are grouped natively with <code>fieldset</code>/<code>legend</code> — no ARIA needed. Same <code>name</code> groups the radios.</p>
+    <fieldset class="demo-input">
+      <legend class="form-label fs-6">Deployment environment</legend>
+      <div class="form-check">
+        <input class="form-check-input" type="radio" name="envRadio" id="envStaging" checked>
+        <label class="form-check-label" for="envStaging">Staging</label>
+      </div>
+      <div class="form-check">
+        <input class="form-check-input" type="radio" name="envRadio" id="envProd">
+        <label class="form-check-label" for="envProd">Production</label>
+      </div>
+      <div class="form-check">
+        <input class="form-check-input" type="radio" name="envRadio" id="envSandbox" disabled>
+        <label class="form-check-label" for="envSandbox">Sandbox (disabled)</label>
+      </div>
+    </fieldset>
+
+    <h3 class="h5 mt-4 mb-3">Selected &amp; disabled radios</h3>
+    <fieldset class="demo-input">
+      <legend class="form-label fs-6">Billing cycle</legend>
+      <div class="form-check">
+        <input class="form-check-input" type="radio" name="billingRadio" id="billMonthly" checked>
+        <label class="form-check-label" for="billMonthly">Monthly</label>
+      </div>
+      <div class="form-check">
+        <input class="form-check-input" type="radio" name="billingRadio" id="billAnnual">
+        <label class="form-check-label" for="billAnnual">Annual — save 20%</label>
+      </div>
+      <div class="form-check">
+        <input class="form-check-input" type="radio" name="billingRadio" id="billLegacy" disabled>
+        <label class="form-check-label" for="billLegacy">Legacy plan (unavailable)</label>
+      </div>
+    </fieldset>
+
+    <h3 class="h5 mt-4 mb-3">Inline radios</h3>
+    <fieldset class="demo-input">
+      <legend class="form-label fs-6">Sort results</legend>
+      <div class="form-check form-check-inline">
+        <input class="form-check-input" type="radio" name="sortRadio" id="sortNew" checked>
+        <label class="form-check-label" for="sortNew">Newest</label>
+      </div>
+      <div class="form-check form-check-inline">
+        <input class="form-check-input" type="radio" name="sortRadio" id="sortOld">
+        <label class="form-check-label" for="sortOld">Oldest</label>
+      </div>
+      <div class="form-check form-check-inline">
+        <input class="form-check-input" type="radio" name="sortRadio" id="sortAlpha">
+        <label class="form-check-label" for="sortAlpha">Alphabetical</label>
+      </div>
+    </fieldset>
+
+    <h3 class="h5 mt-4 mb-3">Required choices</h3>
+    <p class="demo-label">Native <code>required</code> on the radio — no redundant ARIA.</p>
+    <fieldset class="demo-input">
+      <legend class="form-label fs-6">Preferred contact method <span class="text-secondary">(required)</span></legend>
+      <div class="form-check">
+        <input class="form-check-input" type="radio" name="contactRadio" id="contactEmail" required>
+        <label class="form-check-label" for="contactEmail">Email</label>
+      </div>
+      <div class="form-check">
+        <input class="form-check-input" type="radio" name="contactRadio" id="contactPhone">
+        <label class="form-check-label" for="contactPhone">Phone</label>
+      </div>
+    </fieldset>
+
+    <h3 class="h5 mt-4 mb-3">Valid state</h3>
+    <div class="demo-input">
+      <div class="form-check">
+        <input class="form-check-input is-valid" type="checkbox" id="checkValid" checked aria-describedby="checkValidFeedback">
+        <label class="form-check-label" for="checkValid">Accept the terms of service</label>
+        <div id="checkValidFeedback" class="valid-feedback">Thanks — you're all set.</div>
+      </div>
+    </div>
+
+    <h3 class="h5 mt-4 mb-3">Invalid state</h3>
+    <div class="demo-input">
+      <div class="form-check">
+        <input class="form-check-input is-invalid" type="checkbox" id="checkInvalid" aria-describedby="checkInvalidFeedback">
+        <label class="form-check-label" for="checkInvalid">Accept the terms of service</label>
+        <div id="checkInvalidFeedback" class="invalid-feedback">You must accept the terms before continuing.</div>
+      </div>
+    </div>
+
+    <h3 class="h5 mt-4 mb-3">Long labels</h3>
+    <div class="demo-input">
+      <div class="form-check">
+        <input class="form-check-input" type="checkbox" id="longLabel" checked>
+        <label class="form-check-label" for="longLabel">I agree to the IndigoKit terms of service, the data processing addendum, and the acceptable use policy governing this workspace.</label>
+      </div>
+    </div>
+
+    <h3 class="h5 mt-4 mb-3">Indeterminate checkbox</h3>
+    <p class="demo-label">Bootstrap 5.3 styles the native <code>:indeterminate</code> state (indigo with a white dash). No HTML attribute exists for it, so the demo sets the DOM property directly below — IndigoKit ships no checkbox JavaScript.</p>
+    <div class="demo-input">
+      <div class="form-check">
+        <input class="form-check-input" type="checkbox" id="indeterminateCheck">
+        <label class="form-check-label" for="indeterminateCheck">Select all permissions (indeterminate)</label>
+      </div>
+    </div>
+
+    <!-- Switches & range -->
+    <h2 class="h5 mt-5" id="switches-range">Switches &amp; range</h2>
+
+    <h3 class="h5 mt-4 mb-3">Switch (off)</h3>
+    <p class="demo-label">Bootstrap's <code>.form-switch</code> — a native checkbox with switch presentation. The off knob is slate (<code>$secondary</code>, ≈4.8:1 on the track), the on state is indigo with a white knob.</p>
+    <div class="demo-input">
+      <div class="form-check form-switch">
+        <input class="form-check-input" type="checkbox" role="switch" id="switchOff">
+        <label class="form-check-label" for="switchOff">Email digests</label>
+      </div>
+    </div>
+
+    <h3 class="h5 mt-4 mb-3">Switch (on)</h3>
+    <div class="demo-input">
+      <div class="form-check form-switch">
+        <input class="form-check-input" type="checkbox" role="switch" id="switchOn" checked>
+        <label class="form-check-label" for="switchOn">Two-factor authentication</label>
+      </div>
+    </div>
+
+    <h3 class="h5 mt-4 mb-3">Disabled switches</h3>
+    <div class="demo-input">
+      <div class="form-check form-switch">
+        <input class="form-check-input" type="checkbox" role="switch" id="switchDisabledOff" disabled>
+        <label class="form-check-label" for="switchDisabledOff">Beta features (unavailable)</label>
+      </div>
+      <div class="form-check form-switch">
+        <input class="form-check-input" type="checkbox" role="switch" id="switchDisabledOn" checked disabled>
+        <label class="form-check-label" for="switchDisabledOn">Audit logging (enforced)</label>
+      </div>
+    </div>
+
+    <h3 class="h5 mt-4 mb-3">Switch with descriptive text</h3>
+    <div class="demo-input">
+      <div class="form-check form-switch">
+        <input class="form-check-input" type="checkbox" role="switch" id="switchDescriptive" checked aria-describedby="switchDescriptiveHelp">
+        <label class="form-check-label" for="switchDescriptive">Auto-approve dependabot PRs</label>
+      </div>
+      <div class="form-text ms-5 ps-2" id="switchDescriptiveHelp">Only for repositories with a passing CI pipeline and full test coverage.</div>
+    </div>
+
+    <h3 class="h5 mt-4 mb-3">Basic range</h3>
+    <div class="demo-input">
+      <label for="rangeBasic" class="form-label">Confidence threshold</label>
+      <input type="range" class="form-range" id="rangeBasic" min="0" max="100" value="25">
+    </div>
+
+    <h3 class="h5 mt-4 mb-3">Range with min / max</h3>
+    <div class="demo-input">
+      <label for="rangeBounds" class="form-label">Font size (12–24px)</label>
+      <input type="range" class="form-range" id="rangeBounds" min="12" max="24" step="1" value="16">
+    </div>
+
+    <h3 class="h5 mt-4 mb-3">Range with step</h3>
+    <div class="demo-input">
+      <label for="rangeStep" class="form-label">Disk quota (10 GB steps)</label>
+      <input type="range" class="form-range" id="rangeStep" min="0" max="100" step="10" value="40">
+    </div>
+
+    <h3 class="h5 mt-4 mb-3">Disabled range</h3>
+    <div class="demo-input">
+      <label for="rangeDisabled" class="form-label">Legacy retry limit</label>
+      <input type="range" class="form-range" id="rangeDisabled" min="0" max="10" value="3" disabled>
+    </div>
+
+    <h3 class="h5 mt-4 mb-3">Accessible label</h3>
+    <p class="demo-label">Every range has an associated <code>&lt;label&gt;</code> (<code>for</code>/<code>id</code>). Native range inputs expose <code>valuenow</code>/<code>valuemin</code>/<code>valuemax</code> to assistive technology automatically — no ARIA required.</p>
+    <div class="demo-input">
+      <label for="rangeLabelled" class="form-label">Backup retention (days)</label>
+      <input type="range" class="form-range" id="rangeLabelled" min="1" max="365" value="90">
+    </div>
+
+    <h3 class="h5 mt-4 mb-3">Live range value</h3>
+    <p class="demo-label">The control stays a native <code>.form-range</code> — this one-line listener only updates the visible value text (playground demo; IndigoKit ships no range JavaScript).</p>
+    <div class="demo-input">
+      <div class="d-flex justify-content-between">
+        <label for="rangeLive" class="form-label">Volume</label>
+        <span class="form-text" id="rangeLiveValue">50</span>
+      </div>
+      <input type="range" class="form-range" id="rangeLive" min="0" max="100" step="5" value="50">
+    </div>
+
+    <!-- Input groups -->
+    <h2 class="h5 mt-5" id="input-groups">Input groups</h2>
+
+    <h3 class="h5 mt-4 mb-3">Basic prefix</h3>
+    <div class="demo-input">
+      <label for="igPrefix" class="form-label">Username</label>
+      <div class="input-group">
+        <span class="input-group-text">@</span>
+        <input type="text" class="form-control" id="igPrefix" placeholder="username">
+      </div>
+    </div>
+
+    <h3 class="h5 mt-4 mb-3">Basic suffix</h3>
+    <div class="demo-input">
+      <label for="igSuffix" class="form-label">Storage</label>
+      <div class="input-group">
+        <input type="number" class="form-control" id="igSuffix" value="100">
+        <span class="input-group-text">GB</span>
+      </div>
+    </div>
+
+    <h3 class="h5 mt-4 mb-3">Currency</h3>
+    <div class="demo-input">
+      <label for="igCurrency" class="form-label">Price</label>
+      <div class="input-group">
+        <span class="input-group-text">₹</span>
+        <input type="number" class="form-control" id="igCurrency" value="25000">
+      </div>
+    </div>
+
+    <h3 class="h5 mt-4 mb-3">Unit</h3>
+    <div class="demo-input">
+      <label for="igUnit" class="form-label">Weight</label>
+      <div class="input-group">
+        <input type="number" class="form-control" id="igUnit" value="4.5">
+        <span class="input-group-text">kg</span>
+      </div>
+    </div>
+
+    <h3 class="h5 mt-4 mb-3">URL</h3>
+    <div class="demo-input">
+      <label for="igUrl" class="form-label">Site URL</label>
+      <div class="input-group">
+        <span class="input-group-text">https://</span>
+        <input type="url" class="form-control" id="igUrl" placeholder="example.com">
+      </div>
+    </div>
+
+    <h3 class="h5 mt-4 mb-3">Search + button</h3>
+    <div class="demo-input">
+      <label for="igSearch" class="form-label">Search repositories</label>
+      <div class="input-group">
+        <input type="search" class="form-control" id="igSearch" placeholder="Search…">
+        <button class="btn btn-primary" type="button">
+          <i data-lucide="search" aria-hidden="true"></i>
+          Search
+        </button>
+      </div>
+    </div>
+
+    <h3 class="h5 mt-4 mb-3">Select + input</h3>
+    <div class="demo-input">
+      <label for="igSelectInput" class="form-label">Project URL</label>
+      <div class="input-group">
+        <select class="form-select" id="igScheme" aria-label="URL scheme">
+          <option value="https://">https://</option>
+          <option value="http://">http://</option>
+          <option value="ssh://">ssh://</option>
+        </select>
+        <input type="text" class="form-control" id="igSelectInput" placeholder="github.com/acme/indigokit">
+      </div>
+    </div>
+
+    <h3 class="h5 mt-4 mb-3">Small input group</h3>
+    <div class="demo-input">
+      <label for="igSm" class="form-label">Tax rate</label>
+      <div class="input-group input-group-sm">
+        <input type="number" class="form-control" id="igSm" value="18">
+        <span class="input-group-text">%</span>
+      </div>
+    </div>
+
+    <h3 class="h5 mt-4 mb-3">Large input group</h3>
+    <div class="demo-input">
+      <label for="igLg" class="form-label">Budget</label>
+      <div class="input-group input-group-lg">
+        <span class="input-group-text">₹</span>
+        <input type="number" class="form-control" id="igLg" value="500000">
+        <span class="input-group-text">/ year</span>
+      </div>
+    </div>
+
+    <h3 class="h5 mt-4 mb-3">Valid input group</h3>
+    <div class="demo-input">
+      <label for="igValid" class="form-label">Discount code</label>
+      <div class="input-group has-validation">
+        <span class="input-group-text">#</span>
+        <input type="text" class="form-control is-valid" id="igValid" value="INDIGOKIT10" aria-describedby="igValidFeedback">
+        <div id="igValidFeedback" class="valid-feedback">Code applied — 10% off.</div>
+      </div>
+    </div>
+
+    <h3 class="h5 mt-4 mb-3">Invalid input group</h3>
+    <div class="demo-input">
+      <label for="igInvalid" class="form-label">Port</label>
+      <div class="input-group has-validation">
+        <span class="input-group-text">:port</span>
+        <input type="number" class="form-control is-invalid" id="igInvalid" value="99999" aria-describedby="igInvalidFeedback">
+        <div id="igInvalidFeedback" class="invalid-feedback">Port must be between 1 and 65535.</div>
+      </div>
+    </div>
+
+    <h3 class="h5 mt-4 mb-3">Disabled</h3>
+    <div class="demo-input">
+      <label for="igDisabled" class="form-label">Invite code</label>
+      <div class="input-group">
+        <span class="input-group-text">#</span>
+        <input type="text" class="form-control" id="igDisabled" value="TEAM-2026" disabled>
+      </div>
+    </div>
+
+    <h3 class="h5 mt-4 mb-3">Readonly</h3>
+    <div class="demo-input">
+      <label for="igReadonly" class="form-label">Deploy URL</label>
+      <div class="input-group">
+        <span class="input-group-text">https://</span>
+        <input type="text" class="form-control" id="igReadonly" value="indigokit.pages.dev" readonly>
+      </div>
+    </div>
+
+    <h3 class="h5 mt-4 mb-3">Icon-enhanced</h3>
+    <p class="demo-label">Decorative icons in addons are <code>aria-hidden="true"</code> — the field keeps its own label, and the icon never replaces accessible text.</p>
+    <div class="demo-input">
+      <label for="igIcon" class="form-label">API endpoint</label>
+      <div class="input-group">
+        <span class="input-group-text"><i data-lucide="link" aria-hidden="true"></i></span>
+        <input type="url" class="form-control" id="igIcon" value="https://api.indigokit.dev/v1">
+        <button class="btn btn-outline-secondary" type="button">
+          <i data-lucide="copy" aria-hidden="true"></i>
+          Copy
+        </button>
+      </div>
+    </div>
+
+    <!-- Floating labels -->
+    <h2 class="h5 mt-5" id="floating-labels">Floating labels</h2>
+
+    <h3 class="h5 mt-4 mb-3">Floating text input</h3>
+    <p class="demo-label">Bootstrap's <code>.form-floating</code>. The <code>placeholder</code> is required — it drives the label's float state — but it is <strong>not</strong> the accessible name; the <code>&lt;label&gt;</code> is.</p>
+    <div class="demo-input">
+      <div class="form-floating">
+        <input type="text" class="form-control" id="flText" placeholder="Project name">
+        <label for="flText">Project name</label>
+      </div>
+    </div>
+
+    <h3 class="h5 mt-4 mb-3">Floating email</h3>
+    <div class="demo-input">
+      <div class="form-floating">
+        <input type="email" class="form-control" id="flEmail" placeholder="name@example.com" value="ada@example.com">
+        <label for="flEmail">Email address</label>
+      </div>
+    </div>
+
+    <h3 class="h5 mt-4 mb-3">Floating password</h3>
+    <div class="demo-input">
+      <div class="form-floating">
+        <input type="password" class="form-control" id="flPassword" placeholder="Password">
+        <label for="flPassword">Password</label>
+      </div>
+    </div>
+
+    <h3 class="h5 mt-4 mb-3">Floating select</h3>
+    <div class="demo-input">
+      <div class="form-floating">
+        <select class="form-select" id="flSelect">
+          <option selected>Choose a country…</option>
+          <option>India</option>
+          <option>United States</option>
+          <option>Germany</option>
+        </select>
+        <label for="flSelect">Country</label>
+      </div>
+    </div>
+
+    <h3 class="h5 mt-4 mb-3">Floating textarea</h3>
+    <div class="demo-input">
+      <div class="form-floating">
+        <textarea class="form-control demo-fl-textarea" id="flMessage" placeholder="Message"></textarea>
+        <label for="flMessage">Message</label>
+      </div>
+    </div>
+
+    <h3 class="h5 mt-4 mb-3">Floating valid state</h3>
+    <div class="demo-input">
+      <div class="form-floating">
+        <input type="email" class="form-control is-valid" id="flValid" placeholder="name@example.com" value="ada@example.com" aria-describedby="flValidFeedback">
+        <label for="flValid">Email address</label>
+        <div id="flValidFeedback" class="valid-feedback">Looks good — this email is ready to go.</div>
+      </div>
+    </div>
+
+    <h3 class="h5 mt-4 mb-3">Floating invalid state</h3>
+    <div class="demo-input">
+      <div class="form-floating">
+        <input type="email" class="form-control is-invalid" id="flInvalid" placeholder="name@example.com" value="ada@" aria-describedby="flInvalidFeedback">
+        <label for="flInvalid">Email address</label>
+        <div id="flInvalidFeedback" class="invalid-feedback">Please enter a valid email address.</div>
+      </div>
+    </div>
+
+    <h3 class="h5 mt-4 mb-3">Floating disabled</h3>
+    <div class="demo-input">
+      <div class="form-floating">
+        <input type="text" class="form-control" id="flDisabled" placeholder="Plan" value="Enterprise" disabled>
+        <label for="flDisabled">Plan</label>
+      </div>
+    </div>
+
+    <h3 class="h5 mt-4 mb-3">Floating readonly</h3>
+    <div class="demo-input">
+      <div class="form-floating">
+        <input type="text" class="form-control" id="flReadonly" placeholder="Invite link" value="https://indigokit.dev/invite/abc123" readonly>
+        <label for="flReadonly">Invite link</label>
+      </div>
+    </div>
+
+    <h3 class="h5 mt-4 mb-3">Long label</h3>
+    <div class="demo-input">
+      <div class="form-floating">
+        <input type="text" class="form-control" id="flLong" placeholder="Company registration number">
+        <label for="flLong">Company registration number (tax identifier)</label>
+      </div>
+    </div>
+
+    <h3 class="h5 mt-4 mb-3">Responsive example</h3>
+    <p class="demo-label">Floating controls stack in the responsive grid like any other field. Note: Bootstrap does <strong>not</strong> scale floating labels with <code>.form-control-sm/-lg</code> — the 3.5rem height is fixed — so use the default size here (documented limitation, no IndigoKit sizing API invented).</p>
+    <div class="card">
+      <div class="card-body">
+        <div class="row g-3">
+          <div class="col-12 col-md-6">
+            <div class="form-floating">
+              <input type="text" class="form-control" id="flFirst" placeholder="First name">
+              <label for="flFirst">First name</label>
+            </div>
+          </div>
+          <div class="col-12 col-md-6">
+            <div class="form-floating">
+              <input type="text" class="form-control" id="flLast" placeholder="Last name">
+              <label for="flLast">Last name</label>
+            </div>
+          </div>
+          <div class="col-12">
+            <div class="form-floating">
+              <input type="email" class="form-control" id="flRespEmail" placeholder="name@example.com">
+              <label for="flRespEmail">Email address</label>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <p class="demo-note mt-3">Floating labels are an alternative presentation of standard form labels; they do not replace semantic labels.</p>
+
+    <!-- Validation -->
+    <h2 class="h5 mt-5" id="validation">Validation</h2>
+    <p class="demo-label">Bootstrap's validation API (<code>.is-valid</code>, <code>.is-invalid</code>, <code>.valid-feedback</code>, <code>.invalid-feedback</code>, <code>.valid-tooltip</code>, <code>.invalid-tooltip</code>) with IndigoKit contrast fixes. Error messages are specific and actionable, linked with <code>aria-describedby</code>, and never rely on color alone. Valid states are used sparingly — marking every successful field is visual noise.</p>
+
+    <h3 class="h6 mt-4 mb-3">Valid text input</h3>
+    <div class="demo-input">
+      <label for="vText" class="form-label">Email address</label>
+      <input type="email" class="form-control is-valid" id="vText" value="ada@example.com" aria-describedby="vTextFeedback">
+      <div id="vTextFeedback" class="valid-feedback">Email verified.</div>
+    </div>
+
+    <h3 class="h6 mt-4 mb-3">Invalid text input</h3>
+    <div class="demo-input">
+      <label for="vEmail" class="form-label">Email address</label>
+      <input type="email" class="form-control is-invalid" id="vEmail" value="ada@" aria-describedby="vEmailFeedback">
+      <div id="vEmailFeedback" class="invalid-feedback">Enter an email address such as name@example.com.</div>
+    </div>
+
+    <h3 class="h6 mt-4 mb-3">Valid select</h3>
+    <div class="demo-input">
+      <label for="vSelValid" class="form-label">Region</label>
+      <select class="form-select is-valid" id="vSelValid" aria-describedby="vSelValidFeedback">
+        <option>eu-west-1</option>
+        <option selected>us-east-1</option>
+        <option>ap-south-1</option>
+      </select>
+      <div id="vSelValidFeedback" class="valid-feedback">Region available.</div>
+    </div>
+
+    <h3 class="h6 mt-4 mb-3">Invalid select</h3>
+    <div class="demo-input">
+      <label for="vSelInvalid" class="form-label">Deployment region</label>
+      <select class="form-select is-invalid" id="vSelInvalid" aria-describedby="vSelInvalidFeedback">
+        <option selected value="">Choose a region…</option>
+        <option>eu-west-1</option>
+        <option>us-east-1</option>
+      </select>
+      <div id="vSelInvalidFeedback" class="invalid-feedback">Select a deployment region.</div>
+    </div>
+
+    <h3 class="h6 mt-4 mb-3">Valid textarea</h3>
+    <div class="demo-input">
+      <label for="vTaValid" class="form-label">Description</label>
+      <textarea class="form-control is-valid" id="vTaValid" rows="2" aria-describedby="vTaValidFeedback">A short project description.</textarea>
+      <div id="vTaValidFeedback" class="valid-feedback">Looks good.</div>
+    </div>
+
+    <h3 class="h6 mt-4 mb-3">Invalid textarea</h3>
+    <div class="demo-input">
+      <label for="vTaInvalid" class="form-label">Description</label>
+      <textarea class="form-control is-invalid" id="vTaInvalid" rows="2" aria-describedby="vTaInvalidFeedback"></textarea>
+      <div id="vTaInvalidFeedback" class="invalid-feedback">Add a description so reviewers know what changed.</div>
+    </div>
+
+    <h3 class="h6 mt-4 mb-3">Valid checkbox</h3>
+    <div class="demo-input">
+      <div class="form-check">
+        <input class="form-check-input is-valid" type="checkbox" id="vCheckValid" checked aria-describedby="vCheckValidFeedback">
+        <label class="form-check-label" for="vCheckValid">Notify me about releases</label>
+        <div id="vCheckValidFeedback" class="valid-feedback">Notifications on.</div>
+      </div>
+    </div>
+
+    <h3 class="h6 mt-4 mb-3">Invalid checkbox</h3>
+    <div class="demo-input">
+      <div class="form-check">
+        <input class="form-check-input is-invalid" type="checkbox" id="vCheckInvalid" aria-describedby="vCheckInvalidFeedback">
+        <label class="form-check-label" for="vCheckInvalid">I agree to the terms of service</label>
+        <div id="vCheckInvalidFeedback" class="invalid-feedback">You must accept the terms to continue.</div>
+      </div>
+    </div>
+
+    <h3 class="h6 mt-4 mb-3">Invalid radio group</h3>
+    <div class="demo-input">
+      <fieldset>
+        <legend class="form-label fs-6">Contact preference <span class="text-secondary">(required)</span></legend>
+        <div class="form-check">
+          <input class="form-check-input is-invalid" type="radio" name="vRadio" id="vRadioEmail" aria-describedby="vRadioFeedback">
+          <label class="form-check-label" for="vRadioEmail">Email</label>
+        </div>
+        <div class="form-check">
+          <input class="form-check-input" type="radio" name="vRadio" id="vRadioPhone">
+          <label class="form-check-label" for="vRadioPhone">Phone</label>
+        </div>
+        <div id="vRadioFeedback" class="invalid-feedback">Choose a contact method.</div>
+      </fieldset>
+    </div>
+
+    <h3 class="h6 mt-4 mb-3">Input-group validation</h3>
+    <div class="demo-input">
+      <label for="vGroup" class="form-label">Port</label>
+      <div class="input-group has-validation">
+        <span class="input-group-text">:port</span>
+        <input type="number" class="form-control is-invalid" id="vGroup" value="99999" aria-describedby="vGroupFeedback">
+        <div id="vGroupFeedback" class="invalid-feedback">Port must be between 1 and 65535.</div>
+      </div>
+    </div>
+
+    <h3 class="h6 mt-4 mb-3">Floating-label validation</h3>
+    <div class="demo-input">
+      <div class="form-floating">
+        <input type="email" class="form-control is-invalid" id="vFloating" placeholder="name@example.com" value="ada@" aria-describedby="vFloatingFeedback">
+        <label for="vFloating">Email address</label>
+        <div id="vFloatingFeedback" class="invalid-feedback">Enter an email address such as name@example.com.</div>
+      </div>
+    </div>
+
+    <h3 class="h6 mt-4 mb-3">Multiple-field form</h3>
+    <p class="demo-label"><code>novalidate</code> is used here on purpose — it lets this demo show static, server-rendered-style errors (exactly the markup ASP.NET MVC, Razor or any server renderer emits) instead of native browser bubbles. <code>aria-invalid="true"</code> marks each failing control because the browser's native <code>:invalid</code> semantics aren't active under <code>novalidate</code>.</p>
+    <div class="card">
+      <div class="card-body">
+        <form novalidate>
+          <div class="mb-3 demo-input">
+            <label for="vfName" class="form-label">Full name</label>
+            <input type="text" class="form-control is-invalid" id="vfName" aria-invalid="true" aria-describedby="vfNameFeedback">
+            <div id="vfNameFeedback" class="invalid-feedback">Name is required.</div>
+          </div>
+          <div class="mb-3 demo-input">
+            <label for="vfEmail" class="form-label">Email address</label>
+            <input type="email" class="form-control is-invalid" id="vfEmail" value="ada@" aria-invalid="true" aria-describedby="vfEmailFeedback">
+            <div id="vfEmailFeedback" class="invalid-feedback">Enter an email address such as name@example.com.</div>
+          </div>
+          <div class="mb-3 demo-input">
+            <label for="vfPassword" class="form-label">Password</label>
+            <input type="password" class="form-control is-invalid" id="vfPassword" value="short" aria-invalid="true" aria-describedby="vfPasswordFeedback">
+            <div id="vfPasswordFeedback" class="invalid-feedback">Password must be at least 12 characters.</div>
+          </div>
+          <button type="button" class="btn btn-primary">Create account</button>
+        </form>
+      </div>
+    </div>
+
+    <h3 class="h6 mt-4 mb-3">Validation summary</h3>
+    <p class="demo-label">A form-level summary built from existing components — <code>.alert</code> with <code>role="alert"</code> and links to each failing field. No new IndigoKit API.</p>
+    <div class="demo-input">
+      <div class="alert alert-danger" role="alert">
+        <h4 class="alert-heading h6 mb-2">Please fix the following errors</h4>
+        <ul class="mb-0">
+          <li><a href="#vfName" class="alert-link">Name is required.</a></li>
+          <li><a href="#vfEmail" class="alert-link">Enter an email address such as name@example.com.</a></li>
+          <li><a href="#vfPassword" class="alert-link">Password must be at least 12 characters.</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <h3 class="h6 mt-4 mb-3">Long error message</h3>
+    <div class="demo-input">
+      <label for="vLong" class="form-label">API token</label>
+      <input type="text" class="form-control is-invalid" id="vLong" value="sk-live-1234" aria-describedby="vLongFeedback">
+      <div id="vLongFeedback" class="invalid-feedback">This token is scoped to the staging environment and cannot be used for production deploys. Create a production-scoped token in Settings &gt; API tokens, then paste it here.</div>
+    </div>
+
+    <h3 class="h6 mt-4 mb-3">Focused invalid control</h3>
+    <p class="demo-label">Invalid controls keep the standard IndigoKit focus ring — validation styling never replaces the focus indicator. Keyboard users land on the first invalid field and see exactly where they are; <kbd>Tab</kbd> moves through the rest.</p>
+    <div class="demo-input">
+      <label for="vFocus" class="form-label">Workspace slug</label>
+      <input type="text" class="form-control is-invalid" id="vFocus" value="ac me" aria-describedby="vFocusFeedback">
+      <div id="vFocusFeedback" class="invalid-feedback">Lowercase letters, numbers and hyphens only — no spaces.</div>
+    </div>
+
+    <!-- Responsive layout -->
+    <h2 class="h5 mt-5" id="advanced-layouts">Advanced layouts</h2>
+
+    <h3 class="h5 mt-4 mb-3">Responsive form layout</h3>
+    <p class="demo-label">Bootstrap utilities only — a two-column row that stacks on small screens.</p>
+    <div class="card">
+      <div class="card-body">
+        <form novalidate>
+          <div class="row g-3">
+            <div class="col-12 col-md-6">
+              <label for="rFirstName" class="form-label">First name</label>
+              <input type="text" class="form-control" id="rFirstName" placeholder="Ada">
+            </div>
+            <div class="col-12 col-md-6">
+              <label for="rLastName" class="form-label">Last name</label>
+              <input type="text" class="form-control" id="rLastName" placeholder="Lovelace">
+            </div>
+            <div class="col-12">
+              <label for="rEmail" class="form-label">Email address</label>
+              <input type="email" class="form-control" id="rEmail" placeholder="ada@example.com">
+            </div>
+            <div class="col-12 col-md-6">
+              <label for="rRole" class="form-label">Role</label>
+              <select class="form-select" id="rRole">
+                <option>Administrator</option>
+                <option>Member</option>
+                <option>Viewer</option>
+              </select>
+            </div>
+            <div class="col-12 col-md-6">
+              <label for="rTeam" class="form-label">Team</label>
+              <select class="form-select" id="rTeam">
+                <option>Platform</option>
+                <option>Design</option>
+                <option>Operations</option>
+              </select>
+            </div>
+            <div class="col-12 d-flex justify-content-end gap-2">
+              <button type="button" class="btn btn-secondary">Cancel</button>
+              <button type="button" class="btn btn-primary">Save member</button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <!-- Form layouts -->
+    <h3 class="h5 mt-4 mb-3">Form layouts</h3>
+    <p class="demo-label">All patterns use Bootstrap's grid/flex/spacing utilities and existing IndigoKit components — no layout API invented. Fields keep natural widths based on content rather than being forced into equal columns.</p>
+
+    <h4 class="h6 mt-4 mb-3">Single-column form</h4>
+    <div class="demo-input">
+      <div class="mb-3">
+        <h4 class="h4 mb-1">Create account</h4>
+        <p class="text-secondary mb-0">Set up a workspace for your team.</p>
+      </div>
+      <div class="mb-3">
+        <label for="sName" class="form-label">Full name</label>
+        <input type="text" class="form-control" id="sName" placeholder="Ada Lovelace">
+      </div>
+      <div class="mb-3">
+        <label for="sEmail" class="form-label">Email address</label>
+        <input type="email" class="form-control" id="sEmail" placeholder="ada@example.com">
+      </div>
+      <div class="mb-3">
+        <label for="sPassword" class="form-label">Password</label>
+        <input type="password" class="form-control" id="sPassword">
+      </div>
+      <div class="mb-4">
+        <label for="sAbout" class="form-label">Description</label>
+        <textarea class="form-control" id="sAbout" rows="3" placeholder="What will your team build?"></textarea>
+      </div>
+      <div class="d-flex flex-column flex-sm-row gap-2">
+        <button type="button" class="btn btn-primary">Create account</button>
+        <button type="button" class="btn btn-secondary">Cancel</button>
+      </div>
+    </div>
+
+    <h4 class="h6 mt-4 mb-3">Two-column form</h4>
+    <div class="card">
+      <div class="card-body">
+        <div class="row g-3">
+          <div class="col-md-6">
+            <label for="tFirst" class="form-label">First name</label>
+            <input type="text" class="form-control" id="tFirst" placeholder="Ada">
+          </div>
+          <div class="col-md-6">
+            <label for="tLast" class="form-label">Last name</label>
+            <input type="text" class="form-control" id="tLast" placeholder="Lovelace">
+          </div>
+          <div class="col-md-6">
+            <label for="tEmail" class="form-label">Email address</label>
+            <input type="email" class="form-control" id="tEmail" placeholder="ada@example.com">
+          </div>
+          <div class="col-md-6">
+            <label for="tPhone" class="form-label">Phone</label>
+            <input type="tel" class="form-control" id="tPhone" placeholder="+91 98765 43210">
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <h4 class="h6 mt-4 mb-3">Responsive form (content-based widths)</h4>
+    <div class="card">
+      <div class="card-body">
+        <div class="row g-3">
+          <div class="col-12 col-md-6">
+            <label for="rStreet" class="form-label">Street address</label>
+            <input type="text" class="form-control" id="rStreet" placeholder="221B Baker Street">
+          </div>
+          <div class="col-12 col-md-6">
+            <label for="rCity" class="form-label">City</label>
+            <input type="text" class="form-control" id="rCity" placeholder="London">
+          </div>
+          <div class="col-12 col-md-4">
+            <label for="rState" class="form-label">State / Province</label>
+            <input type="text" class="form-control" id="rState">
+          </div>
+          <div class="col-6 col-md-3">
+            <label for="rZip" class="form-label">Postal code</label>
+            <input type="text" class="form-control" id="rZip" placeholder="NW1 6XE">
+          </div>
+          <div class="col-6 col-md-3">
+            <label for="rCountry" class="form-label">Country</label>
+            <select class="form-select" id="rCountry">
+              <option>United Kingdom</option>
+              <option>India</option>
+              <option>United States</option>
+            </select>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <h4 class="h6 mt-4 mb-3">Fieldset / legend</h4>
+    <div class="card">
+      <div class="card-body">
+        <fieldset>
+          <legend class="fs-6 fw-semibold">Contact information</legend>
+          <div class="row g-3">
+            <div class="col-md-6">
+              <label for="fEmail" class="form-label">Email address</label>
+              <input type="email" class="form-control" id="fEmail">
+            </div>
+            <div class="col-md-6">
+              <label for="fPhone" class="form-label">Phone</label>
+              <input type="tel" class="form-control" id="fPhone">
+            </div>
+          </div>
+        </fieldset>
+      </div>
+    </div>
+
+    <h4 class="h6 mt-4 mb-3">Form sections (multiple fieldsets)</h4>
+    <div class="card">
+      <div class="card-body">
+        <fieldset class="mb-4">
+          <legend class="fs-6 fw-semibold mb-2">Account</legend>
+          <div class="row g-3">
+            <div class="col-md-6">
+              <label for="secName" class="form-label">Display name</label>
+              <input type="text" class="form-control" id="secName">
+            </div>
+            <div class="col-md-6">
+              <label for="secEmail" class="form-label">Email address</label>
+              <input type="email" class="form-control" id="secEmail">
+            </div>
+          </div>
+        </fieldset>
+        <fieldset class="mb-4">
+          <legend class="fs-6 fw-semibold mb-2">Contact</legend>
+          <div class="row g-3">
+            <div class="col-md-4">
+              <label for="secCity" class="form-label">City</label>
+              <input type="text" class="form-control" id="secCity">
+            </div>
+            <div class="col-md-4">
+              <label for="secState" class="form-label">State</label>
+              <input type="text" class="form-control" id="secState">
+            </div>
+            <div class="col-md-4">
+              <label for="secZip" class="form-label">Postal code</label>
+              <input type="text" class="form-control" id="secZip">
+            </div>
+          </div>
+        </fieldset>
+        <fieldset class="mb-0">
+          <legend class="fs-6 fw-semibold mb-2">Preferences</legend>
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" id="secNews" checked>
+            <label class="form-check-label" for="secNews">Send product updates</label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" id="secDigest">
+            <label class="form-check-label" for="secDigest">Weekly digest</label>
+          </div>
+        </fieldset>
+      </div>
+    </div>
+
+    <h4 class="h6 mt-4 mb-3">Horizontal form</h4>
+    <p class="demo-label">Bootstrap's classic horizontal pattern — labels beside fields from <code>md</code> up, stacked below it. Readability wins over layout: labels stay on top on narrow screens.</p>
+    <div class="demo-input">
+      <div class="mb-3 row">
+        <label for="hName" class="col-sm-3 col-form-label">Full name</label>
+        <div class="col-sm-9">
+          <input type="text" class="form-control" id="hName" placeholder="Ada Lovelace">
+        </div>
+      </div>
+      <div class="mb-3 row">
+        <label for="hEmail" class="col-sm-3 col-form-label">Email address</label>
+        <div class="col-sm-9">
+          <input type="email" class="form-control" id="hEmail" placeholder="ada@example.com">
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-sm-9 offset-sm-3">
+          <button type="button" class="btn btn-primary">Save profile</button>
+        </div>
+      </div>
+    </div>
+
+    <h4 class="h6 mt-4 mb-3">Compact form</h4>
+    <p class="demo-label">A dense filter/search row — <code>.form-control-sm</code>, <code>.form-select-sm</code>, small buttons and tight gutters. No custom compact classes.</p>
+    <div class="card">
+      <div class="card-body">
+        <div class="row g-2 align-items-end">
+          <div class="col-12 col-sm-4">
+            <label for="cSearch" class="form-label visually-hidden">Search</label>
+            <input type="search" class="form-control form-control-sm" id="cSearch" placeholder="Search projects…">
+          </div>
+          <div class="col-6 col-sm-3">
+            <label for="cStatus" class="form-label visually-hidden">Status</label>
+            <select class="form-select form-select-sm" id="cStatus">
+              <option>All statuses</option>
+              <option>Active</option>
+              <option>Archived</option>
+            </select>
+          </div>
+          <div class="col-6 col-sm-3">
+            <label for="cOwner" class="form-label visually-hidden">Owner</label>
+            <select class="form-select form-select-sm" id="cOwner">
+              <option>Anyone</option>
+              <option>Me</option>
+              <option>My team</option>
+            </select>
+          </div>
+          <div class="col-12 col-sm-2 d-flex gap-2">
+            <button type="button" class="btn btn-primary btn-sm flex-fill">Apply</button>
+            <button type="button" class="btn btn-outline-secondary btn-sm">Reset</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <h4 class="h6 mt-4 mb-3">Card form</h4>
+    <div class="card">
+      <div class="card-header"><strong>Billing details</strong></div>
+      <div class="card-body">
+        <div class="row g-3">
+          <div class="col-md-8">
+            <label for="cfCard" class="form-label">Card number</label>
+            <input type="text" class="form-control" id="cfCard" placeholder="4242 4242 4242 4242">
+          </div>
+          <div class="col-6 col-md-2">
+            <label for="cfExp" class="form-label">Expiry</label>
+            <input type="text" class="form-control" id="cfExp" placeholder="09/28">
+          </div>
+          <div class="col-6 col-md-2">
+            <label for="cfCvc" class="form-label">CVC</label>
+            <input type="text" class="form-control" id="cfCvc" placeholder="123">
+          </div>
+          <div class="col-12">
+            <label for="cfName" class="form-label">Name on card</label>
+            <input type="text" class="form-control" id="cfName" placeholder="Ada Lovelace">
+          </div>
+        </div>
+      </div>
+      <div class="card-footer d-flex justify-content-end gap-2">
+        <button type="button" class="btn btn-secondary">Cancel</button>
+        <button type="button" class="btn btn-primary">Save billing</button>
+      </div>
+    </div>
+
+    <h4 class="h6 mt-4 mb-3">Modal form</h4>
+    <p class="demo-label">A form inside Bootstrap's modal — labels, validation states and actions all compose with the modal's focus trap.</p>
+    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#formModal">New invite</button>
+
+    <div class="modal fade" id="formModal" tabindex="-1" aria-labelledby="formModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h2 class="modal-title fs-5" id="formModalLabel">Invite a member</h2>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <div class="mb-3">
+              <label for="mEmail" class="form-label">Email address</label>
+              <input type="email" class="form-control is-invalid" id="mEmail" value="ada@" aria-describedby="mEmailFeedback">
+              <div id="mEmailFeedback" class="invalid-feedback">Enter an email address such as name@example.com.</div>
+            </div>
+            <div class="mb-3">
+              <label for="mRole" class="form-label">Role</label>
+              <select class="form-select" id="mRole">
+                <option>Member</option>
+                <option>Administrator</option>
+                <option>Viewer</option>
+              </select>
+            </div>
+            <div class="mb-0">
+              <label for="mNote" class="form-label">Personal note (optional)</label>
+              <textarea class="form-control" id="mNote" rows="2"></textarea>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+            <button type="button" class="btn btn-primary">Send invite</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <h4 class="h6 mt-4 mb-3">Tabs + form</h4>
+    <p class="demo-label">A settings-style interface — each tab holds its own form content. Bootstrap's Tab JS (already loaded) powers the switching.</p>
+    <div class="card">
+      <div class="card-body">
+        <ul class="nav nav-tabs" role="tablist">
+          <li class="nav-item" role="presentation">
+            <button class="nav-link active" id="stGeneralTab" data-bs-toggle="tab" data-bs-target="#stGeneral" type="button" role="tab" aria-controls="stGeneral" aria-selected="true" tabindex="0">General</button>
+          </li>
+          <li class="nav-item" role="presentation">
+            <button class="nav-link" id="stSecurityTab" data-bs-toggle="tab" data-bs-target="#stSecurity" type="button" role="tab" aria-controls="stSecurity" aria-selected="false" tabindex="-1">Security</button>
+          </li>
+          <li class="nav-item" role="presentation">
+            <button class="nav-link" id="stNotifTab" data-bs-toggle="tab" data-bs-target="#stNotif" type="button" role="tab" aria-controls="stNotif" aria-selected="false" tabindex="-1">Notifications</button>
+          </li>
+        </ul>
+        <div class="tab-content pt-3">
+          <div class="tab-pane fade show active" id="stGeneral" role="tabpanel" aria-labelledby="stGeneralTab">
+            <div class="row g-3">
+              <div class="col-md-6">
+                <label for="stName" class="form-label">Workspace name</label>
+                <input type="text" class="form-control" id="stName" value="IndigoKit">
+              </div>
+              <div class="col-md-6">
+                <label for="stSlug" class="form-label">Slug</label>
+                <input type="text" class="form-control" id="stSlug" value="indigokit">
+              </div>
+            </div>
+          </div>
+          <div class="tab-pane fade" id="stSecurity" role="tabpanel" aria-labelledby="stSecurityTab">
+            <div class="row g-3">
+              <div class="col-md-6">
+                <label for="stMfa" class="form-label">Password</label>
+                <input type="password" class="form-control" id="stMfa">
+              </div>
+              <div class="col-md-6 d-flex align-items-end pb-2">
+                <div class="form-check form-switch">
+                  <input class="form-check-input" type="checkbox" role="switch" id="stSwitch" checked>
+                  <label class="form-check-label" for="stSwitch">Require two-factor authentication</label>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="tab-pane fade" id="stNotif" role="tabpanel" aria-labelledby="stNotifTab">
+            <div class="form-check">
+              <input class="form-check-input" type="checkbox" id="stNotifEmail" checked>
+              <label class="form-check-label" for="stNotifEmail">Email digests</label>
+            </div>
+            <div class="form-check">
+              <input class="form-check-input" type="checkbox" id="stNotifSlack">
+              <label class="form-check-label" for="stNotifSlack">Slack mentions</label>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <h4 class="h6 mt-4 mb-3">Form actions</h4>
+    <p class="demo-label">Action rows via flex utilities — right-aligned on desktop, full-width buttons on mobile (<code>flex-column flex-sm-row</code> + <code>ms-auto</code>).</p>
+    <div class="card">
+      <div class="card-body">
+        <div class="d-flex flex-column flex-sm-row gap-2 justify-content-end">
+          <button type="button" class="btn btn-outline-secondary">Back</button>
+          <button type="button" class="btn btn-secondary">Save draft</button>
+          <button type="button" class="btn btn-primary">Submit</button>
+        </div>
+        <hr>
+        <div class="d-flex flex-column flex-sm-row gap-2">
+          <button type="button" class="btn btn-outline-secondary">Reset</button>
+          <button type="button" class="btn btn-primary ms-sm-auto">Apply changes</button>
+        </div>
+      </div>
+    </div>
+
+    <h4 class="h6 mt-4 mb-3">Appropriate field widths</h4>
+    <div class="card">
+      <div class="card-body">
+        <div class="row g-3">
+          <div class="col-12 col-md-6">
+            <label for="wEmail" class="form-label">Email address</label>
+            <input type="email" class="form-control" id="wEmail" placeholder="ada@example.com">
+          </div>
+          <div class="col-6 col-md-3">
+            <label for="wDate" class="form-label">Date</label>
+            <input type="date" class="form-control" id="wDate">
+          </div>
+          <div class="col-6 col-md-3">
+            <label for="wQty" class="form-label">Quantity</label>
+            <input type="number" class="form-control" id="wQty" value="1">
+          </div>
+          <div class="col-12 col-md-4">
+            <label for="wPhone" class="form-label">Phone</label>
+            <input type="tel" class="form-control" id="wPhone" placeholder="+91 98765 43210">
+          </div>
+          <div class="col-12 col-md-4">
+            <label for="wAmount" class="form-label">Amount</label>
+            <div class="input-group">
+              <span class="input-group-text">₹</span>
+              <input type="number" class="form-control" id="wAmount" value="25000">
+            </div>
+          </div>
+          <div class="col-6 col-md-4">
+            <label for="wZip" class="form-label">Postal code</label>
+            <input type="text" class="form-control" id="wZip" placeholder="560001">
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Form integration -->
+    <h2 class="h5 mt-5" id="form-integration">Form integration</h2>
+    <p class="demo-label">Real-world compositions — every pattern below is built from Bootstrap utilities and the IndigoKit components above (buttons, cards, tabs, modals, validation). No form framework, no new classes.</p>
+
+    <h3 class="h5 mt-4 mb-3">Profile form</h3>
+    <div class="card">
+      <div class="card-header">Profile</div>
+      <div class="card-body">
+        <form novalidate>
+          <div class="row g-3">
+            <div class="col-md-6">
+              <label for="profileName" class="form-label">Full name <span class="text-secondary">(required)</span></label>
+              <input type="text" class="form-control" id="profileName" required value="Ada Lovelace">
+            </div>
+            <div class="col-md-6">
+              <label for="profileEmail" class="form-label">Email address <span class="text-secondary">(required)</span></label>
+              <input type="email" class="form-control" id="profileEmail" required value="ada@example.com" aria-describedby="profileEmailHelp">
+              <div id="profileEmailHelp" class="form-text">Work email — notifications are sent here.</div>
+            </div>
+            <div class="col-md-6">
+              <label for="profilePhone" class="form-label">Phone</label>
+              <div class="input-group">
+                <span class="input-group-text">+91</span>
+                <input type="tel" class="form-control" id="profilePhone" placeholder="98765 43210">
+              </div>
+            </div>
+            <div class="col-md-3">
+              <label for="profileCountry" class="form-label">Country <span class="text-secondary">(required)</span></label>
+              <select class="form-select" id="profileCountry" required>
+                <option value="" selected>Choose…</option>
+                <option value="in">India</option>
+                <option value="us">United States</option>
+                <option value="gb">United Kingdom</option>
+                <option value="de">Germany</option>
+              </select>
+            </div>
+            <div class="col-md-3">
+              <label for="profileCity" class="form-label">City</label>
+              <input type="text" class="form-control" id="profileCity">
+            </div>
+            <div class="col-12">
+              <label for="profileBio" class="form-label">Bio</label>
+              <textarea class="form-control demo-fl-textarea" id="profileBio" rows="3" placeholder="A short summary of your work…"></textarea>
+              <div class="form-text">Shown on your public profile. Markdown is not supported.</div>
+            </div>
+          </div>
+
+          <fieldset class="mt-4">
+            <legend class="fs-6 fw-semibold">Notifications</legend>
+            <div class="form-check form-switch mb-2">
+              <input class="form-check-input" type="checkbox" role="switch" id="notifProduct" checked>
+              <label class="form-check-label" for="notifProduct">Product updates</label>
+            </div>
+            <div class="form-check form-switch mb-2">
+              <input class="form-check-input" type="checkbox" role="switch" id="notifWeekly" checked>
+              <label class="form-check-label" for="notifWeekly">Weekly digest</label>
+            </div>
+            <div class="form-check form-switch">
+              <input class="form-check-input" type="checkbox" role="switch" id="notifSecurity">
+              <label class="form-check-label" for="notifSecurity">Security alerts</label>
+            </div>
+          </fieldset>
+        </form>
+      </div>
+      <div class="card-footer d-flex justify-content-end gap-2">
+        <button type="button" class="btn btn-outline-secondary">Cancel</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+
+    <h3 class="h5 mt-4 mb-3">Account settings (tabs)</h3>
+    <div class="card">
+      <div class="card-header p-0">
+        <ul class="nav nav-tabs card-header-tabs px-3 pt-2" role="tablist">
+          <li class="nav-item" role="presentation">
+            <button class="nav-link active" id="accTab" data-bs-toggle="tab" data-bs-target="#accPane" type="button" role="tab" aria-controls="accPane" aria-selected="true" tabindex="0">Account</button>
+          </li>
+          <li class="nav-item" role="presentation">
+            <button class="nav-link" id="secTab" data-bs-toggle="tab" data-bs-target="#secPane" type="button" role="tab" aria-controls="secPane" aria-selected="false" tabindex="-1">Security</button>
+          </li>
+          <li class="nav-item" role="presentation">
+            <button class="nav-link" id="notTab" data-bs-toggle="tab" data-bs-target="#notPane" type="button" role="tab" aria-controls="notPane" aria-selected="false" tabindex="-1">Notifications</button>
+          </li>
+        </ul>
+      </div>
+      <div class="card-body">
+        <div class="tab-content">
+          <div class="tab-pane fade show active" id="accPane" role="tabpanel" aria-labelledby="accTab">
+            <div class="row g-3">
+              <div class="col-md-6">
+                <label for="accName" class="form-label">Display name</label>
+                <input type="text" class="form-control" id="accName" value="Ada Lovelace">
+              </div>
+              <div class="col-md-6">
+                <label for="accEmail" class="form-label">Login email</label>
+                <input type="email" class="form-control" id="accEmail" value="ada@example.com">
+              </div>
+            </div>
+          </div>
+          <div class="tab-pane fade" id="secPane" role="tabpanel" aria-labelledby="secTab">
+            <div class="row g-3">
+              <div class="col-md-6">
+                <label for="secPass" class="form-label">New password</label>
+                <input type="password" class="form-control" id="secPass" autocomplete="new-password">
+              </div>
+              <div class="col-md-6">
+                <label for="secConfirm" class="form-label">Confirm new password</label>
+                <input type="password" class="form-control" id="secConfirm" autocomplete="new-password">
+              </div>
+            </div>
+            <div class="form-check form-switch mt-3">
+              <input class="form-check-input" type="checkbox" role="switch" id="sec2fa" checked>
+              <label class="form-check-label" for="sec2fa">Require two-factor authentication</label>
+            </div>
+          </div>
+          <div class="tab-pane fade" id="notPane" role="tabpanel" aria-labelledby="notTab">
+            <div class="form-check form-switch mb-2">
+              <input class="form-check-input" type="checkbox" role="switch" id="notEmail" checked>
+              <label class="form-check-label" for="notEmail">Email me about activity on my projects</label>
+            </div>
+            <div class="form-check form-switch">
+              <input class="form-check-input" type="checkbox" role="switch" id="notSlack">
+              <label class="form-check-label" for="notSlack">Send Slack digests</label>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <h3 class="h5 mt-4 mb-3">Search / filter form</h3>
+    <form class="card p-3 mb-3" novalidate>
+      <div class="row g-2 align-items-end">
+        <div class="col-12 col-md-4 col-lg-3">
+          <label for="filterQ" class="form-label visually-hidden">Search</label>
+          <div class="input-group">
+            <span class="input-group-text"><i data-lucide="search" aria-hidden="true"></i></span>
+            <input type="search" class="form-control form-control-sm" id="filterQ" placeholder="Search projects…">
+          </div>
+        </div>
+        <div class="col-6 col-md-2 col-lg-2">
+          <label for="filterStatus" class="form-label visually-hidden">Status</label>
+          <select class="form-select form-select-sm" id="filterStatus">
+            <option value="">Status</option>
+            <option>Active</option>
+            <option>Archived</option>
+            <option>Draft</option>
+          </select>
+        </div>
+        <div class="col-6 col-md-2 col-lg-2">
+          <label for="filterCategory" class="form-label visually-hidden">Category</label>
+          <select class="form-select form-select-sm" id="filterCategory">
+            <option value="">Category</option>
+            <option>Design</option>
+            <option>Engineering</option>
+            <option>Marketing</option>
+          </select>
+        </div>
+        <div class="col-12 col-md-4 col-lg-3">
+          <label for="filterFrom" class="form-label visually-hidden">From date</label>
+          <input type="date" class="form-control form-control-sm" id="filterFrom">
+        </div>
+        <div class="col-12 col-lg-2 d-flex gap-2">
+          <button type="submit" class="btn btn-primary btn-sm flex-grow-1">Apply</button>
+          <button type="reset" class="btn btn-outline-secondary btn-sm">Reset</button>
+        </div>
+      </div>
+    </form>
+    <p class="demo-label">The compact filter row uses <code>.form-control-sm</code> / <code>.form-select-sm</code> with <code>visually-hidden</code> labels — every control keeps an accessible name.</p>
+
+    <h3 class="h5 mt-4 mb-3">Create-project modal</h3>
+    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#createProjectModal">New project</button>
+    <div class="modal fade" id="createProjectModal" tabindex="-1" aria-labelledby="createProjectLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h2 class="modal-title fs-5" id="createProjectLabel">Create project</h2>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <form novalidate>
+              <div class="mb-3">
+                <label for="projName" class="form-label">Project name <span class="text-secondary">(required)</span></label>
+                <input type="text" class="form-control" id="projName" required aria-describedby="projNameHelp">
+                <div id="projNameHelp" class="form-text">2–60 characters, visible to all members.</div>
+              </div>
+              <div class="mb-3">
+                <label for="projDesc" class="form-label">Description</label>
+                <textarea class="form-control" id="projDesc" rows="3" placeholder="What is this project about? (optional)"></textarea>
+              </div>
+              <div class="mb-3">
+                <label for="projCategory" class="form-label">Category <span class="text-secondary">(required)</span></label>
+                <select class="form-select" id="projCategory" required>
+                  <option value="" selected>Choose…</option>
+                  <option>Design</option>
+                  <option>Engineering</option>
+                  <option>Marketing</option>
+                </select>
+              </div>
+            </form>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Cancel</button>
+            <button type="button" class="btn btn-primary">Create project</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <h3 class="h5 mt-4 mb-3">Failed-submission state</h3>
+    <p class="demo-label">One realistic server-rendered error scenario — three fields invalid, each with a specific message, plus a summary. The indigo focus ring is never replaced by the error border.</p>
+    <div class="card">
+      <div class="card-body">
+        <div class="alert alert-danger d-flex align-items-start gap-2 mb-4" role="alert">
+          <i data-lucide="triangle-alert" aria-hidden="true"></i>
+          <div>
+            <strong>We couldn't save your workspace.</strong> Fix the fields below and try again.
+            <ul class="mb-0 mt-1 ps-3">
+              <li><a href="#wsName" class="alert-link">Workspace name</a> is required.</li>
+              <li><a href="#wsEmail" class="alert-link">Billing email</a> is not a valid email address.</li>
+              <li><a href="#wsPlan" class="alert-link">Plan</a> must be selected.</li>
+            </ul>
+          </div>
+        </div>
+        <form novalidate>
+          <div class="row g-3">
+            <div class="col-md-6">
+              <label for="wsName" class="form-label">Workspace name</label>
+              <input type="text" class="form-control is-invalid" id="wsName" aria-describedby="wsNameError" aria-invalid="true">
+              <div id="wsNameError" class="invalid-feedback">Workspace name is required.</div>
+            </div>
+            <div class="col-md-6">
+              <label for="wsEmail" class="form-label">Billing email</label>
+              <input type="email" class="form-control is-invalid" id="wsEmail" value="ada@" aria-describedby="wsEmailError" aria-invalid="true">
+              <div id="wsEmailError" class="invalid-feedback">Enter an email address such as name@example.com.</div>
+            </div>
+            <div class="col-md-6">
+              <label for="wsPlan" class="form-label">Plan</label>
+              <select class="form-select is-invalid" id="wsPlan" aria-describedby="wsPlanError" aria-invalid="true">
+                <option value="" selected>Choose…</option>
+                <option>Starter</option>
+                <option>Professional</option>
+                <option>Enterprise</option>
+              </select>
+              <div id="wsPlanError" class="invalid-feedback">Select a plan to continue.</div>
+            </div>
+          </div>
+        </form>
+      </div>
+      <div class="card-footer d-flex justify-content-between align-items-center flex-column flex-sm-row gap-2">
+        <span class="text-secondary small">3 errors — summary links jump to each field.</span>
+        <div class="d-flex gap-2">
+          <button type="button" class="btn btn-outline-secondary btn-sm">Cancel</button>
+          <button type="button" class="btn btn-primary btn-sm">Save workspace</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Accessibility -->
+    <h2 class="h5 mt-5" id="accessibility-examples">Accessibility examples</h2>
+    <ul class="mb-0">
+      <li>Every control has an associated <code>&lt;label&gt;</code> via <code>for</code>/<code>id</code> — placeholders are never the label.</li>
+      <li>Help text and error messages are linked with <code>aria-describedby</code>; native <code>required</code> carries requiredness (no redundant ARIA).</li>
+      <li>Required fields show visible "(required)" text, not a lone red asterisk.</li>
+      <li>Validation feedback uses the dark emphasis colors (≈8.5:1 / ≈8.8:1 contrast) and the message text explains the problem — never color alone.</li>
+      <li>Choice controls use native <code>.form-check</code> semantics: <code>for</code>/<code>id</code> labels, same-<code>name</code> radio groups, <code>fieldset</code>/<code>legend</code> for related choices, native <code>required</code>, and the checked mark is a white glyph on solid indigo (≈6.3:1) — no ARIA beyond what HTML provides.</li>
+      <li>The indeterminate checkbox uses the native DOM property (styled by Bootstrap's <code>:indeterminate</code>) — no IndigoKit class or API.</li>
+      <li>Switches are native checkboxes with Bootstrap's <code>.form-switch</code> presentation (<code>role="switch"</code> for the toggle semantics); state is conveyed by knob position <em>and</em> color, never color alone, and the off knob is slate (≈4.8:1).</li>
+      <li>Range controls are native <code>.form-range</code> inputs with associated labels — min/max/value are exposed to assistive technology automatically.</li>
+      <li>Input-group addons are contextual, not labels — every control keeps its own <code>&lt;label&gt;</code>, and <code>aria-describedby</code> is used only where an addon adds genuinely useful supplementary information. Addon icons are decorative (<code>aria-hidden="true"</code>).</li>
+      <li>Disabled controls are muted and unreachable; readonly controls keep their editable look (still focusable/selectable).</li>
+      <li>Focus uses the global indigo ring — keyboard users can always see where they are.</li>
+      <li><strong>Validation:</strong> errors use <code>aria-invalid="true"</code> where the native <code>:invalid</code> semantics aren't active (e.g. static/novalidate forms), and <code>aria-describedby</code> ties each control to its help/error text. Messages are specific and actionable, never color-only, and the invalid icon is a dark-red glyph matching the border and message.</li>
+      <li><strong>Validation timing:</strong> errors are announced when they appear — the summary uses <code>role="alert"</code>, but live regions are not scattered across every field (that would double-announce). No aggressive keystroke-by-keystroke validation is demonstrated.</li>
+      <li><strong>Server compatibility:</strong> every example is plain server-renderable HTML — no client-side validation engine; ASP.NET MVC/Razor style markup works unchanged.</li>
+    </ul>
+  </div>
+
+  <script>
+    lucide.createIcons();
+    // Native indeterminate state — no HTML attribute exists, so the
+    // DOM property is set directly. Demo-only; IndigoKit ships no
+    // checkbox/radio JavaScript.
+    document.getElementById('indeterminateCheck').indeterminate = true;
+
+    // Live range value — one listener updating the visible number.
+    // Playground demo only; the .form-range control stays native and
+    // IndigoKit ships no range JavaScript.
+    var rangeLive = document.getElementById('rangeLive');
+    var rangeLiveValue = document.getElementById('rangeLiveValue');
+    rangeLive.addEventListener('input', function () {
+      rangeLiveValue.textContent = rangeLive.value;
+    });
+  </script>
+</body>
+</html>

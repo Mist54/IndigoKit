@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>IndigoKit Playground — Scrollspy</title>
+  <link rel="stylesheet" href="../../dist/css/indigokit.css">
+  <link rel="stylesheet" href="../playground.css">
+  <!-- Playground theme persistence (Task 047) — applies the stored
+       indigokit-theme preference before first paint. Playground-only. -->
+  <script src="../theme.js"></script>
+  <script src="../assets/lucide.umd.js"></script>
+  <script src="../../node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+</head>
+<body data-bs-spy="scroll" data-bs-target="#spyNav" data-bs-root-margin="0px 0px -40%" data-bs-smooth-scroll="true" tabindex="0">
+  <div class="container py-4 demo-table-page">
+    <h1 class="h4 mb-1">Scrollspy</h1>
+    <p class="demo-label mb-4">Bootstrap's <code>data-bs-spy</code> API — scrolling the content updates the active navigation item. The active state is Bootstrap's own <code>.active</code> class on nav links, carried by the existing IndigoKit pill treatment. No custom scroll tracking.</p>
+
+    <div class="d-flex gap-4 mb-5">
+      <div class="d-none d-md-block spy-nav-col">
+        <nav id="spyNav" class="sticky-top pt-3" aria-label="Documentation sections">
+          <ul class="nav nav-pills flex-column">
+            <li class="nav-item">
+              <a class="nav-link active" href="#sec-overview">Overview</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#sec-config">Configuration</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#sec-security">Security</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#sec-notifications">Notifications</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#sec-advanced">Advanced</a>
+            </li>
+          </ul>
+        </nav>
+      </div>
+
+      <div class="flex-grow-1 min-vw-0">
+        <section id="sec-overview" class="spy-section">
+          <h2 class="h4 mb-3">Overview</h2>
+          <p>IndigoKit is a reusable Modern + Enterprise UI framework on top of Bootstrap 5.3. This documentation page demonstrates the scrollspy pattern: a sticky navigation column that highlights the section currently in view.</p>
+          <p>The active item is marked by Bootstrap's scrollspy toggling <code>.active</code> on the matching nav link — the same class the tabs and pills systems use, so the indigo pill treatment applies automatically.</p>
+        </section>
+
+        <section id="sec-config" class="spy-section">
+          <h2 class="h4 mb-3">Configuration</h2>
+          <p>Configuration lives in <code>src/scss/base/_tokens.scss</code> — colors, spacing, radius, shadows, and motion map onto Bootstrap's variables before the framework is imported.</p>
+          <p>Component refinements sit in <code>src/scss/components/</code>, each file holding only the rules Bootstrap genuinely needs. The build is a single Sass CLI pass with no bundler.</p>
+          <p>Consumer integration is plain Bootstrap: import the compiled CSS and optional <code>dist/js/indigokit.js</code>, then write standard Bootstrap markup.</p>
+        </section>
+
+        <section id="sec-security" class="spy-section">
+          <h2 class="h4 mb-3">Security</h2>
+          <p>Authentication and authorization follow your existing application architecture — IndigoKit is presentation only and never intercepts credentials or session state.</p>
+          <p>Form validation is server-render compatible: the markup works with ASP.NET MVC, Razor, and standard HTML forms, and validation feedback uses the dark emphasis colors (measured ≥8:1).</p>
+          <p>Never store secrets in the repository; inject them at deploy time via environment variables or your platform's secret manager.</p>
+        </section>
+
+        <section id="sec-notifications" class="spy-section">
+          <h2 class="h4 mb-3">Notifications</h2>
+          <p>Toasts are transient event notifications — success, info, warning, and error variants with deliberate live-region semantics (<code>role="status"</code> for non-urgent, <code>role="alert"</code> for errors).</p>
+          <p>Alerts remain the pattern for persistent page-level information. The two complement each other and never replace one another.</p>
+        </section>
+
+        <section id="sec-advanced" class="spy-section">
+          <h2 class="h4 mb-3">Advanced</h2>
+          <p>Advanced options include the application shell (navbar + collapsible sidebar + mobile drawer), the Bootstrap-first component library, and the Phase 6 data-display set: tables, progress, loading, toasts, list groups, and empty states.</p>
+          <p>The scrollspy pattern itself composes from existing utilities — a sticky nav column, semantic sections, and Bootstrap's own spy. No navigation framework is required.</p>
+        </section>
+      </div>
+    </div>
+
+    <!-- Nested + mobile -->
+    <h2 class="h5 mt-5" id="nested">Nested navigation &amp; mobile</h2>
+    <p class="demo-label">One level of nested nav (Configuration → child links) demonstrates the parent/child active handling. On mobile the nav lives in an offcanvas drawer — the same links, the same spy target, so the active state works from the drawer too.</p>
+
+    <div class="d-flex gap-4">
+      <div class="d-none d-lg-block spy-nav-col">
+        <nav id="spyNavNested" class="sticky-top pt-3" aria-label="Advanced sections">
+          <ul class="nav nav-pills flex-column">
+            <li class="nav-item">
+              <a class="nav-link active" href="#n-overview">Overview</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#n-config">Configuration</a>
+              <ul class="nav flex-column ms-3 mt-1 spy-subnav">
+                <li class="nav-item"><a class="nav-link" href="#n-config-tokens">Tokens</a></li>
+                <li class="nav-item"><a class="nav-link" href="#n-config-build">Build</a></li>
+              </ul>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#n-security">Security</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#n-advanced">Advanced</a>
+            </li>
+          </ul>
+        </nav>
+      </div>
+
+      <div class="flex-grow-1 min-vw-0">
+        <section id="n-overview" class="spy-section">
+          <h3 class="h5 mb-3">Overview</h3>
+          <p>Nested navigation tracks parent and child sections together — scroll into a child and both its link and the parent stay active.</p>
+        </section>
+        <section id="n-config" class="spy-section">
+          <h3 class="h5 mb-3">Configuration</h3>
+          <p>The parent section for the nested links below. Scroll to either child and the Configuration link remains highlighted alongside it.</p>
+        </section>
+        <section id="n-config-tokens" class="spy-section">
+          <h3 class="h5 mb-3">Tokens</h3>
+          <p>The token layer maps the IndigoKit palette and scales onto Bootstrap's variables before import.</p>
+        </section>
+        <section id="n-config-build" class="spy-section">
+          <h3 class="h5 mb-3">Build</h3>
+          <p>A single Sass CLI command compiles <code>indigokit.scss</code> into <code>dist/css/indigokit.css</code> with no bundler and no build-time framework.</p>
+        </section>
+        <section id="n-security" class="spy-section">
+          <h3 class="h5 mb-3">Security</h3>
+          <p>Presentation-only framework — authentication and authorization stay in your application layer.</p>
+        </section>
+        <section id="n-advanced" class="spy-section">
+          <h3 class="h5 mb-3">Advanced</h3>
+          <p>The shell, the component library, and the data-display set round out the system.</p>
+        </section>
+      </div>
+    </div>
+
+    <button type="button" class="btn btn-outline-secondary d-lg-none mt-3" data-bs-toggle="offcanvas" data-bs-target="#ocSpyNav" aria-controls="ocSpyNav">
+      <i data-lucide="menu" aria-hidden="true"></i> Sections
+    </button>
+
+    <!-- A11y -->
+    <h2 class="h5 mt-5" id="accessibility">Accessibility notes</h2>
+    <ul class="mb-0">
+      <li>Navigation is a real <code>&lt;nav&gt;</code> with an accessible name (<code>aria-label</code>), and links point to real section IDs — the same markup works with or without scrollspy.</li>
+      <li>Bootstrap toggles <code>.active</code> on the nav link of the section in view; the indigo pill + strong text carries the state (never color alone). The <code>data-bs-smooth-scroll</code> option animates anchor jumps and respects reduced motion.</li>
+      <li>Headings follow the document structure (<code>h2</code> for sections, <code>h3</code> for nested ones); sections are semantic <code>&lt;section&gt;</code> elements.</li>
+      <li>Mobile: the nav moves into an offcanvas drawer (the existing offcanvas pattern) — the same spy target, so the active state tracks correctly from the drawer.</li>
+      <li>No custom scroll listeners, analytics, or reading-progress tracking — this is Bootstrap's own scrollspy.</li>
+    </ul>
+  </div>
+
+  <!-- Mobile nav (offcanvas) -->
+  <div class="offcanvas offcanvas-start" tabindex="-1" id="ocSpyNav" aria-labelledby="ocSpyNavLabel">
+    <div class="offcanvas-header">
+      <h2 class="offcanvas-title" id="ocSpyNavLabel">Sections</h2>
+      <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+    </div>
+    <div class="offcanvas-body">
+      <nav id="spyNavMobile" aria-label="Mobile documentation sections">
+        <ul class="nav nav-pills flex-column">
+          <li class="nav-item">
+            <a class="nav-link active" href="#sec-overview">Overview</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#sec-config">Configuration</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#sec-security">Security</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#sec-notifications">Notifications</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#sec-advanced">Advanced</a>
+          </li>
+        </ul>
+      </nav>
+    </div>
+  </div>
+
+  <script>
+    lucide.createIcons();
+  </script>
+</body>
+</html>

@@ -1,0 +1,54 @@
+// ============================================================
+// IndigoKit — Card System
+// ------------------------------------------------------------
+// Bootstrap-first: .card, .card-header, .card-body, .card-footer,
+// .card-title, .card-subtitle, .card-text, .card-link,
+// .card-img-top/bottom and .card-group all keep their names and
+// behavior. Bootstrap's card variables already produce the
+// IndigoKit look with our tokens (white surface, hairline
+// translucent border, 6px radius, no shadow), so this partial
+// only adds typography hierarchy and the one interactive-card
+// affordance Bootstrap cannot express.
+//
+// Elevation: an "integrated" card is the default (border only).
+// For a slightly elevated card use Bootstrap's own utility:
+//   <div class="card shadow-sm">  (emits $mu-shadow-xs)
+// ============================================================
+
+// Card titles match the approved heading weight (600) so
+// <h5 class="card-title"> reads as IndigoKit instead of plain text.
+.card-title {
+  font-weight: $font-weight-semibold;
+}
+
+// Card subtitles use the secondary/muted text hierarchy (the
+// --bs-secondary-color token, dark-theme-safe).
+.card-subtitle {
+  color: var(--bs-secondary-color);
+}
+
+// ------------------------------------------------------------
+// Interactive cards
+// ------------------------------------------------------------
+// Bootstrap has no interactive-card affordance (no hover/focus
+// concept on .card itself), so this is a genuinely new IndigoKit
+// concept — the one justified mu-* card class.
+//
+// Usage — the card must be a real link/control (never a
+// clickable <div>):
+//   <a class="card mu-card-interactive" href="...">...</a>
+//
+// Treatment: subtle indigo-tinted border + XS shadow on hover.
+// Static cards are NOT affected — no generic hover everywhere.
+// The anchor is keyboard-focusable and receives the global
+// :focus-visible ring around the whole card.
+.mu-card-interactive {
+  text-decoration: none; // the card itself is a link — no underline
+
+  @include transition(border-color $mu-motion-fast ease-in-out, box-shadow $mu-motion-fast ease-in-out);
+
+  &:hover {
+    border-color: rgba($mu-indigo, 0.4);
+    box-shadow: $mu-shadow-xs;
+  }
+}

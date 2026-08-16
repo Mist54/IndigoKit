@@ -1,0 +1,37 @@
+// Nav / tabs refinements.
+//
+// Bootstrap 5.3.8's nav system is already token-wired (indigo focus ring,
+// classic nav-tabs notch, indigo+white nav-pills). These rules are the only
+// IndigoKit additions:
+//
+// 1. `.nav-link` becomes a flex row so icons and badges sit on the label's
+//    text baseline (mirrors the `.btn` / `.dropdown-item` pattern).
+// 2. Icons inside nav links render at 1em (16px) and never shrink.
+// 3. The active `.nav-tabs` link gains the IndigoKit 600 text weight — stronger
+//    text on top of Bootstrap's existing border-notch active treatment, so
+//    the active state never relies on color alone.
+// 4. Bootstrap's native `.nav-underline` gets a subtle indigo active
+//    indicator (text stays strong emphasis-color; the underline carries the
+//    primary accent). Theme-aware via `--bs-primary`.
+
+.nav-link {
+  display: inline-flex;
+  align-items: center;
+  gap: $spacer * 0.5;
+}
+
+.nav-link [data-lucide] {
+  width: 1em;
+  height: 1em;
+  flex-shrink: 0;
+}
+
+.nav-tabs .nav-link.active,
+.nav-tabs .nav-item.show .nav-link {
+  font-weight: 600;
+}
+
+.nav-underline .nav-link.active,
+.nav-underline .show > .nav-link {
+  border-bottom-color: var(--bs-primary);
+}

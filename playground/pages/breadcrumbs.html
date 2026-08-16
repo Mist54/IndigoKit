@@ -1,0 +1,125 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>IndigoKit Playground — Breadcrumbs</title>
+  <link rel="stylesheet" href="../../dist/css/indigokit.css">
+  <link rel="stylesheet" href="../playground.css">
+  <!-- Playground theme persistence (Task 047) — applies the stored
+       indigokit-theme preference before first paint. Playground-only. -->
+  <script src="../theme.js"></script>
+  <script src="../assets/lucide.umd.js"></script>
+</head>
+<body>
+  <div class="container py-5">
+    <h1>Breadcrumbs</h1>
+    <p class="lead">Bootstrap's breadcrumb API with IndigoKit refinement — all classes are standard Bootstrap (<code>.breadcrumb</code>, <code>.breadcrumb-item</code>, <code>.active</code>). Supporting navigation: compact 14px type, a subtle <code>/</code> separator, and a current page marked by muted color, stronger weight and <code>aria-current="page"</code>.</p>
+
+    <!-- Basic -->
+    <h2 class="h5 mt-5 mb-3">Basic breadcrumb</h2>
+    <nav aria-label="breadcrumb">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="#">Home</a></li>
+        <li class="breadcrumb-item"><a href="#">Projects</a></li>
+        <li class="breadcrumb-item active" aria-current="page">Project Details</li>
+      </ol>
+    </nav>
+
+    <!-- Two-level -->
+    <h2 class="h5 mt-5 mb-3">Two-level breadcrumb</h2>
+    <nav aria-label="breadcrumb">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="#">Home</a></li>
+        <li class="breadcrumb-item active" aria-current="page">Settings</li>
+      </ol>
+    </nav>
+
+    <!-- Multi-level / long -->
+    <h2 class="h5 mt-5 mb-3">Multi-level breadcrumb (long hierarchy)</h2>
+    <p class="demo-label">Bootstrap's <code>.breadcrumb</code> wraps naturally — an eight-level hierarchy stays readable with zero horizontal overflow and no custom scrolling.</p>
+    <nav aria-label="breadcrumb">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="#">Home</a></li>
+        <li class="breadcrumb-item"><a href="#">Organization</a></li>
+        <li class="breadcrumb-item"><a href="#">Engineering</a></li>
+        <li class="breadcrumb-item"><a href="#">Projects</a></li>
+        <li class="breadcrumb-item"><a href="#">Internal Tools</a></li>
+        <li class="breadcrumb-item"><a href="#">IndigoKit</a></li>
+        <li class="breadcrumb-item"><a href="#">Components</a></li>
+        <li class="breadcrumb-item active" aria-current="page">Breadcrumbs</li>
+      </ol>
+    </nav>
+
+    <!-- Current page -->
+    <h2 class="h5 mt-5 mb-3">Current page treatment</h2>
+    <p class="demo-label">The current page is the last item: muted color <em>and</em> a stronger text weight (never color alone), with <code>aria-current="page"</code> for assistive technology. It is not a link.</p>
+    <nav aria-label="breadcrumb">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="#">Home</a></li>
+        <li class="breadcrumb-item"><a href="#">Account</a></li>
+        <li class="breadcrumb-item active" aria-current="page">Billing &amp; plans</li>
+      </ol>
+    </nav>
+
+    <!-- Above page title -->
+    <h2 class="h5 mt-5 mb-3">Above the page title</h2>
+    <p class="demo-label">The standard composition — breadcrumb, then page title, then description/actions. Spacing uses Bootstrap utilities only.</p>
+    <div class="border rounded-3 p-4">
+      <nav aria-label="breadcrumb" class="mb-2">
+        <ol class="breadcrumb mb-2">
+          <li class="breadcrumb-item"><a href="#">Home</a></li>
+          <li class="breadcrumb-item"><a href="#">Projects</a></li>
+          <li class="breadcrumb-item active" aria-current="page">IndigoKit</li>
+        </ol>
+      </nav>
+      <div class="d-flex flex-wrap align-items-center gap-3">
+        <h1 class="h3 mb-0">IndigoKit</h1>
+        <span class="badge text-bg-secondary">Active</span>
+        <button type="button" class="btn btn-primary ms-auto">New task</button>
+      </div>
+      <p class="text-secondary mt-3 mb-0">IndigoKit's design system — components, tokens and the application shell, built on Bootstrap.</p>
+    </div>
+
+    <!-- Optional home icon -->
+    <h2 class="h5 mt-5 mb-3">Optional home icon</h2>
+    <p class="demo-label">Icons are optional and decorative (<code>aria-hidden="true"</code>) — the visible label supplies the accessible name. No per-item separator icons are used.</p>
+    <nav aria-label="breadcrumb">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item">
+          <a href="#">
+            <i data-lucide="house" aria-hidden="true"></i>
+            Home
+          </a>
+        </li>
+        <li class="breadcrumb-item"><a href="#">Projects</a></li>
+        <li class="breadcrumb-item active" aria-current="page">IndigoKit</li>
+      </ol>
+    </nav>
+
+    <!-- Keyboard / focus -->
+    <h2 class="h5 mt-5 mb-3">Keyboard &amp; focus</h2>
+    <p class="demo-label">Breadcrumb links are real anchors — <kbd>Tab</kbd> moves through them and the global IndigoKit focus ring (strong indigo) marks the focused link. The current page is not a link, so it is not keyboard-reachable.</p>
+    <nav aria-label="breadcrumb">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="#">Home</a></li>
+        <li class="breadcrumb-item"><a href="#">Reports</a></li>
+        <li class="breadcrumb-item"><a href="#">Monthly</a></li>
+        <li class="breadcrumb-item active" aria-current="page">August 2026</li>
+      </ol>
+    </nav>
+
+    <!-- Accessibility -->
+    <h2 class="h5 mt-5 mb-3">Accessibility notes</h2>
+    <ul class="mb-0">
+      <li>Breadcrumbs live in a <code>&lt;nav&gt;</code> landmark with an accessible name (<code>aria-label="breadcrumb"</code>).</li>
+      <li>The current page uses <code>aria-current="page"</code> and is <strong>not</strong> a link — only real ancestors are anchors.</li>
+      <li>The <code>/</code> separator is generated by Bootstrap's CSS (<code>::before</code> content) — no icon elements per item.</li>
+      <li>The current page is distinguished by muted color <em>and</em> stronger weight, never color alone.</li>
+      <li>Breadcrumbs are supporting navigation — the page title and primary nav remain the main orientation cues.</li>
+    </ul>
+  </div>
+
+  <script>lucide.createIcons();</script>
+</body>
+</html>

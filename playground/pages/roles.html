@@ -1,0 +1,463 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>IndigoKit — Roles &amp; permissions</title>
+  <link rel="stylesheet" href="../../dist/css/indigokit.css">
+  <link rel="stylesheet" href="../playground.css">
+  <script src="../theme.js"></script>
+  <script src="../assets/lucide.umd.js"></script>
+  <script src="../../node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="../../dist/js/indigokit.js"></script>
+</head>
+<body>
+  <div class="mu-app">
+
+    <header class="mu-app-top">
+      <nav class="navbar mu-app-navbar" aria-label="Main navigation">
+        <div class="container-fluid">
+                    <div class="d-flex align-items-center gap-2">
+            <button type="button" class="btn" data-mu-mobile-toggle aria-controls="app-sidebar" aria-expanded="false" aria-label="Open navigation">
+              <i data-lucide="menu" aria-hidden="true"></i>
+            </button>
+            <button type="button" class="btn" data-mu-sidebar-toggle aria-controls="app-sidebar" aria-expanded="true" aria-label="Collapse sidebar">
+              <i data-lucide="panel-left-close" aria-hidden="true"></i>
+            </button>
+            <a class="navbar-brand" href="../index.html">
+            <i data-lucide="layers" aria-hidden="true"></i>
+            IndigoKit
+          </a>
+          </div>
+          <div class="mu-navbar-main"></div>
+          <div class="mu-navbar-actions">
+            <select class="form-select form-select-sm" data-theme-switch aria-label="Theme">
+              <option value="system">System</option>
+              <option value="light">Light</option>
+              <option value="dark">Dark</option>
+            </select>
+            <button type="button" class="btn d-none d-md-inline-flex" aria-label="Notifications">
+              <i data-lucide="bell" aria-hidden="true"></i>
+            </button>
+            <button type="button" class="btn d-none d-md-inline-flex" aria-label="Help">
+              <i data-lucide="circle-question-mark" aria-hidden="true"></i>
+            </button>
+            <div class="dropdown">
+              <a class="mu-navbar-user" href="#" data-bs-toggle="dropdown" aria-expanded="false" aria-label="User menu">
+                <span class="mu-avatar"><i data-lucide="user" aria-hidden="true"></i></span>
+                <span class="mu-user-name d-none d-lg-inline">Jane Doe</span>
+                <i data-lucide="chevron-down" aria-hidden="true"></i>
+              </a>
+              <ul class="dropdown-menu dropdown-menu-end">
+                <li>
+                  <h6 class="dropdown-header">Jane Doe<span class="d-block small fw-normal text-body-secondary">Software Engineer</span></h6>
+                </li>
+                <li><hr class="dropdown-divider"></li>
+                <li><a class="dropdown-item" href="profile.html">Profile</a></li>
+                <li><a class="dropdown-item" href="settings.html">Account Settings</a></li>
+                <li><a class="dropdown-item" href="settings.html">Notifications</a></li>
+                <li><a class="dropdown-item" href="auth/lock-screen.html">Lock Screen</a></li>
+                <li><hr class="dropdown-divider"></li>
+                <li><a class="dropdown-item text-danger" href="auth/login.html">Sign out</a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <div class="mu-app-body">
+
+      <aside class="mu-app-side">
+        <div class="mu-sidebar" id="app-sidebar">
+          <div class="mu-sidebar-header">
+            <button type="button" class="btn mu-sidebar-close" data-mu-sidebar-close aria-label="Close navigation">
+              <i data-lucide="x" aria-hidden="true"></i>
+            </button>
+          </div>
+          <nav class="mu-sidebar-nav" aria-label="Sidebar navigation">
+            <div class="mu-sidebar-section">
+              <div class="mu-sidebar-label">Application examples</div>
+              <ul class="mu-sidebar-list">
+                <li>
+                  <a class="mu-sidebar-link" href="../index.html">
+                    <i data-lucide="layout-dashboard" aria-hidden="true"></i>
+                    <span class="mu-sidebar-link-text">Dashboard</span>
+                  </a>
+                </li>
+                <li>
+                  <a class="mu-sidebar-link" href="dashboard-analytics.html">
+                    <i data-lucide="chart-no-axes-combined" aria-hidden="true"></i>
+                    <span class="mu-sidebar-link-text">Analytics</span>
+                  </a>
+                </li>
+                <li>
+                  <a class="mu-sidebar-link" href="dashboard-sales.html">
+                    <i data-lucide="chart-column" aria-hidden="true"></i>
+                    <span class="mu-sidebar-link-text">Sales</span>
+                  </a>
+                </li>
+                <li>
+                  <button type="button" class="mu-sidebar-link" data-bs-toggle="collapse" data-bs-target="#nav-auth" aria-expanded="false" aria-controls="nav-auth">
+                    <i data-lucide="shield" aria-hidden="true"></i>
+                    <span class="mu-sidebar-link-text">Authentication</span>
+                    <i data-lucide="chevron-right" class="mu-sidebar-chevron" aria-hidden="true"></i>
+                  </button>
+                  <div class="collapse" id="nav-auth">
+                    <ul class="mu-sidebar-nested">
+                      <li><a class="mu-sidebar-link" href="auth/login.html"><span class="mu-sidebar-link-text">Login</span></a></li>
+                      <li><a class="mu-sidebar-link" href="auth/register.html"><span class="mu-sidebar-link-text">Register</span></a></li>
+                      <li><a class="mu-sidebar-link" href="auth/forgot-password.html"><span class="mu-sidebar-link-text">Forgot password</span></a></li>
+                      <li><a class="mu-sidebar-link" href="auth/reset-password.html"><span class="mu-sidebar-link-text">Reset password</span></a></li>
+                      <li><a class="mu-sidebar-link" href="auth/lock-screen.html"><span class="mu-sidebar-link-text">Lock screen</span></a></li>
+                    </ul>
+                  </div>
+                </li>
+                <li>
+                  <button type="button" class="mu-sidebar-link" data-bs-toggle="collapse" data-bs-target="#nav-pages" aria-expanded="true" aria-controls="nav-pages">
+                    <i data-lucide="files" aria-hidden="true"></i>
+                    <span class="mu-sidebar-link-text">Pages</span>
+                    <i data-lucide="chevron-right" class="mu-sidebar-chevron" aria-hidden="true"></i>
+                  </button>
+                  <div class="collapse show" id="nav-pages">
+                    <ul class="mu-sidebar-nested">
+                      <li><a class="mu-sidebar-link" href="profile.html"><span class="mu-sidebar-link-text">Profile</span></a></li>
+                      <li><a class="mu-sidebar-link" href="settings.html"><span class="mu-sidebar-link-text">Settings</span></a></li>
+                      <li><a class="mu-sidebar-link" href="pricing.html"><span class="mu-sidebar-link-text">Pricing</span></a></li>
+                      <li><a class="mu-sidebar-link" href="faq.html"><span class="mu-sidebar-link-text">FAQ</span></a></li>
+                      <li><a class="mu-sidebar-link" href="invoice.html"><span class="mu-sidebar-link-text">Invoice</span></a></li>
+                      <li><a class="mu-sidebar-link" href="users.html"><span class="mu-sidebar-link-text">User list</span></a></li>
+                      <li><a class="mu-sidebar-link active" href="roles.html" aria-current="page"><span class="mu-sidebar-link-text">Roles &amp; permissions</span></a></li>
+                      <li><a class="mu-sidebar-link" href="notifications.html"><span class="mu-sidebar-link-text">Notifications</span></a></li>
+                      <li><a class="mu-sidebar-link" href="products.html"><span class="mu-sidebar-link-text">Products</span></a></li>
+                    </ul>
+                  </div>
+                </li>
+                <li>
+                  <button type="button" class="mu-sidebar-link" data-bs-toggle="collapse" data-bs-target="#nav-errors" aria-expanded="false" aria-controls="nav-errors">
+                    <i data-lucide="triangle-alert" aria-hidden="true"></i>
+                    <span class="mu-sidebar-link-text">Error pages</span>
+                    <i data-lucide="chevron-right" class="mu-sidebar-chevron" aria-hidden="true"></i>
+                  </button>
+                  <div class="collapse" id="nav-errors">
+                    <ul class="mu-sidebar-nested">
+                      <li><a class="mu-sidebar-link" href="errors/404.html"><span class="mu-sidebar-link-text">404 Not found</span></a></li>
+                      <li><a class="mu-sidebar-link" href="errors/403.html"><span class="mu-sidebar-link-text">403 Forbidden</span></a></li>
+                      <li><a class="mu-sidebar-link" href="errors/500.html"><span class="mu-sidebar-link-text">500 Server error</span></a></li>
+                      <li><a class="mu-sidebar-link" href="errors/maintenance.html"><span class="mu-sidebar-link-text">Maintenance</span></a></li>
+                    </ul>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="mu-sidebar-section">
+              <div class="mu-sidebar-label">Components</div>
+              <ul class="mu-sidebar-list">
+                <li><a class="mu-sidebar-link" href="tokens.html"><span class="mu-sidebar-link-text">Tokens</span></a></li>
+                <li><a class="mu-sidebar-link" href="base.html"><span class="mu-sidebar-link-text">Base</span></a></li>
+                <li><a class="mu-sidebar-link" href="layout.html"><span class="mu-sidebar-link-text">Layout</span></a></li>
+                <li><a class="mu-sidebar-link" href="navbar.html"><span class="mu-sidebar-link-text">Navbar</span></a></li>
+                <li><a class="mu-sidebar-link" href="sidebar.html"><span class="mu-sidebar-link-text">Sidebar</span></a></li>
+                <li><a class="mu-sidebar-link" href="buttons.html"><span class="mu-sidebar-link-text">Buttons</span></a></li>
+                <li><a class="mu-sidebar-link" href="cards.html"><span class="mu-sidebar-link-text">Cards</span></a></li>
+                <li><a class="mu-sidebar-link" href="alerts.html"><span class="mu-sidebar-link-text">Alerts</span></a></li>
+                <li><a class="mu-sidebar-link" href="badges.html"><span class="mu-sidebar-link-text">Badges</span></a></li>
+                <li><a class="mu-sidebar-link" href="dropdowns.html"><span class="mu-sidebar-link-text">Dropdowns</span></a></li>
+                <li><a class="mu-sidebar-link" href="modals.html"><span class="mu-sidebar-link-text">Modals</span></a></li>
+                <li><a class="mu-sidebar-link" href="tabs.html"><span class="mu-sidebar-link-text">Tabs</span></a></li>
+                <li><a class="mu-sidebar-link" href="breadcrumbs.html"><span class="mu-sidebar-link-text">Breadcrumbs</span></a></li>
+                <li><a class="mu-sidebar-link" href="pagination.html"><span class="mu-sidebar-link-text">Pagination</span></a></li>
+                <li><a class="mu-sidebar-link" href="forms.html"><span class="mu-sidebar-link-text">Forms</span></a></li>
+                <li><a class="mu-sidebar-link" href="tables.html"><span class="mu-sidebar-link-text">Tables</span></a></li>
+                <li><a class="mu-sidebar-link" href="data-table.html"><span class="mu-sidebar-link-text">Data table</span></a></li>
+                <li><a class="mu-sidebar-link" href="form-patterns.html"><span class="mu-sidebar-link-text">Form patterns</span></a></li>
+                <li><a class="mu-sidebar-link" href="progress.html"><span class="mu-sidebar-link-text">Progress</span></a></li>
+                <li><a class="mu-sidebar-link" href="loading.html"><span class="mu-sidebar-link-text">Loading</span></a></li>
+                <li><a class="mu-sidebar-link" href="toasts.html"><span class="mu-sidebar-link-text">Toasts</span></a></li>
+                <li><a class="mu-sidebar-link" href="list-groups.html"><span class="mu-sidebar-link-text">List groups</span></a></li>
+                <li><a class="mu-sidebar-link" href="empty-states.html"><span class="mu-sidebar-link-text">Empty states</span></a></li>
+                <li><a class="mu-sidebar-link" href="tooltips-popovers.html"><span class="mu-sidebar-link-text">Tooltips &amp; popovers</span></a></li>
+                <li><a class="mu-sidebar-link" href="accordion.html"><span class="mu-sidebar-link-text">Accordion</span></a></li>
+                <li><a class="mu-sidebar-link" href="offcanvas.html"><span class="mu-sidebar-link-text">Offcanvas</span></a></li>
+                <li><a class="mu-sidebar-link" href="carousel.html"><span class="mu-sidebar-link-text">Carousel</span></a></li>
+                <li><a class="mu-sidebar-link" href="scrollspy.html"><span class="mu-sidebar-link-text">Scrollspy</span></a></li>
+                <li><a class="mu-sidebar-link" href="navigation-patterns.html"><span class="mu-sidebar-link-text">Navigation patterns</span></a></li>
+                <li><a class="mu-sidebar-link" href="themes.html"><span class="mu-sidebar-link-text">Themes</span></a></li>
+              </ul>
+            </div>
+          </nav>
+        </div>
+      </aside>
+
+      <main class="mu-app-main">
+        <div class="mu-app-content">
+          <div class="container-fluid py-4">
+
+            <nav aria-label="Breadcrumb">
+              <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="../index.html">Dashboard</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Roles &amp; permissions</li>
+              </ol>
+            </nav>
+
+            <div class="d-flex flex-wrap align-items-center justify-content-between gap-2 mb-4">
+              <div>
+                <h1 class="h3 mb-1">Roles &amp; permissions</h1>
+                <p class="text-body-secondary mb-0">Define who can do what across your workspace. Static demo — no permission checks are enforced.</p>
+              </div>
+              <button type="button" class="btn btn-primary btn-sm">
+                <i data-lucide="plus" aria-hidden="true" width="16" height="16" class="me-1"></i>
+                New role
+              </button>
+            </div>
+
+            <div class="row g-3 mb-3">
+              <div class="col-12 col-lg-8">
+                <div class="input-group input-group-sm">
+                  <span class="input-group-text"><i data-lucide="search" aria-hidden="true" width="14" height="14"></i></span>
+                  <input type="search" class="form-control" id="role-search" aria-label="Search roles" placeholder="Search roles">
+                </div>
+              </div>
+              <div class="col-12 col-lg-4 d-flex align-items-center">
+                <span class="small text-body-secondary" id="role-count" aria-live="polite">5 roles</span>
+              </div>
+            </div>
+
+            <div class="row g-3">
+              <div class="col-12 col-lg-4">
+                <div class="card">
+                  <div class="card-header">
+                    <span class="fw-semibold">Roles</span>
+                  </div>
+                  <div class="list-group list-group-flush" id="role-list">
+                    <button type="button" class="list-group-item list-group-item-action d-flex justify-content-between align-items-center" data-role="administrator" aria-pressed="true">
+                      <span class="fw-medium">Administrator</span>
+                      <span class="small text-body-secondary">3 members</span>
+                    </button>
+                    <button type="button" class="list-group-item list-group-item-action d-flex justify-content-between align-items-center" data-role="manager" aria-pressed="false">
+                      <span class="fw-medium">Manager</span>
+                      <span class="small text-body-secondary">8 members</span>
+                    </button>
+                    <button type="button" class="list-group-item list-group-item-action d-flex justify-content-between align-items-center" data-role="editor" aria-pressed="false">
+                      <span class="fw-medium">Editor</span>
+                      <span class="small text-body-secondary">14 members</span>
+                    </button>
+                    <button type="button" class="list-group-item list-group-item-action d-flex justify-content-between align-items-center" data-role="support" aria-pressed="false">
+                      <span class="fw-medium">Support</span>
+                      <span class="small text-body-secondary">6 members</span>
+                    </button>
+                    <button type="button" class="list-group-item list-group-item-action d-flex justify-content-between align-items-center" data-role="viewer" aria-pressed="false">
+                      <span class="fw-medium">Viewer</span>
+                      <span class="small text-body-secondary">42 members</span>
+                    </button>
+                  </div>
+                  <p class="card-body small text-body-secondary d-none mb-0 py-3" id="roles-empty">No roles match your search.</p>
+                </div>
+              </div>
+              <div class="col-12 col-lg-8">
+                <section class="card h-100" aria-labelledby="role-panel-title">
+                  <div class="card-header d-flex flex-wrap align-items-start justify-content-between gap-2">
+                    <div>
+                      <h2 class="h5 mb-1" id="role-panel-title">Administrator</h2>
+                      <p class="text-body-secondary small mb-0" id="role-panel-description">Full access to every workspace feature and setting.</p>
+                    </div>
+                    <span class="badge text-bg-secondary" id="role-panel-members">3 members</span>
+                  </div>
+                  <div class="card-body" id="permission-groups">
+                    <!-- Permission groups are rendered here by the demo script. -->
+                  </div>
+                  <div class="card-footer d-flex justify-content-end gap-2">
+                    <button type="button" class="btn btn-outline-secondary btn-sm">Cancel</button>
+                    <button type="button" class="btn btn-primary btn-sm">
+                      <i data-lucide="check" aria-hidden="true" width="16" height="16" class="me-1"></i>
+                      Save changes
+                    </button>
+                  </div>
+                </section>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </main>
+
+    </div>
+
+    <div class="mu-app-backdrop" aria-hidden="true"></div>
+  </div>
+
+  <script>lucide.createIcons();</script>
+
+  <script>
+  (function () {
+    'use strict';
+
+    // Roles & permissions demo (Task 059) — static UI only: the
+    // role list and permission groups are demo data; nothing is
+    // enforced or persisted. DOM is built with createElement and
+    // textContent (never innerHTML).
+
+    var PERMISSIONS = [
+      { id: 'users', label: 'Users', perms: ['view', 'create', 'edit', 'delete'] },
+      { id: 'orders', label: 'Orders', perms: ['view', 'create', 'edit', 'delete'] },
+      { id: 'reports', label: 'Reports', perms: ['view', 'export'] },
+      { id: 'settings', label: 'Settings', perms: ['view', 'edit'] }
+    ];
+
+    var PERM_LABELS = {
+      view: 'View', create: 'Create', edit: 'Edit', delete: 'Delete', export: 'Export'
+    };
+
+    var ROLES = {
+      administrator: {
+        name: 'Administrator', members: '3 members',
+        description: 'Full access to every workspace feature and setting.',
+        granted: {
+          users: ['view', 'create', 'edit', 'delete'],
+          orders: ['view', 'create', 'edit', 'delete'],
+          reports: ['view', 'export'],
+          settings: ['view', 'edit']
+        }
+      },
+      manager: {
+        name: 'Manager', members: '8 members',
+        description: 'Runs day-to-day operations: manages users and orders, exports reports.',
+        granted: {
+          users: ['view', 'create', 'edit'],
+          orders: ['view', 'create', 'edit', 'delete'],
+          reports: ['view', 'export'],
+          settings: ['view']
+        }
+      },
+      editor: {
+        name: 'Editor', members: '14 members',
+        description: 'Creates and edits orders and content, exports reports. No user or settings access.',
+        granted: {
+          users: ['view'],
+          orders: ['view', 'create', 'edit'],
+          reports: ['view', 'export'],
+          settings: []
+        }
+      },
+      support: {
+        name: 'Support', members: '6 members',
+        description: 'Answers customer questions: can view users and edit orders in progress.',
+        granted: {
+          users: ['view'],
+          orders: ['view', 'edit'],
+          reports: ['view'],
+          settings: []
+        }
+      },
+      viewer: {
+        name: 'Viewer', members: '42 members',
+        description: 'Read-only access to users, orders, and reports.',
+        granted: {
+          users: ['view'],
+          orders: ['view'],
+          reports: ['view'],
+          settings: []
+        }
+      }
+    };
+
+    var roleButtons = document.querySelectorAll('#role-list [data-role]');
+    var permissionGroups = document.getElementById('permission-groups');
+    var panelTitle = document.getElementById('role-panel-title');
+    var panelDescription = document.getElementById('role-panel-description');
+    var panelMembers = document.getElementById('role-panel-members');
+    var searchInput = document.getElementById('role-search');
+    var roleCount = document.getElementById('role-count');
+    var rolesEmpty = document.getElementById('roles-empty');
+
+    function renderPermissions(role) {
+      permissionGroups.textContent = ''; // clear; rebuilt below
+
+      PERMISSIONS.forEach(function (group) {
+        var fieldset = document.createElement('fieldset');
+        fieldset.className = 'mb-4';
+
+        var legend = document.createElement('legend');
+        legend.className = 'small fw-semibold text-body-secondary text-uppercase mb-2';
+        legend.textContent = group.label;
+        fieldset.appendChild(legend);
+
+        var grid = document.createElement('div');
+        grid.className = 'row g-2';
+
+        var granted = role.granted[group.id] || [];
+
+        group.perms.forEach(function (perm) {
+          var col = document.createElement('div');
+          col.className = 'col-12 col-sm-6 col-xl-3';
+
+          var wrap = document.createElement('div');
+          wrap.className = 'form-check form-switch';
+
+          var input = document.createElement('input');
+          input.className = 'form-check-input';
+          input.type = 'checkbox';
+          input.id = 'perm-' + group.id + '-' + perm;
+          input.checked = granted.indexOf(perm) !== -1;
+
+          var label = document.createElement('label');
+          label.className = 'form-check-label';
+          label.htmlFor = input.id;
+          label.textContent = PERM_LABELS[perm];
+
+          wrap.appendChild(input);
+          wrap.appendChild(label);
+          col.appendChild(wrap);
+          grid.appendChild(col);
+        });
+
+        fieldset.appendChild(grid);
+        permissionGroups.appendChild(fieldset);
+      });
+    }
+
+    function selectRole(roleId) {
+      var role = ROLES[roleId];
+      if (!role) { return; }
+
+      roleButtons.forEach(function (btn) {
+        var isActive = btn.getAttribute('data-role') === roleId;
+        btn.classList.toggle('active', isActive);
+        btn.setAttribute('aria-pressed', isActive ? 'true' : 'false');
+      });
+
+      panelTitle.textContent = role.name;
+      panelDescription.textContent = role.description;
+      panelMembers.textContent = role.members;
+      renderPermissions(role);
+    }
+
+    roleButtons.forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        selectRole(btn.getAttribute('data-role'));
+      });
+    });
+
+    function updateSearch() {
+      var query = searchInput.value.trim().toLowerCase();
+      var visible = 0;
+
+      roleButtons.forEach(function (btn) {
+        var name = btn.getAttribute('data-role');
+        var matches = !query || ROLES[name].name.toLowerCase().indexOf(query) !== -1;
+        btn.classList.toggle('d-none', !matches);
+        if (matches) { visible += 1; }
+      });
+
+      rolesEmpty.classList.toggle('d-none', visible !== 0);
+      roleCount.textContent = visible + ' ' + (visible === 1 ? 'role' : 'roles');
+    }
+
+    searchInput.addEventListener('input', updateSearch);
+
+    // Default selection: Administrator.
+    selectRole('administrator');
+  })();
+  </script>
+</body>
+</html>

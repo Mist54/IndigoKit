@@ -1,0 +1,192 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>IndigoKit Playground — Application Navbar</title>
+  <link rel="stylesheet" href="../../dist/css/indigokit.css">
+  <link rel="stylesheet" href="../playground.css">
+  <!-- Playground theme persistence (Task 047) — applies the stored
+       indigokit-theme preference before first paint. Playground-only. -->
+  <script src="../theme.js"></script>
+  <script src="../assets/lucide.umd.js"></script>
+  <script src="../../node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="../../dist/js/indigokit.js"></script>
+</head>
+<body>
+  <div class="mu-app">
+
+    <!-- Application navbar — a real IndigoKit component -->
+    <header class="mu-app-top">
+            <nav class="navbar mu-app-navbar" aria-label="Main navigation">
+        <div class="container-fluid">
+          <div class="d-flex align-items-center gap-2">
+            <button type="button" class="btn" data-mu-mobile-toggle aria-controls="app-sidebar" aria-expanded="false" aria-label="Open navigation">
+              <i data-lucide="menu" aria-hidden="true"></i>
+            </button>
+            <button type="button" class="btn" data-mu-sidebar-toggle aria-controls="app-sidebar" aria-expanded="true" aria-label="Collapse sidebar">
+              <i data-lucide="panel-left-close" aria-hidden="true"></i>
+            </button>
+            <a class="navbar-brand" href="#">
+              <i data-lucide="layers" aria-hidden="true"></i>
+              IndigoKit
+            </a>
+          </div>
+          <div class="mu-navbar-main"></div>
+          <div class="mu-navbar-actions">
+            <select class="form-select form-select-sm" data-theme-switch aria-label="Theme">
+              <option value="system">System</option>
+              <option value="light">Light</option>
+              <option value="dark">Dark</option>
+            </select>
+            <button type="button" class="btn d-none d-md-inline-flex" aria-label="Notifications">
+              <i data-lucide="bell" aria-hidden="true"></i>
+            </button>
+            <button type="button" class="btn d-none d-md-inline-flex" aria-label="Help">
+              <i data-lucide="circle-question-mark" aria-hidden="true"></i>
+            </button>
+            <div class="dropdown">
+              <a class="mu-navbar-user" href="#" data-bs-toggle="dropdown" aria-expanded="false" aria-label="User menu">
+                <span class="mu-avatar"><i data-lucide="user" aria-hidden="true"></i></span>
+                <span class="mu-user-name d-none d-lg-inline">Jane Doe</span>
+                <i data-lucide="chevron-down" aria-hidden="true"></i>
+              </a>
+              <ul class="dropdown-menu dropdown-menu-end">
+                <li>
+                  <h6 class="dropdown-header">Jane Doe<span class="d-block small fw-normal text-body-secondary">Software Engineer</span></h6>
+                </li>
+                <li><hr class="dropdown-divider"></li>
+                <li><a class="dropdown-item" href="profile.html">Profile</a></li>
+                <li><a class="dropdown-item" href="settings.html">Account Settings</a></li>
+                <li><a class="dropdown-item" href="settings.html">Notifications</a></li>
+                <li><a class="dropdown-item" href="auth/lock-screen.html">Lock Screen</a></li>
+                <li><hr class="dropdown-divider"></li>
+                <li><a class="dropdown-item text-danger" href="auth/login.html">Sign out</a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <div class="mu-app-body">
+
+      <!-- Application sidebar — real IndigoKit component (Task 006–009) -->
+      <aside class="mu-app-side">
+        <div class="mu-sidebar" id="app-sidebar">
+          <!-- Drawer header — mobile only (close control) -->
+          <div class="mu-sidebar-header">
+            <button type="button" class="btn mu-sidebar-close" data-mu-sidebar-close aria-label="Close navigation">
+              <i data-lucide="x" aria-hidden="true"></i>
+            </button>
+          </div>
+          <nav class="mu-sidebar-nav" aria-label="Sidebar navigation">
+
+            <div class="mu-sidebar-section">
+              <div class="mu-sidebar-label">Workspace</div>
+              <ul class="mu-sidebar-list">
+                <li>
+                  <a class="mu-sidebar-link active" href="#" aria-current="page">
+                    <i data-lucide="layout-dashboard" aria-hidden="true"></i>
+                    <span class="mu-sidebar-link-text">Dashboard</span>
+                  </a>
+                </li>
+                <li>
+                  <a class="mu-sidebar-link" href="#">
+                    <i data-lucide="chart-line" aria-hidden="true"></i>
+                    <span class="mu-sidebar-link-text">Analytics</span>
+                  </a>
+                </li>
+                <li>
+                  <a class="mu-sidebar-link" href="#">
+                    <i data-lucide="folder-kanban" aria-hidden="true"></i>
+                    <span class="mu-sidebar-link-text">Projects</span>
+                  </a>
+                </li>
+              </ul>
+            </div>
+
+            <div class="mu-sidebar-section">
+              <div class="mu-sidebar-label">Management</div>
+              <ul class="mu-sidebar-list">
+                <li>
+                  <a class="mu-sidebar-link" href="#">
+                    <i data-lucide="users" aria-hidden="true"></i>
+                    <span class="mu-sidebar-link-text">Users</span>
+                  </a>
+                </li>
+                <li>
+                  <a class="mu-sidebar-link" href="#">
+                    <i data-lucide="users-round" aria-hidden="true"></i>
+                    <span class="mu-sidebar-link-text">Teams</span>
+                  </a>
+                </li>
+                <li>
+                  <a class="mu-sidebar-link" href="#">
+                    <i data-lucide="file-text" aria-hidden="true"></i>
+                    <span class="mu-sidebar-link-text">Reports</span>
+                  </a>
+                </li>
+              </ul>
+            </div>
+
+            <div class="mu-sidebar-section">
+              <div class="mu-sidebar-label">System</div>
+              <ul class="mu-sidebar-list">
+                <li>
+                  <a class="mu-sidebar-link" href="#">
+                    <i data-lucide="settings" aria-hidden="true"></i>
+                    <span class="mu-sidebar-link-text">Settings</span>
+                  </a>
+                </li>
+                <li>
+                  <a class="mu-sidebar-link" href="#">
+                    <i data-lucide="scroll-text" aria-hidden="true"></i>
+                    <span class="mu-sidebar-link-text">Audit Logs</span>
+                  </a>
+                </li>
+              </ul>
+            </div>
+
+          </nav>
+        </div>
+      </aside>
+
+      <!-- Mobile drawer backdrop (framework CSS + JS; visible below md) -->
+      <div class="mu-app-backdrop" aria-hidden="true"></div>
+
+      <main class="mu-app-main">
+        <div class="mu-app-content">
+
+          <p class="mb-0"><a href="../index.html">← Playground home</a></p>
+
+          <h1 class="mt-2">Application Navbar</h1>
+          <p class="lead">The first IndigoKit component: <code>.mu-app-navbar</code> — an application-level navbar extending Bootstrap's <code>.navbar</code>.</p>
+
+          <h2 class="h5 mt-5 mb-3">Structure</h2>
+          <ul>
+            <li><strong>Brand</strong> — indigo icon mark (logo placeholder) + wordmark, links to app home</li>
+            <li><strong>Main area</strong> — flexible center region reserved for future breadcrumbs / search / context</li>
+            <li><strong>Actions</strong> — notification and help icon buttons (placeholders only) + user/profile area</li>
+          </ul>
+
+          <h2 class="h5 mt-5 mb-3">Behavior notes</h2>
+          <ul>
+            <li>Compact enterprise height (~4px vertical padding, no hard-coded height)</li>
+            <li>Surface is the page background with a subtle bottom border — no shadow in the app shell</li>
+            <li>On small screens the user <em>name</em> hides; brand and action buttons remain</li>
+            <li>Icons render via the approved Lucide library (<code>lucide.createIcons()</code>, no bundler)</li>
+            <li>The sidebar is a real component too (Task 006): desktop collapse (Task 008) + mobile drawer (Task 009) are wired through <code>dist/js/indigokit.js</code></li>
+          </ul>
+
+          <p class="mt-4 mb-0 text-body-secondary">Try the keyboard: Tab through the brand link, both icon buttons, and the user area — each shows a visible indigo focus ring.</p>
+
+        </div>
+      </main>
+
+    </div>
+  </div>
+
+  <script>lucide.createIcons();</script>
+</body>
+</html>

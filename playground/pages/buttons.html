@@ -1,0 +1,126 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>IndigoKit Playground — Buttons</title>
+  <link rel="stylesheet" href="../../dist/css/indigokit.css">
+  <link rel="stylesheet" href="../playground.css">
+  <!-- Playground theme persistence (Task 047) — applies the stored
+       indigokit-theme preference before first paint. Playground-only. -->
+  <script src="../theme.js"></script>
+  <script src="../assets/lucide.umd.js"></script>
+</head>
+<body>
+  <div class="container py-5">
+    <h1>Buttons</h1>
+    <p class="lead">Bootstrap's button API with IndigoKit refinement — every class below is a standard Bootstrap class (<code>.btn</code>, <code>.btn-*</code>, <code>.btn-outline-*</code>, <code>.btn-sm</code>/<code>.btn-lg</code>, <code>.btn-group</code>, <code>w-100</code>).</p>
+
+    <!-- Solid variants -->
+    <h2 class="h5 mt-5 mb-3">Solid variants</h2>
+    <div class="d-flex flex-wrap gap-2">
+      <button type="button" class="btn btn-primary">Primary</button>
+      <button type="button" class="btn btn-secondary">Secondary</button>
+      <button type="button" class="btn btn-success">Success</button>
+      <button type="button" class="btn btn-info">Info</button>
+      <button type="button" class="btn btn-warning">Warning</button>
+      <button type="button" class="btn btn-danger">Danger</button>
+      <button type="button" class="btn btn-light">Light</button>
+      <button type="button" class="btn btn-dark">Dark</button>
+      <button type="button" class="btn btn-link">Link</button>
+    </div>
+
+    <!-- Outline variants -->
+    <h2 class="h5 mt-5 mb-3">Outline variants</h2>
+    <div class="d-flex flex-wrap gap-2">
+      <button type="button" class="btn btn-outline-primary">Primary</button>
+      <button type="button" class="btn btn-outline-secondary">Secondary</button>
+      <button type="button" class="btn btn-outline-success">Success</button>
+      <button type="button" class="btn btn-outline-info">Info</button>
+      <button type="button" class="btn btn-outline-warning">Warning</button>
+      <button type="button" class="btn btn-outline-danger">Danger</button>
+      <button type="button" class="btn btn-outline-dark">Dark</button>
+    </div>
+
+    <!-- Sizes -->
+    <h2 class="h5 mt-5 mb-3">Sizes</h2>
+    <div class="d-flex flex-wrap align-items-center gap-2">
+      <button type="button" class="btn btn-primary btn-sm">Small</button>
+      <button type="button" class="btn btn-primary">Default</button>
+      <button type="button" class="btn btn-primary btn-lg">Large</button>
+    </div>
+
+    <!-- Icon + text -->
+    <h2 class="h5 mt-5 mb-3">Icon + text</h2>
+    <div class="d-flex flex-wrap gap-2">
+      <button type="button" class="btn btn-primary"><i data-lucide="save" aria-hidden="true"></i> Save</button>
+      <button type="button" class="btn btn-secondary"><i data-lucide="settings" aria-hidden="true"></i> Settings</button>
+      <button type="button" class="btn btn-outline-danger"><i data-lucide="trash-2" aria-hidden="true"></i> Delete</button>
+      <button type="button" class="btn btn-outline-primary btn-sm"><i data-lucide="plus" aria-hidden="true"></i> Add item</button>
+      <button type="button" class="btn btn-primary btn-lg"><i data-lucide="download" aria-hidden="true"></i> Export</button>
+    </div>
+
+    <!-- Icon-only -->
+    <h2 class="h5 mt-5 mb-3">Icon-only</h2>
+    <p class="demo-label">Icon-only buttons require an accessible name — <code>aria-label</code> here; the icon is decorative (<code>aria-hidden</code>).</p>
+    <div class="d-flex flex-wrap gap-2">
+      <button type="button" class="btn btn-outline-secondary" aria-label="Add item"><i data-lucide="plus" aria-hidden="true"></i></button>
+      <button type="button" class="btn btn-outline-secondary" aria-label="Download"><i data-lucide="download" aria-hidden="true"></i></button>
+      <button type="button" class="btn btn-outline-danger" aria-label="Delete"><i data-lucide="trash-2" aria-hidden="true"></i></button>
+      <button type="button" class="btn btn-outline-secondary btn-lg" aria-label="Settings"><i data-lucide="settings" aria-hidden="true"></i></button>
+    </div>
+
+    <!-- Disabled -->
+    <h2 class="h5 mt-5 mb-3">Disabled</h2>
+    <p class="demo-label">Native <code>disabled</code> buttons are neither focusable nor clickable. For links styled as buttons, Bootstrap's <code>.disabled</code> class alone is not enough — add <code>tabindex="-1"</code> and <code>aria-disabled="true"</code>.</p>
+    <div class="d-flex flex-wrap gap-2">
+      <button type="button" class="btn btn-primary" disabled>Disabled button</button>
+      <button type="button" class="btn btn-outline-secondary" disabled><i data-lucide="save" aria-hidden="true"></i> Disabled with icon</button>
+      <a class="btn btn-primary disabled" tabindex="-1" aria-disabled="true" href="#">Disabled link</a>
+    </div>
+
+    <!-- Loading pattern -->
+    <h2 class="h5 mt-5 mb-3">Loading</h2>
+    <p class="demo-label">Minimal pattern — Bootstrap's own spinner with the native <code>disabled</code> attribute. No custom component.</p>
+    <div class="d-flex flex-wrap gap-2">
+      <button type="button" class="btn btn-primary" disabled><span class="spinner-border spinner-border-sm" aria-hidden="true"></span> Saving…</button>
+    </div>
+
+    <!-- Button groups -->
+    <h2 class="h5 mt-5 mb-3">Button groups</h2>
+    <div class="d-flex flex-wrap align-items-center gap-3">
+      <div class="btn-group" role="group" aria-label="View options">
+        <button type="button" class="btn btn-outline-secondary">List</button>
+        <button type="button" class="btn btn-outline-secondary active">Grid</button>
+        <button type="button" class="btn btn-outline-secondary">Board</button>
+      </div>
+      <div class="btn-group btn-group-sm" role="group" aria-label="Small group">
+        <button type="button" class="btn btn-outline-secondary">Day</button>
+        <button type="button" class="btn btn-outline-secondary">Week</button>
+        <button type="button" class="btn btn-outline-secondary">Month</button>
+      </div>
+      <div class="btn-group btn-group-lg" role="group" aria-label="Large group">
+        <button type="button" class="btn btn-outline-primary"><i data-lucide="save" aria-hidden="true"></i> Save</button>
+        <button type="button" class="btn btn-outline-primary"><i data-lucide="download" aria-hidden="true"></i> Export</button>
+      </div>
+    </div>
+
+    <!-- Full width -->
+    <h2 class="h5 mt-5 mb-3">Full width</h2>
+    <div class="d-grid">
+      <button type="button" class="btn btn-primary w-100">Full-width button (<code>w-100</code>)</button>
+    </div>
+
+    <!-- Focus -->
+    <h2 class="h5 mt-5 mb-3">Focus</h2>
+    <p class="demo-label">Press <kbd>Tab</kbd> to move focus — every button shows the IndigoKit solid indigo focus ring (<code>:focus-visible</code>), which meets the ≥3:1 focus-appearance contrast target.</p>
+    <div class="d-flex flex-wrap gap-2">
+      <button type="button" class="btn btn-primary">Focus me</button>
+      <button type="button" class="btn btn-outline-secondary">And me</button>
+      <button type="button" class="btn btn-danger">And me too</button>
+    </div>
+  </div>
+
+  <script>lucide.createIcons();</script>
+</body>
+</html>

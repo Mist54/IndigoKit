@@ -1,0 +1,721 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>IndigoKit Playground — Tables</title>
+  <link rel="stylesheet" href="../../dist/css/indigokit.css">
+  <link rel="stylesheet" href="../playground.css">
+  <!-- Playground theme persistence (Task 047) — applies the stored
+       indigokit-theme preference before first paint. Playground-only. -->
+  <script src="../theme.js"></script>
+  <script src="../assets/lucide.umd.js"></script>
+  <script src="../../node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+</head>
+<body>
+  <div class="container py-4 demo-table-page">
+    <h1 class="h4 mb-1">Tables</h1>
+    <p class="demo-label mb-4">Bootstrap's <code>.table</code> API with IndigoKit refinement — semantic markup, hairline borders, a weighted header (600, the one IndigoKit addition), token-wired striped/hover/active states, and Bootstrap's <code>.table-responsive</code> for overflow. No table framework, no sorting engine.</p>
+
+    <nav class="demo-subnav mb-4" aria-label="On this page">
+      <a href="#basic">Basic</a>
+      <a href="#variants">Variants</a>
+      <a href="#dense">Dense</a>
+      <a href="#numeric">Numeric</a>
+      <a href="#status">Status</a>
+      <a href="#actions">Actions</a>
+      <a href="#responsive">Responsive</a>
+      <a href="#sortable">Sortable</a>
+      <a href="#pagination">Pagination</a>
+      <a href="#long">Long content</a>
+      <a href="#empty">Empty</a>
+    </nav>
+    <p class="demo-label">Jump links are plain anchors to the section headings — no page script needed.</p>
+
+    <!-- Basic -->
+    <h2 class="h5 mt-5" id="basic">Basic table</h2>
+    <p class="demo-label">A <code>caption</code> describes the table; <code>th scope="col"</code> marks column headers. The header row is the only place IndigoKit styles <code>th</code> (weight 600 + emphasis color).</p>
+    <div class="card">
+      <div class="card-body p-0">
+        <div class="table-responsive">
+          <table class="table align-middle mb-0">
+            <caption class="px-3 pt-2 pb-0">Active members of the design system team</caption>
+            <thead>
+              <tr>
+                <th scope="col">Member</th>
+                <th scope="col">Role</th>
+                <th scope="col">Projects</th>
+                <th scope="col" class="text-end">Tasks</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Ada Lovelace</td>
+                <td>Design lead</td>
+                <td>IndigoKit</td>
+                <td class="text-end">24</td>
+              </tr>
+              <tr>
+                <td>Alan Turing</td>
+                <td>Engineering</td>
+                <td>IndigoKit, Docs</td>
+                <td class="text-end">17</td>
+              </tr>
+              <tr>
+                <td>Grace Hopper</td>
+                <td>Engineering</td>
+                <td>Compiler</td>
+                <td class="text-end">31</td>
+              </tr>
+              <tr>
+                <td>Katherine Johnson</td>
+                <td>Research</td>
+                <td>Orbit</td>
+                <td class="text-end">9</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- Variants -->
+    <h2 class="h5 mt-5" id="variants">Variants</h2>
+    <p class="demo-label">All standard Bootstrap variants, unchanged. Striped and hover use emphasis-rgb factors so they stay theme-adaptive.</p>
+
+    <h3 class="h6 mt-4 mb-2">Striped</h3>
+    <div class="card">
+      <div class="card-body p-0">
+        <div class="table-responsive">
+          <table class="table table-striped align-middle mb-0">
+            <thead>
+              <tr>
+                <th scope="col">Member</th>
+                <th scope="col">Role</th>
+                <th scope="col">Projects</th>
+                <th scope="col" class="text-end">Tasks</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Ada Lovelace</td>
+                <td>Design lead</td>
+                <td>IndigoKit</td>
+                <td class="text-end">24</td>
+              </tr>
+              <tr>
+                <td>Alan Turing</td>
+                <td>Engineering</td>
+                <td>IndigoKit, Docs</td>
+                <td class="text-end">17</td>
+              </tr>
+              <tr>
+                <td>Grace Hopper</td>
+                <td>Engineering</td>
+                <td>Compiler</td>
+                <td class="text-end">31</td>
+              </tr>
+              <tr>
+                <td>Katherine Johnson</td>
+                <td>Research</td>
+                <td>Orbit</td>
+                <td class="text-end">9</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <h3 class="h6 mt-4 mb-2">Hover</h3>
+    <div class="card">
+      <div class="card-body p-0">
+        <div class="table-responsive">
+          <table class="table table-hover align-middle mb-0">
+            <thead>
+              <tr>
+                <th scope="col">Member</th>
+                <th scope="col">Role</th>
+                <th scope="col">Projects</th>
+                <th scope="col" class="text-end">Tasks</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Ada Lovelace</td>
+                <td>Design lead</td>
+                <td>IndigoKit</td>
+                <td class="text-end">24</td>
+              </tr>
+              <tr>
+                <td>Alan Turing</td>
+                <td>Engineering</td>
+                <td>IndigoKit, Docs</td>
+                <td class="text-end">17</td>
+              </tr>
+              <tr>
+                <td>Grace Hopper</td>
+                <td>Engineering</td>
+                <td>Compiler</td>
+                <td class="text-end">31</td>
+              </tr>
+              <tr>
+                <td>Katherine Johnson</td>
+                <td>Research</td>
+                <td>Orbit</td>
+                <td class="text-end">9</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <h3 class="h6 mt-4 mb-2">Bordered</h3>
+    <div class="card">
+      <div class="card-body p-0">
+        <div class="table-responsive">
+          <table class="table table-bordered align-middle mb-0">
+            <thead>
+              <tr>
+                <th scope="col">Member</th>
+                <th scope="col">Role</th>
+                <th scope="col">Projects</th>
+                <th scope="col" class="text-end">Tasks</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Ada Lovelace</td>
+                <td>Design lead</td>
+                <td>IndigoKit</td>
+                <td class="text-end">24</td>
+              </tr>
+              <tr>
+                <td>Alan Turing</td>
+                <td>Engineering</td>
+                <td>IndigoKit, Docs</td>
+                <td class="text-end">17</td>
+              </tr>
+              <tr>
+                <td>Grace Hopper</td>
+                <td>Engineering</td>
+                <td>Compiler</td>
+                <td class="text-end">31</td>
+              </tr>
+              <tr>
+                <td>Katherine Johnson</td>
+                <td>Research</td>
+                <td>Orbit</td>
+                <td class="text-end">9</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <h3 class="h6 mt-4 mb-2">Borderless</h3>
+    <div class="card">
+      <div class="card-body p-0">
+        <div class="table-responsive">
+          <table class="table table-borderless align-middle mb-0">
+            <thead>
+              <tr>
+                <th scope="col">Member</th>
+                <th scope="col">Role</th>
+                <th scope="col">Projects</th>
+                <th scope="col" class="text-end">Tasks</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Ada Lovelace</td>
+                <td>Design lead</td>
+                <td>IndigoKit</td>
+                <td class="text-end">24</td>
+              </tr>
+              <tr>
+                <td>Alan Turing</td>
+                <td>Engineering</td>
+                <td>IndigoKit, Docs</td>
+                <td class="text-end">17</td>
+              </tr>
+              <tr>
+                <td>Grace Hopper</td>
+                <td>Engineering</td>
+                <td>Compiler</td>
+                <td class="text-end">31</td>
+              </tr>
+              <tr>
+                <td>Katherine Johnson</td>
+                <td>Research</td>
+                <td>Orbit</td>
+                <td class="text-end">9</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- Dense -->
+    <h2 class="h5 mt-5" id="dense">Dense / compact</h2>
+    <p class="demo-label"><code>.table-sm</code> halves the cell padding for dense admin and report interfaces — row separation and scanability stay intact.</p>
+    <div class="card">
+      <div class="card-body p-0">
+        <div class="table-responsive">
+          <table class="table table-sm align-middle mb-0">
+            <thead>
+              <tr>
+                <th scope="col">Member</th>
+                <th scope="col">Role</th>
+                <th scope="col">Projects</th>
+                <th scope="col" class="text-end">Tasks</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Ada Lovelace</td>
+                <td>Design lead</td>
+                <td>IndigoKit</td>
+                <td class="text-end">24</td>
+              </tr>
+              <tr>
+                <td>Alan Turing</td>
+                <td>Engineering</td>
+                <td>IndigoKit, Docs</td>
+                <td class="text-end">17</td>
+              </tr>
+              <tr>
+                <td>Grace Hopper</td>
+                <td>Engineering</td>
+                <td>Compiler</td>
+                <td class="text-end">31</td>
+              </tr>
+              <tr>
+                <td>Katherine Johnson</td>
+                <td>Research</td>
+                <td>Orbit</td>
+                <td class="text-end">9</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- Numeric -->
+    <h2 class="h5 mt-5" id="numeric">Numeric data</h2>
+    <p class="demo-label">Numbers align right with <code>text-end</code> + <code>text-nowrap</code>; dates align left — no custom table-number classes. A <code>tfoot</code> summarizes without ARIA.</p>
+    <div class="card">
+      <div class="card-body p-0">
+        <div class="table-responsive">
+          <table class="table align-middle mb-0">
+            <caption class="px-3 pt-2 pb-0">Q3 infrastructure spend (₹)</caption>
+            <thead>
+              <tr>
+                <th scope="col">Vendor</th>
+                <th scope="col" class="text-end">Compute</th>
+                <th scope="col" class="text-end">Storage</th>
+                <th scope="col" class="text-end">Network</th>
+                <th scope="col" class="text-end">Total</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Cloud One</td>
+                <td class="text-end text-nowrap">₹42,180</td>
+                <td class="text-end text-nowrap">₹8,940</td>
+                <td class="text-end text-nowrap">₹3,210</td>
+                <td class="text-end text-nowrap">₹54,330</td>
+              </tr>
+              <tr>
+                <td>Edge Hosting</td>
+                <td class="text-end text-nowrap">₹19,750</td>
+                <td class="text-end text-nowrap">₹12,400</td>
+                <td class="text-end text-nowrap">₹1,980</td>
+                <td class="text-end text-nowrap">₹34,130</td>
+              </tr>
+              <tr>
+                <td>CDN Network</td>
+                <td class="text-end text-nowrap">₹7,120</td>
+                <td class="text-end text-nowrap">₹2,300</td>
+                <td class="text-end text-nowrap">₹15,670</td>
+                <td class="text-end text-nowrap">₹25,090</td>
+              </tr>
+            </tbody>
+            <tfoot class="table-group-divider">
+              <tr>
+                <th scope="row">Total</th>
+                <td class="text-end text-nowrap">₹69,050</td>
+                <td class="text-end text-nowrap">₹23,640</td>
+                <td class="text-end text-nowrap">₹20,860</td>
+                <td class="text-end text-nowrap">₹113,550</td>
+              </tr>
+            </tfoot>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- Status -->
+    <h2 class="h5 mt-5" id="status">Status column</h2>
+    <p class="demo-label">Status uses the existing badge system — text carries the state, color reinforces it.</p>
+    <div class="card">
+      <div class="card-body p-0">
+        <div class="table-responsive">
+          <table class="table align-middle mb-0">
+            <thead>
+              <tr>
+                <th scope="col">Project</th>
+                <th scope="col">Owner</th>
+                <th scope="col">Status</th>
+                <th scope="col" class="text-end">Due</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>IndigoKit — Application Shell</td>
+                <td>Ada Lovelace</td>
+                <td><span class="badge text-bg-success">Done</span></td>
+                <td class="text-end text-nowrap">Aug 2</td>
+              </tr>
+              <tr>
+                <td>IndigoKit — Form System</td>
+                <td>Alan Turing</td>
+                <td><span class="badge text-bg-primary">In progress</span></td>
+                <td class="text-end text-nowrap">Aug 22</td>
+              </tr>
+              <tr>
+                <td>IndigoKit — Data Tables</td>
+                <td>Grace Hopper</td>
+                <td><span class="badge text-bg-warning">Review</span></td>
+                <td class="text-end text-nowrap">Aug 30</td>
+              </tr>
+              <tr>
+                <td>IndigoKit — Themes</td>
+                <td>Katherine Johnson</td>
+                <td><span class="badge text-bg-secondary">Planned</span></td>
+                <td class="text-end text-nowrap">Sep 12</td>
+              </tr>
+              <tr>
+                <td>Docs Migration</td>
+                <td>—</td>
+                <td><span class="badge text-bg-danger">Blocked</span></td>
+                <td class="text-end text-nowrap">Sep 5</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- Actions -->
+    <h2 class="h5 mt-5" id="actions">Action column</h2>
+    <p class="demo-label">Actions are real <code>.btn .btn-sm</code> buttons — icon-only with <code>aria-label</code>, or icon + text. No custom table-action classes.</p>
+    <div class="card">
+      <div class="card-body p-0">
+        <div class="table-responsive">
+          <table class="table align-middle mb-0">
+            <thead>
+              <tr>
+                <th scope="col">Member</th>
+                <th scope="col">Role</th>
+                <th scope="col" class="text-end">Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Ada Lovelace</td>
+                <td>Design lead</td>
+                <td class="text-end text-nowrap">
+                  <button type="button" class="btn btn-outline-secondary btn-sm" aria-label="View Ada Lovelace"><i data-lucide="eye" aria-hidden="true"></i></button>
+                  <button type="button" class="btn btn-outline-secondary btn-sm" aria-label="Edit Ada Lovelace"><i data-lucide="pencil" aria-hidden="true"></i></button>
+                  <button type="button" class="btn btn-outline-danger btn-sm" aria-label="Delete Ada Lovelace"><i data-lucide="trash-2" aria-hidden="true"></i></button>
+                </td>
+              </tr>
+              <tr>
+                <td>Alan Turing</td>
+                <td>Engineering</td>
+                <td class="text-end text-nowrap">
+                  <button type="button" class="btn btn-outline-secondary btn-sm" aria-label="View Alan Turing"><i data-lucide="eye" aria-hidden="true"></i></button>
+                  <button type="button" class="btn btn-outline-secondary btn-sm" aria-label="Edit Alan Turing"><i data-lucide="pencil" aria-hidden="true"></i></button>
+                  <button type="button" class="btn btn-outline-danger btn-sm" aria-label="Delete Alan Turing"><i data-lucide="trash-2" aria-hidden="true"></i></button>
+                </td>
+              </tr>
+              <tr>
+                <td>Grace Hopper</td>
+                <td>Engineering</td>
+                <td class="text-end text-nowrap">
+                  <button type="button" class="btn btn-outline-secondary btn-sm" aria-label="View Grace Hopper"><i data-lucide="eye" aria-hidden="true"></i></button>
+                  <button type="button" class="btn btn-outline-secondary btn-sm" aria-label="Edit Grace Hopper"><i data-lucide="pencil" aria-hidden="true"></i></button>
+                  <button type="button" class="btn btn-outline-danger btn-sm" aria-label="Delete Grace Hopper"><i data-lucide="trash-2" aria-hidden="true"></i></button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+    <p class="demo-label">Text + icon variant — the label stays visible, the icon is decorative:</p>
+    <div class="card">
+      <div class="card-body p-0">
+        <div class="table-responsive">
+          <table class="table align-middle mb-0">
+            <thead>
+              <tr>
+                <th scope="col">Repository</th>
+                <th scope="col" class="text-end">Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>indigokit/indigokit</td>
+                <td class="text-end text-nowrap">
+                  <button type="button" class="btn btn-outline-secondary btn-sm"><i data-lucide="external-link" aria-hidden="true"></i> Open</button>
+                  <button type="button" class="btn btn-outline-secondary btn-sm"><i data-lucide="copy" aria-hidden="true"></i> Clone</button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- Responsive -->
+    <h2 class="h5 mt-5" id="responsive">Responsive</h2>
+    <p class="demo-label">The same table inside <code>.table-responsive</code> — on a 320px viewport the wrapper scrolls horizontally (its own scroll region, never the page) and the header stays readable.</p>
+    <div class="card">
+      <div class="card-body p-0">
+        <div class="table-responsive">
+          <table class="table align-middle mb-0">
+            <caption class="px-3 pt-2 pb-0">Deployments across regions — wider than any phone viewport, so the wrapper scrolls</caption>
+            <thead>
+              <tr>
+                <th scope="col">Service</th>
+                <th scope="col">Region</th>
+                <th scope="col">Replicas</th>
+                <th scope="col">CPU</th>
+                <th scope="col">Memory</th>
+                <th scope="col">Storage</th>
+                <th scope="col">Ingress</th>
+                <th scope="col">Status</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>api-gateway</td>
+                <td>ap-south-1</td>
+                <td class="text-end">6</td>
+                <td class="text-end">2 vCPU</td>
+                <td class="text-end">4 GiB</td>
+                <td class="text-end">20 GiB</td>
+                <td class="text-end">1.2 GB/h</td>
+                <td><span class="badge text-bg-success">Healthy</span></td>
+              </tr>
+              <tr>
+                <td>auth-service</td>
+                <td>eu-west-1</td>
+                <td class="text-end">4</td>
+                <td class="text-end">1 vCPU</td>
+                <td class="text-end">2 GiB</td>
+                <td class="text-end">10 GiB</td>
+                <td class="text-end">0.4 GB/h</td>
+                <td><span class="badge text-bg-success">Healthy</span></td>
+              </tr>
+              <tr>
+                <td>worker-queue</td>
+                <td>us-east-1</td>
+                <td class="text-end">8</td>
+                <td class="text-end">4 vCPU</td>
+                <td class="text-end">8 GiB</td>
+                <td class="text-end">50 GiB</td>
+                <td class="text-end">2.1 GB/h</td>
+                <td><span class="badge text-bg-warning">Degraded</span></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- Sortable -->
+    <h2 class="h5 mt-5" id="sortable">Sorting indicator</h2>
+    <p class="demo-label">Visual only — no sorting logic. The header is a real <code>&lt;button&gt;</code> with <code>aria-sort</code> on the column and an accessible label; the chevron is decorative and flips with the <code>.asc</code> state class.</p>
+    <div class="card">
+      <div class="card-body p-0">
+        <div class="table-responsive">
+          <table class="table align-middle mb-0">
+            <thead>
+              <tr>
+                <th scope="col" aria-sort="ascending">
+                  <button type="button" class="btn btn-link btn-sm p-0 border-0 fw-semibold" aria-label="Sort by member, ascending">
+                    Member <i data-lucide="chevron-up" aria-hidden="true"></i>
+                  </button>
+                </th>
+                <th scope="col">
+                  <button type="button" class="btn btn-link btn-sm p-0 border-0 fw-semibold" aria-label="Sort by role">
+                    Role <i data-lucide="chevrons-up-down" aria-hidden="true"></i>
+                  </button>
+                </th>
+                <th scope="col" class="text-end">Tasks</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Ada Lovelace</td>
+                <td>Design lead</td>
+                <td class="text-end">24</td>
+              </tr>
+              <tr>
+                <td>Alan Turing</td>
+                <td>Engineering</td>
+                <td class="text-end">17</td>
+              </tr>
+              <tr>
+                <td>Grace Hopper</td>
+                <td>Engineering</td>
+                <td class="text-end">31</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- Pagination integration -->
+    <h2 class="h5 mt-5" id="pagination">Pagination integration</h2>
+    <p class="demo-label">The established pagination pattern below a table — a results count, the pagination nav, and its own <code>aria-label</code>. No pagination logic.</p>
+    <div class="card">
+      <div class="card-body p-0">
+        <div class="table-responsive">
+          <table class="table table-hover align-middle mb-0">
+            <thead>
+              <tr>
+                <th scope="col">Project</th>
+                <th scope="col">Status</th>
+                <th scope="col" class="text-end">Tasks</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>IndigoKit — Application Shell</td>
+                <td><span class="badge text-bg-success">Done</span></td>
+                <td class="text-end">24</td>
+              </tr>
+              <tr>
+                <td>IndigoKit — Form System</td>
+                <td><span class="badge text-bg-primary">In progress</span></td>
+                <td class="text-end">17</td>
+              </tr>
+              <tr>
+                <td>IndigoKit — Data Tables</td>
+                <td><span class="badge text-bg-warning">Review</span></td>
+                <td class="text-end">31</td>
+              </tr>
+              <tr>
+                <td>IndigoKit — Themes</td>
+                <td><span class="badge text-bg-secondary">Planned</span></td>
+                <td class="text-end">9</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="card-footer d-flex justify-content-between align-items-center flex-column flex-sm-row gap-2">
+        <span class="text-secondary small">Showing 1–4 of 128 projects</span>
+        <nav aria-label="Projects table pages">
+          <ul class="pagination pagination-sm mb-0">
+            <li class="page-item disabled">
+              <span class="page-link">Previous</span>
+            </li>
+            <li class="page-item active" aria-current="page">
+              <a class="page-link" href="#">1</a>
+            </li>
+            <li class="page-item">
+              <a class="page-link" href="#">2</a>
+            </li>
+            <li class="page-item">
+              <a class="page-link" href="#">3</a>
+            </li>
+            <li class="page-item">
+              <a class="page-link" href="#">Next</a>
+            </li>
+          </ul>
+        </nav>
+      </div>
+    </div>
+
+    <!-- Long content -->
+    <h2 class="h5 mt-5" id="long">Long content</h2>
+    <p class="demo-label">Long names and emails wrap naturally in the cell; the table never truncates without an intentional reason.</p>
+    <div class="card">
+      <div class="card-body p-0">
+        <div class="table-responsive">
+          <table class="table align-middle mb-0">
+            <thead>
+              <tr>
+                <th scope="col">Member</th>
+                <th scope="col">Email</th>
+                <th scope="col">Notes</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Augusta Ada King, Countess of Lovelace</td>
+                <td>augusta.ada.king.lovelace@example.com</td>
+                <td>Mathematician and writer, chiefly known for her work on Charles Babbage's proposed mechanical general-purpose computer.</td>
+              </tr>
+              <tr>
+                <td>Alan Mathison Turing</td>
+                <td>alan.m.turing@example.com</td>
+                <td>Computer scientist, mathematician, logician, cryptanalyst, philosopher, and theoretical biologist.</td>
+              </tr>
+              <tr>
+                <td>Grace Brewster Murray Hopper</td>
+                <td>grace.b.hopper@example.com</td>
+                <td>Computer scientist and United States Navy rear admiral, credited with developing COBOL.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- Empty state -->
+    <h2 class="h5 mt-5" id="empty">Empty state</h2>
+    <p class="demo-label">Semantic table structure with a single <code>colspan</code> row — muted text and an action, no new API. A dedicated Empty State component is deferred to its own task.</p>
+    <div class="card">
+      <div class="card-body p-0">
+        <div class="table-responsive">
+          <table class="table align-middle mb-0">
+            <caption class="px-3 pt-2 pb-0">Pending invitations</caption>
+            <thead>
+              <tr>
+                <th scope="col">Member</th>
+                <th scope="col">Role</th>
+                <th scope="col">Status</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td colspan="3" class="text-center text-secondary py-5">
+                  <i data-lucide="inbox" aria-hidden="true" class="d-block mx-auto mb-2"></i>
+                  No pending invitations.
+                  <button type="button" class="btn btn-link btn-sm p-0 ms-1 align-baseline">Invite a member</button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <script>
+    lucide.createIcons();
+  </script>
+</body>
+</html>

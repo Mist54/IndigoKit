@@ -1,0 +1,226 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>IndigoKit Playground — Application Sidebar</title>
+  <link rel="stylesheet" href="../../dist/css/indigokit.css">
+  <link rel="stylesheet" href="../playground.css">
+  <!-- Playground theme persistence (Task 047) — applies the stored
+       indigokit-theme preference before first paint. Playground-only. -->
+  <script src="../theme.js"></script>
+  <script src="../assets/lucide.umd.js"></script>
+  <script src="../../node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="../../dist/js/indigokit.js"></script>
+</head>
+<body>
+  <div class="mu-app">
+
+    <!-- Application navbar — real IndigoKit component (Task 005) -->
+    <header class="mu-app-top">
+            <nav class="navbar mu-app-navbar" aria-label="Main navigation">
+        <div class="container-fluid">
+          <div class="d-flex align-items-center gap-2">
+            <button type="button" class="btn" data-mu-mobile-toggle aria-controls="app-sidebar" aria-expanded="false" aria-label="Open navigation">
+              <i data-lucide="menu" aria-hidden="true"></i>
+            </button>
+            <button type="button" class="btn" data-mu-sidebar-toggle aria-controls="app-sidebar" aria-expanded="true" aria-label="Collapse sidebar">
+              <i data-lucide="panel-left-close" aria-hidden="true"></i>
+            </button>
+            <a class="navbar-brand" href="#">
+              <i data-lucide="layers" aria-hidden="true"></i>
+              IndigoKit
+            </a>
+          </div>
+          <div class="mu-navbar-main"></div>
+          <div class="mu-navbar-actions">
+            <select class="form-select form-select-sm" data-theme-switch aria-label="Theme">
+              <option value="system">System</option>
+              <option value="light">Light</option>
+              <option value="dark">Dark</option>
+            </select>
+            <button type="button" class="btn d-none d-md-inline-flex" aria-label="Notifications">
+              <i data-lucide="bell" aria-hidden="true"></i>
+            </button>
+            <button type="button" class="btn d-none d-md-inline-flex" aria-label="Help">
+              <i data-lucide="circle-question-mark" aria-hidden="true"></i>
+            </button>
+            <div class="dropdown">
+              <a class="mu-navbar-user" href="#" data-bs-toggle="dropdown" aria-expanded="false" aria-label="User menu">
+                <span class="mu-avatar"><i data-lucide="user" aria-hidden="true"></i></span>
+                <span class="mu-user-name d-none d-lg-inline">Jane Doe</span>
+                <i data-lucide="chevron-down" aria-hidden="true"></i>
+              </a>
+              <ul class="dropdown-menu dropdown-menu-end">
+                <li>
+                  <h6 class="dropdown-header">Jane Doe<span class="d-block small fw-normal text-body-secondary">Software Engineer</span></h6>
+                </li>
+                <li><hr class="dropdown-divider"></li>
+                <li><a class="dropdown-item" href="profile.html">Profile</a></li>
+                <li><a class="dropdown-item" href="settings.html">Account Settings</a></li>
+                <li><a class="dropdown-item" href="settings.html">Notifications</a></li>
+                <li><a class="dropdown-item" href="auth/lock-screen.html">Lock Screen</a></li>
+                <li><hr class="dropdown-divider"></li>
+                <li><a class="dropdown-item text-danger" href="auth/login.html">Sign out</a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <div class="mu-app-body">
+
+      <!-- Application sidebar — real IndigoKit component (Task 006 + 007) -->
+      <aside class="mu-app-side">
+        <div class="mu-sidebar" id="app-sidebar">
+          <!-- Drawer header — mobile only (close control) -->
+          <div class="mu-sidebar-header">
+            <button type="button" class="btn mu-sidebar-close" data-mu-sidebar-close aria-label="Close navigation">
+              <i data-lucide="x" aria-hidden="true"></i>
+            </button>
+          </div>
+          <nav class="mu-sidebar-nav" aria-label="Sidebar navigation">
+
+            <div class="mu-sidebar-section">
+              <div class="mu-sidebar-label">Workspace</div>
+              <ul class="mu-sidebar-list">
+                <li>
+                  <a class="mu-sidebar-link active" href="#" aria-current="page">
+                    <i data-lucide="layout-dashboard" aria-hidden="true"></i>
+                    <span class="mu-sidebar-link-text">Dashboard</span>
+                  </a>
+                </li>
+                <li>
+                  <a class="mu-sidebar-link" href="#">
+                    <i data-lucide="chart-line" aria-hidden="true"></i>
+                    <span class="mu-sidebar-link-text">Analytics</span>
+                    <span class="badge text-bg-primary mu-sidebar-badge">NEW</span>
+                  </a>
+                </li>
+                <li>
+                  <button type="button" class="mu-sidebar-link" data-bs-toggle="collapse" data-bs-target="#nav-projects" aria-expanded="false" aria-controls="nav-projects">
+                    <i data-lucide="folder-kanban" aria-hidden="true"></i>
+                    <span class="mu-sidebar-link-text">Projects</span>
+                    <i data-lucide="chevron-right" class="mu-sidebar-chevron" aria-hidden="true"></i>
+                  </button>
+                  <!-- Bootstrap Collapse group: the toggle above drives it (Task 055A) -->
+                  <div class="collapse" id="nav-projects">
+                    <ul class="mu-sidebar-nested">
+                      <li>
+                        <a class="mu-sidebar-link" href="#">
+                          <span class="mu-sidebar-link-text">Active Projects</span>
+                          <span class="badge text-bg-secondary mu-sidebar-badge">4</span>
+                        </a>
+                      </li>
+                      <li>
+                        <a class="mu-sidebar-link" href="#"><span class="mu-sidebar-link-text">Archived</span></a>
+                      </li>
+                      <li>
+                        <!-- Disabled item: real <button disabled> — native semantics, no ARIA needed -->
+                        <button type="button" class="mu-sidebar-link" disabled><span class="mu-sidebar-link-text">Templates</span></button>
+                      </li>
+                    </ul>
+                  </div>
+                </li>
+              </ul>
+            </div>
+
+            <div class="mu-sidebar-section">
+              <div class="mu-sidebar-label">Management</div>
+              <ul class="mu-sidebar-list">
+                <li>
+                  <a class="mu-sidebar-link" href="#">
+                    <i data-lucide="users" aria-hidden="true"></i>
+                    <span class="mu-sidebar-link-text">Users</span>
+                  </a>
+                </li>
+                <li>
+                  <a class="mu-sidebar-link" href="#">
+                    <i data-lucide="users-round" aria-hidden="true"></i>
+                    <span class="mu-sidebar-link-text">Teams</span>
+                    <span class="badge text-bg-secondary mu-sidebar-badge">8</span>
+                  </a>
+                </li>
+                <li>
+                  <a class="mu-sidebar-link" href="#">
+                    <i data-lucide="file-text" aria-hidden="true"></i>
+                    <span class="mu-sidebar-link-text">Reports</span>
+                  </a>
+                </li>
+              </ul>
+            </div>
+
+            <div class="mu-sidebar-section">
+              <div class="mu-sidebar-label">System</div>
+              <ul class="mu-sidebar-list">
+                <li>
+                  <a class="mu-sidebar-link" href="#">
+                    <i data-lucide="settings" aria-hidden="true"></i>
+                    <span class="mu-sidebar-link-text">Settings</span>
+                  </a>
+                </li>
+                <li>
+                  <a class="mu-sidebar-link" href="#">
+                    <i data-lucide="scroll-text" aria-hidden="true"></i>
+                    <span class="mu-sidebar-link-text">Audit Logs</span>
+                  </a>
+                </li>
+              </ul>
+            </div>
+
+          </nav>
+        </div>
+      </aside>
+
+      <!-- Main content — the only scrolling region -->
+      <main class="mu-app-main">
+        <div class="mu-app-content">
+
+          <p class="mb-0"><a href="../index.html">← Playground home</a></p>
+
+          <h1 class="mt-2">Application Sidebar</h1>
+          <p class="lead">The <code>.mu-sidebar</code> component — static enterprise navigation filling the <code>.mu-app-side</code> slot of the application shell.</p>
+
+          <h2 class="h5 mt-5 mb-3">Structure</h2>
+          <ul>
+            <li><strong>Semantic:</strong> <code>&lt;aside&gt;</code> landmark containing a labeled <code>&lt;nav&gt;</code> landmark</li>
+            <li><strong>Groups:</strong> section labels (Workspace / Management / System) with item lists</li>
+            <li><strong>Active item:</strong> Dashboard — solid indigo pill, weight 600, <code>aria-current="page"</code> (static, no JS)</li>
+            <li><strong>Badges:</strong> Bootstrap <code>.badge</code> + <code>text-bg-*</code>, positioned right with <code>.mu-sidebar-badge</code></li>
+            <li><strong>Nested:</strong> Bootstrap Collapse groups — the <code>Projects</code> toggle expands/collapses its children (chevron rotates); group toggles use <code>data-bs-toggle="collapse"</code></li>
+            <li><strong>Disabled:</strong> real <code>&lt;button disabled&gt;</code> — native semantics, no ARIA</li>
+            <li><strong>Icons:</strong> Lucide, decorative (<code>aria-hidden</code>) — link text carries the name</li>
+          </ul>
+
+          <h2 class="h5 mt-5 mb-3">Behavior notes</h2>
+          <ul>
+            <li>Width is the <code>$mu-sidebar-width</code> token (16rem / 256px); collapsed = <code>$mu-sidebar-width-collapsed</code> (4.75rem / 76px) — sized from the icon grid (2 × 38px centerline) so collapsed and expanded icons share one column and never shift</li>
+            <li>Surface is Bootstrap's subtle surface token — quiet, dark-theme-ready</li>
+            <li>The sidebar scrolls independently when the navigation list is long</li>
+            <li>Hover = subtle slate surface (never on disabled items); focus = the global solid-indigo outline</li>
+            <li><strong>Collapse (desktop only, ≥768px):</strong> click the <code>panel-left</code> button in the navbar actions — labels visually hide but stay in the accessibility tree</li>
+            <li><strong>Mobile drawer (&lt;768px):</strong> the <code>menu</code> button opens a slide-in drawer with a backdrop; Escape, backdrop click, or the <code>x</code> button closes it and focus returns to the trigger</li>
+            <li>No persistence, no tooltips yet</li>
+          </ul>
+
+          <h2 class="h5 mt-5 mb-3">Not implemented yet (later tasks)</h2>
+          <ul>
+            <li>Tooltip/flyout for collapsed items (nested groups are hidden while collapsed)</li>
+            <li>State persistence, active-route detection, dynamic navigation</li>
+          </ul>
+
+          <p class="mt-4 mb-0 text-body-secondary">Try it on desktop: collapse with the <code>panel-left</code> button. Shrink the window below 768px: the <code>menu</code> button opens the drawer; Escape / backdrop / <code>x</code> close it and keyboard focus returns to the trigger. The disabled “Templates” item is skipped by the keyboard.</p>
+
+        </div>
+      </main>
+
+    </div>
+
+    <!-- Mobile drawer backdrop (framework CSS + JS; visible below md) -->
+    <div class="mu-app-backdrop" aria-hidden="true"></div>
+  </div>
+
+  <script>lucide.createIcons();</script>
+</body>
+</html>

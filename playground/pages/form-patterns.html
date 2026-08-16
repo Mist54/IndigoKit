@@ -1,0 +1,570 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>IndigoKit — Form patterns</title>
+  <link rel="stylesheet" href="../../dist/css/indigokit.css">
+  <!-- Optional Select2 theme — loaded only on pages that opt into
+       Select2 (Task 057). Never part of indigokit.css. -->
+  <link rel="stylesheet" href="../../dist/css/indigokit-select2.css">
+  <link rel="stylesheet" href="../playground.css">
+  <script src="../theme.js"></script>
+  <script src="../assets/lucide.umd.js"></script>
+  <script src="../../node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="../../dist/js/indigokit.js"></script>
+  <!-- Optional Select2 stack: jQuery + Select2 + the IndigoKit
+       containment wrapper (the ONLY IndigoKit file allowed to touch
+       jQuery). Page-level only — never part of indigokit.js. -->
+  <script src="../../node_modules/jquery/dist/jquery.min.js"></script>
+  <script src="../../node_modules/select2/dist/js/select2.full.min.js"></script>
+  <script src="../../dist/js/indigokit-select2.js"></script>
+</head>
+<body>
+  <div class="mu-app">
+
+    <header class="mu-app-top">
+      <nav class="navbar mu-app-navbar" aria-label="Main navigation">
+        <div class="container-fluid">
+                    <div class="d-flex align-items-center gap-2">
+            <button type="button" class="btn" data-mu-mobile-toggle aria-controls="app-sidebar" aria-expanded="false" aria-label="Open navigation">
+              <i data-lucide="menu" aria-hidden="true"></i>
+            </button>
+            <button type="button" class="btn" data-mu-sidebar-toggle aria-controls="app-sidebar" aria-expanded="true" aria-label="Collapse sidebar">
+              <i data-lucide="panel-left-close" aria-hidden="true"></i>
+            </button>
+            <a class="navbar-brand" href="../index.html">
+            <i data-lucide="layers" aria-hidden="true"></i>
+            IndigoKit
+          </a>
+          </div>
+          <div class="mu-navbar-main"></div>
+          <div class="mu-navbar-actions">
+            <select class="form-select form-select-sm" data-theme-switch aria-label="Theme">
+              <option value="system">System</option>
+              <option value="light">Light</option>
+              <option value="dark">Dark</option>
+            </select>
+            <button type="button" class="btn d-none d-md-inline-flex" aria-label="Notifications">
+              <i data-lucide="bell" aria-hidden="true"></i>
+            </button>
+            <button type="button" class="btn d-none d-md-inline-flex" aria-label="Help">
+              <i data-lucide="circle-question-mark" aria-hidden="true"></i>
+            </button>
+            <div class="dropdown">
+              <a class="mu-navbar-user" href="#" data-bs-toggle="dropdown" aria-expanded="false" aria-label="User menu">
+                <span class="mu-avatar"><i data-lucide="user" aria-hidden="true"></i></span>
+                <span class="mu-user-name d-none d-lg-inline">Jane Doe</span>
+                <i data-lucide="chevron-down" aria-hidden="true"></i>
+              </a>
+              <ul class="dropdown-menu dropdown-menu-end">
+                <li>
+                  <h6 class="dropdown-header">Jane Doe<span class="d-block small fw-normal text-body-secondary">Software Engineer</span></h6>
+                </li>
+                <li><hr class="dropdown-divider"></li>
+                <li><a class="dropdown-item" href="profile.html">Profile</a></li>
+                <li><a class="dropdown-item" href="settings.html">Account Settings</a></li>
+                <li><a class="dropdown-item" href="settings.html">Notifications</a></li>
+                <li><a class="dropdown-item" href="auth/lock-screen.html">Lock Screen</a></li>
+                <li><hr class="dropdown-divider"></li>
+                <li><a class="dropdown-item text-danger" href="auth/login.html">Sign out</a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <div class="mu-app-body">
+
+      <aside class="mu-app-side">
+        <div class="mu-sidebar" id="app-sidebar">
+          <div class="mu-sidebar-header">
+            <button type="button" class="btn mu-sidebar-close" data-mu-sidebar-close aria-label="Close navigation">
+              <i data-lucide="x" aria-hidden="true"></i>
+            </button>
+          </div>
+          <nav class="mu-sidebar-nav" aria-label="Sidebar navigation">
+            <div class="mu-sidebar-section">
+              <div class="mu-sidebar-label">Application examples</div>
+              <ul class="mu-sidebar-list">
+                <li>
+                  <a class="mu-sidebar-link" href="../index.html">
+                    <i data-lucide="layout-dashboard" aria-hidden="true"></i>
+                    <span class="mu-sidebar-link-text">Dashboard</span>
+                  </a>
+                </li>
+                <li>
+                  <a class="mu-sidebar-link" href="dashboard-analytics.html">
+                    <i data-lucide="chart-no-axes-combined" aria-hidden="true"></i>
+                    <span class="mu-sidebar-link-text">Analytics</span>
+                  </a>
+                </li>
+                <li>
+                  <a class="mu-sidebar-link" href="dashboard-sales.html">
+                    <i data-lucide="chart-column" aria-hidden="true"></i>
+                    <span class="mu-sidebar-link-text">Sales</span>
+                  </a>
+                </li>
+                <li>
+                  <button type="button" class="mu-sidebar-link" data-bs-toggle="collapse" data-bs-target="#nav-auth" aria-expanded="false" aria-controls="nav-auth">
+                    <i data-lucide="shield" aria-hidden="true"></i>
+                    <span class="mu-sidebar-link-text">Authentication</span>
+                    <i data-lucide="chevron-right" class="mu-sidebar-chevron" aria-hidden="true"></i>
+                  </button>
+                  <div class="collapse" id="nav-auth">
+                    <ul class="mu-sidebar-nested">
+                      <li><a class="mu-sidebar-link" href="auth/login.html"><span class="mu-sidebar-link-text">Login</span></a></li>
+                      <li><a class="mu-sidebar-link" href="auth/register.html"><span class="mu-sidebar-link-text">Register</span></a></li>
+                      <li><a class="mu-sidebar-link" href="auth/forgot-password.html"><span class="mu-sidebar-link-text">Forgot password</span></a></li>
+                      <li><a class="mu-sidebar-link" href="auth/reset-password.html"><span class="mu-sidebar-link-text">Reset password</span></a></li>
+                      <li><a class="mu-sidebar-link" href="auth/lock-screen.html"><span class="mu-sidebar-link-text">Lock screen</span></a></li>
+                    </ul>
+                  </div>
+                </li>
+                <li>
+                  <button type="button" class="mu-sidebar-link" data-bs-toggle="collapse" data-bs-target="#nav-pages" aria-expanded="true" aria-controls="nav-pages">
+                    <i data-lucide="files" aria-hidden="true"></i>
+                    <span class="mu-sidebar-link-text">Pages</span>
+                    <i data-lucide="chevron-right" class="mu-sidebar-chevron" aria-hidden="true"></i>
+                  </button>
+                  <div class="collapse show" id="nav-pages">
+                    <ul class="mu-sidebar-nested">
+                      <li><a class="mu-sidebar-link" href="profile.html"><span class="mu-sidebar-link-text">Profile</span></a></li>
+                      <li><a class="mu-sidebar-link" href="settings.html"><span class="mu-sidebar-link-text">Settings</span></a></li>
+                      <li><a class="mu-sidebar-link" href="pricing.html"><span class="mu-sidebar-link-text">Pricing</span></a></li>
+                      <li><a class="mu-sidebar-link" href="faq.html"><span class="mu-sidebar-link-text">FAQ</span></a></li>
+                      <li><a class="mu-sidebar-link" href="invoice.html"><span class="mu-sidebar-link-text">Invoice</span></a></li>
+                      <li><a class="mu-sidebar-link" href="users.html"><span class="mu-sidebar-link-text">User list</span></a></li>
+                      <li><a class="mu-sidebar-link" href="roles.html"><span class="mu-sidebar-link-text">Roles &amp; permissions</span></a></li>
+                      <li><a class="mu-sidebar-link" href="notifications.html"><span class="mu-sidebar-link-text">Notifications</span></a></li>
+                      <li><a class="mu-sidebar-link" href="products.html"><span class="mu-sidebar-link-text">Products</span></a></li>
+                    </ul>
+                  </div>
+                </li>
+                <li>
+                  <button type="button" class="mu-sidebar-link" data-bs-toggle="collapse" data-bs-target="#nav-errors" aria-expanded="false" aria-controls="nav-errors">
+                    <i data-lucide="triangle-alert" aria-hidden="true"></i>
+                    <span class="mu-sidebar-link-text">Error pages</span>
+                    <i data-lucide="chevron-right" class="mu-sidebar-chevron" aria-hidden="true"></i>
+                  </button>
+                  <div class="collapse" id="nav-errors">
+                    <ul class="mu-sidebar-nested">
+                      <li><a class="mu-sidebar-link" href="errors/404.html"><span class="mu-sidebar-link-text">404 Not found</span></a></li>
+                      <li><a class="mu-sidebar-link" href="errors/403.html"><span class="mu-sidebar-link-text">403 Forbidden</span></a></li>
+                      <li><a class="mu-sidebar-link" href="errors/500.html"><span class="mu-sidebar-link-text">500 Server error</span></a></li>
+                      <li><a class="mu-sidebar-link" href="errors/maintenance.html"><span class="mu-sidebar-link-text">Maintenance</span></a></li>
+                    </ul>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="mu-sidebar-section">
+              <div class="mu-sidebar-label">Components</div>
+              <ul class="mu-sidebar-list">
+                <li><a class="mu-sidebar-link" href="tokens.html"><span class="mu-sidebar-link-text">Tokens</span></a></li>
+                <li><a class="mu-sidebar-link" href="base.html"><span class="mu-sidebar-link-text">Base</span></a></li>
+                <li><a class="mu-sidebar-link" href="layout.html"><span class="mu-sidebar-link-text">Layout</span></a></li>
+                <li><a class="mu-sidebar-link" href="navbar.html"><span class="mu-sidebar-link-text">Navbar</span></a></li>
+                <li><a class="mu-sidebar-link" href="sidebar.html"><span class="mu-sidebar-link-text">Sidebar</span></a></li>
+                <li><a class="mu-sidebar-link" href="buttons.html"><span class="mu-sidebar-link-text">Buttons</span></a></li>
+                <li><a class="mu-sidebar-link" href="cards.html"><span class="mu-sidebar-link-text">Cards</span></a></li>
+                <li><a class="mu-sidebar-link" href="alerts.html"><span class="mu-sidebar-link-text">Alerts</span></a></li>
+                <li><a class="mu-sidebar-link" href="badges.html"><span class="mu-sidebar-link-text">Badges</span></a></li>
+                <li><a class="mu-sidebar-link" href="dropdowns.html"><span class="mu-sidebar-link-text">Dropdowns</span></a></li>
+                <li><a class="mu-sidebar-link" href="modals.html"><span class="mu-sidebar-link-text">Modals</span></a></li>
+                <li><a class="mu-sidebar-link" href="tabs.html"><span class="mu-sidebar-link-text">Tabs</span></a></li>
+                <li><a class="mu-sidebar-link" href="breadcrumbs.html"><span class="mu-sidebar-link-text">Breadcrumbs</span></a></li>
+                <li><a class="mu-sidebar-link" href="pagination.html"><span class="mu-sidebar-link-text">Pagination</span></a></li>
+                <li><a class="mu-sidebar-link" href="forms.html"><span class="mu-sidebar-link-text">Forms</span></a></li>
+                <li><a class="mu-sidebar-link" href="tables.html"><span class="mu-sidebar-link-text">Tables</span></a></li>
+                <li><a class="mu-sidebar-link" href="data-table.html"><span class="mu-sidebar-link-text">Data table</span></a></li>
+                <li><a class="mu-sidebar-link active" href="form-patterns.html" aria-current="page"><span class="mu-sidebar-link-text">Form patterns</span></a></li>
+                <li><a class="mu-sidebar-link" href="progress.html"><span class="mu-sidebar-link-text">Progress</span></a></li>
+                <li><a class="mu-sidebar-link" href="loading.html"><span class="mu-sidebar-link-text">Loading</span></a></li>
+                <li><a class="mu-sidebar-link" href="toasts.html"><span class="mu-sidebar-link-text">Toasts</span></a></li>
+                <li><a class="mu-sidebar-link" href="list-groups.html"><span class="mu-sidebar-link-text">List groups</span></a></li>
+                <li><a class="mu-sidebar-link" href="empty-states.html"><span class="mu-sidebar-link-text">Empty states</span></a></li>
+                <li><a class="mu-sidebar-link" href="tooltips-popovers.html"><span class="mu-sidebar-link-text">Tooltips &amp; popovers</span></a></li>
+                <li><a class="mu-sidebar-link" href="accordion.html"><span class="mu-sidebar-link-text">Accordion</span></a></li>
+                <li><a class="mu-sidebar-link" href="offcanvas.html"><span class="mu-sidebar-link-text">Offcanvas</span></a></li>
+                <li><a class="mu-sidebar-link" href="carousel.html"><span class="mu-sidebar-link-text">Carousel</span></a></li>
+                <li><a class="mu-sidebar-link" href="scrollspy.html"><span class="mu-sidebar-link-text">Scrollspy</span></a></li>
+                <li><a class="mu-sidebar-link" href="navigation-patterns.html"><span class="mu-sidebar-link-text">Navigation patterns</span></a></li>
+                <li><a class="mu-sidebar-link" href="themes.html"><span class="mu-sidebar-link-text">Themes</span></a></li>
+              </ul>
+            </div>
+          </nav>
+        </div>
+      </aside>
+
+      <main class="mu-app-main">
+        <div class="mu-app-content">
+          <div class="container-fluid py-4">
+
+            <nav aria-label="Breadcrumb">
+              <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="../index.html">Dashboard</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Form patterns</li>
+              </ol>
+            </nav>
+
+            <div class="d-flex flex-wrap align-items-center justify-content-between gap-2 mb-3">
+              <div>
+                <h1 class="h3 mb-1">Form patterns</h1>
+                <p class="text-body-secondary mb-0">Reusable form compositions — a multi-step wizard and a file-upload list — built from Bootstrap classes and a small vanilla demo script.</p>
+              </div>
+            </div>
+
+            <p class="demo-label mb-4">Both patterns follow the same rules: label first, clear grouping, helpful validation, and no placeholder-as-label. The wizard uses Bootstrap tabs for step switching with native constraint validation on each step; the uploader renders a file list you can review and remove before submitting. No backend — the submit handlers only demonstrate the flow.</p>
+
+            <div class="row g-4">
+              <div class="col-12 col-lg-7">
+                <div class="card">
+                  <div class="card-header">
+                    <h2 class="h5 mb-0">Create account</h2>
+                  </div>
+                  <div class="card-body">
+                    <nav aria-label="Account creation steps">
+                      <ul class="nav nav-pills nav-justified mb-3" id="wizard-tabs" role="tablist">
+                        <li class="nav-item" role="presentation">
+                          <button type="button" class="nav-link active" id="step-account-tab" data-bs-toggle="tab" data-bs-target="#step-account" role="tab" aria-controls="step-account" aria-selected="true">
+                            <span class="badge text-bg-primary me-1">1</span> Account
+                          </button>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                          <button type="button" class="nav-link" id="step-org-tab" data-bs-toggle="tab" data-bs-target="#step-org" role="tab" aria-controls="step-org" aria-selected="false" tabindex="-1">
+                            <span class="badge text-bg-secondary me-1">2</span> Organization
+                          </button>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                          <button type="button" class="nav-link" id="step-review-tab" data-bs-toggle="tab" data-bs-target="#step-review" role="tab" aria-controls="step-review" aria-selected="false" tabindex="-1">
+                            <span class="badge text-bg-secondary me-1">3</span> Review
+                          </button>
+                        </li>
+                      </ul>
+                    </nav>
+
+                    <div class="progress mb-4" role="progressbar" aria-label="Account creation progress" aria-valuemin="0" aria-valuemax="100" aria-valuenow="33">
+                      <div class="progress-bar" id="wizard-progress"></div>
+                    </div>
+
+                    <form id="wizard-form" novalidate>
+                      <div class="tab-content" id="wizard-content">
+                        <div class="tab-pane fade show active" id="step-account" role="tabpanel" aria-labelledby="step-account-tab" tabindex="0">
+                          <div class="row g-3">
+                            <div class="col-12 col-md-6">
+                              <label class="form-label" for="fp-name">Full name</label>
+                              <input type="text" class="form-control" id="fp-name" required autocomplete="name">
+                              <div class="form-text">As it appears on your billing invoice.</div>
+                            </div>
+                            <div class="col-12 col-md-6">
+                              <label class="form-label" for="fp-email">Work email</label>
+                              <input type="email" class="form-control" id="fp-email" required autocomplete="email">
+                            </div>
+                            <div class="col-12 col-md-6">
+                              <label class="form-label" for="fp-password">Password</label>
+                              <input type="password" class="form-control" id="fp-password" required minlength="8" autocomplete="new-password">
+                              <div class="form-text">At least 8 characters.</div>
+                            </div>
+                            <div class="col-12 col-md-6">
+                              <label class="form-label" for="fp-confirm">Confirm password</label>
+                              <input type="password" class="form-control" id="fp-confirm" required autocomplete="new-password">
+                            </div>
+                          </div>
+                        </div>
+                        <div class="tab-pane fade" id="step-org" role="tabpanel" aria-labelledby="step-org-tab" tabindex="0">
+                          <div class="row g-3">
+                            <div class="col-12 col-md-6">
+                              <label class="form-label" for="fp-company">Company name</label>
+                              <input type="text" class="form-control" id="fp-company" required autocomplete="organization">
+                            </div>
+                            <div class="col-12 col-md-6">
+                              <label class="form-label" for="fp-size">Team size</label>
+                              <select class="form-select" id="fp-size" required>
+                                <option value="" selected>Choose a size…</option>
+                                <option value="1-10">1–10</option>
+                                <option value="11-50">11–50</option>
+                                <option value="51-200">51–200</option>
+                                <option value="200+">200+</option>
+                              </select>
+                            </div>
+                            <fieldset class="col-12">
+                              <legend class="col-form-label">Plan</legend>
+                              <div class="form-check">
+                                <input class="form-check-input" type="radio" name="fp-plan" id="fp-plan-free" value="free" checked>
+                                <label class="form-check-label" for="fp-plan-free">Free — for personal projects</label>
+                              </div>
+                              <div class="form-check">
+                                <input class="form-check-input" type="radio" name="fp-plan" id="fp-plan-team" value="team">
+                                <label class="form-check-label" for="fp-plan-team">Team — $12 per member / month</label>
+                              </div>
+                              <div class="form-check">
+                                <input class="form-check-input" type="radio" name="fp-plan" id="fp-plan-enterprise" value="enterprise">
+                                <label class="form-check-label" for="fp-plan-enterprise">Enterprise — contact sales</label>
+                              </div>
+                            </fieldset>
+                          </div>
+                        </div>
+                        <div class="tab-pane fade" id="step-review" role="tabpanel" aria-labelledby="step-review-tab" tabindex="0">
+                          <dl class="row mb-3">
+                            <dt class="col-sm-4">Full name</dt>
+                            <dd class="col-sm-8" id="review-name">—</dd>
+                            <dt class="col-sm-4">Work email</dt>
+                            <dd class="col-sm-8" id="review-email">—</dd>
+                            <dt class="col-sm-4">Company</dt>
+                            <dd class="col-sm-8" id="review-company">—</dd>
+                            <dt class="col-sm-4">Team size</dt>
+                            <dd class="col-sm-8" id="review-size">—</dd>
+                            <dt class="col-sm-4">Plan</dt>
+                            <dd class="col-sm-8" id="review-plan">Free</dd>
+                          </dl>
+                          <div class="form-check mb-3">
+                            <input class="form-check-input" type="checkbox" id="fp-terms" required>
+                            <label class="form-check-label" for="fp-terms">I agree to the Terms of Service and Privacy Policy.</label>
+                          </div>
+                          <div id="wizard-success" class="alert alert-success d-none" role="status"></div>
+                        </div>
+                      </div>
+                    </form>
+                  </div>
+                  <div class="card-footer d-flex justify-content-between">
+                    <button type="button" class="btn btn-outline-secondary" id="wizard-back">Back</button>
+                    <button type="button" class="btn btn-primary" id="wizard-next">Continue</button>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-12 col-lg-5">
+                <div class="card">
+                  <div class="card-header">
+                    <h2 class="h5 mb-0">Attachments</h2>
+                  </div>
+                  <div class="card-body">
+                    <label class="form-label" for="fp-files">Project files</label>
+                    <input type="file" class="form-control" id="fp-files" multiple>
+                    <div class="form-text">PNG, PDF, or ZIP up to 10 MB each. Files are listed below before submitting so nothing is uploaded by accident.</div>
+                  </div>
+                  <ul class="list-group list-group-flush" id="fp-file-list"></ul>
+                  <div class="card-body d-none text-center py-5" id="fp-file-empty">
+                    <i data-lucide="file-up" aria-hidden="true" width="32" height="32" class="text-secondary mb-3"></i>
+                    <p class="fw-semibold mb-1">No files attached yet</p>
+                    <p class="text-body-secondary mb-0">Choose files above and they will appear here for review.</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="mt-5">
+              <h2 class="h5 mb-1">Searchable &amp; multi-select (Select2)</h2>               <p class="text-body-secondary small mb-3">An optional enhancement — Select2 4.1 powers the searchable single select, multi-select, and free tagging below. Native <code>&lt;select class="form-select"&gt;</code> stays the default; these controls opt in via <code>data-mu-select2</code>, and jQuery is contained in a single integration file (<code>indigokit-select2.js</code>).</p>
+              <div class="row g-4">
+                <div class="col-12 col-md-4">
+                  <div class="card h-100">
+                    <div class="card-header">
+                      <h3 class="h6 mb-0">Searchable select</h3>
+                    </div>
+                    <div class="card-body">                       <label class="form-label" id="lbl-s2-owner" for="s2-owner">Assign owner</label>                       <select class="form-select" id="s2-owner" data-mu-select2 aria-labelledby="lbl-s2-owner">
+                        <option value="" selected disabled>Search a team member…</option>
+                        <option>Amara Okafor</option>
+                        <option>Ben Carter</option>
+                        <option>Clara Nguyen</option>
+                        <option>Diego Morales</option>
+                        <option>Elena Petrova</option>
+                        <option>Felix Braun</option>
+                        <option>Grace Kim</option>
+                        <option>Hassan Ali</option>
+                        <option>Ingrid Johansson</option>
+                        <option>Jonas Lindqvist</option>
+                        <option>Keiko Tanaka</option>
+                        <option>Liam O&#39;Connor</option>
+                        <option>Maya Patel</option>
+                        <option>Noah Fischer</option>
+                        <option>Priya Sharma</option>
+                      </select>
+                      <div class="form-text">Type to filter a large option set instead of scrolling.</div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-12 col-md-4">
+                  <div class="card h-100">
+                    <div class="card-header">
+                      <h3 class="h6 mb-0">Multi-select</h3>
+                    </div>
+                    <div class="card-body">                       <label class="form-label" id="lbl-s2-channels" for="s2-channels">Marketing channels</label>                       <select class="form-select" id="s2-channels" data-mu-select2 aria-labelledby="lbl-s2-channels" multiple>
+                        <option selected>Email</option>
+                        <option selected>Social media</option>
+                        <option>Blog</option>
+                        <option>Webinar</option>
+                        <option>Paid search</option>
+                        <option>Partner referrals</option>
+                        <option>Events</option>
+                      </select>
+                      <div class="form-text">Pick several; selected items appear as removable chips.</div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-12 col-md-4">
+                  <div class="card h-100">
+                    <div class="card-header">
+                      <h3 class="h6 mb-0">Tagging</h3>
+                    </div>
+                    <div class="card-body">                       <label class="form-label" id="lbl-s2-skills" for="s2-skills">Skills</label>                       <select class="form-select" id="s2-skills" data-mu-select2 aria-labelledby="lbl-s2-skills" data-mu-select2-tags="true" multiple>
+                        <option selected>Frontend</option>
+                        <option selected>Accessibility</option>
+                        <option>Design systems</option>
+                        <option>Backend</option>
+                      </select>
+                      <div class="form-text">Type a new value and press Enter to add it as a tag.</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </main>
+
+    </div>
+
+    <div class="mu-app-backdrop" aria-hidden="true"></div>
+  </div>
+
+  <script>
+  (function () {
+    'use strict';
+
+    // --- Wizard ---
+    var steps = ['step-account', 'step-org', 'step-review'];
+    var current = 0;
+    var progress = document.getElementById('wizard-progress');
+    var backBtn = document.getElementById('wizard-back');
+    var nextBtn = document.getElementById('wizard-next');
+    var form = document.getElementById('wizard-form');
+    var success = document.getElementById('wizard-success');
+
+    function panel(id) {
+      return document.getElementById(id);
+    }
+
+    function goTo(index) {
+      current = Math.max(0, Math.min(steps.length - 1, index));
+      var link = document.getElementById(steps[current] + '-tab');
+      new bootstrap.Tab(link).show();
+      var value = Math.round(((current + 1) / steps.length) * 100);
+      progress.style.width = value + '%';
+      progress.setAttribute('aria-valuenow', String(value));
+      backBtn.classList.toggle('invisible', current === 0);
+      nextBtn.textContent = current === steps.length - 1 ? 'Create account' : 'Continue';
+      panel(steps[current]).focus();
+    }
+
+    function stepIsValid() {
+      var els = panel(steps[current]).querySelectorAll('input, select');
+      for (var i = 0; i < els.length; i++) {
+        if (els[i].required && !els[i].checkValidity()) {
+          els[i].reportValidity();
+          return false;
+        }
+      }
+      return true;
+    }
+
+    function fillReview() {
+      document.getElementById('review-name').textContent = document.getElementById('fp-name').value || '—';
+      document.getElementById('review-email').textContent = document.getElementById('fp-email').value || '—';
+      document.getElementById('review-company').textContent = document.getElementById('fp-company').value || '—';
+      var size = document.getElementById('fp-size');
+      document.getElementById('review-size').textContent = size.options[size.selectedIndex] ? size.options[size.selectedIndex].textContent : '—';
+      var plan = document.querySelector('input[name="fp-plan"]:checked');
+      document.getElementById('review-plan').textContent = plan ? plan.value : 'Free';
+    }
+
+    nextBtn.addEventListener('click', function () {
+      if (current < steps.length - 1) {
+        if (!stepIsValid()) { return; }
+        goTo(current + 1);
+        if (current === steps.length - 1) { fillReview(); }
+      } else {
+        if (!form.checkValidity()) { form.reportValidity(); return; }
+        success.textContent = 'Account created for ' + document.getElementById('fp-email').value + '. A confirmation email is on its way.';
+        success.classList.remove('d-none');
+        nextBtn.disabled = true;
+        backBtn.disabled = true;
+      }
+    });
+
+    backBtn.addEventListener('click', function () { goTo(current - 1); });
+
+    ['shown.bs.tab'].forEach(function (evt) {
+      document.getElementById('wizard-content').addEventListener(evt, function (e) {
+        var idx = steps.indexOf(e.target.id);
+        if (idx !== -1 && idx !== current) { goTo(idx); }
+      });
+    });
+
+    goTo(0);
+
+    // --- File list ---
+    var fileInput = document.getElementById('fp-files');
+    var fileList = document.getElementById('fp-file-list');
+    var fileEmpty = document.getElementById('fp-file-empty');
+
+    function fmtSize(bytes) {
+      if (bytes < 1024) { return bytes + ' B'; }
+      if (bytes < 1048576) { return (bytes / 1024).toFixed(1) + ' KB'; }
+      return (bytes / 1048576).toFixed(1) + ' MB';
+    }
+
+    function addFileRow(file) {
+      var li = document.createElement('li');
+      li.className = 'list-group-item d-flex align-items-center gap-3';
+      var icon = document.createElement('i');
+      icon.setAttribute('data-lucide', 'file');
+      icon.setAttribute('aria-hidden', 'true');
+      icon.setAttribute('width', '16');
+      icon.setAttribute('height', '16');
+      icon.className = 'text-secondary flex-shrink-0';
+      var info = document.createElement('div');
+      info.className = 'flex-grow-1 min-w-0';
+      var name = document.createElement('div');
+      name.className = 'text-truncate';
+      name.textContent = file.name;
+      var meta = document.createElement('div');
+      meta.className = 'text-body-secondary small';
+      meta.textContent = fmtSize(file.size);
+      info.appendChild(name);
+      info.appendChild(meta);
+      var remove = document.createElement('button');
+      remove.type = 'button';
+      remove.className = 'btn btn-sm btn-outline-secondary';
+      remove.setAttribute('aria-label', 'Remove ' + file.name);
+      remove.textContent = 'Remove';
+      remove.addEventListener('click', function () {
+        li.remove();
+        updateFileList();
+      });
+      li.appendChild(icon);
+      li.appendChild(info);
+      li.appendChild(remove);
+      fileList.appendChild(li);
+      lucide.createIcons();
+    }
+
+    function updateFileList() {
+      var hasFiles = fileList.children.length > 0;
+      fileEmpty.classList.toggle('d-none', hasFiles);
+    }
+
+    fileInput.addEventListener('change', function () {
+      Array.prototype.forEach.call(fileInput.files, addFileRow);
+      fileInput.value = '';
+      updateFileList();
+    });
+
+    updateFileList();
+    lucide.createIcons();
+  })();
+  </script>
+</body>
+</html>

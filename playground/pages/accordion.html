@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>IndigoKit Playground — Accordion &amp; Collapse</title>
+  <link rel="stylesheet" href="../../dist/css/indigokit.css">
+  <link rel="stylesheet" href="../playground.css">
+  <!-- Playground theme persistence (Task 047) — applies the stored
+       indigokit-theme preference before first paint. Playground-only. -->
+  <script src="../theme.js"></script>
+  <script src="../assets/lucide.umd.js"></script>
+  <script src="../../node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+</head>
+<body>
+  <div class="container py-4 demo-table-page">
+    <h1 class="h4 mb-1">Accordion &amp; collapse</h1>
+    <p class="demo-label mb-4">Bootstrap's <code>.accordion</code> / <code>.collapse</code> with IndigoKit styling — hairline borders, 6px radius, indigo emphasis on the open header, the global indigo focus ring, and Bootstrap's own collapse transition (reduced-motion aware). Best for grouped, progressive information — not for content users need to compare side by side.</p>
+
+    <!-- Basic -->
+    <h2 class="h5 mt-5" id="basic">Basic accordion</h2>
+    <p class="demo-label">Standard single-open behavior — opening one item closes the others. Bootstrap's collapse JS drives everything; no custom state.</p>
+    <div class="accordion demo-acc" id="accordionBasic">
+      <div class="accordion-item">
+        <h2 class="accordion-header">
+          <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+            Design tokens
+          </button>
+        </h2>
+        <div id="collapseOne" class="accordion-collapse collapse show" data-bs-parent="#accordionBasic">
+          <div class="accordion-body">
+            <p class="mb-0">Colors, spacing, radius, shadows, and motion tokens live in <code>src/scss/base/_tokens.scss</code> and map onto Bootstrap's variables. Every component compiles against them.</p>
+          </div>
+        </div>
+      </div>
+      <div class="accordion-item">
+        <h2 class="accordion-header">
+          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+            Component architecture
+          </button>
+        </h2>
+        <div id="collapseTwo" class="accordion-collapse collapse" data-bs-parent="#accordionBasic">
+          <div class="accordion-body">
+            <p class="mb-0">Components extend Bootstrap's public API — refinements live in <code>src/scss/components/</code>, and JavaScript stays with Bootstrap (or minimal guarded init in <code>indigokit.js</code>).</p>
+          </div>
+        </div>
+      </div>
+      <div class="accordion-item">
+        <h2 class="accordion-header">
+          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+            Playground conventions
+          </button>
+        </h2>
+        <div id="collapseThree" class="accordion-collapse collapse" data-bs-parent="#accordionBasic">
+          <div class="accordion-body">
+            <p class="mb-0">Every component has a reference page in <code>playground/pages/</code>, linked from the index. No inline styles, no embedded framework CSS — the playground consumes the compiled output.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Independent collapse -->
+    <h2 class="h5 mt-5" id="independent">Independent collapse</h2>
+    <p class="demo-label">Without a <code>data-bs-parent</code>, each panel opens and closes on its own — useful for filters and settings with unrelated sections.</p>
+    <div class="accordion demo-acc" id="accordionIndependent">
+      <div class="accordion-item">
+        <h2 class="accordion-header">
+          <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#indOne" aria-expanded="true" aria-controls="indOne">
+            Branch protection
+          </button>
+        </h2>
+        <div id="indOne" class="accordion-collapse collapse show">
+          <div class="accordion-body">Require pull request reviews before merging. Protected branches cannot be force-pushed.</div>
+        </div>
+      </div>
+      <div class="accordion-item">
+        <h2 class="accordion-header">
+          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#indTwo" aria-expanded="false" aria-controls="indTwo">
+            Auto-merge
+          </button>
+        </h2>
+        <div id="indTwo" class="accordion-collapse collapse">
+          <div class="accordion-body">Automatically merge pull requests when all required checks pass.</div>
+        </div>
+      </div>
+      <div class="accordion-item">
+        <h2 class="accordion-header">
+          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#indThree" aria-expanded="false" aria-controls="indThree">
+            Deploy rules
+          </button>
+        </h2>
+        <div id="indThree" class="accordion-collapse collapse">
+          <div class="accordion-body">Gate production deploys on a passing CI pipeline and a human approval.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Flush -->
+    <h2 class="h5 mt-5" id="flush">Flush accordion</h2>
+    <p class="demo-label"><code>.accordion-flush</code> removes the outer borders — the items sit flush against their container, e.g. inside a card body.</p>
+    <div class="card demo-acc">
+      <div class="card-header">Deployment configuration</div>
+      <div class="card-body p-0">
+        <div class="accordion accordion-flush" id="accordionFlush">
+          <div class="accordion-item">
+            <h2 class="accordion-header">
+              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flushOne" aria-expanded="false" aria-controls="flushOne">
+                Environment variables
+              </button>
+            </h2>
+            <div id="flushOne" class="accordion-collapse collapse" data-bs-parent="#accordionFlush">
+              <div class="accordion-body">Secrets are injected at deploy time and never stored in the repository.</div>
+            </div>
+          </div>
+          <div class="accordion-item">
+            <h2 class="accordion-header">
+              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flushTwo" aria-expanded="false" aria-controls="flushTwo">
+                Scaling policy
+              </button>
+            </h2>
+            <div id="flushTwo" class="accordion-collapse collapse" data-bs-parent="#accordionFlush">
+              <div class="accordion-body">Minimum 2 replicas, maximum 12; scale on CPU above 70% for 5 minutes.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- FAQ -->
+    <h2 class="h5 mt-5" id="faq">FAQ</h2>
+    <p class="demo-label">Real questions as heading buttons — each opens its answer. Fine for answers read one at a time.</p>
+    <div class="accordion demo-acc" id="faqAccordion">
+      <div class="accordion-item">
+        <h2 class="accordion-header">
+          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faqOne" aria-expanded="false" aria-controls="faqOne">
+            How do I install IndigoKit?
+          </button>
+        </h2>
+        <div id="faqOne" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+          <div class="accordion-body">Install <code>bootstrap</code> and <code>lucide</code>, import <code>dist/css/indigokit.css</code> and <code>dist/js/indigokit.js</code>, then use standard Bootstrap markup.</div>
+        </div>
+      </div>
+      <div class="accordion-item">
+        <h2 class="accordion-header">
+          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faqTwo" aria-expanded="false" aria-controls="faqTwo">
+            Does IndigoKit add its own component classes?
+          </button>
+        </h2>
+        <div id="faqTwo" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+          <div class="accordion-body">Only for genuinely new concepts (the app shell, the sidebar). Every Bootstrap component keeps its Bootstrap classes — IndigoKit refines the visuals underneath.</div>
+        </div>
+      </div>
+      <div class="accordion-item">
+        <h2 class="accordion-header">
+          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faqThree" aria-expanded="false" aria-controls="faqThree">
+            Can I use the accordion for content people compare side by side?
+          </button>
+        </h2>
+        <div id="faqThree" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+          <div class="accordion-body">No — an accordion shows one panel at a time. For simultaneous comparison, use cards or a table instead.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Settings + form -->
+    <h2 class="h5 mt-5" id="settings">Settings &amp; forms</h2>
+    <p class="demo-label">Accordion as a settings surface — the form controls keep their labels, focus, and validation; the collapse transition never moves focus unexpectedly (it closes on the same button that opened it).</p>
+    <div class="accordion demo-acc" id="settingsAccordion">
+      <div class="accordion-item">
+        <h2 class="accordion-header">
+          <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#setProfile" aria-expanded="true" aria-controls="setProfile">
+            Profile
+          </button>
+        </h2>
+        <div id="setProfile" class="accordion-collapse collapse show" data-bs-parent="#settingsAccordion">
+          <div class="accordion-body">
+            <form novalidate>
+              <div class="row g-3">
+                <div class="col-md-6">
+                  <label for="accName2" class="form-label">Display name</label>
+                  <input type="text" class="form-control" id="accName2" value="Ada Lovelace">
+                </div>
+                <div class="col-md-6">
+                  <label for="accEmail2" class="form-label">Email address</label>
+                  <input type="email" class="form-control" id="accEmail2" value="ada@example.com">
+                </div>
+                <div class="col-12">
+                  <label for="accBio2" class="form-label">Bio</label>
+                  <textarea class="form-control" id="accBio2" rows="2" placeholder="A short summary…"></textarea>
+                </div>
+              </div>
+              <div class="mt-3 d-flex justify-content-end">
+                <button type="button" class="btn btn-primary">Save profile</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+      <div class="accordion-item">
+        <h2 class="accordion-header">
+          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#setNotify" aria-expanded="false" aria-controls="setNotify">
+            Notifications
+          </button>
+        </h2>
+        <div id="setNotify" class="accordion-collapse collapse" data-bs-parent="#settingsAccordion">
+          <div class="accordion-body">
+            <div class="form-check form-switch mb-2">
+              <input class="form-check-input" type="checkbox" role="switch" id="accEmailNotif" checked>
+              <label class="form-check-label" for="accEmailNotif">Email me about project activity</label>
+            </div>
+            <div class="form-check form-switch">
+              <input class="form-check-input" type="checkbox" role="switch" id="accSlackNotif">
+              <label class="form-check-label" for="accSlackNotif">Send Slack digests</label>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Long content -->
+    <h2 class="h5 mt-5" id="long">Long content</h2>
+    <div class="accordion demo-acc" id="longAccordion">
+      <div class="accordion-item">
+        <h2 class="accordion-header">
+          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#longOne" aria-expanded="false" aria-controls="longOne">
+            Accessibility audit — how we verify contrast, focus, and announcements
+          </button>
+        </h2>
+        <div id="longOne" class="accordion-collapse collapse" data-bs-parent="#longAccordion">
+          <div class="accordion-body">
+            <p>Every IndigoKit component is checked in the browser, not assumed: computed styles for contrast, the global indigo <code>:focus-visible</code> ring on every control, live-region behavior for toasts and alerts, and keyboard-only passes over tabs, modals, dropdowns, and accordions. Validation text uses the dark emphasis colors (measured ≥8:1), icons are decorative unless they carry essential meaning, and motion respects <code>prefers-reduced-motion</code>.</p>
+            <p class="mb-0">Known limitations are documented honestly in the playground pages — for example, the preview environment cannot animate transitions, so motion is verified in the compiled CSS rather than live.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- A11y -->
+    <h2 class="h5 mt-5" id="accessibility">Accessibility notes</h2>
+    <ul class="mb-0">
+      <li>Each panel header is a real <code>&lt;button&gt;</code> inside a semantic heading — <code>aria-expanded</code>, <code>aria-controls</code>, and the region IDs are managed by Bootstrap's collapse JS; no manual duplication.</li>
+      <li>Keyboard: Tab/Shift+Tab move through the header buttons (visible indigo focus ring), Enter/Space toggle them — native button behavior, no custom navigation.</li>
+      <li>The chevron flips on open and the open header gains indigo emphasis (color + weight context), so the active item is never color-only.</li>
+      <li>Bootstrap's collapse transition is reduced-motion aware; no custom animation is added.</li>
+      <li>Use accordions for progressive information (FAQ, settings, advanced options) — not for content users must compare simultaneously (use cards or tables there).</li>
+      <li>Forms inside accordion panels keep their labels, focus, and validation; collapsing happens on the same control that opened the panel, so focus never jumps.</li>
+    </ul>
+  </div>
+
+  <script>
+    lucide.createIcons();
+  </script>
+</body>
+</html>

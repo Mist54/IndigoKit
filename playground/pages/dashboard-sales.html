@@ -1,0 +1,802 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>IndigoKit — Sales</title>
+  <link rel="stylesheet" href="../../dist/css/indigokit.css">
+  <link rel="stylesheet" href="../playground.css">
+  <script src="../theme.js"></script>
+  <script src="../assets/lucide.umd.js"></script>
+  <script src="../../node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="../../dist/js/indigokit.js"></script>
+  <!-- Optional page-level chart library: loaded only by pages that
+       chart. Never bundled into indigokit.js (Task 057). -->
+  <script src="../../node_modules/chart.js/dist/chart.umd.min.js"></script>
+</head>
+<body>
+  <div class="mu-app">
+
+    <header class="mu-app-top">
+      <nav class="navbar mu-app-navbar" aria-label="Main navigation">
+        <div class="container-fluid">
+                    <div class="d-flex align-items-center gap-2">
+            <button type="button" class="btn" data-mu-mobile-toggle aria-controls="app-sidebar" aria-expanded="false" aria-label="Open navigation">
+              <i data-lucide="menu" aria-hidden="true"></i>
+            </button>
+            <button type="button" class="btn" data-mu-sidebar-toggle aria-controls="app-sidebar" aria-expanded="true" aria-label="Collapse sidebar">
+              <i data-lucide="panel-left-close" aria-hidden="true"></i>
+            </button>
+            <a class="navbar-brand" href="../index.html">
+            <i data-lucide="layers" aria-hidden="true"></i>
+            IndigoKit
+          </a>
+          </div>
+          <div class="mu-navbar-main"></div>
+          <div class="mu-navbar-actions">
+            <select class="form-select form-select-sm" data-theme-switch aria-label="Theme">
+              <option value="system">System</option>
+              <option value="light">Light</option>
+              <option value="dark">Dark</option>
+            </select>
+            <button type="button" class="btn d-none d-md-inline-flex" aria-label="Notifications">
+              <i data-lucide="bell" aria-hidden="true"></i>
+            </button>
+            <button type="button" class="btn d-none d-md-inline-flex" aria-label="Help">
+              <i data-lucide="circle-question-mark" aria-hidden="true"></i>
+            </button>
+            <div class="dropdown">
+              <a class="mu-navbar-user" href="#" data-bs-toggle="dropdown" aria-expanded="false" aria-label="User menu">
+                <span class="mu-avatar"><i data-lucide="user" aria-hidden="true"></i></span>
+                <span class="mu-user-name d-none d-lg-inline">Jane Doe</span>
+                <i data-lucide="chevron-down" aria-hidden="true"></i>
+              </a>
+              <ul class="dropdown-menu dropdown-menu-end">
+                <li>
+                  <h6 class="dropdown-header">Jane Doe<span class="d-block small fw-normal text-body-secondary">Software Engineer</span></h6>
+                </li>
+                <li><hr class="dropdown-divider"></li>
+                <li><a class="dropdown-item" href="profile.html">Profile</a></li>
+                <li><a class="dropdown-item" href="settings.html">Account Settings</a></li>
+                <li><a class="dropdown-item" href="settings.html">Notifications</a></li>
+                <li><a class="dropdown-item" href="auth/lock-screen.html">Lock Screen</a></li>
+                <li><hr class="dropdown-divider"></li>
+                <li><a class="dropdown-item text-danger" href="auth/login.html">Sign out</a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <div class="mu-app-body">
+
+      <aside class="mu-app-side">
+        <div class="mu-sidebar" id="app-sidebar">
+          <div class="mu-sidebar-header">
+            <button type="button" class="btn mu-sidebar-close" data-mu-sidebar-close aria-label="Close navigation">
+              <i data-lucide="x" aria-hidden="true"></i>
+            </button>
+          </div>
+          <nav class="mu-sidebar-nav" aria-label="Sidebar navigation">
+            <div class="mu-sidebar-section">
+              <div class="mu-sidebar-label">Application examples</div>
+              <ul class="mu-sidebar-list">
+                <li>
+                  <a class="mu-sidebar-link" href="../index.html">
+                    <i data-lucide="layout-dashboard" aria-hidden="true"></i>
+                    <span class="mu-sidebar-link-text">Dashboard</span>
+                  </a>
+                </li>
+                <li>
+                  <a class="mu-sidebar-link" href="dashboard-analytics.html">
+                    <i data-lucide="chart-no-axes-combined" aria-hidden="true"></i>
+                    <span class="mu-sidebar-link-text">Analytics</span>
+                  </a>
+                </li>
+                <li>
+                  <a class="mu-sidebar-link active" href="dashboard-sales.html" aria-current="page">
+                    <i data-lucide="chart-column" aria-hidden="true"></i>
+                    <span class="mu-sidebar-link-text">Sales</span>
+                  </a>
+                </li>
+                <li>
+                  <button type="button" class="mu-sidebar-link" data-bs-toggle="collapse" data-bs-target="#nav-auth" aria-expanded="false" aria-controls="nav-auth">
+                    <i data-lucide="shield" aria-hidden="true"></i>
+                    <span class="mu-sidebar-link-text">Authentication</span>
+                    <i data-lucide="chevron-right" class="mu-sidebar-chevron" aria-hidden="true"></i>
+                  </button>
+                  <div class="collapse" id="nav-auth">
+                    <ul class="mu-sidebar-nested">
+                      <li><a class="mu-sidebar-link" href="auth/login.html"><span class="mu-sidebar-link-text">Login</span></a></li>
+                      <li><a class="mu-sidebar-link" href="auth/register.html"><span class="mu-sidebar-link-text">Register</span></a></li>
+                      <li><a class="mu-sidebar-link" href="auth/forgot-password.html"><span class="mu-sidebar-link-text">Forgot password</span></a></li>
+                      <li><a class="mu-sidebar-link" href="auth/reset-password.html"><span class="mu-sidebar-link-text">Reset password</span></a></li>
+                      <li><a class="mu-sidebar-link" href="auth/lock-screen.html"><span class="mu-sidebar-link-text">Lock screen</span></a></li>
+                    </ul>
+                  </div>
+                </li>
+                <li>
+                  <button type="button" class="mu-sidebar-link" data-bs-toggle="collapse" data-bs-target="#nav-pages" aria-expanded="true" aria-controls="nav-pages">
+                    <i data-lucide="files" aria-hidden="true"></i>
+                    <span class="mu-sidebar-link-text">Pages</span>
+                    <i data-lucide="chevron-right" class="mu-sidebar-chevron" aria-hidden="true"></i>
+                  </button>
+                  <div class="collapse show" id="nav-pages">
+                    <ul class="mu-sidebar-nested">
+                      <li><a class="mu-sidebar-link" href="profile.html"><span class="mu-sidebar-link-text">Profile</span></a></li>
+                      <li><a class="mu-sidebar-link" href="settings.html"><span class="mu-sidebar-link-text">Settings</span></a></li>
+                      <li><a class="mu-sidebar-link" href="pricing.html"><span class="mu-sidebar-link-text">Pricing</span></a></li>
+                      <li><a class="mu-sidebar-link" href="faq.html"><span class="mu-sidebar-link-text">FAQ</span></a></li>
+                      <li><a class="mu-sidebar-link" href="invoice.html"><span class="mu-sidebar-link-text">Invoice</span></a></li>
+                      <li><a class="mu-sidebar-link" href="users.html"><span class="mu-sidebar-link-text">User list</span></a></li>
+                      <li><a class="mu-sidebar-link" href="roles.html"><span class="mu-sidebar-link-text">Roles &amp; permissions</span></a></li>
+                      <li><a class="mu-sidebar-link" href="notifications.html"><span class="mu-sidebar-link-text">Notifications</span></a></li>
+                      <li><a class="mu-sidebar-link" href="products.html"><span class="mu-sidebar-link-text">Products</span></a></li>
+                    </ul>
+                  </div>
+                </li>
+                <li>
+                  <button type="button" class="mu-sidebar-link" data-bs-toggle="collapse" data-bs-target="#nav-errors" aria-expanded="false" aria-controls="nav-errors">
+                    <i data-lucide="triangle-alert" aria-hidden="true"></i>
+                    <span class="mu-sidebar-link-text">Error pages</span>
+                    <i data-lucide="chevron-right" class="mu-sidebar-chevron" aria-hidden="true"></i>
+                  </button>
+                  <div class="collapse" id="nav-errors">
+                    <ul class="mu-sidebar-nested">
+                      <li><a class="mu-sidebar-link" href="errors/404.html"><span class="mu-sidebar-link-text">404 Not found</span></a></li>
+                      <li><a class="mu-sidebar-link" href="errors/403.html"><span class="mu-sidebar-link-text">403 Forbidden</span></a></li>
+                      <li><a class="mu-sidebar-link" href="errors/500.html"><span class="mu-sidebar-link-text">500 Server error</span></a></li>
+                      <li><a class="mu-sidebar-link" href="errors/maintenance.html"><span class="mu-sidebar-link-text">Maintenance</span></a></li>
+                    </ul>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="mu-sidebar-section">
+              <div class="mu-sidebar-label">Components</div>
+              <ul class="mu-sidebar-list">
+                <li><a class="mu-sidebar-link" href="tokens.html"><span class="mu-sidebar-link-text">Tokens</span></a></li>
+                <li><a class="mu-sidebar-link" href="base.html"><span class="mu-sidebar-link-text">Base</span></a></li>
+                <li><a class="mu-sidebar-link" href="layout.html"><span class="mu-sidebar-link-text">Layout</span></a></li>
+                <li><a class="mu-sidebar-link" href="navbar.html"><span class="mu-sidebar-link-text">Navbar</span></a></li>
+                <li><a class="mu-sidebar-link" href="sidebar.html"><span class="mu-sidebar-link-text">Sidebar</span></a></li>
+                <li><a class="mu-sidebar-link" href="buttons.html"><span class="mu-sidebar-link-text">Buttons</span></a></li>
+                <li><a class="mu-sidebar-link" href="cards.html"><span class="mu-sidebar-link-text">Cards</span></a></li>
+                <li><a class="mu-sidebar-link" href="alerts.html"><span class="mu-sidebar-link-text">Alerts</span></a></li>
+                <li><a class="mu-sidebar-link" href="badges.html"><span class="mu-sidebar-link-text">Badges</span></a></li>
+                <li><a class="mu-sidebar-link" href="dropdowns.html"><span class="mu-sidebar-link-text">Dropdowns</span></a></li>
+                <li><a class="mu-sidebar-link" href="modals.html"><span class="mu-sidebar-link-text">Modals</span></a></li>
+                <li><a class="mu-sidebar-link" href="tabs.html"><span class="mu-sidebar-link-text">Tabs</span></a></li>
+                <li><a class="mu-sidebar-link" href="breadcrumbs.html"><span class="mu-sidebar-link-text">Breadcrumbs</span></a></li>
+                <li><a class="mu-sidebar-link" href="pagination.html"><span class="mu-sidebar-link-text">Pagination</span></a></li>
+                <li><a class="mu-sidebar-link" href="forms.html"><span class="mu-sidebar-link-text">Forms</span></a></li>
+                <li><a class="mu-sidebar-link" href="tables.html"><span class="mu-sidebar-link-text">Tables</span></a></li>
+                <li><a class="mu-sidebar-link" href="data-table.html"><span class="mu-sidebar-link-text">Data table</span></a></li>
+                <li><a class="mu-sidebar-link" href="form-patterns.html"><span class="mu-sidebar-link-text">Form patterns</span></a></li>
+                <li><a class="mu-sidebar-link" href="progress.html"><span class="mu-sidebar-link-text">Progress</span></a></li>
+                <li><a class="mu-sidebar-link" href="loading.html"><span class="mu-sidebar-link-text">Loading</span></a></li>
+                <li><a class="mu-sidebar-link" href="toasts.html"><span class="mu-sidebar-link-text">Toasts</span></a></li>
+                <li><a class="mu-sidebar-link" href="list-groups.html"><span class="mu-sidebar-link-text">List groups</span></a></li>
+                <li><a class="mu-sidebar-link" href="empty-states.html"><span class="mu-sidebar-link-text">Empty states</span></a></li>
+                <li><a class="mu-sidebar-link" href="tooltips-popovers.html"><span class="mu-sidebar-link-text">Tooltips &amp; popovers</span></a></li>
+                <li><a class="mu-sidebar-link" href="accordion.html"><span class="mu-sidebar-link-text">Accordion</span></a></li>
+                <li><a class="mu-sidebar-link" href="offcanvas.html"><span class="mu-sidebar-link-text">Offcanvas</span></a></li>
+                <li><a class="mu-sidebar-link" href="carousel.html"><span class="mu-sidebar-link-text">Carousel</span></a></li>
+                <li><a class="mu-sidebar-link" href="scrollspy.html"><span class="mu-sidebar-link-text">Scrollspy</span></a></li>
+                <li><a class="mu-sidebar-link" href="navigation-patterns.html"><span class="mu-sidebar-link-text">Navigation patterns</span></a></li>
+                <li><a class="mu-sidebar-link" href="themes.html"><span class="mu-sidebar-link-text">Themes</span></a></li>
+              </ul>
+            </div>
+          </nav>
+        </div>
+      </aside>
+
+      <main class="mu-app-main">
+        <div class="mu-app-content">
+          <div class="container-fluid py-4">
+
+            <nav aria-label="Breadcrumb">
+              <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="../index.html">Dashboard</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Sales</li>
+              </ol>
+            </nav>
+
+            <div class="d-flex flex-wrap align-items-center justify-content-between gap-2 mb-4">
+              <div>
+                <h1 class="h3 mb-1">Sales</h1>
+                <p class="text-body-secondary mb-0">Revenue, orders, and fulfillment performance for the last 30 days.</p>
+              </div>
+              <div class="d-flex gap-2">
+                <select class="form-select form-select-sm" aria-label="Reporting period">
+                  <option value="7">Last 7 days</option>
+                  <option value="30" selected>Last 30 days</option>
+                  <option value="90">This quarter</option>
+                  <option value="365">Last 12 months</option>
+                </select>
+                <button type="button" class="btn btn-outline-secondary btn-sm">
+                  <i data-lucide="download" aria-hidden="true" width="16" height="16" class="me-1"></i>
+                  Export
+                </button>
+                <button type="button" class="btn btn-primary btn-sm">
+                  <i data-lucide="plus" aria-hidden="true" width="16" height="16" class="me-1"></i>
+                  New order
+                </button>
+              </div>
+            </div>
+
+            <div class="row g-3 mb-4">
+              <div class="col-12 col-sm-6 col-xl-3">
+                <div class="card h-100">
+                  <div class="card-body">
+                    <div class="d-flex align-items-center justify-content-between mb-2">
+                      <span class="text-body-secondary small">Revenue</span>
+                      <i data-lucide="dollar-sign" aria-hidden="true" width="18" height="18" class="text-secondary"></i>
+                    </div>
+                    <div class="h4 mb-1">$128,540</div>
+                    <div class="small text-success">
+                      <i data-lucide="trending-up" aria-hidden="true" width="14" height="14" class="me-1"></i>+18.2% vs last period
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-12 col-sm-6 col-xl-3">
+                <div class="card h-100">
+                  <div class="card-body">
+                    <div class="d-flex align-items-center justify-content-between mb-2">
+                      <span class="text-body-secondary small">Orders</span>
+                      <i data-lucide="shopping-cart" aria-hidden="true" width="18" height="18" class="text-secondary"></i>
+                    </div>
+                    <div class="h4 mb-1">1,847</div>
+                    <div class="small text-success">
+                      <i data-lucide="trending-up" aria-hidden="true" width="14" height="14" class="me-1"></i>+6.4% vs last period
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-12 col-sm-6 col-xl-3">
+                <div class="card h-100">
+                  <div class="card-body">
+                    <div class="d-flex align-items-center justify-content-between mb-2">
+                      <span class="text-body-secondary small">Conversion rate</span>
+                      <i data-lucide="percent" aria-hidden="true" width="18" height="18" class="text-secondary"></i>
+                    </div>
+                    <div class="h4 mb-1">3.8%</div>
+                    <div class="small text-success">
+                      <i data-lucide="trending-up" aria-hidden="true" width="14" height="14" class="me-1"></i>+0.3 pts vs last period
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-12 col-sm-6 col-xl-3">
+                <div class="card h-100">
+                  <div class="card-body">
+                    <div class="d-flex align-items-center justify-content-between mb-2">
+                      <span class="text-body-secondary small">Avg. order value</span>
+                      <i data-lucide="wallet" aria-hidden="true" width="18" height="18" class="text-secondary"></i>
+                    </div>
+                    <div class="h4 mb-1">$69.58</div>
+                    <div class="small text-danger">
+                      <i data-lucide="trending-down" aria-hidden="true" width="14" height="14" class="me-1"></i>1.2% vs last period
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="row g-3 mb-4">
+              <div class="col-12 col-lg-8">
+                <div class="card h-100">
+                  <div class="card-header d-flex flex-wrap align-items-center justify-content-between gap-2">
+                    <span class="fw-semibold">Revenue trend</span>
+                    <span class="small text-body-secondary d-flex align-items-center gap-3">
+                      <span class="d-flex align-items-center gap-1"><i data-lucide="circle" aria-hidden="true" width="10" height="10" class="text-primary"></i> This year</span>
+                      <span class="d-flex align-items-center gap-1"><i data-lucide="circle" aria-hidden="true" width="10" height="10" class="text-secondary"></i> Last year</span>
+                    </span>
+                  </div>
+                  <div class="card-body">
+                    <canvas id="revenue-chart" role="img" aria-label="Bar chart of monthly revenue: this year rising from $54,000 in January to $104,000 in December, consistently above last year"></canvas>
+                    <table class="visually-hidden">
+                      <caption>Monthly revenue in US dollars, this year and last year</caption>
+                      <thead>
+                        <tr><th scope="col">Month</th><th scope="col">This year</th><th scope="col">Last year</th></tr>
+                      </thead>
+                      <tbody>
+                        <tr><th scope="row">Jan</th><td>$54,000</td><td>$46,000</td></tr>
+                        <tr><th scope="row">Feb</th><td>$58,000</td><td>$44,000</td></tr>
+                        <tr><th scope="row">Mar</th><td>$57,000</td><td>$48,000</td></tr>
+                        <tr><th scope="row">Apr</th><td>$62,000</td><td>$51,000</td></tr>
+                        <tr><th scope="row">May</th><td>$66,000</td><td>$49,000</td></tr>
+                        <tr><th scope="row">Jun</th><td>$69,000</td><td>$55,000</td></tr>
+                        <tr><th scope="row">Jul</th><td>$74,000</td><td>$58,000</td></tr>
+                        <tr><th scope="row">Aug</th><td>$71,000</td><td>$56,000</td></tr>
+                        <tr><th scope="row">Sep</th><td>$79,000</td><td>$61,000</td></tr>
+                        <tr><th scope="row">Oct</th><td>$86,000</td><td>$65,000</td></tr>
+                        <tr><th scope="row">Nov</th><td>$93,000</td><td>$70,000</td></tr>
+                        <tr><th scope="row">Dec</th><td>$104,000</td><td>$76,000</td></tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+              <div class="col-12 col-lg-4">
+                <div class="card h-100">
+                  <div class="card-header">
+                    <span class="fw-semibold">Sales by category</span>
+                  </div>
+                  <div class="card-body">
+                    <canvas id="category-chart" role="img" aria-label="Doughnut chart of sales by category: online store 42 percent, marketplace 28 percent, wholesale 18 percent, in-store 12 percent"></canvas>
+                    <ul class="list-unstyled small mb-0 mt-3">
+                      <li class="d-flex justify-content-between align-items-center py-1">
+                        <span class="d-flex align-items-center gap-2"><span class="badge rounded-pill bg-primary" aria-hidden="true">&nbsp;</span>Online store</span>
+                        <span class="fw-semibold">42%</span>
+                      </li>
+                      <li class="d-flex justify-content-between align-items-center py-1">
+                        <span class="d-flex align-items-center gap-2"><span class="badge rounded-pill bg-secondary" aria-hidden="true">&nbsp;</span>Marketplace</span>
+                        <span class="fw-semibold">28%</span>
+                      </li>
+                      <li class="d-flex justify-content-between align-items-center py-1">
+                        <span class="d-flex align-items-center gap-2"><span class="badge rounded-pill bg-warning" aria-hidden="true">&nbsp;</span>Wholesale</span>
+                        <span class="fw-semibold">18%</span>
+                      </li>
+                      <li class="d-flex justify-content-between align-items-center py-1">
+                        <span class="d-flex align-items-center gap-2"><span class="badge rounded-pill bg-success" aria-hidden="true">&nbsp;</span>In-store</span>
+                        <span class="fw-semibold">12%</span>
+                      </li>
+                    </ul>
+                    <table class="visually-hidden">
+                      <caption>Sales by category as a percentage of total revenue</caption>
+                      <thead>
+                        <tr><th scope="col">Category</th><th scope="col">Share</th></tr>
+                      </thead>
+                      <tbody>
+                        <tr><th scope="row">Online store</th><td>42%</td></tr>
+                        <tr><th scope="row">Marketplace</th><td>28%</td></tr>
+                        <tr><th scope="row">Wholesale</th><td>18%</td></tr>
+                        <tr><th scope="row">In-store</th><td>12%</td></tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="row g-3 mb-4">
+              <div class="col-12 col-lg-8">
+                <div class="card">
+                  <div class="card-header d-flex align-items-center justify-content-between">
+                    <span class="fw-semibold">Recent orders</span>
+                    <a href="data-table.html" class="small text-decoration-none">View all</a>
+                  </div>
+                  <div class="table-responsive">
+                    <table class="table table-hover align-middle mb-0">
+                      <caption class="visually-hidden">Recent orders with customer, date, amount, status, and actions</caption>
+                      <thead>
+                        <tr>
+                          <th scope="col">Order</th>
+                          <th scope="col">Customer</th>
+                          <th scope="col">Date</th>
+                          <th scope="col" class="text-end">Amount</th>
+                          <th scope="col">Status</th>
+                          <th scope="col"><span class="visually-hidden">Actions</span></th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr>
+                          <th scope="row"><a href="invoice.html" class="text-decoration-none">#10254</a></th>
+                          <td>Ana Trujillo</td>
+                          <td class="text-body-secondary">Aug 15, 2026</td>
+                          <td class="text-end">$440.00</td>
+                          <td><span class="badge text-bg-success">Paid</span></td>
+                          <td>
+                            <div class="dropdown">
+                              <button type="button" class="btn btn-sm" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Actions for order #10254">
+                                <i data-lucide="more-horizontal" aria-hidden="true"></i>
+                              </button>
+                              <ul class="dropdown-menu dropdown-menu-end">
+                                <li><a class="dropdown-item" href="invoice.html">View</a></li>
+                                <li><a class="dropdown-item" href="invoice.html">Edit</a></li>
+                                <li><a class="dropdown-item text-danger" href="#">Refund</a></li>
+                              </ul>
+                            </div>
+                          </td>
+                        </tr>
+                        <tr>
+                          <th scope="row"><a href="invoice.html" class="text-decoration-none">#10253</a></th>
+                          <td>Antonio Moreno</td>
+                          <td class="text-body-secondary">Aug 15, 2026</td>
+                          <td class="text-end">$1,872.00</td>
+                          <td><span class="badge text-bg-warning">Pending payment</span></td>
+                          <td>
+                            <div class="dropdown">
+                              <button type="button" class="btn btn-sm" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Actions for order #10253">
+                                <i data-lucide="more-horizontal" aria-hidden="true"></i>
+                              </button>
+                              <ul class="dropdown-menu dropdown-menu-end">
+                                <li><a class="dropdown-item" href="invoice.html">View</a></li>
+                                <li><a class="dropdown-item" href="invoice.html">Edit</a></li>
+                                <li><a class="dropdown-item text-danger" href="#">Refund</a></li>
+                              </ul>
+                            </div>
+                          </td>
+                        </tr>
+                        <tr>
+                          <th scope="row"><a href="invoice.html" class="text-decoration-none">#10252</a></th>
+                          <td>Thomas Hardy</td>
+                          <td class="text-body-secondary">Aug 14, 2026</td>
+                          <td class="text-end">$315.50</td>
+                          <td><span class="badge text-bg-info">Shipped</span></td>
+                          <td>
+                            <div class="dropdown">
+                              <button type="button" class="btn btn-sm" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Actions for order #10252">
+                                <i data-lucide="more-horizontal" aria-hidden="true"></i>
+                              </button>
+                              <ul class="dropdown-menu dropdown-menu-end">
+                                <li><a class="dropdown-item" href="invoice.html">View</a></li>
+                                <li><a class="dropdown-item" href="invoice.html">Edit</a></li>
+                                <li><a class="dropdown-item text-danger" href="#">Refund</a></li>
+                              </ul>
+                            </div>
+                          </td>
+                        </tr>
+                        <tr>
+                          <th scope="row"><a href="invoice.html" class="text-decoration-none">#10251</a></th>
+                          <td>Christina Berglund</td>
+                          <td class="text-body-secondary">Aug 14, 2026</td>
+                          <td class="text-end">$96.00</td>
+                          <td><span class="badge text-bg-success">Paid</span></td>
+                          <td>
+                            <div class="dropdown">
+                              <button type="button" class="btn btn-sm" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Actions for order #10251">
+                                <i data-lucide="more-horizontal" aria-hidden="true"></i>
+                              </button>
+                              <ul class="dropdown-menu dropdown-menu-end">
+                                <li><a class="dropdown-item" href="invoice.html">View</a></li>
+                                <li><a class="dropdown-item" href="invoice.html">Edit</a></li>
+                                <li><a class="dropdown-item text-danger" href="#">Refund</a></li>
+                              </ul>
+                            </div>
+                          </td>
+                        </tr>
+                        <tr>
+                          <th scope="row"><a href="invoice.html" class="text-decoration-none">#10250</a></th>
+                          <td>Hanna Moos</td>
+                          <td class="text-body-secondary">Aug 13, 2026</td>
+                          <td class="text-end">$2,310.00</td>
+                          <td><span class="badge text-bg-danger">Refunded</span></td>
+                          <td>
+                            <div class="dropdown">
+                              <button type="button" class="btn btn-sm" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Actions for order #10250">
+                                <i data-lucide="more-horizontal" aria-hidden="true"></i>
+                              </button>
+                              <ul class="dropdown-menu dropdown-menu-end">
+                                <li><a class="dropdown-item" href="invoice.html">View</a></li>
+                                <li><a class="dropdown-item" href="invoice.html">Edit</a></li>
+                                <li><a class="dropdown-item text-danger" href="#">Refund</a></li>
+                              </ul>
+                            </div>
+                          </td>
+                        </tr>
+                        <tr>
+                          <th scope="row"><a href="invoice.html" class="text-decoration-none">#10249</a></th>
+                          <td>Martin Sommer</td>
+                          <td class="text-body-secondary">Aug 13, 2026</td>
+                          <td class="text-end">$1,048.20</td>
+                          <td><span class="badge text-bg-warning">Pending payment</span></td>
+                          <td>
+                            <div class="dropdown">
+                              <button type="button" class="btn btn-sm" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Actions for order #10249">
+                                <i data-lucide="more-horizontal" aria-hidden="true"></i>
+                              </button>
+                              <ul class="dropdown-menu dropdown-menu-end">
+                                <li><a class="dropdown-item" href="invoice.html">View</a></li>
+                                <li><a class="dropdown-item" href="invoice.html">Edit</a></li>
+                                <li><a class="dropdown-item text-danger" href="#">Refund</a></li>
+                              </ul>
+                            </div>
+                          </td>
+                        </tr>
+                        <tr>
+                          <th scope="row"><a href="invoice.html" class="text-decoration-none">#10248</a></th>
+                          <td>Laurence Lebihan</td>
+                          <td class="text-body-secondary">Aug 12, 2026</td>
+                          <td class="text-end">$764.00</td>
+                          <td><span class="badge text-bg-info">Shipped</span></td>
+                          <td>
+                            <div class="dropdown">
+                              <button type="button" class="btn btn-sm" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Actions for order #10248">
+                                <i data-lucide="more-horizontal" aria-hidden="true"></i>
+                              </button>
+                              <ul class="dropdown-menu dropdown-menu-end">
+                                <li><a class="dropdown-item" href="invoice.html">View</a></li>
+                                <li><a class="dropdown-item" href="invoice.html">Edit</a></li>
+                                <li><a class="dropdown-item text-danger" href="#">Refund</a></li>
+                              </ul>
+                            </div>
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+              <div class="col-12 col-lg-4">
+                <div class="card h-100">
+                  <div class="card-header">
+                    <span class="fw-semibold">Operational status</span>
+                  </div>
+                  <div class="card-body">
+                    <div class="row text-center mb-3 g-2">
+                      <div class="col-3">
+                        <div class="h5 mb-0">12</div>
+                        <div class="small text-body-secondary">Pending</div>
+                      </div>
+                      <div class="col-3">
+                        <div class="h5 mb-0">38</div>
+                        <div class="small text-body-secondary">Processing</div>
+                      </div>
+                      <div class="col-3">
+                        <div class="h5 mb-0">104</div>
+                        <div class="small text-body-secondary">Shipped</div>
+                      </div>
+                      <div class="col-3">
+                        <div class="h5 mb-0">6</div>
+                        <div class="small text-body-secondary">Returned</div>
+                      </div>
+                    </div>
+                    <div class="mb-3">
+                      <div class="d-flex justify-content-between small mb-1"><span>Fulfillment SLA</span><span class="fw-semibold">94%</span></div>
+                      <div class="progress" role="progressbar" aria-label="Fulfillment SLA" aria-valuenow="94" aria-valuemin="0" aria-valuemax="100">
+                        <div class="progress-bar" style="width: 94%"></div>
+                      </div>
+                    </div>
+                    <div class="mb-3">
+                      <div class="d-flex justify-content-between small mb-1"><span>On-time delivery</span><span class="fw-semibold">91%</span></div>
+                      <div class="progress" role="progressbar" aria-label="On-time delivery" aria-valuenow="91" aria-valuemin="0" aria-valuemax="100">
+                        <div class="progress-bar" style="width: 91%"></div>
+                      </div>
+                    </div>
+                    <div class="mb-3">
+                      <div class="d-flex justify-content-between small mb-1"><span>Inventory accuracy</span><span class="fw-semibold">98%</span></div>
+                      <div class="progress" role="progressbar" aria-label="Inventory accuracy" aria-valuenow="98" aria-valuemin="0" aria-valuemax="100">
+                        <div class="progress-bar" style="width: 98%"></div>
+                      </div>
+                    </div>
+                    <div class="mb-0">
+                      <div class="d-flex justify-content-between small mb-1"><span>Backorder rate</span><span class="fw-semibold">6%</span></div>
+                      <div class="progress" role="progressbar" aria-label="Backorder rate" aria-valuenow="6" aria-valuemin="0" aria-valuemax="100">
+                        <div class="progress-bar" style="width: 6%"></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="row g-3">
+              <div class="col-12 col-lg-7">
+                <div class="card h-100">
+                  <div class="card-header">
+                    <span class="fw-semibold">Recent activity</span>
+                  </div>
+                  <ul class="list-group list-group-flush">
+                    <li class="list-group-item">
+                      <div class="d-flex align-items-start gap-2">
+                        <i data-lucide="circle-check" aria-hidden="true" width="16" height="16" class="text-success mt-1 flex-shrink-0"></i>
+                        <div>
+                          <div><a href="invoice.html" class="text-decoration-none">#10254</a> paid — <strong>$440.00</strong></div>
+                          <div class="small text-body-secondary">2 minutes ago</div>
+                        </div>
+                      </div>
+                    </li>
+                    <li class="list-group-item">
+                      <div class="d-flex align-items-start gap-2">
+                        <i data-lucide="truck" aria-hidden="true" width="16" height="16" class="text-info mt-1 flex-shrink-0"></i>
+                        <div>
+                          <div>Shipment for <a href="invoice.html" class="text-decoration-none">#10251</a> marked as delivered</div>
+                          <div class="small text-body-secondary">38 minutes ago</div>
+                        </div>
+                      </div>
+                    </li>
+                    <li class="list-group-item">
+                      <div class="d-flex align-items-start gap-2">
+                        <i data-lucide="boxes" aria-hidden="true" width="16" height="16" class="text-primary mt-1 flex-shrink-0"></i>
+                        <div>
+                          <div>12 units of USB-C hub restocked at West warehouse</div>
+                          <div class="small text-body-secondary">1 hour ago</div>
+                        </div>
+                      </div>
+                    </li>
+                    <li class="list-group-item">
+                      <div class="d-flex align-items-start gap-2">
+                        <i data-lucide="refresh-cw" aria-hidden="true" width="16" height="16" class="text-warning mt-1 flex-shrink-0"></i>
+                        <div>
+                          <div>Refund of <strong>$2,310.00</strong> processed for <a href="invoice.html" class="text-decoration-none">#10250</a></div>
+                          <div class="small text-body-secondary">3 hours ago</div>
+                        </div>
+                      </div>
+                    </li>
+                    <li class="list-group-item">
+                      <div class="d-flex align-items-start gap-2">
+                        <i data-lucide="receipt-text" aria-hidden="true" width="16" height="16" class="text-secondary mt-1 flex-shrink-0"></i>
+                        <div>
+                          <div>New wholesale order from Northwind Traders — <strong>$4,280.00</strong></div>
+                          <div class="small text-body-secondary">Yesterday</div>
+                        </div>
+                      </div>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+              <div class="col-12 col-lg-5">
+                <div class="card h-100">
+                  <div class="card-header">
+                    <span class="fw-semibold">Quick actions</span>
+                  </div>
+                  <div class="card-body d-grid gap-2">
+                    <button type="button" class="btn btn-outline-primary">
+                      <i data-lucide="plus" aria-hidden="true" width="16" height="16" class="me-1"></i>
+                      Create order
+                    </button>
+                    <button type="button" class="btn btn-outline-primary">
+                      <i data-lucide="package-plus" aria-hidden="true" width="16" height="16" class="me-1"></i>
+                      Add product
+                    </button>
+                    <button type="button" class="btn btn-outline-secondary">
+                      <i data-lucide="boxes" aria-hidden="true" width="16" height="16" class="me-1"></i>
+                      View inventory
+                    </button>
+                    <button type="button" class="btn btn-outline-secondary">
+                      <i data-lucide="file-text" aria-hidden="true" width="16" height="16" class="me-1"></i>
+                      Generate report
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </main>
+
+    </div>
+
+    <div class="mu-app-backdrop" aria-hidden="true"></div>
+  </div>
+
+  <script>lucide.createIcons();</script>
+
+  <script>
+  (function () {
+    'use strict';
+
+    // Chart.js integration (Task 057 pattern) — page-level and
+    // guarded: if the optional chart library is absent the native
+    // fallbacks (the visually-hidden data tables above) remain.
+    var revenueCanvas = document.getElementById('revenue-chart');
+    var categoryCanvas = document.getElementById('category-chart');
+    if (!revenueCanvas || !categoryCanvas || !window.Chart) { return; }
+
+    var MONTHS = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+    var THIS_YEAR = [54000, 58000, 57000, 62000, 66000, 69000, 74000, 71000, 79000, 86000, 93000, 104000];
+    var LAST_YEAR = [46000, 44000, 48000, 51000, 49000, 55000, 58000, 56000, 61000, 65000, 70000, 76000];
+    var CATEGORIES = ['Online store', 'Marketplace', 'Wholesale', 'In-store'];
+    var CATEGORY_VALUES = [42, 28, 18, 12];
+
+    function cssVar(name) {
+      return getComputedStyle(document.documentElement).getPropertyValue(name).trim();
+    }
+
+    var reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    function buildCharts() {
+      // Never leave a duplicate instance on the same canvas.
+      var existing = Chart.getChart(revenueCanvas);
+      if (existing) { existing.destroy(); }
+      existing = Chart.getChart(categoryCanvas);
+      if (existing) { existing.destroy(); }
+
+      var primary = cssVar('--bs-primary') || '#4F46E5';
+      var secondary = cssVar('--bs-secondary') || '#64748B';
+      var success = cssVar('--bs-success') || '#198754';
+      var warning = cssVar('--bs-warning') || '#FFC107';
+      var grid = cssVar('--bs-border-color') || '#dee2e6';
+      var tick = cssVar('--bs-secondary-color') || 'rgba(0,0,0,0.75)';
+      var bg = cssVar('--bs-body-bg') || '#ffffff';
+      var bodyColor = cssVar('--bs-body-color') || '#0F172A';
+
+      new Chart(revenueCanvas.getContext('2d'), {
+        type: 'bar',
+        data: {
+          labels: MONTHS,
+          datasets: [
+            { label: 'This year', data: THIS_YEAR, backgroundColor: primary, borderRadius: 3, maxBarThickness: 22 },
+            { label: 'Last year', data: LAST_YEAR, backgroundColor: secondary, borderRadius: 3, maxBarThickness: 22 }
+          ]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: true,
+          aspectRatio: 2.2,
+          animation: reduceMotion ? false : { duration: 400 },
+          interaction: { mode: 'index', intersect: false },
+          plugins: {
+            legend: { display: false }, // the card header legend names the series
+            tooltip: {
+              backgroundColor: bg,
+              titleColor: bodyColor,
+              bodyColor: bodyColor,
+              borderColor: grid,
+              borderWidth: 1,
+              padding: 10,
+              callbacks: {
+                label: function (ctx) { return ctx.dataset.label + ': $' + ctx.parsed.y.toLocaleString(); }
+              }
+            }
+          },
+          scales: {
+            x: {
+              grid: { display: false },
+              ticks: { color: tick, font: { size: 12 } }
+            },
+            y: {
+              grid: { color: grid },
+              border: { display: false },
+              ticks: {
+                color: tick,
+                font: { size: 12 },
+                callback: function (v) { return '$' + (v / 1000) + 'k'; }
+              }
+            }
+          }
+        }
+      });
+
+      new Chart(categoryCanvas.getContext('2d'), {
+        type: 'doughnut',
+        data: {
+          labels: CATEGORIES,
+          datasets: [{
+            data: CATEGORY_VALUES,
+            backgroundColor: [primary, secondary, warning, success],
+            borderColor: bg,
+            borderWidth: 2
+          }]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: true,
+          aspectRatio: 1.35,
+          cutout: '62%',
+          animation: reduceMotion ? false : { duration: 400 },
+          plugins: {
+            legend: { display: false }, // the legend list below names the categories
+            tooltip: {
+              backgroundColor: bg,
+              titleColor: bodyColor,
+              bodyColor: bodyColor,
+              borderColor: grid,
+              borderWidth: 1,
+              padding: 10,
+              callbacks: {
+                label: function (ctx) { return ctx.label + ': ' + ctx.parsed + '%'; }
+              }
+            }
+          }
+        }
+      });
+    }
+
+    buildCharts();
+
+    // Theme changes re-render the charts with the current tokens.
+    // Observing data-bs-theme on <html> catches the theme select,
+    // system-mode OS changes, and any other theme source without
+    // coupling to the theme utility's implementation.
+    new MutationObserver(function () { buildCharts(); })
+      .observe(document.documentElement, { attributes: true, attributeFilter: ['data-bs-theme'] });
+  })();
+  </script>
+</body>
+</html>

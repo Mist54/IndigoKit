@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>IndigoKit Playground — Tooltips &amp; Popovers</title>
+  <link rel="stylesheet" href="../../dist/css/indigokit.css">
+  <link rel="stylesheet" href="../playground.css">
+  <!-- Playground theme persistence (Task 047) — applies the stored
+       indigokit-theme preference before first paint. Playground-only. -->
+  <script src="../theme.js"></script>
+  <script src="../assets/lucide.umd.js"></script>
+  <script src="../../node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="../../dist/js/indigokit.js"></script>
+</head>
+<body>
+  <div class="container py-4 demo-table-page">
+    <h1 class="h4 mb-1">Tooltips &amp; popovers</h1>
+    <p class="demo-label mb-4">Bootstrap's <code>.tooltip</code> / <code>.popover</code> with IndigoKit's token treatment — near-black tooltip surface, white popover surface with a hairline border and small elevation. Initialized centrally by <code>indigokit.js</code>; Bootstrap/Popper handle all positioning and dismissal. Neither replaces essential labels: a tooltip is brief supplementary context, a popover is richer but still optional information.</p>
+
+    <!-- Tooltips -->
+    <h2 class="h5 mt-5" id="tooltips">Tooltips</h2>
+    <p class="demo-label">Four placements. Triggers are hover + focus (Bootstrap's default) — keyboard users get the same information via the focus trigger.</p>
+    <div class="d-flex flex-wrap gap-3 mb-2">
+      <button type="button" class="btn btn-outline-secondary" data-bs-toggle="tooltip" data-bs-placement="top" title="Merged with the default branch">Tooltip on top</button>
+      <button type="button" class="btn btn-outline-secondary" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Dispatched from the Actions column">Tooltip on bottom</button>
+      <button type="button" class="btn btn-outline-secondary" data-bs-toggle="tooltip" data-bs-placement="start" title="Runs on every pull request">Tooltip on start</button>
+      <button type="button" class="btn btn-outline-secondary" data-bs-toggle="tooltip" data-bs-placement="end" title="Last run 12 minutes ago">Tooltip on end</button>
+    </div>
+
+    <!-- Icon-only -->
+    <h2 class="h5 mt-5" id="icon-only">Icon-only buttons</h2>
+    <p class="demo-label">The button's accessible name comes from <code>aria-label</code> — the tooltip only adds supplementary context and is never the only name.</p>
+    <div class="d-flex align-items-center gap-3 mb-4">
+      <button type="button" class="btn btn-outline-secondary btn-sm" aria-label="Copy commit hash" data-bs-toggle="tooltip" data-bs-placement="top" title="Copy commit hash to clipboard">
+        <i data-lucide="copy" aria-hidden="true"></i>
+      </button>
+      <button type="button" class="btn btn-outline-secondary btn-sm" aria-label="Download report" data-bs-toggle="tooltip" data-bs-placement="top" title="Download the Q3 report as CSV">
+        <i data-lucide="download" aria-hidden="true"></i>
+      </button>
+      <button type="button" class="btn btn-outline-secondary btn-sm" aria-label="More options" data-bs-toggle="tooltip" data-bs-placement="top" title="More actions for this project">
+        <i data-lucide="more-horizontal" aria-hidden="true"></i>
+      </button>
+    </div>
+    <p class="demo-label">Keyboard: focus the buttons with Tab — the tooltip appears on focus, so hover-only information is never inaccessible.</p>
+
+    <!-- Popovers -->
+    <h2 class="h5 mt-5" id="popovers">Popovers</h2>
+    <p class="demo-label">Richer contextual content — a title and a body. Click-triggered by default here; <code>data-bs-content</code> carries the body text (no hidden markup needed).</p>
+    <div class="d-flex flex-wrap gap-3 mb-4">
+      <button type="button" class="btn btn-outline-secondary" data-bs-toggle="popover" data-bs-placement="top" data-bs-title="Deployment policy" data-bs-content="Production deploys are gated on a passing CI pipeline and a human review.">Deploy policy (top)</button>
+      <button type="button" class="btn btn-outline-secondary" data-bs-toggle="popover" data-bs-placement="bottom" data-bs-title="Seat usage" data-bs-content="12 of 25 seats are in use this quarter. Add seats from the billing page.">Seat usage (bottom)</button>
+      <button type="button" class="btn btn-outline-secondary" data-bs-toggle="popover" data-bs-placement="start" data-bs-title="Rate limit" data-bs-content="120 requests per hour per API key. You are at 68% of the window.">Rate limit (start)</button>
+      <button type="button" class="btn btn-outline-secondary" data-bs-toggle="popover" data-bs-placement="end" data-bs-title="Retention" data-bs-content="Audit logs are retained for 90 days, then archived to cold storage.">Retention (end)</button>
+    </div>
+
+    <!-- Dismissal -->
+    <h2 class="h5 mt-5" id="dismissal">Dismissal behavior</h2>
+    <p class="demo-label">Click-triggered popovers close on: clicking the trigger again, clicking outside, or pressing Escape — all stock Bootstrap behavior, no custom dismissal.</p>
+    <div class="d-flex flex-wrap gap-3 mb-4">
+      <button type="button" class="btn btn-primary" data-bs-toggle="popover" data-bs-title="Account details" data-bs-content="Ada Lovelace · Design lead · ada@example.com — managed in your profile settings.">Open account popover</button>
+      <button type="button" class="btn btn-outline-secondary" data-bs-toggle="popover" data-bs-trigger="focus" data-bs-title="Focus-triggered" data-bs-content="This popover opens on focus and closes on blur — try tabbing to it, then away.">Focus-triggered popover</button>
+    </div>
+
+    <!-- Edge of viewport -->
+    <h2 class="h5 mt-5" id="edge">Edge-of-viewport behavior</h2>
+    <p class="demo-label">Popper flips placement automatically near the edges — the trigger in the bottom corner opens its popover upward so nothing is cut off.</p>
+    <div class="d-flex flex-wrap gap-3 mb-4">
+      <button type="button" class="btn btn-outline-secondary" data-bs-toggle="tooltip" data-bs-placement="top" title="This tooltip flips downward if it would overflow the viewport top">Near the top edge</button>
+      <button type="button" class="btn btn-outline-secondary" data-bs-toggle="popover" data-bs-placement="top" data-bs-title="Near the edge" data-bs-content="Popper flips this popover below the trigger if the top placement would overflow.">Near the top edge</button>
+    </div>
+
+    <!-- A11y -->
+    <h2 class="h5 mt-5" id="accessibility">Accessibility notes</h2>
+    <ul class="mb-0">
+      <li>Tooltips and popovers are <strong>supplementary</strong> — they never replace the trigger's accessible name. Every trigger has real text or an <code>aria-label</code>.</li>
+      <li>Triggers use hover <em>and</em> focus (tooltips) or click/focus (popovers) — no hover-only information. Keyboard users tab to a trigger to read its tooltip.</li>
+      <li>Bootstrap 5.3 attaches tooltip/popover content to the trigger's <code>aria-describedby</code> when shown; no extra ARIA is added.</li>
+      <li>Dismissal is stock: click-away, trigger toggle, and Escape for popovers; blur for focus-triggered ones. No persistent overlays, no keyboard traps.</li>
+      <li>Icons in icon-only buttons are decorative (<code>aria-hidden</code>) with the <code>aria-label</code> carrying the name.</li>
+      <li>Popper flips placement near viewport edges, so content stays on-screen at every width.</li>
+    </ul>
+  </div>
+
+  <script>
+    lucide.createIcons();
+  </script>
+</body>
+</html>

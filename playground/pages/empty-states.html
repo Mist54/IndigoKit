@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>IndigoKit Playground — Empty States</title>
+  <link rel="stylesheet" href="../../dist/css/indigokit.css">
+  <link rel="stylesheet" href="../playground.css">
+  <!-- Playground theme persistence (Task 047) — applies the stored
+       indigokit-theme preference before first paint. Playground-only. -->
+  <script src="../theme.js"></script>
+  <script src="../assets/lucide.umd.js"></script>
+</head>
+<body>
+  <div class="container py-4 demo-table-page">
+    <h1 class="h4 mb-1">Empty states</h1>
+    <p class="demo-label mb-4">A consistent pattern composed entirely from Bootstrap utilities and existing IndigoKit components — icon, title, description, action. An empty state answers three questions: <em>what</em> is empty, <em>why</em>, and <em>what can the user do next</em>. No new classes, no framework.</p>
+
+    <!-- Basic -->
+    <h2 class="h5 mt-5" id="basic">Basic empty state</h2>
+    <div class="card demo-empty-card">
+      <div class="card-body text-center py-5">
+        <i data-lucide="folder-open" aria-hidden="true" class="demo-empty-icon text-secondary mb-3"></i>
+        <h3 class="h5 mb-2">No projects yet</h3>
+        <p class="text-body-secondary mb-4 mx-auto demo-empty-desc">Create your first project to start organizing your work. You can invite teammates once a project exists.</p>
+        <button type="button" class="btn btn-primary"><i data-lucide="plus" aria-hidden="true"></i> Create project</button>
+      </div>
+    </div>
+
+    <!-- First use -->
+    <h2 class="h5 mt-5" id="first-use">First-use state</h2>
+    <p class="demo-label">Same shape, new-user context — the action is the primary next step.</p>
+    <div class="card demo-empty-card">
+      <div class="card-body text-center py-5">
+        <i data-lucide="user-plus" aria-hidden="true" class="demo-empty-icon text-secondary mb-3"></i>
+        <h3 class="h5 mb-2">Welcome to IndigoKit</h3>
+        <p class="text-body-secondary mb-4">Invite your first teammate to set up your workspace.</p>
+        <button type="button" class="btn btn-primary"><i data-lucide="mail-plus" aria-hidden="true"></i> Invite teammate</button>
+      </div>
+    </div>
+
+    <!-- Search -->
+    <h2 class="h5 mt-5" id="search">Search empty state</h2>
+    <p class="demo-label">Shows the search context, explains the result, and offers a clear action.</p>
+    <div class="card demo-empty-card">
+      <div class="card-body text-center py-5">
+        <i data-lucide="search-x" aria-hidden="true" class="demo-empty-icon text-secondary mb-3"></i>
+        <h3 class="h5 mb-2">No results for "svg spinners"</h3>
+        <p class="text-body-secondary mb-4">Check the spelling, or try a broader search term across projects and files.</p>
+        <button type="button" class="btn btn-outline-secondary">Clear search</button>
+      </div>
+    </div>
+
+    <!-- Filtered -->
+    <h2 class="h5 mt-5" id="filtered">Filtered empty state</h2>
+    <div class="card demo-empty-card">
+      <div class="card-body text-center py-5">
+        <i data-lucide="filter" aria-hidden="true" class="demo-empty-icon text-secondary mb-3"></i>
+        <h3 class="h5 mb-2">No projects match your filters</h3>
+        <p class="text-body-secondary mb-4">Try removing a filter — Status: Archived, Category: Marketing.</p>
+        <button type="button" class="btn btn-outline-secondary">Reset filters</button>
+      </div>
+    </div>
+
+    <!-- Notifications -->
+    <h2 class="h5 mt-5" id="notifications">Empty notifications</h2>
+    <div class="card demo-empty-card">
+      <div class="card-body text-center py-5">
+        <i data-lucide="bell-off" aria-hidden="true" class="demo-empty-icon text-secondary mb-3"></i>
+        <h3 class="h5 mb-2">You're all caught up</h3>
+        <p class="text-body-secondary mb-0">No new notifications. We'll let you know when something needs your attention.</p>
+      </div>
+    </div>
+
+    <!-- Activity -->
+    <h2 class="h5 mt-5" id="activity">Empty activity</h2>
+    <div class="card demo-empty-card">
+      <div class="card-body text-center py-5">
+        <i data-lucide="clock" aria-hidden="true" class="demo-empty-icon text-secondary mb-3"></i>
+        <h3 class="h5 mb-2">No recent activity</h3>
+        <p class="text-body-secondary mb-0">Actions you and your team take will appear here.</p>
+      </div>
+    </div>
+
+    <!-- Table -->
+    <h2 class="h5 mt-5" id="table">Empty table</h2>
+    <p class="demo-label">Inside the table as a semantic <code>colspan</code> row — the table structure stays intact.</p>
+    <div class="card">
+      <div class="card-body p-0">
+        <div class="table-responsive">
+          <table class="table align-middle mb-0">
+            <caption class="px-3 pt-2 pb-0">Deployments this month</caption>
+            <thead>
+              <tr>
+                <th scope="col">Service</th>
+                <th scope="col">Region</th>
+                <th scope="col">Status</th>
+                <th scope="col" class="text-end">Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td colspan="4" class="text-center py-5">
+                  <i data-lucide="rocket" aria-hidden="true" class="demo-empty-icon text-secondary mb-3"></i>
+                  <h3 class="h6 mb-1">No deployments yet</h3>
+                  <p class="text-body-secondary small mb-3">Deploy a service to see its status here.</p>
+                  <button type="button" class="btn btn-primary btn-sm">Deploy service</button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- List -->
+    <h2 class="h5 mt-5" id="list">Empty list</h2>
+    <div class="card demo-empty-card">
+      <div class="card-header">Saved filters</div>
+      <div class="card-body p-0">
+        <div class="text-center py-5">
+          <i data-lucide="bookmark" aria-hidden="true" class="demo-empty-icon text-secondary mb-3"></i>
+          <h3 class="h6 mb-1">No saved filters</h3>
+          <p class="text-body-secondary small mb-0">Save a filter from any results page to pin it here.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Empty vs error/loading -->
+    <h2 class="h5 mt-5" id="distinctions">Empty vs error vs loading</h2>
+    <p class="demo-label">Three different situations, three different presentations. An empty state never hides an error, and never appears while content is still loading.</p>
+    <div class="row g-4">
+      <div class="col-md-4">
+        <div class="card h-100">
+          <div class="card-body text-center py-4">
+            <i data-lucide="inbox" aria-hidden="true" class="demo-empty-icon text-secondary mb-2"></i>
+            <h3 class="h6 mb-1">Empty</h3>
+            <p class="text-body-secondary small mb-0">Data loaded — there are no records. The user can create or clear filters.</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="card h-100">
+          <div class="card-body text-center py-4">
+            <i data-lucide="triangle-alert" aria-hidden="true" class="demo-empty-icon text-danger mb-2"></i>
+            <h3 class="h6 mb-1">Error</h3>
+            <p class="text-body-secondary small mb-3">Data could not be loaded. Treated as an error — never shown as "empty".</p>
+            <button type="button" class="btn btn-outline-secondary btn-sm">Retry</button>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="card h-100">
+          <div class="card-body text-center py-4">
+            <div class="spinner-border spinner-border-sm text-primary mb-2" role="status"><span class="visually-hidden">Loading…</span></div>
+            <h3 class="h6 mb-1">Loading</h3>
+            <p class="text-body-secondary small mb-0">Data is being retrieved. The empty state waits until loading completes.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- A11y -->
+    <h2 class="h5 mt-5" id="accessibility">Accessibility notes</h2>
+    <ul class="mb-0">
+      <li>Hierarchy: decorative icon → <code>h3</code> title (the primary textual anchor) → concise description → single obvious action.</li>
+      <li>Icons are decorative (<code>aria-hidden="true"</code>) — the title and description carry the meaning; there are no icon-only empty states.</li>
+      <li>An ordinary empty state is <strong>not</strong> an alert — no <code>role="alert"</code> anywhere on this page. Urgency is reserved for errors.</li>
+      <li>Actions are real <code>.btn</code> buttons, keyboard-focusable with the global indigo ring; the empty table keeps its semantics via a <code>colspan</code> row.</li>
+      <li>Contrast: muted icon and description use <code>--bs-secondary-color</code>/<code>--bs-body-secondary</code> (≈8.5:1 on white); the title uses body text. Empty states are calm by design — muted but readable.</li>
+    </ul>
+  </div>
+
+  <script>
+    lucide.createIcons();
+  </script>
+</body>
+</html>

@@ -1,0 +1,27 @@
+// Pagination refinement.
+//
+// Bootstrap's pagination is already token-wired (solid indigo active,
+// muted non-interactive disabled, strong indigo focus ring, sm/lg
+// sizes). The one IndigoKit addition: allow the strip to wrap. Bootstrap's
+// default `display: flex` has no `flex-wrap`, so a realistic long range
+// (1 2 3 … 98 99 100 + Previous/Next ≈ 460px) overflows a 320px
+// viewport. Wrapping is a vanilla flex property — no new class, no API
+// change, and it preserves the joined-segment look on each row.
+
+.pagination {
+  flex-wrap: wrap;
+}
+
+// Page-links as flex rows so optional icons sit on the label's
+// baseline (same pattern as .btn / .dropdown-item / .nav-link).
+.page-link {
+  display: inline-flex;
+  align-items: center;
+  gap: $spacer * 0.5;
+}
+
+.page-link [data-lucide] {
+  width: 1em;
+  height: 1em;
+  flex-shrink: 0;
+}

@@ -1,0 +1,218 @@
+// ============================================================
+// IndigoKit — Application Navbar (.mu-app-navbar)
+// ------------------------------------------------------------
+// The application-level top navbar. Extends Bootstrap's `.navbar`
+// (class names preserved) and adds only the application concepts
+// Bootstrap does not provide: surface treatment, a flexible main
+// region, a right-side action group, and a user/profile area.
+//
+// Designed for the `.mu-app` shell — it fills the `.mu-app-top`
+// grid row, so it stays visible while `.mu-app-main` scrolls.
+// All colors/spacing come from the approved tokens (via --bs-*
+// variables and the $spacer scale). No new design values.
+// ============================================================
+
+.mu-app-navbar {
+  // Compact enterprise height: Bootstrap's default navbar padding
+  // (8px) is halved via the scoped CSS variable — spacing still
+  // comes from the approved $spacer scale (4px). No hard-coded
+  // height.
+  --bs-navbar-padding-y: #{$spacer * .25};
+
+  // Surface: page background + subtle bottom border. Uses --bs-*
+  // variables so the future dark theme flips it cleanly.
+  background-color: var(--bs-body-bg);
+  border-bottom: 1px solid var(--bs-border-color);
+
+  // Shell-edge anchoring (Task 055B): the sidebar-collapse toggle
+  // lives at the far left of the navbar, so the container's left
+  // padding is reduced from Bootstrap's 12px to 4px. The toggle
+  // then reads as part of the shell's left rail (Inspinia-style
+  // flush placement) rather than a floating utility icon — the
+  // brand and actions keep their natural spacing. Scoped to the
+  // shell navbar's own container so standalone navbar demos keep
+  // Bootstrap's default gutter.
+  > .container-fluid {
+    padding-left: $spacer * .25; // 4px
+  }
+}
+
+// ------------------------------------------------------------
+// Brand — icon mark + wordmark
+// ------------------------------------------------------------
+// The icon mark is an indigo rounded square (logo placeholder —
+// no asset yet). Font weight 600 and gap use approved tokens.
+// margin-right is zeroed because the brand now sits in the left
+// navigation cluster (toggle + brand, Task 055A refinement) and
+// owns its spacing via the cluster's flex gap — Bootstrap's
+// default 1rem brand margin would add a second, uneven space.
+.mu-app-navbar .navbar-brand {
+  display: inline-flex;
+  align-items: center;
+  gap: $spacer * .5;
+  margin-right: 0;
+  font-weight: $font-weight-semibold;
+
+  svg {
+    width: $spacer * 1.5;   // 24px
+    height: $spacer * 1.5;
+    padding: $spacer * .25; // 4px
+    color: $white;
+    background-color: var(--bs-primary);
+    border-radius: $border-radius;
+  }
+}
+
+// ------------------------------------------------------------
+// Main region — flexible center area
+// ------------------------------------------------------------
+// Future home for breadcrumbs / search / page context. Grows and
+// shrinks between brand and actions. min-width: 0 allows long
+// content to truncate instead of overflowing.
+.mu-navbar-main {
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
+// ------------------------------------------------------------
+// Actions — right-side icon buttons + user area
+// ------------------------------------------------------------
+// 6px gap keeps the 32px icon buttons from touching while staying
+// dense (the navigation toggles moved to the left cluster; this
+// cluster holds theme, notifications, and the profile trigger).
+.mu-navbar-actions {
+  display: flex;
+  align-items: center;
+  gap: $spacer * .375; // 6px
+
+  // Icon-only action buttons (placeholders for future components).
+  // Built on Bootstrap's .btn so focus/ring behavior is inherited.
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: $spacer * 2;  // 32px
+    height: $spacer * 2;
+    padding: 0;
+    color: var(--bs-secondary-color);
+    background: transparent;
+    border: 0;
+    border-radius: $border-radius;
+
+    &:hover {
+      color: var(--bs-body-color);
+      background-color: rgba($mu-slate, .08);
+    }
+
+    svg {
+      width: $spacer * 1.25; // 20px
+      height: $spacer * 1.25;
+    }
+  }
+}
+
+// ------------------------------------------------------------
+// User / profile area — Bootstrap dropdown trigger
+// ------------------------------------------------------------
+// The user area is a Bootstrap .dropdown trigger (data-bs-toggle=
+// "dropdown" — Bootstrap's own dropdown, no custom API). The
+// chevron rotates 180° while the menu is open; Bootstrap sets
+// aria-expanded on the trigger. The transition mixin emits the
+// prefers-reduced-motion override.
+//
+// Polished as one coherent trigger (Task 055A refinement): the
+// avatar + name + chevron sit inside a single padded pill whose
+// hover surface covers all three, so it reads as one control
+// rather than separate elements.
+.mu-navbar-user {
+  display: inline-flex;
+  align-items: center;
+  gap: $spacer * .5;
+  margin-left: $spacer * .25;
+  padding: $spacer * .375; // 6px — a roomier tap target
+  color: var(--bs-body-color);
+  text-decoration: none; // brand links stay underline-free
+  border-radius: $border-radius;
+  // The trigger is ONE control (Task 055B): it never compresses in
+  // a tight navbar and the name can never wrap — the avatar stays
+  // circular and the label stays on one line (the two-line
+  // identity lives in the dropdown header). At <lg the name is
+  // hidden by the responsive utility, leaving avatar + caret.
+  flex-shrink: 0;
+  white-space: nowrap;
+
+  // Direct-child selector on purpose: lucide replaces the trailing
+  // <i data-lucide="chevron-down"> (a direct child) with an <svg>,
+  // while the avatar's icon lives inside .mu-avatar. A bare
+  // `svg:last-child` would also match the avatar icon (it is the
+  // last child of its own span) and rotate it 180° with the menu.
+  > svg:last-child {
+    // 16px quiet caret — lucide's 24px default would out-weigh the
+    // 16px name and 20px avatar glyph. Matches the sidebar
+    // chevron language (1rem). flex-shrink: 0 keeps it stable.
+    width: $spacer; // 16px
+    height: $spacer;
+    flex-shrink: 0;
+    color: var(--bs-secondary-color); // the caret stays a quiet utility
+
+    @include transition(transform $mu-motion-fast ease);
+  }
+
+  &:hover {
+    color: var(--bs-body-color);
+    text-decoration: none;
+    background-color: rgba($mu-slate, .08);
+  }
+
+  &[aria-expanded="true"] {
+    > svg:last-child {
+      transform: rotate(180deg);
+    }
+  }
+}
+
+// Profile menu — the dropdown uses Bootstrap's own .dropdown-menu
+// (already IndigoKit-themed). A slightly wider minimum gives the
+// two-line identity header room to breathe.
+.mu-navbar-actions .dropdown-menu {
+  min-width: 13rem;
+}
+
+// Avatar — shared building block (future profile/notification use).
+// Slate surface from the approved token; icon inside inherits size.
+// flex-shrink: 0 is the true-circle guarantee (Task 055B): as a
+// flex item of .mu-navbar-user, the default flex-shrink: 1 lets a
+// compressed row squash it horizontally into an oval. Never
+// compress — the box stays 32x32 and border-radius: 50% stays a
+// real circle at every width, in both themes.
+.mu-avatar {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: $spacer * 2;  // 32px
+  height: $spacer * 2;
+  flex-shrink: 0;
+  color: $white;
+  background-color: var(--bs-secondary);
+  border-radius: 50%;
+
+  svg {
+    width: $spacer * 1.25; // 20px
+    height: $spacer * 1.25;
+  }
+}
+
+// User name — preserved on desktop/tablet, hidden on small screens
+// so brand + important actions survive (see requirements §8).
+// Medium weight makes the identity read as the trigger's label.
+// flex-shrink: 0 keeps the label at its natural width so it can
+// never compress the avatar or wrap (nowrap comes from the
+// trigger; the responsive utility hides it <lg).
+.mu-user-name {
+  flex-shrink: 0;
+  font-weight: $font-weight-medium;
+
+  @include media-breakpoint-down(md) {
+    display: none;
+  }
+}

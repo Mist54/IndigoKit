@@ -1,0 +1,83 @@
+{
+  "name": "indigokit",
+  "version": "1.0.0",
+  "description": "IndigoKit — Bootstrap-first Enterprise UI Kit. Bootstrap's familiar API with a refined visual system, light/dark themes, measured accessibility, and a reusable application shell.",
+  "main": "dist/js/indigokit.js",
+  "style": "dist/css/indigokit.css",
+  "files": [
+    "dist",
+    "docs",
+    "README.md",
+    "LICENSE"
+  ],
+  "exports": {
+    ".": {
+      "style": "./dist/css/indigokit.css",
+      "default": "./dist/js/indigokit.js"
+    },
+    "./css": "./dist/css/indigokit.css",
+    "./css/min": "./dist/css/indigokit.min.css",
+    "./js": "./dist/js/indigokit.js",
+    "./js/min": "./dist/js/indigokit.min.js",
+    "./css/select2": "./dist/css/indigokit-select2.css",
+    "./css/select2/min": "./dist/css/indigokit-select2.min.css",
+    "./js/select2": "./dist/js/indigokit-select2.js",
+    "./js/select2/min": "./dist/js/indigokit-select2.min.js",
+    "./package.json": "./package.json"
+  },
+  "unpkg": "dist/css/indigokit.css",
+  "jsdelivr": "dist/css/indigokit.css",
+  "sideEffects": [
+    "*.css"
+  ],
+  "scripts": {
+    "build:css": "sass --load-path=node_modules --silence-deprecation=import --silence-deprecation=global-builtin --silence-deprecation=if-function --silence-deprecation=color-functions src/scss/indigokit.scss dist/css/indigokit.css && sass --style=compressed --no-source-map --load-path=node_modules --silence-deprecation=import --silence-deprecation=global-builtin --silence-deprecation=if-function --silence-deprecation=color-functions src/scss/indigokit.scss dist/css/indigokit.min.css && sass --load-path=node_modules --silence-deprecation=import --silence-deprecation=global-builtin --silence-deprecation=if-function --silence-deprecation=color-functions src/scss/indigokit-select2.scss dist/css/indigokit-select2.css && sass --style=compressed --no-source-map --load-path=node_modules --silence-deprecation=import --silence-deprecation=global-builtin --silence-deprecation=if-function --silence-deprecation=color-functions src/scss/indigokit-select2.scss dist/css/indigokit-select2.min.css",
+    "build:js": "node scripts/minify-js.js",
+    "build": "npm run clean && npm run build:css && npm run build:js",
+    "clean": "node -e \"const fs=require('fs');fs.rmSync('dist',{recursive:true,force:true})\"",
+    "prepack": "npm run build",
+    "test": "echo \"No test runner — the build + playground QA are the release gates (see AGENT_KNOWLEDGE, Task 056).\" && exit 0"
+  },
+  "keywords": [
+    "bootstrap",
+    "design-system",
+    "admin",
+    "dashboard",
+    "enterprise",
+    "ui",
+    "theme",
+    "css-framework",
+    "accessible"
+  ],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "peerDependencies": {
+    "bootstrap": "^5.3.8",
+    "chart.js": "^4.5.1",
+    "lucide": "^1.31.0",
+    "select2": "^4.1.0"
+  },
+  "peerDependenciesMeta": {
+    "bootstrap": {
+      "optional": true
+    },
+    "chart.js": {
+      "optional": true
+    },
+    "select2": {
+      "optional": true
+    },
+    "lucide": {
+      "optional": true
+    }
+  },
+  "devDependencies": {
+    "bootstrap": "^5.3.8",
+    "chart.js": "^4.5.1",
+    "jquery": "^3.7.1",
+    "lucide": "^1.31.0",
+    "sass": "^1.102.0",
+    "select2": "^4.1.0"
+  }
+}

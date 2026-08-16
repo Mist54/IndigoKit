@@ -1,0 +1,74 @@
+// ============================================================
+// IndigoKit — Application Layout (.mu-app)
+// ------------------------------------------------------------
+// The reusable enterprise app shell. STRUCTURE ONLY — the top
+// area (future navbar) and nav area (future sidebar) are empty
+// slots here. No widths or heights for those regions are
+// hard-coded in this file; they belong to their own future
+// components.
+//
+// Scroll strategy: region-level scrolling. The shell fills the
+// dynamic viewport and only the main content region scrolls, so
+// a future fixed top bar and persistent/collapsible sidebar work
+// naturally, short pages don't scroll, and long pages scroll
+// inside main.
+// ============================================================
+
+.mu-app {
+  display: grid;
+  grid-template-rows: auto minmax(0, 1fr); // top area + body
+  height: 100vh; // fallback for browsers without dvh
+  height: 100dvh; // dynamic viewport height (mobile URL bar)
+  // Shell-level containment: no page-level scrollbars and no
+  // horizontal bleed. NOTE: clips absolutely-positioned content
+  // that overflows the shell (fixed-position modals/toasts are
+  // unaffected).
+  overflow: hidden;
+}
+
+// Top area slot — future navbar lives here. Structural only.
+.mu-app-top {
+  min-height: 0;
+}
+
+// Body region: side (future sidebar) + main content.
+.mu-app-body {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr); // main-only default
+  min-height: 0;
+}
+
+// When a side slot exists, reserve an auto-sized column for it.
+// The future sidebar component owns its own width and collapse
+// behavior — nothing is hard-coded here, so a collapsible
+// sidebar can animate its width freely.
+.mu-app-body:has(.mu-app-side) {
+  grid-template-columns: auto minmax(0, 1fr);
+}
+
+// Side area slot — future sidebar lives here. Structural only.
+.mu-app-side {
+  min-width: 0;
+  min-height: 0;
+}
+
+// Main scroll region. Content grows naturally; long content
+// scrolls only here. overflow-x is hidden as a guard against
+// horizontal bleed (inner wrappers with their own horizontal
+// scroll, e.g. wide tables, are unaffected).
+.mu-app-main {
+  min-width: 0;
+  min-height: 0;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+// Page content wrapper — spacing only. Bootstrap containers,
+// rows, and columns inside continue working untouched.
+.mu-app-content {
+  padding: $spacer * 1.5; // 24px
+
+  @include media-breakpoint-down(md) {
+    padding: $spacer; // 16px on tablet and mobile
+  }
+}

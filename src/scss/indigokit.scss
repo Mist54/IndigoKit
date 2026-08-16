@@ -1,0 +1,86 @@
+// ============================================================
+// IndigoKit — SCSS Entry Point
+// ------------------------------------------------------------
+// IndigoKit is a Modern + Enterprise UI framework built on top of
+// Bootstrap 5.3.x.
+//
+// Import order matters (Bootstrap's customization pattern):
+//
+//   1. Bootstrap functions — Sass color helpers, available to
+//      token definitions if needed
+//   2. IndigoKit design tokens — MUST precede Bootstrap's variable
+//      defaults: Bootstrap variables use `!default` and its
+//      $theme-colors map is built from $primary, $secondary,
+//      etc., so overrides only take effect when set before the
+//      Bootstrap import
+//   3. Full Bootstrap framework — its internal imports dedupe
+//      and see the IndigoKit overrides above
+//
+// Compile with:
+//   npm run build:css
+// ============================================================
+
+// ------------------------------------------------------------
+// 1. Bootstrap functions
+// ------------------------------------------------------------
+@import "bootstrap/scss/functions";
+
+// ------------------------------------------------------------
+// 2. IndigoKit design tokens
+// ------------------------------------------------------------
+@import "base/tokens";
+
+// ------------------------------------------------------------
+// 2b. IndigoKit theme architecture
+// ------------------------------------------------------------
+// Build-time dark variables (must precede the Bootstrap import,
+// same !default pattern as tokens) + runtime [data-bs-theme="dark"]
+// refinements Bootstrap cannot express at build time.
+@import "base/themes";
+
+// ------------------------------------------------------------
+// 3. Bootstrap framework
+// ------------------------------------------------------------
+@import "bootstrap/scss/bootstrap";
+
+// ------------------------------------------------------------
+// 4. IndigoKit base layer
+// ------------------------------------------------------------
+// Global foundation styles (body, headings, links, focus,
+// selection, basic elements). These run AFTER Bootstrap so they
+// customize rather than fight its reboot.
+@import "base/base";
+@import "base/elements";
+
+// ------------------------------------------------------------
+// 5. IndigoKit layout system
+// ------------------------------------------------------------
+// The reusable application shell (.mu-app) — structure only.
+// Navbar and sidebar slots are defined here, not styled.
+@import "layout/app";
+
+// Application navbar — fills the .mu-app-top slot.
+@import "layout/navbar";
+
+// Application sidebar — static enterprise navigation; fills the
+// .mu-app-side slot. Collapse/mobile behavior arrives later.
+@import "layout/sidebar";
+
+// ------------------------------------------------------------
+// 6. IndigoKit component partials
+// ------------------------------------------------------------
+// Component partials live here, after the base layer, so they
+// can extend and refine rather than duplicate Bootstrap
+// components. Variable-level overrides stay in base/tokens
+// (they must precede the Bootstrap import).
+@import "components/button";
+@import "components/card";
+@import "components/alert";
+@import "components/dropdown";
+@import "components/modal";
+@import "components/nav";
+@import "components/breadcrumb";
+@import "components/pagination";
+@import "components/table";
+@import "components/progress";
+@import "components/forms";

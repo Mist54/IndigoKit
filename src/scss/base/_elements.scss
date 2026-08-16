@@ -1,0 +1,82 @@
+// ============================================================
+// IndigoKit — Base Elements
+// ------------------------------------------------------------
+// Restrained, enterprise-friendly styling for basic document
+// elements. Bootstrap's reboot already covers hr, small, code,
+// and kbd sensibly — those are kept as-is (customize, don't
+// duplicate). Only elements that benefit from the IndigoKit
+// palette are adjusted here.
+// ============================================================
+
+// ------------------------------------------------------------
+// mark — soft amber highlight (approved $mu-amber at low alpha)
+// ------------------------------------------------------------
+// Bootstrap reads --bs-highlight-bg, so overriding the custom
+// property keeps the change compatible with a future dark theme.
+:root {
+  // to-rgb() converts the token hex to channel values, the same
+  // technique Bootstrap uses for its own --bs-*-rgb variables.
+  --bs-highlight-bg: rgba(#{to-rgb($mu-amber)}, 0.18);
+}
+
+// ------------------------------------------------------------
+// blockquote — quiet, enterprise-friendly treatment
+// ------------------------------------------------------------
+// Uses --bs-* custom properties so colors flip with a future
+// dark theme automatically.
+blockquote {
+  margin-bottom: $spacer;
+  padding-left: 1.25rem;
+  border-left: 3px solid var(--bs-border-color);
+  color: var(--bs-secondary-color);
+}
+
+// ------------------------------------------------------------
+// Images / media — sensible global behavior only
+// ------------------------------------------------------------
+// Prevent obvious overflow; keep aspect ratio. No media
+// components (Bootstrap's .img-fluid etc. remain available).
+img,
+video {
+  max-width: 100%;
+  height: auto;
+}
+
+// ------------------------------------------------------------
+// Scrollbars — subtle, slate-tinted
+// ------------------------------------------------------------
+// Modern browsers only; graceful degradation everywhere else.
+// Firefox uses scrollbar-color/width; WebKit (Chrome, Edge,
+// Safari) uses the vendor pseudo-elements below.
+* {
+  scrollbar-width: thin;
+  scrollbar-color: rgba($mu-slate, 0.3) transparent;
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: rgba($mu-slate, 0.3);
+  border: 2px solid transparent;
+  border-radius: 5px;
+  background-clip: padding-box;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background-color: rgba($mu-slate, 0.5);
+}
+
+// ------------------------------------------------------------
+// Reduced motion
+// ------------------------------------------------------------
+// No animations are added in this layer. Bootstrap's global
+// prefers-reduced-motion: reduce block (enabled via
+// $enable-reduced-motion in _tokens.scss §6) already clamps
+// animation/transition durations for users who request it.

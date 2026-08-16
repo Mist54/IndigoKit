@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>IndigoKit Playground — Tooltips</title>
+  <link rel="stylesheet" href="../../dist/css/indigokit.css">
+  <link rel="stylesheet" href="../playground.css">
+  <!-- Playground theme persistence (Task 047) — applies the stored
+       indigokit-theme preference before first paint. Playground-only. -->
+  <script src="../theme.js"></script>
+  <script src="../assets/lucide.umd.js"></script>
+  <!-- Bootstrap's own JS bundle powers tooltip behavior (Popper positioning,
+       lifecycle, Escape, reduced-motion fade). Consumer-side load. -->
+  <script src="../../node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+  <!-- IndigoKit's framework JS — initializes every [data-bs-toggle="tooltip"]
+       element as a Bootstrap Tooltip (guarded, centralized in indigokit.js). -->
+  <script src="../../dist/js/indigokit.js"></script>
+</head>
+<body>
+  <div class="container py-5">
+    <h1>Tooltips</h1>
+    <p class="lead">Bootstrap's tooltip API with IndigoKit refinement — <code>data-bs-toggle="tooltip"</code>, <code>data-bs-title</code>, <code>data-bs-placement</code>, and Bootstrap's Tooltip JavaScript. IndigoKit initializes the triggers centrally from <code>dist/js/indigokit.js</code>; there is no second tooltip engine.</p>
+
+    <div class="alert alert-info d-flex align-items-start gap-2">
+      <i data-lucide="info" aria-hidden="true"></i>
+      <span><strong>Accessibility note:</strong> tooltips supplement labels — they never replace accessible names. Every icon-only control below has its own <code>aria-label</code>; the tooltip only adds context.</span>
+    </div>
+
+    <!-- Basic + placements -->
+    <h2 class="h5 mt-5 mb-3">Basic and placement</h2>
+    <div class="d-flex flex-wrap gap-3">
+      <button type="button" class="btn btn-secondary" data-bs-toggle="tooltip" data-bs-title="Default — top">Hover me (top)</button>
+      <button type="button" class="btn btn-outline-secondary" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Top placement">Top</button>
+      <button type="button" class="btn btn-outline-secondary" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-title="Bottom placement">Bottom</button>
+      <button type="button" class="btn btn-outline-secondary" data-bs-toggle="tooltip" data-bs-placement="start" data-bs-title="Start placement">Start</button>
+      <button type="button" class="btn btn-outline-secondary" data-bs-toggle="tooltip" data-bs-placement="end" data-bs-title="End placement">End</button>
+    </div>
+
+    <!-- Icon buttons (navbar pattern) -->
+    <h2 class="h5 mt-5 mb-3">Icon buttons (navbar pattern)</h2>
+    <p class="demo-label">Each icon button keeps its own <code>aria-label</code> — the tooltip is supplementary context, exactly as in the application navbar.</p>
+    <div class="d-flex flex-wrap gap-2">
+      <button type="button" class="btn btn-outline-secondary" aria-label="Notifications" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-title="Notifications">
+        <i data-lucide="bell" aria-hidden="true"></i>
+      </button>
+      <button type="button" class="btn btn-outline-secondary" aria-label="Help" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-title="Help center">
+        <i data-lucide="circle-question-mark" aria-hidden="true"></i>
+      </button>
+      <button type="button" class="btn btn-outline-secondary" aria-label="Settings" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-title="Workspace settings">
+        <i data-lucide="settings" aria-hidden="true"></i>
+      </button>
+      <button type="button" class="btn btn-outline-secondary" aria-label="Delete" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-title="Delete item">
+        <i data-lucide="trash-2" aria-hidden="true"></i>
+      </button>
+    </div>
+
+    <!-- Text button -->
+    <h2 class="h5 mt-5 mb-3">Text button</h2>
+    <button type="button" class="btn btn-primary" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-title="Publish the current draft">
+      Publish
+    </button>
+
+    <!-- Longer tooltip -->
+    <h2 class="h5 mt-5 mb-3">Longer tooltip</h2>
+    <p class="demo-label">Tooltips cap at 200px (<code>--bs-tooltip-max-width</code>) and wrap — keep tooltip text short; longer explanations belong in visible UI.</p>
+    <button type="button" class="btn btn-outline-secondary" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Exports older than 90 days are automatically deleted from this workspace.">
+      Retention policy
+    </button>
+
+    <!-- Keyboard -->
+    <h2 class="h5 mt-5 mb-3">Keyboard activation</h2>
+    <p class="demo-label">Bootstrap tooltips show on <kbd>Tab</kbd> focus as well as hover — press <kbd>Tab</kbd> onto any tooltip button above to see the tooltip. <kbd>Esc</kbd> dismisses it.</p>
+
+    <!-- Collapsed-rail pattern -->
+    <h2 class="h5 mt-5 mb-3">Collapsed-rail pattern</h2>
+    <p class="demo-label">A collapsed icon rail is the natural home for supplementary tooltips. The real collapsed sidebar (Sidebar showcase) already keeps accessible names via visually-hidden text; wiring its icons to tooltips is future work — the pattern is the same as here.</p>
+    <div class="d-inline-flex flex-column gap-2 border rounded-2 p-2">
+      <button type="button" class="btn btn-outline-secondary" aria-label="Dashboard" data-bs-toggle="tooltip" data-bs-placement="end" data-bs-title="Dashboard">
+        <i data-lucide="layout-dashboard" aria-hidden="true"></i>
+      </button>
+      <button type="button" class="btn btn-outline-secondary" aria-label="Projects" data-bs-toggle="tooltip" data-bs-placement="end" data-bs-title="Projects">
+        <i data-lucide="folder" aria-hidden="true"></i>
+      </button>
+      <button type="button" class="btn btn-outline-secondary" aria-label="Settings" data-bs-toggle="tooltip" data-bs-placement="end" data-bs-title="Settings">
+        <i data-lucide="settings" aria-hidden="true"></i>
+      </button>
+    </div>
+
+    <!-- Disabled pattern -->
+    <h2 class="h5 mt-5 mb-3">Disabled control</h2>
+    <p class="demo-label">Tooltips can't attach to genuinely disabled controls (they don't fire pointer events). Bootstrap's documented pattern: a wrapper with <code>tabindex="0"</code> carries the tooltip while the button stays disabled.</p>
+    <span class="d-inline-block" tabindex="0" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Disabled until the project is archived.">
+      <button type="button" class="btn btn-secondary" disabled>Export</button>
+    </span>
+  </div>
+
+  <script>lucide.createIcons();</script>
+</body>
+</html>

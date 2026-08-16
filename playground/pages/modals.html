@@ -1,0 +1,293 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>IndigoKit Playground — Modals</title>
+  <link rel="stylesheet" href="../../dist/css/indigokit.css">
+  <link rel="stylesheet" href="../playground.css">
+  <!-- Playground theme persistence (Task 047) — applies the stored
+       indigokit-theme preference before first paint. Playground-only. -->
+  <script src="../theme.js"></script>
+  <!-- Bootstrap's own JS bundle powers modal behavior (data-bs-toggle,
+       focus management, scroll lock, Escape, backdrop). Consumer-side
+       load — IndigoKit ships no modal engine. -->
+  <script src="../../node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+</head>
+<body>
+  <div class="container py-5">
+    <h1>Modals</h1>
+    <p class="lead">Bootstrap's modal API with IndigoKit refinement — all classes are standard Bootstrap (<code>.modal</code>, <code>.modal-dialog</code>, <code>.modal-content</code>, <code>.modal-header/-body/-footer</code>, <code>.modal-sm/-lg/-xl</code>, <code>.btn-close</code>). Behavior comes from Bootstrap's own Modal JavaScript.</p>
+
+    <div class="alert alert-info d-flex align-items-start gap-2">
+      <span><strong>Accessibility note:</strong> every modal has an accessible name (<code>aria-labelledby</code>); focus moves into the modal when it opens, is contained while it is open, and returns to the trigger when it closes. Background content is inert while a modal is open (scroll locked, focus trapped).</span>
+    </div>
+
+    <!-- Basic -->
+    <h2 class="h5 mt-5 mb-3">Basic</h2>
+    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalBasic">Open modal</button>
+    <div class="modal fade" id="modalBasic" tabindex="-1" aria-labelledby="modalBasicLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h1 class="modal-title fs-5" id="modalBasicLabel">Example modal</h1>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <p class="mb-0">Modal body — the standard header / body / footer structure with IndigoKit spacing and typography.</p>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+            <button type="button" class="btn btn-primary">Save changes</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Centered + sizes -->
+    <h2 class="h5 mt-5 mb-3">Centered and sizes</h2>
+    <div class="d-flex flex-wrap gap-3">
+      <button type="button" class="btn btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#modalCentered">Centered</button>
+      <button type="button" class="btn btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#modalSm">Small</button>
+      <button type="button" class="btn btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#modalLg">Large</button>
+      <button type="button" class="btn btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#modalXl">Extra large</button>
+    </div>
+
+    <div class="modal fade" id="modalCentered" tabindex="-1" aria-labelledby="modalCenteredLabel" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h1 class="modal-title fs-5" id="modalCenteredLabel">Centered modal</h1>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <p class="mb-0">Vertically centered at every viewport height via <code>.modal-dialog-centered</code>.</p>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="modal fade" id="modalSm" tabindex="-1" aria-labelledby="modalSmLabel" aria-hidden="true">
+      <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h1 class="modal-title fs-5" id="modalSmLabel">Small modal</h1>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <p class="mb-0">Compact — good for quick confirmations.</p>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-primary" data-bs-dismiss="modal">OK</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="modal fade" id="modalLg" tabindex="-1" aria-labelledby="modalLgLabel" aria-hidden="true">
+      <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h1 class="modal-title fs-5" id="modalLgLabel">Large modal</h1>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <p class="mb-0">More room for content-heavy dialogs.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="modal fade" id="modalXl" tabindex="-1" aria-labelledby="modalXlLabel" aria-hidden="true">
+      <div class="modal-dialog modal-xl">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h1 class="modal-title fs-5" id="modalXlLabel">Extra large modal</h1>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <p class="mb-0">Wide format — dashboards and detail views.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Scrollable -->
+    <h2 class="h5 mt-5 mb-3">Scrollable</h2>
+    <button type="button" class="btn btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#modalScrollable">Scrollable modal</button>
+    <div class="modal fade" id="modalScrollable" tabindex="-1" aria-labelledby="modalScrollableLabel" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-scrollable">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h1 class="modal-title fs-5" id="modalScrollableLabel">Audit log</h1>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <p>Long content scrolls inside the body while the header and footer stay fixed. The page behind the modal remains scroll-locked by Bootstrap.</p>
+            <ol>
+              <li>2026-08-14 — Configuration export initiated by Jane Doe</li>
+              <li>2026-08-13 — Access policy updated (3 rules)</li>
+              <li>2026-08-12 — API key rotated for <code>staging-integration</code></li>
+              <li>2026-08-11 — Workspace owner changed</li>
+              <li>2026-08-10 — Backup verification passed</li>
+              <li>2026-08-09 — Invitation sent to 2 reviewers</li>
+              <li>2026-08-08 — Retention policy updated to 90 days</li>
+              <li>2026-08-07 — Webhook endpoint <code>orders.shipped</code> created</li>
+              <li>2026-08-06 — Schema migration <code>v42</code> applied</li>
+              <li>2026-08-05 — Role "Billing admin" created</li>
+              <li>2026-08-04 — Secret scanned and rotated</li>
+              <li>2026-08-03 — Session timeout lowered to 20 minutes</li>
+              <li>2026-08-02 — Report schedule modified (weekly → daily)</li>
+              <li>2026-08-01 — Sandbox environment reset</li>
+            </ol>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-primary">Export log</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Alert inside modal -->
+    <h2 class="h5 mt-5 mb-3">Alert inside a modal</h2>
+    <button type="button" class="btn btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#modalAlert">Alert + modal</button>
+    <div class="modal fade" id="modalAlert" tabindex="-1" aria-labelledby="modalAlertLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h1 class="modal-title fs-5" id="modalAlertLabel">Import results</h1>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <div class="alert alert-warning mb-0">
+              <strong>3 rows skipped</strong> — 47 of 50 records imported. Fix the invalid rows and re-import.
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Done</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Card inside modal -->
+    <h2 class="h5 mt-5 mb-3">Card inside a modal</h2>
+    <button type="button" class="btn btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#modalCard">Card + modal</button>
+    <div class="modal fade" id="modalCard" tabindex="-1" aria-labelledby="modalCardLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h1 class="modal-title fs-5" id="modalCardLabel">Deployment details</h1>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <div class="card shadow-sm">
+              <div class="card-header d-flex align-items-center">
+                <span class="me-auto">Deployment #284</span>
+                <span class="badge text-bg-success">Completed</span>
+              </div>
+              <div class="card-body">
+                <p class="card-text mb-0">Cards nest inside modal bodies without any modal-specific styles.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Destructive -->
+    <h2 class="h5 mt-5 mb-3">Destructive confirmation</h2>
+    <p class="demo-label">Confirmation flows use a static backdrop (<code>data-bs-backdrop="static"</code>) + <code>data-bs-keyboard="false"</code> so the dialog cannot be dismissed accidentally. The text states exactly what will happen — the red button is reinforcement, not the only cue.</p>
+    <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#modalDelete">Delete project</button>
+    <div class="modal fade" id="modalDelete" tabindex="-1" aria-labelledby="modalDeleteLabel" aria-describedby="modalDeleteDesc" aria-hidden="true" data-bs-backdrop="static" data-bs-keyboard="false">
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h1 class="modal-title fs-5" id="modalDeleteLabel">Delete project?</h1>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <p id="modalDeleteDesc" class="mb-0">This permanently deletes the project and all of its data, including reports and audit history. <strong>This action cannot be undone.</strong></p>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+            <button type="button" class="btn btn-danger">Delete project</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Static backdrop -->
+    <h2 class="h5 mt-5 mb-3">Static backdrop</h2>
+    <p class="demo-label">With <code>data-bs-backdrop="static"</code>, clicking the backdrop does not close the modal — only the close button, footer actions or <kbd>Esc</kbd> (when keyboard is enabled) close it.</p>
+    <button type="button" class="btn btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#modalStatic">Static backdrop</button>
+    <div class="modal fade" id="modalStatic" tabindex="-1" aria-labelledby="modalStaticLabel" aria-hidden="true" data-bs-backdrop="static">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h1 class="modal-title fs-5" id="modalStaticLabel">Unsaved changes</h1>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <p class="mb-0">Click the backdrop — nothing happens. Choose an action instead.</p>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Discard</button>
+            <button type="button" class="btn btn-primary">Review changes</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Form controls -->
+    <h2 class="h5 mt-5 mb-3">Form controls in a modal</h2>
+    <p class="demo-label">Bootstrap's own form controls work inside modals. (The full IndigoKit form system is a future task.)</p>
+    <button type="button" class="btn btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#modalForm">New API key</button>
+    <div class="modal fade" id="modalForm" tabindex="-1" aria-labelledby="modalFormLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h1 class="modal-title fs-5" id="modalFormLabel">New API key</h1>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <form>
+              <div class="mb-3">
+                <label for="key-name" class="form-label">Key name</label>
+                <input type="text" class="form-control" id="key-name" placeholder="e.g. staging-integration">
+              </div>
+              <div class="mb-3">
+                <label for="key-scope" class="form-label">Scope</label>
+                <select class="form-select" id="key-scope">
+                  <option>Read-only</option>
+                  <option>Read + write</option>
+                  <option>Full access</option>
+                </select>
+              </div>
+              <div class="form-check mb-0">
+                <input class="form-check-input" type="checkbox" id="key-expire" checked>
+                <label class="form-check-label" for="key-expire">Expire in 30 days</label>
+              </div>
+            </form>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+            <button type="button" class="btn btn-primary">Create key</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Keyboard / focus -->
+    <h2 class="h5 mt-5 mb-3">Keyboard and focus behavior</h2>
+    <p class="demo-label"><kbd>Esc</kbd> closes a modal (unless <code>data-bs-keyboard="false"</code>); <kbd>Tab</kbd>/<kbd>Shift+Tab</kbd> move through modal controls and wrap at the edges (focus never reaches the page behind); opening moves focus into the modal; closing returns focus to the trigger button. Try it on any modal above.</p>
+
+    <h2 class="h5 mt-5 mb-3">Nested modals</h2>
+    <p class="demo-label">Nested modals are <strong>not supported</strong> in IndigoKit — they complicate focus management and stacking. If a workflow seems to need a modal inside a modal, prefer a single dialog, an in-modal view switch, or a dedicated page.</p>
+  </div>
+</body>
+</html>

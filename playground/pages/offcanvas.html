@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>IndigoKit Playground — Offcanvas</title>
+  <link rel="stylesheet" href="../../dist/css/indigokit.css">
+  <link rel="stylesheet" href="../playground.css">
+  <!-- Playground theme persistence (Task 047) — applies the stored
+       indigokit-theme preference before first paint. Playground-only. -->
+  <script src="../theme.js"></script>
+  <script src="../assets/lucide.umd.js"></script>
+  <script src="../../node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+</head>
+<body>
+  <div class="container py-4 demo-table-page">
+    <h1 class="h4 mb-1">Offcanvas</h1>
+    <p class="demo-label mb-4">Bootstrap's <code>.offcanvas</code> with IndigoKit styling — white surface, hairline border, small elevation, Bootstrap's own JS (focus management, Escape, backdrop, scroll lock). Offcanvas is for <strong>temporary side panels</strong>: mobile navigation, filters, contextual settings. The desktop sidebar is a persistent shell element — this page never replaces it.</p>
+
+    <!-- Left -->
+    <h2 class="h5 mt-5" id="start">Left offcanvas</h2>
+    <p class="demo-label"><code>.offcanvas-md.offcanvas-start</code> — always a drawer on small screens; at <code>md</code> and up it becomes a static sidebar slot (try resizing). A real header with a titled heading and a close button.</p>
+    <button type="button" class="btn btn-primary" data-bs-toggle="offcanvas" data-bs-target="#ocStart" aria-controls="ocStart">Open left offcanvas</button>
+
+    <!-- Right -->
+    <h2 class="h5 mt-5" id="end">Right offcanvas — filter panel</h2>
+    <p class="demo-label"><code>.offcanvas-end</code> (always a drawer) for a contextual filter panel built from the existing form system — no filtering logic.</p>
+    <button type="button" class="btn btn-outline-secondary" data-bs-toggle="offcanvas" data-bs-target="#ocFilters" aria-controls="ocFilters">Open filters</button>
+
+    <!-- Top / bottom -->
+    <h2 class="h5 mt-5" id="topbottom">Top &amp; bottom</h2>
+    <p class="demo-label">Bootstrap's directional variants, demonstrated where they are genuinely useful — a top notification bar and a bottom quick-actions sheet.</p>
+    <div class="d-flex flex-wrap gap-2">
+      <button type="button" class="btn btn-outline-secondary" data-bs-toggle="offcanvas" data-bs-target="#ocTop" aria-controls="ocTop">Open top bar</button>
+      <button type="button" class="btn btn-outline-secondary" data-bs-toggle="offcanvas" data-bs-target="#ocBottom" aria-controls="ocBottom">Open bottom sheet</button>
+    </div>
+
+    <!-- Mobile nav -->
+    <h2 class="h5 mt-5" id="mobile">Mobile navigation</h2>
+    <p class="demo-label">A start-aligned offcanvas holding the same navigation links the shell sidebar uses — one navigation system, presented in a drawer on mobile. No second nav API.</p>
+    <button type="button" class="btn btn-outline-secondary" data-bs-toggle="offcanvas" data-bs-target="#ocMobileNav" aria-controls="ocMobileNav">Open mobile navigation</button>
+
+    <!-- Long content -->
+    <h2 class="h5 mt-5" id="long">Long content &amp; scrolling</h2>
+    <p class="demo-label">The body scrolls independently; the header stays pinned. Bootstrap's scroll lock keeps the page behind still.</p>
+    <button type="button" class="btn btn-outline-secondary" data-bs-toggle="offcanvas" data-bs-target="#ocLong" aria-controls="ocLong">Open long panel</button>
+
+    <!-- A11y -->
+    <h2 class="h5 mt-5" id="accessibility">Accessibility notes</h2>
+    <ul class="mb-0">
+      <li>Every offcanvas has a titled heading (<code>.offcanvas-title</code> + <code>aria-labelledby</code>) as its accessible name, a real <code>.btn-close</code> with <code>aria-label="Close"</code>, and Bootstrap-managed <code>aria-hidden</code>/<code>role="dialog"</code> semantics.</li>
+      <li>Focus: Bootstrap moves it into the panel on open and restores it to the trigger on close; <kbd>Escape</kbd> closes; the backdrop click closes — all stock, no custom focus manager.</li>
+      <li>Body scroll locks while open and restores on close; the panel content scrolls in its own region (long panels verified).</li>
+      <li>Offcanvas vs sidebar: offcanvas = temporary, dismissible, overlay panels (mobile nav, filters, contextual settings). The sidebar = the persistent desktop shell navigation. Use each where it belongs.</li>
+    </ul>
+  </div>
+
+  <!-- Left offcanvas -->
+  <div class="offcanvas offcanvas-md offcanvas-start" tabindex="-1" id="ocStart" aria-labelledby="ocStartLabel">
+    <div class="offcanvas-header">
+      <h2 class="offcanvas-title" id="ocStartLabel">Project details</h2>
+      <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+    </div>
+    <div class="offcanvas-body">
+      <p class="text-body-secondary">A compact summary of the selected project — metadata, owners, and recent activity.</p>
+      <div class="mb-3"><span class="text-secondary small">Name</span><div class="fw-medium">IndigoKit — Data Tables</div></div>
+      <div class="mb-3"><span class="text-secondary small">Owner</span><div class="fw-medium">Ada Lovelace</div></div>
+      <div class="mb-3"><span class="text-secondary small">Status</span><div><span class="badge text-bg-primary">In progress</span></div></div>
+      <div class="mb-3"><span class="text-secondary small">Updated</span><div class="fw-medium">2 hours ago</div></div>
+    </div>
+  </div>
+
+  <!-- Right: filters -->
+  <div class="offcanvas offcanvas-end" tabindex="-1" id="ocFilters" aria-labelledby="ocFiltersLabel">
+    <div class="offcanvas-header">
+      <h2 class="offcanvas-title" id="ocFiltersLabel">Filters</h2>
+      <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+    </div>
+    <div class="offcanvas-body">
+      <form novalidate>
+        <div class="mb-3">
+          <label for="ocSearch" class="form-label">Search</label>
+          <input type="search" class="form-control" id="ocSearch" placeholder="Search projects…">
+        </div>
+        <div class="mb-3">
+          <label for="ocStatus" class="form-label">Status</label>
+          <select class="form-select" id="ocStatus">
+            <option value="" selected>Any status</option>
+            <option>Active</option>
+            <option>Archived</option>
+            <option>Draft</option>
+          </select>
+        </div>
+        <div class="mb-3">
+          <label for="ocCategory" class="form-label">Category</label>
+          <select class="form-select" id="ocCategory">
+            <option value="" selected>Any category</option>
+            <option>Design</option>
+            <option>Engineering</option>
+            <option>Marketing</option>
+          </select>
+        </div>
+        <fieldset class="mb-3">
+          <legend class="fs-6 fw-semibold mb-2">Visibility</legend>
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" id="ocVisPublic" checked>
+            <label class="form-check-label" for="ocVisPublic">Public</label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" id="ocVisPrivate" checked>
+            <label class="form-check-label" for="ocVisPrivate">Private</label>
+          </div>
+        </fieldset>
+        <div class="mb-4">
+          <label for="ocOwner" class="form-label">Owner</label>
+          <select class="form-select" id="ocOwner">
+            <option value="" selected>Anyone</option>
+            <option>Ada Lovelace</option>
+            <option>Alan Turing</option>
+          </select>
+        </div>
+        <div class="d-flex gap-2">
+          <button type="button" class="btn btn-primary flex-grow-1">Apply</button>
+          <button type="button" class="btn btn-outline-secondary">Reset</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Top -->
+  <div class="offcanvas offcanvas-top" tabindex="-1" id="ocTop" aria-labelledby="ocTopLabel">
+    <div class="offcanvas-header">
+      <h2 class="offcanvas-title" id="ocTopLabel">Announcement</h2>
+      <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+    </div>
+    <div class="offcanvas-body">
+      <p class="mb-0">Scheduled maintenance: Sunday 02:00–04:00 UTC. Deploys will be paused during the window.</p>
+    </div>
+  </div>
+
+  <!-- Bottom -->
+  <div class="offcanvas offcanvas-bottom" tabindex="-1" id="ocBottom" aria-labelledby="ocBottomLabel">
+    <div class="offcanvas-header">
+      <h2 class="offcanvas-title" id="ocBottomLabel">Quick actions</h2>
+      <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+    </div>
+    <div class="offcanvas-body">
+      <div class="d-flex flex-wrap gap-2">
+        <button type="button" class="btn btn-outline-secondary btn-sm"><i data-lucide="copy" aria-hidden="true"></i> Duplicate</button>
+        <button type="button" class="btn btn-outline-secondary btn-sm"><i data-lucide="archive" aria-hidden="true"></i> Archive</button>
+        <button type="button" class="btn btn-outline-danger btn-sm"><i data-lucide="trash-2" aria-hidden="true"></i> Delete</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Mobile nav -->
+  <div class="offcanvas offcanvas-start" tabindex="-1" id="ocMobileNav" aria-labelledby="ocMobileNavLabel">
+    <div class="offcanvas-header">
+      <h2 class="offcanvas-title" id="ocMobileNavLabel">Navigation</h2>
+      <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+    </div>
+    <div class="offcanvas-body">
+      <ul class="list-group list-group-flush">
+        <li class="list-group-item list-group-item-action active" aria-current="true">Dashboard</li>
+        <li class="list-group-item list-group-item-action">Projects</li>
+        <li class="list-group-item list-group-item-action">Teams</li>
+        <li class="list-group-item list-group-item-action">Reports</li>
+        <li class="list-group-item list-group-item-action">Settings</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- Long content -->
+  <div class="offcanvas offcanvas-end" tabindex="-1" id="ocLong" aria-labelledby="ocLongLabel">
+    <div class="offcanvas-header">
+      <h2 class="offcanvas-title" id="ocLongLabel">Audit log</h2>
+      <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+    </div>
+    <div class="offcanvas-body">
+      <ul class="list-group list-group-flush">
+        <li class="list-group-item d-flex justify-content-between gap-2"><span>Ada updated project settings</span><small class="text-body-secondary text-nowrap">09:14</small></li>
+        <li class="list-group-item d-flex justify-content-between gap-2"><span>Alan merged pull request #412</span><small class="text-body-secondary text-nowrap">08:52</small></li>
+        <li class="list-group-item d-flex justify-content-between gap-2"><span>Grace deployed api-gateway v2.4.1</span><small class="text-body-secondary text-nowrap">08:31</small></li>
+        <li class="list-group-item d-flex justify-content-between gap-2"><span>Katherine created project "Themes"</span><small class="text-body-secondary text-nowrap">07:58</small></li>
+        <li class="list-group-item d-flex justify-content-between gap-2"><span>Ada invited 2 new members</span><small class="text-body-secondary text-nowrap">07:12</small></li>
+        <li class="list-group-item d-flex justify-content-between gap-2"><span>Alan archived project "Legacy"</span><small class="text-body-secondary text-nowrap">06:44</small></li>
+        <li class="list-group-item d-flex justify-content-between gap-2"><span>Grace updated CI pipeline</span><small class="text-body-secondary text-nowrap">06:20</small></li>
+        <li class="list-group-item d-flex justify-content-between gap-2"><span>Katherine exported Q3 report</span><small class="text-body-secondary text-nowrap">05:59</small></li>
+        <li class="list-group-item d-flex justify-content-between gap-2"><span>Ada changed role for Grace</span><small class="text-body-secondary text-nowrap">05:31</small></li>
+        <li class="list-group-item d-flex justify-content-between gap-2"><span>Alan reopened issue #389</span><small class="text-body-secondary text-nowrap">05:02</small></li>
+        <li class="list-group-item d-flex justify-content-between gap-2"><span>Grace updated documentation</span><small class="text-body-secondary text-nowrap">04:47</small></li>
+        <li class="list-group-item d-flex justify-content-between gap-2"><span>Katherine rotated API keys</span><small class="text-body-secondary text-nowrap">04:15</small></li>
+        <li class="list-group-item d-flex justify-content-between gap-2"><span>Ada merged pull request #405</span><small class="text-body-secondary text-nowrap">03:58</small></li>
+        <li class="list-group-item d-flex justify-content-between gap-2"><span>Alan archived project "Old Site"</span><small class="text-body-secondary text-nowrap">03:22</small></li>
+        <li class="list-group-item d-flex justify-content-between gap-2"><span>Grace enabled branch protection</span><small class="text-body-secondary text-nowrap">02:56</small></li>
+      </ul>
+    </div>
+  </div>
+
+  <script>
+    lucide.createIcons();
+  </script>
+</body>
+</html>
