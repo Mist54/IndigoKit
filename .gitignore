@@ -29,6 +29,12 @@ Desktop.ini
 *.swp
 *.swo
 
+# ---------- Agent / AI tooling ----------
+.agents/
+.claude/
+.freebuff/
+agent/
+
 # ------------------------------------------------------------
 # NOTE: dist/ is intentionally NOT ignored.
 #
@@ -37,10 +43,3 @@ Desktop.ini
 # remain an explicit decision. For now dist/ stays tracked.
 # Revisit when the release/distribution policy is set.
 # ------------------------------------------------------------
-
-# Agent based ignores
-.agent
-.freebuff
-.claude
-agent
-.foam
