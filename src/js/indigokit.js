@@ -129,16 +129,17 @@
         syncToggle(toggle);
 
         if (nowCollapsed) {
-          // Entering the rail: the flyout layer takes over the
-          // group toggles (its click/key handlers stop Bootstrap's
-          // hidden Collapse from firing). Nothing to reconcile —
-          // only the flyout-open group reads as pressed.
+          // Entering the rail: strip Bootstrap collapse attrs so
+          // the event delegation never fires on group toggles —
+          // the flyout layer takes over entirely.
+          stripCollapseAttrs();
           return;
         }
 
-        // Leaving the rail: remember which group's flyout is open
-        // so the reconcile below expands it, remove the panel, and
-        // hand the group toggles back to Bootstrap Collapse.
+        // Leaving the rail: restore attrs, remember which group's
+        // flyout is open, remove the panel, and hand the group
+        // toggles back to Bootstrap Collapse.
+        restoreCollapseAttrs();
         var flyoutGroup = flyout.button;
         closeCollapsedFlyout(false);
         if (flyoutGroup) {
@@ -365,7 +366,11 @@
   }
 
   function openCollapsedFlyout(button) {
-    var target = document.querySelector(button.getAttribute('data-bs-target'));
+    // In rail mode, data-bs-target may have been stripped by
+    // stripCollapseAttrs(). Fall back to the backup attribute.
+    var targetId = button.getAttribute('data-bs-target') ||
+                   button.getAttribute('data-mu-collapse-target');
+    var target = targetId && document.querySelector(targetId);
     var nested = target && target.querySelector('.mu-sidebar-nested');
     if (!nested) {
       return;
@@ -391,10 +396,11 @@
     // Bootstrap Collapse cannot show a pressed box without a
     // flyout — and the expand-time reconcile stays consistent with
     // what the rail actually showed.
+    // Use stored collapseButtons because in rail mode data-bs-toggle
+    // has been stripped by stripCollapseAttrs().
     var rail = button.closest('.mu-sidebar');
-    if (rail) {
-      var groupToggles = rail.querySelectorAll('.mu-sidebar-link[data-bs-toggle="collapse"]');
-      Array.prototype.forEach.call(groupToggles, function (other) {
+    if (rail && collapseButtons) {
+      Array.prototype.forEach.call(collapseButtons, function (other) {
         if (other !== button) {
           other.setAttribute('aria-expanded', 'false');
         }
@@ -443,6 +449,52 @@
     button.setAttribute('aria-expanded', 'true');
   }
 
+  // Shared references to the group-toggle buttons — stored once
+  // before stripCollapseAttrs() removes data-bs-toggle, so the
+  // flyout layer can still attach listeners and resolve siblings
+  // even when the attributes are absent.
+  var collapseButtons = null;
+
+  function stripCollapseAttrs() {
+    if (!collapseButtons) {
+      return;
+    }
+    Array.prototype.forEach.call(collapseButtons, function (btn) {
+      if (btn.hasAttribute('data-bs-toggle')) {
+        btn.setAttribute('data-mu-collapse-toggle', btn.getAttribute('data-bs-toggle'));
+        btn.removeAttribute('data-bs-toggle');
+      }
+      if (btn.hasAttribute('data-bs-target')) {
+        btn.setAttribute('data-mu-collapse-target', btn.getAttribute('data-bs-target'));
+        btn.removeAttribute('data-bs-target');
+      }
+      if (btn.hasAttribute('aria-controls')) {
+        btn.setAttribute('data-mu-collapse-controls', btn.getAttribute('aria-controls'));
+        btn.removeAttribute('aria-controls');
+      }
+    });
+  }
+
+  function restoreCollapseAttrs() {
+    if (!collapseButtons) {
+      return;
+    }
+    Array.prototype.forEach.call(collapseButtons, function (btn) {
+      if (btn.hasAttribute('data-mu-collapse-toggle')) {
+        btn.setAttribute('data-bs-toggle', btn.getAttribute('data-mu-collapse-toggle'));
+        btn.removeAttribute('data-mu-collapse-toggle');
+      }
+      if (btn.hasAttribute('data-mu-collapse-target')) {
+        btn.setAttribute('data-bs-target', btn.getAttribute('data-mu-collapse-target'));
+        btn.removeAttribute('data-mu-collapse-target');
+      }
+      if (btn.hasAttribute('data-mu-collapse-controls')) {
+        btn.setAttribute('aria-controls', btn.getAttribute('data-mu-collapse-controls'));
+        btn.removeAttribute('data-mu-collapse-controls');
+      }
+    });
+  }
+
   function initCollapsedFlyout() {
     var sidebar = document.querySelector('.mu-sidebar');
     if (!sidebar) {
@@ -459,8 +511,16 @@
       return isDesktop() && sidebar.classList.contains('is-collapsed');
     }
 
-    var buttons = sidebar.querySelectorAll('.mu-sidebar-link[data-bs-toggle="collapse"]');
-    Array.prototype.forEach.call(buttons, function (button) {
+    // Store references BEFORE stripping — these are the real DOM
+    // nodes that survive attr removal.
+    collapseButtons = sidebar.querySelectorAll('.mu-sidebar-link[data-bs-toggle="collapse"]');
+
+    // If already in rail mode (persisted state), strip now.
+    if (isRailMode()) {
+      stripCollapseAttrs();
+    }
+
+    Array.prototype.forEach.call(collapseButtons, function (button) {
       // Keyboard: Enter/Space opens the flyout and moves focus into
       // it (a plain click would leave focus on the toggle, and Tab
       // order would then skip the body-appended panel).
@@ -562,10 +622,26 @@
       }
     });
 
+    // Breakpoint crossing: sync collapse attrs when the viewport
+    // crosses the md breakpoint. The MutationObserver only fires
+    // on class changes — not viewport changes — so without this,
+    // a page loaded at mobile width that later resizes to desktop
+    // would have stale attrs.
     if (mql.addEventListener) {
-      mql.addEventListener('change', function () {
+      mql.addEventListener('change', function (event) {
         if (flyout.panel) {
           closeCollapsedFlyout(false);
+        }
+        // Crossing into desktop with persisted collapsed state:
+        // strip attrs so Bootstrap's collapse delegation doesn't
+        // compete with the flyout handlers.
+        if (event.matches && sidebar.classList.contains('is-collapsed')) {
+          stripCollapseAttrs();
+        }
+        // Crossing into mobile: restore attrs so Bootstrap's
+        // collapse works normally in the drawer.
+        if (!event.matches) {
+          restoreCollapseAttrs();
         }
       });
     }

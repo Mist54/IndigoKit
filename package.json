@@ -1,6 +1,6 @@
 {
   "name": "indigokit",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "IndigoKit — Bootstrap-first Enterprise UI Kit. Bootstrap's familiar API with a refined visual system, light/dark themes, measured accessibility, and a reusable application shell.",
   "main": "dist/js/indigokit.js",
   "style": "dist/css/indigokit.css",

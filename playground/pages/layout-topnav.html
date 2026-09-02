@@ -1,0 +1,169 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>IndigoKit Playground — Top Navigation Layout</title>
+  <link rel="stylesheet" href="../../dist/css/indigokit.css">
+  <link rel="stylesheet" href="../playground.css">
+  <script src="../theme.js"></script>
+  <script src="../assets/lucide.umd.js"></script>
+  <script src="../../node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+</head>
+<body>
+
+  <!-- Top-only navigation — no sidebar. Full-width navbar. -->
+  <header>
+    <nav class="navbar navbar-expand-lg bg-body border-bottom" aria-label="Main navigation">
+      <div class="container">
+        <a class="navbar-brand d-flex align-items-center gap-2" href="../index.html">
+          <i data-lucide="layers" aria-hidden="true" class="text-primary"></i>
+          IndigoKit
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#topNavMain" aria-controls="topNavMain" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="topNavMain">
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <li class="nav-item"><a class="nav-link active" aria-current="page" href="#">Dashboard</a></li>
+            <li class="nav-item"><a class="nav-link" href="#">Projects</a></li>
+            <li class="nav-item"><a class="nav-link" href="#">Team</a></li>
+            <li class="nav-item"><a class="nav-link" href="#">Reports</a></li>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Settings</a>
+              <ul class="dropdown-menu">
+                <li><a class="dropdown-item" href="#">Account</a></li>
+                <li><a class="dropdown-item" href="#">Security</a></li>
+                <li><hr class="dropdown-divider"></li>
+                <li><a class="dropdown-item text-danger" href="#">Sign out</a></li>
+              </ul>
+            </li>
+          </ul>
+          <div class="d-flex align-items-center gap-2">
+            <select class="form-select form-select-sm w-auto" data-theme-switch aria-label="Theme">
+              <option value="system">System</option>
+              <option value="light">Light</option>
+              <option value="dark">Dark</option>
+            </select>
+            <button type="button" class="btn btn-sm" aria-label="Notifications">
+              <i data-lucide="bell" aria-hidden="true"></i>
+            </button>
+            <button type="button" class="btn btn-sm" aria-label="Help">
+              <i data-lucide="circle-question-mark" aria-hidden="true"></i>
+            </button>
+            <div class="dropdown">
+              <a class="d-flex align-items-center gap-2 text-decoration-none" href="#" data-bs-toggle="dropdown" aria-expanded="false">
+                <span class="mu-avatar"><i data-lucide="user" aria-hidden="true"></i></span>
+                <span class="d-none d-md-inline small">Jane Doe</span>
+              </a>
+              <ul class="dropdown-menu dropdown-menu-end">
+                <li><a class="dropdown-item" href="#">Profile</a></li>
+                <li><a class="dropdown-item" href="#">Settings</a></li>
+                <li><hr class="dropdown-divider"></li>
+                <li><a class="dropdown-item text-danger" href="#">Sign out</a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </nav>
+  </header>
+
+  <!-- Main content — full width, no sidebar -->
+  <main class="container py-4" role="main">
+    <p class="mb-2"><a href="../index.html">← Playground home</a></p>
+    <h1 class="h3 mb-1">Top Navigation Layout</h1>
+    <p class="lead text-body-secondary mb-4">A layout without a sidebar — full-width top navigation with responsive collapse. Use this for applications that don't need persistent side navigation.</p>
+
+    <h2 class="h5 mt-4 mb-3">Layout behavior</h2>
+    <div class="card mb-4">
+      <div class="card-body">
+        <ul class="mb-0">
+          <li><strong>Full-width navbar:</strong> spans the page, with collapsible navigation for mobile</li>
+          <li><strong>No sidebar:</strong> content uses the full viewport width</li>
+          <li><strong>Mobile:</strong> hamburger toggles a dropdown menu for navigation</li>
+          <li><strong>Bootstrap grid:</strong> standard container, rows, and columns work normally</li>
+        </ul>
+      </div>
+    </div>
+
+    <h2 class="h5 mt-5 mb-3">Sample content</h2>
+    <div class="row g-3 mb-4">
+      <div class="col-12 col-md-6 col-lg-3">
+        <div class="card h-100">
+          <div class="card-body">
+            <div class="d-flex justify-content-between align-items-center mb-2">
+              <span class="text-body-secondary small">Projects</span>
+              <i data-lucide="folder-kanban" aria-hidden="true" class="text-primary"></i>
+            </div>
+            <div class="h3 mb-0">24</div>
+          </div>
+        </div>
+      </div>
+      <div class="col-12 col-md-6 col-lg-3">
+        <div class="card h-100">
+          <div class="card-body">
+            <div class="d-flex justify-content-between align-items-center mb-2">
+              <span class="text-body-secondary small">Team members</span>
+              <i data-lucide="users" aria-hidden="true" class="text-success"></i>
+            </div>
+            <div class="h3 mb-0">12</div>
+          </div>
+        </div>
+      </div>
+      <div class="col-12 col-md-6 col-lg-3">
+        <div class="card h-100">
+          <div class="card-body">
+            <div class="d-flex justify-content-between align-items-center mb-2">
+              <span class="text-body-secondary small">Deployments</span>
+              <i data-lucide="rocket" aria-hidden="true" class="text-info"></i>
+            </div>
+            <div class="h3 mb-0">156</div>
+          </div>
+        </div>
+      </div>
+      <div class="col-12 col-md-6 col-lg-3">
+        <div class="card h-100">
+          <div class="card-body">
+            <div class="d-flex justify-content-between align-items-center mb-2">
+              <span class="text-body-secondary small">Uptime</span>
+              <i data-lucide="activity" aria-hidden="true" class="text-warning"></i>
+            </div>
+            <div class="h3 mb-0">99.9%</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row g-3">
+      <div class="col-12 col-lg-8">
+        <div class="card">
+          <div class="card-header"><h3 class="h6 mb-0">Recent activity</h3></div>
+          <div class="card-body">
+            <p class="text-body-secondary mb-0">This layout works well for dashboards, reporting pages, or any application that doesn't need persistent side navigation. The responsive navbar collapses into a mobile-friendly dropdown menu.</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-12 col-lg-4">
+        <div class="card">
+          <div class="card-header"><h3 class="h6 mb-0">Quick actions</h3></div>
+          <div class="card-body">
+            <div class="d-grid gap-2">
+              <button type="button" class="btn btn-primary btn-sm">New project</button>
+              <button type="button" class="btn btn-outline-secondary btn-sm">Invite team</button>
+              <button type="button" class="btn btn-outline-secondary btn-sm">Settings</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <footer class="d-flex flex-wrap justify-content-between gap-2 border-top pt-3 mt-4 text-body-secondary small">
+      <span>© 2026 IndigoKit — an enterprise UI showcase built with Bootstrap 5.3.8.</span>
+      <a href="layout.html">See also: Application Shell</a>
+    </footer>
+  </main>
+
+  <script>lucide.createIcons();</script>
+</body>
+</html>

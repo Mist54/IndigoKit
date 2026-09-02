@@ -14,14 +14,21 @@
 
 .mu-sidebar {
   // Width comes from the layout token (256px). The side slot is
-  // grid-stretched to the full body-row height, so the sidebar
-  // fills it and owns its own scrolling: long navigation lists
-  // scroll independently of main content. overflow-x hidden
-  // guards against horizontal bleed from long labels.
+  // a flex container, so the sidebar uses flex: 1 to fill it —
+  // this avoids the height: 100% resolution issue in CSS Grid
+  // contexts. Long navigation lists scroll independently of
+  // main content. overflow-x guards against horizontal bleed.
   width: $mu-sidebar-width;
-  height: 100%;
+  flex: 1 1 auto;
+  min-height: 0; // allow shrink below content size for proper overflow
   overflow-y: auto;
   overflow-x: hidden;
+  // Prevent scroll anchoring from interfering with sidebar scroll
+  // during Bootstrap Collapse transitions (Hypothesis 1).
+  overflow-anchor: none;
+  // Isolate sidebar scroll from sibling scroll containers to
+  // prevent cross-contamination of scroll state (Hypothesis 2).
+  overscroll-behavior: contain;
 
   // Surface: Bootstrap's subtle-surface token (--bs-tertiary-bg,
   // light gray in light mode) plus a hairline right border that
@@ -261,6 +268,18 @@
   list-style: none;
 }
 
+// Bootstrap Collapse regions inside the sidebar need explicit
+// height containment to prevent scroll position jumps during
+// transitions (Hypothesis 3). Without this, Bootstrap's
+// .collapsing class sets an explicit pixel height that causes
+// the sidebar's scrollHeight to fluctuate, making scrollTop jump.
+// overflow-anchor: none prevents the browser from trying to
+// maintain scroll position relative to collapsing content.
+.mu-sidebar .collapse {
+  min-height: 0;
+  overflow-anchor: none;
+}
+
 // Nested links keep the base row height but shift text to align
 // with the parent item's text.
 .mu-sidebar-nested .mu-sidebar-link {
@@ -300,6 +319,7 @@
       // so the icon column keeps its expanded anchor. Do not
       // reduce the horizontal padding — it is half of the grid.
       padding: $spacer * .5 $spacer; // 8px 16px
+      gap: $spacer * .5; // 8px — tighter rail spacing
     }
 
     .mu-sidebar-label,
@@ -317,6 +337,10 @@
     // shell JS manages state + position).
     .collapse {
       display: none;
+      // Safety net: suppress any CSS transition on hidden collapse
+      // regions to prevent visual flicker from Bootstrap's
+      // transition engine while attrs are being stripped/restored.
+      transition: none !important;
     }
 
     // Open-flyout affordance: a group toggle whose flyout is open

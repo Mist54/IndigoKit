@@ -12,7 +12,15 @@
 // a future fixed top bar and persistent/collapsible sidebar work
 // naturally, short pages don't scroll, and long pages scroll
 // inside main.
+//
+// Prevent page-level scrollbars: html and body must not scroll;
+// all scroll is handled by .mu-app-main. Without this, the body
+// creates a second scrollbar alongside .mu-app-main.
 // ============================================================
+html, body {
+  overflow: hidden;
+  height: 100%;
+}
 
 .mu-app {
   display: grid;
@@ -34,8 +42,15 @@
 // Body region: side (future sidebar) + main content.
 .mu-app-body {
   display: grid;
+  // minmax(0, 1fr) — NOT just 1fr. Plain 1fr allows the row to grow
+  // beyond the available space when a grid item's content is taller
+  // (min-height: auto default). minmax(0, 1fr) clamps the row to
+  // exactly the available height, preventing the sidebar from stretching
+  // the body below the footer.
+  grid-template-rows: minmax(0, 1fr);
   grid-template-columns: minmax(0, 1fr); // main-only default
   min-height: 0;
+  overflow: hidden; // clip both columns to the body area
 }
 
 // When a side slot exists, reserve an auto-sized column for it.
@@ -47,9 +62,15 @@
 }
 
 // Side area slot — future sidebar lives here. Structural only.
+// Uses a flex container so .mu-sidebar fills it without relying
+// on height: 100%, which may not resolve correctly when the
+// parent is a CSS Grid item with a minmax(0, 1fr) row height.
 .mu-app-side {
+  display: flex;
+  flex-direction: column;
   min-width: 0;
   min-height: 0;
+  overflow: hidden;
 }
 
 // Main scroll region. Content grows naturally; long content
@@ -61,14 +82,52 @@
   min-height: 0;
   overflow-y: auto;
   overflow-x: hidden;
+  // Prevent scroll anchoring from interfering with main content
+  // scroll during sidebar collapse transitions (Hypothesis 1).
+  overflow-anchor: none;
+  // Isolate main content scroll from sidebar scroll to prevent
+  // cross-contamination of scroll state (Hypothesis 2).
+  overscroll-behavior: contain;
 }
 
 // Page content wrapper — spacing only. Bootstrap containers,
 // rows, and columns inside continue working untouched.
+// min-height: 100% fills the scroll container so the footer
+// can be pushed to the bottom via margin-top: auto.
 .mu-app-content {
+  display: flex;
+  flex-direction: column;
+  min-height: 100%;
   padding: $spacer * 1.5; // 24px
 
   @include media-breakpoint-down(md) {
     padding: $spacer; // 16px on tablet and mobile
   }
+}
+
+// When a Bootstrap container is a direct child, it must also
+// stretch to fill the flex column so margin-top: auto on the
+// footer inside it has room to push down. flex: 1 gives it
+// the remaining space; display: flex + flex-direction: column
+// lets the footer use margin-top: auto.
+.mu-app-content > .container,
+.mu-app-content > .container-fluid {
+  display: flex;
+  flex-direction: column;
+  flex: 1 1 auto;
+  // Do NOT override padding here — Bootstrap utilities
+  // (.py-4 etc.) and inline classes own the container's padding.
+}
+
+// Footer — pushed to the bottom of its flex parent via
+// margin-top: auto. Works whether the footer is a direct
+// child of .mu-app-content or inside a .container/.container-fluid.
+.mu-app-content > footer,
+.mu-app-content > .container > footer,
+.mu-app-content > .container-fluid > footer {
+  margin-top: auto;
+  padding-top: $spacer * .75; // 12px
+  border-top: 1px solid var(--bs-border-color);
+  color: var(--bs-secondary-color);
+  font-size: $small-font-size;
 }

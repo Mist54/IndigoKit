@@ -6,9 +6,20 @@ IndigoKit keeps Bootstrap's familiar class names as the public API and adds a sm
 
 ## Status
 
-- **Phase: v1 execution — packaging in progress.** The component library, theme system, accessibility hardening, playground, and full developer documentation are complete. Package metadata (`package.json` fields, `LICENSE`, `files`/`exports`), a minified CSS build, and install/CDN docs are in place; publishing is deferred until the release gates pass.
+- **v1.1.0** — Bug fixes and improvements (double scrollbar, sidebar scroll, button foreground colors, carousel quality, layout examples).
 - Component coverage: buttons, cards, alerts, badges, dropdowns, modals, tabs, breadcrumbs, pagination, forms, tables, progress, loading, toasts, list groups, empty states, tooltips/popovers, accordion, offcanvas, carousel, scrollspy, navigation patterns, and the application shell — plus the data-table and form-patterns pages.
 - Application examples: dashboard, analytics dashboard, profile, settings, pricing, FAQ, invoice, user list, products, five auth pages, four error pages — all built from Bootstrap classes + IndigoKit shell, with zero page-specific CSS.
+- Layout examples: application shell, top navigation layout, landing page layout.
+
+## What's New in v1.1.0
+
+- **Fixed double scrollbar** — `html, body` now have `overflow: hidden` to prevent page-level scrollbar alongside `.mu-app-main`
+- **Fixed sidebar scroll** — `.mu-sidebar` uses `flex: 1 1 auto` instead of `height: 100%` for proper containment
+- **Fixed button foreground colors** — `.btn-success`, `.btn-danger`, `.btn-info` now show white text consistently across all states
+- **Improved carousel** — Added proper horizontal padding to prevent text/control overlap
+- **Added icons to sidebar** — Component navigation now shows Lucide icons
+- **Added layout examples** — Top navigation layout and landing page layout demos
+- **Scroll anchoring fixes** — Added `overflow-anchor: none` and `overscroll-behavior: contain` to prevent scroll lock during collapse transitions
 
 ## Philosophy
 
