@@ -56,6 +56,88 @@
 }
 
 // ------------------------------------------------------------
+// Semantic foreground color overrides
+// ------------------------------------------------------------
+// Bootstrap's color-contrast() function determines button text
+// color from the background luminance. IndigoKit's custom
+// semantic colors (#10B981 emerald, #EF4444 red, #06B6D4 cyan)
+// have medium luminance that makes color-contrast() return
+// black text — visually wrong for these semantic roles.
+//
+// Fix at the CSS custom-property level so every state
+// (default, hover, focus, active, disabled) inherits the
+// correct foreground. No per-state overrides needed.
+
+// Solid variants: white text on darker semantic backgrounds.
+// The hover/bg/border darken/tint shades preserve white contrast.
+.btn-success {
+  --bs-btn-color: #fff;
+  --bs-btn-hover-color: #fff;
+  --bs-btn-active-color: #fff;
+  --bs-btn-disabled-color: #fff;
+}
+
+.btn-danger {
+  --bs-btn-color: #fff;
+  --bs-btn-hover-color: #fff;
+  --bs-btn-active-color: #fff;
+  --bs-btn-disabled-color: #fff;
+}
+
+// Info: cyan is bright enough for dark text in normal state,
+// but the hover shade darkens enough to warrant white — match
+// success/danger for consistency across saturated variants.
+.btn-info {
+  --bs-btn-color: #fff;
+  --bs-btn-hover-color: #fff;
+  --bs-btn-active-color: #fff;
+  --bs-btn-disabled-color: #fff;
+}
+
+// Outline variants: on hover they fill, so the hover text must
+// match the filled state (white for success/danger/info).
+.btn-outline-success {
+  --bs-btn-hover-color: #fff;
+  --bs-btn-active-color: #fff;
+}
+
+.btn-outline-danger {
+  --bs-btn-hover-color: #fff;
+  --bs-btn-active-color: #fff;
+}
+
+.btn-outline-info {
+  --bs-btn-hover-color: #fff;
+  --bs-btn-active-color: #fff;
+}
+
+// ------------------------------------------------------------
+// text-bg-* utility foreground fix
+// ------------------------------------------------------------
+// Bootstrap's text-bg-* helpers hard-code color: #000 !important.
+// For darker semantic backgrounds the foreground must be white.
+.text-bg-success,
+.text-bg-danger,
+.text-bg-info {
+  color: #fff !important;
+}
+
+// Warning stays black — yellow is light enough.
+// text-bg-warning remains Bootstrap default (black text).
+
+// ------------------------------------------------------------
+// Badge semantic foreground
+// ------------------------------------------------------------
+// .badge uses --bs-badge-color (white by default). The text-bg-*
+// utility overrides it on badges — the fix above handles that.
+// Explicit badge variants for direct usage:
+.badge.text-bg-success,
+.badge.text-bg-danger,
+.badge.text-bg-info {
+  color: #fff !important;
+}
+
+// ------------------------------------------------------------
 // Loading foundation
 // ------------------------------------------------------------
 // No custom loading component: Bootstrap's own spinner is the

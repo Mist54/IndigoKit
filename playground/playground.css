@@ -159,7 +159,16 @@
 .demo-theme-carousel .carousel-indicators .active {
   opacity: 1;
 }
-.demo-slide { min-height: 12rem; background-color: #eef2ff; color: var(--bs-body-color); }
+.demo-slide {
+  min-height: 12rem;
+  background-color: #eef2ff;
+  color: var(--bs-body-color);
+  /* Horizontal padding ensures slide text never overlaps the
+     previous/next controls. Bootstrap's controls are positioned
+     at the edges; 4rem keeps content in a safe zone. */
+  padding-left: 4rem !important;
+  padding-right: 4rem !important;
+}
 .demo-slide-alt { background-color: #ecfdf5; }
 .demo-carousel .carousel-control-prev-icon,
 .demo-carousel .carousel-control-next-icon {
@@ -173,6 +182,13 @@
 }
 .demo-carousel .carousel-indicators [data-bs-target] {
   background-color: var(--bs-body-color);
+}
+/* Dark mode: invert the filter for dark slides */
+[data-bs-theme="dark"] .demo-slide {
+  background-color: #1e1b4b;
+}
+[data-bs-theme="dark"] .demo-slide-alt {
+  background-color: #064e3b;
 }
 
 /* Scrollspy page — demo nav column, section spacing, nested subnav
