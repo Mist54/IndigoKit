@@ -7,15 +7,15 @@ IndigoKit is a reusable Modern + Enterprise UI framework built on top of Bootstr
 ## ROLE
 
 - The human developer is the final decision-maker.
-- FreeBuff is the implementation/coding agent.
+- The coding agent implements changes under these rules.
 - ChatGPT is the architecture/review/advisory agent.
 - Do not make major architectural decisions silently.
 - If a requested change conflicts with these rules or requires a new dependency/architecture decision, explain the issue and ask for approval before proceeding.
 
 ## DECISION WORKFLOW
 
-- The human developer acts as the mediator between FreeBuff and ChatGPT.
-- FreeBuff should not assume that ChatGPT has approved a design unless the human explicitly communicates that approval.
+- The human developer acts as the mediator between the coding agent and ChatGPT.
+- The coding agent should not assume that ChatGPT has approved a design unless the human explicitly communicates that approval.
 - ChatGPT may provide architectural recommendations, but the human developer has final authority.
 - When a major architectural question arises, pause implementation and ask the human to obtain a decision.
 
@@ -27,6 +27,11 @@ At the beginning of every IndigoKit task:
 3. Treat both as authoritative project context.
 4. Do not assume rules from a previous conversation are still valid if they are not recorded there.
 5. Update `AGENT_KNOWLEDGE.md` after meaningful architectural changes.
+
+## COMMITS
+
+- Commit messages are plain and attribution-free: never append tool/agent attribution footers (e.g. `Co-Authored-By:`, "Generated with …") to commit messages or commit bodies.
+- Keep the existing conventional style: `type: summary — detail` (`feat`, `fix`, `chore`, `release`, `docs`, `refactor`).
 
 `PROJECT_RULES.md` contains permanent rules and constraints.
 `AGENT_KNOWLEDGE.md` contains current project state, decisions, architecture, conventions and implementation history.
@@ -294,7 +299,7 @@ Before considering a meaningful feature complete:
 
 ## CODE REVIEW
 
-Use FreeBuff's code-reviewer/review functionality for meaningful changes.
+Use the code-reviewer/review workflow for meaningful changes.
 
 Do not blindly accept review output.
 The human developer makes the final decision.
