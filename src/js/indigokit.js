@@ -365,6 +365,60 @@
     }
   }
 
+  // Open a compact tooltip for a plain link (no sub-sections).
+  // Shows just the link's title in a small panel beside the rail.
+  function openPlainLinkFlyout(link) {
+    // A different element is open: swap panels.
+    if (flyout.panel && flyout.button !== link) {
+      closeCollapsedFlyout(false);
+    }
+    if (flyout.panel) {
+      return; // already open for this button
+    }
+
+    // Belt and braces: never allow a second panel to accumulate.
+    var stale = document.querySelector('.mu-sidebar-flyout');
+    if (stale) {
+      stale.remove();
+    }
+
+    var rect = link.getBoundingClientRect();
+
+    // Create a minimal tooltip panel with just the link text.
+    var panel = document.createElement('div');
+    panel.className = 'mu-sidebar-flyout mu-sidebar-tooltip';
+
+    var label = document.createElement('div');
+    label.className = 'mu-sidebar-flyout-label';
+    var linkText = link.querySelector('.mu-sidebar-link-text');
+    label.textContent = linkText ? linkText.textContent.trim() : '';
+    panel.appendChild(label);
+
+    if (flyout.hoverOk) {
+      panel.addEventListener('mouseenter', cancelFlyoutClose);
+      panel.addEventListener('mouseleave', scheduleFlyoutClose);
+    }
+
+    // Position beside the rail, vertically centered on the link.
+    document.body.appendChild(panel);
+    var left = rect.right + 8;
+    var width = panel.offsetWidth;
+    // Flip to the left if no room on the right.
+    if (left + width > window.innerWidth - 8 && rect.left - width - 8 > 0) {
+      left = rect.left - width - 8;
+    }
+    // Vertically center on the link — align with the icon row.
+    var height = panel.offsetHeight;
+    var top = rect.top + Math.floor((rect.height - height) / 2);
+    // Clamp to viewport.
+    top = Math.max(8, Math.min(top, window.innerHeight - height - 8));
+    panel.style.left = Math.round(left) + 'px';
+    panel.style.top = Math.round(top) + 'px';
+
+    flyout.panel = panel;
+    flyout.button = link;
+  }
+
   function openCollapsedFlyout(button) {
     // In rail mode, data-bs-target may have been stripped by
     // stripCollapseAttrs(). Fall back to the backup attribute.
@@ -501,7 +555,12 @@
       return;
     }
 
-    flyout.hoverOk = window.matchMedia && window.matchMedia('(hover: hover)').matches;
+    // Enable hover on any device with a fine pointer (mouse/trackpad).
+    // This is broader than (hover: hover) which fails on some touchscreen laptops.
+    flyout.hoverOk = window.matchMedia && (
+      window.matchMedia('(hover: hover)').matches ||
+      window.matchMedia('(pointer: fine)').matches
+    );
 
     // Rail mode is desktop-only: the class may also sit on the
     // element from a persisted desktop session, but the mobile
@@ -513,13 +572,20 @@
 
     // Store references BEFORE stripping — these are the real DOM
     // nodes that survive attr removal.
+    // Also store which links ARE group toggles (have collapse targets)
+    // so we can distinguish them from plain links after attrs are stripped.
     collapseButtons = sidebar.querySelectorAll('.mu-sidebar-link[data-bs-toggle="collapse"]');
+    var collapseToggleSet = {};
+    Array.prototype.forEach.call(collapseButtons, function (btn) {
+      collapseToggleSet[btn.getAttribute('data-bs-target')] = true;
+    });
 
     // If already in rail mode (persisted state), strip now.
     if (isRailMode()) {
       stripCollapseAttrs();
     }
 
+    // --- Group toggles (items with sub-sections) ---
     Array.prototype.forEach.call(collapseButtons, function (button) {
       // Keyboard: Enter/Space opens the flyout and moves focus into
       // it (a plain click would leave focus on the toggle, and Tab
@@ -560,36 +626,90 @@
         }
       });
 
-      // Hover (pointer devices only): open on enter, close after a
-      // grace period on leave so the pointer can cross into the
-      // panel. Touch never triggers this path (no hover media).
-      if (flyout.hoverOk) {
-        button.addEventListener('mouseenter', function () {
-          if (!isRailMode()) {
-            return;
+      // Hover: open on enter, close after a grace period on leave so the
+      // pointer can cross into the panel. Always attach on desktop —
+      // the isRailMode() check inside prevents firing in expanded mode.
+      button.addEventListener('mouseenter', function () {
+        if (!isRailMode()) {
+          return;
+        }
+        if (flyoutOpenTimer) {
+          clearTimeout(flyoutOpenTimer);
+        }
+        cancelFlyoutClose();
+        // Close any existing panel immediately when moving to a new item.
+        if (flyout.panel && flyout.button !== button) {
+          closeCollapsedFlyout(false);
+        }
+        flyoutOpenTimer = setTimeout(function () {
+          flyoutOpenTimer = null;
+          if (!flyout.panel) {
+            openCollapsedFlyout(button);
           }
-          if (flyoutOpenTimer) {
-            clearTimeout(flyoutOpenTimer);
-          }
-          cancelFlyoutClose();
-          flyoutOpenTimer = setTimeout(function () {
-            flyoutOpenTimer = null;
-            if (!flyout.panel) {
-              openCollapsedFlyout(button);
-            }
-          }, 120);
-        });
+        }, 60);
+      });
 
-        button.addEventListener('mouseleave', function () {
-          if (flyoutOpenTimer) {
-            clearTimeout(flyoutOpenTimer);
-            flyoutOpenTimer = null;
-          }
-          if (flyout.button === button) {
-            scheduleFlyoutClose();
-          }
-        });
+      button.addEventListener('mouseleave', function () {
+        if (flyoutOpenTimer) {
+          clearTimeout(flyoutOpenTimer);
+          flyoutOpenTimer = null;
+        }
+        if (flyout.button === button) {
+          scheduleFlyoutClose();
+        }
+      });
+    });
+
+    // --- Plain links (items WITHOUT sub-sections) ---
+    // Show a compact tooltip with just the link's title on hover.
+    // Use a data attribute to mark group toggles before stripping,
+    // so we can identify plain links after attrs are removed.
+    var allLinks = sidebar.querySelectorAll('.mu-sidebar-link');
+    Array.prototype.forEach.call(allLinks, function (link) {
+      // Skip group toggles — already handled above.
+      var target = link.getAttribute('data-bs-target') || link.getAttribute('data-mu-collapse-target');
+      if (target && collapseToggleSet[target]) {
+        return;
       }
+
+      // Click on a plain link: close any flyout, then let the
+      // browser navigate normally (no preventDefault).
+      link.addEventListener('click', function () {
+        closeCollapsedFlyout(false);
+      });
+
+      // Hover for plain links: open tooltip on enter, close on leave.
+      // Always attach hover handlers on desktop — the isRailMode()
+      // check inside prevents them from firing in expanded mode.
+      link.addEventListener('mouseenter', function () {
+        if (!isRailMode()) {
+          return;
+        }
+        if (flyoutOpenTimer) {
+          clearTimeout(flyoutOpenTimer);
+        }
+        cancelFlyoutClose();
+        // Close any existing panel immediately when moving to a new item.
+        if (flyout.panel && flyout.button !== link) {
+          closeCollapsedFlyout(false);
+        }
+        flyoutOpenTimer = setTimeout(function () {
+          flyoutOpenTimer = null;
+          if (!flyout.panel) {
+            openPlainLinkFlyout(link);
+          }
+        }, 60);
+      });
+
+      link.addEventListener('mouseleave', function () {
+        if (flyoutOpenTimer) {
+          clearTimeout(flyoutOpenTimer);
+          flyoutOpenTimer = null;
+        }
+        if (flyout.button === link) {
+          scheduleFlyoutClose();
+        }
+      });
     });
 
     // Close on outside pointer, Escape, sidebar scroll, resize, and

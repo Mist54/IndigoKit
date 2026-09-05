@@ -117,12 +117,12 @@
                   </div>
                 </li>
                 <li>
-                  <button type="button" class="mu-sidebar-link" data-bs-toggle="collapse" data-bs-target="#nav-pages" aria-expanded="true" aria-controls="nav-pages">
+                  <button type="button" class="mu-sidebar-link" data-bs-toggle="collapse" data-bs-target="#nav-pages" aria-expanded="false" aria-controls="nav-pages">
                     <i data-lucide="files" aria-hidden="true"></i>
                     <span class="mu-sidebar-link-text">Pages</span>
                     <i data-lucide="chevron-right" class="mu-sidebar-chevron" aria-hidden="true"></i>
                   </button>
-                  <div class="collapse show" id="nav-pages">
+                  <div class="collapse" id="nav-pages">
                     <ul class="mu-sidebar-nested">
                       <li><a class="mu-sidebar-link" href="profile.html"><span class="mu-sidebar-link-text">Profile</span></a></li>
                       <li><a class="mu-sidebar-link" href="settings.html"><span class="mu-sidebar-link-text">Settings</span></a></li>
@@ -232,12 +232,16 @@
                   <div class="card-body">
                     <div class="d-flex align-items-center justify-content-between mb-2">
                       <span class="text-body-secondary small">Revenue</span>
-                      <i data-lucide="dollar-sign" aria-hidden="true" width="18" height="18" class="text-secondary"></i>
+                      <span class="d-inline-flex align-items-center justify-content-center p-2 rounded-2 bg-primary-subtle text-primary">
+                        <i data-lucide="dollar-sign" aria-hidden="true" width="16" height="16"></i>
+                      </span>
                     </div>
-                    <div class="h4 mb-1">$128,540</div>
-                    <div class="small text-success">
-                      <i data-lucide="trending-up" aria-hidden="true" width="14" height="14" class="me-1"></i>+18.2% vs last period
-                    </div>
+                    <div class="h3 mb-1">$128,540</div>
+                    <span class="badge text-bg-success">
+                      <i data-lucide="trending-up" aria-hidden="true" width="12" height="12" class="me-1"></i>
+                      +18.2%
+                    </span>
+                    <span class="text-body-secondary small ms-1">vs last period</span>
                   </div>
                 </div>
               </div>
@@ -246,12 +250,16 @@
                   <div class="card-body">
                     <div class="d-flex align-items-center justify-content-between mb-2">
                       <span class="text-body-secondary small">Orders</span>
-                      <i data-lucide="shopping-cart" aria-hidden="true" width="18" height="18" class="text-secondary"></i>
+                      <span class="d-inline-flex align-items-center justify-content-center p-2 rounded-2 bg-info-subtle text-info">
+                        <i data-lucide="shopping-cart" aria-hidden="true" width="16" height="16"></i>
+                      </span>
                     </div>
-                    <div class="h4 mb-1">1,847</div>
-                    <div class="small text-success">
-                      <i data-lucide="trending-up" aria-hidden="true" width="14" height="14" class="me-1"></i>+6.4% vs last period
-                    </div>
+                    <div class="h3 mb-1">1,847</div>
+                    <span class="badge text-bg-success">
+                      <i data-lucide="trending-up" aria-hidden="true" width="12" height="12" class="me-1"></i>
+                      +6.4%
+                    </span>
+                    <span class="text-body-secondary small ms-1">vs last period</span>
                   </div>
                 </div>
               </div>
@@ -260,12 +268,16 @@
                   <div class="card-body">
                     <div class="d-flex align-items-center justify-content-between mb-2">
                       <span class="text-body-secondary small">Conversion rate</span>
-                      <i data-lucide="percent" aria-hidden="true" width="18" height="18" class="text-secondary"></i>
+                      <span class="d-inline-flex align-items-center justify-content-center p-2 rounded-2 bg-warning-subtle text-warning-emphasis">
+                        <i data-lucide="percent" aria-hidden="true" width="16" height="16"></i>
+                      </span>
                     </div>
-                    <div class="h4 mb-1">3.8%</div>
-                    <div class="small text-success">
-                      <i data-lucide="trending-up" aria-hidden="true" width="14" height="14" class="me-1"></i>+0.3 pts vs last period
-                    </div>
+                    <div class="h3 mb-1">3.8%</div>
+                    <span class="badge text-bg-success">
+                      <i data-lucide="trending-up" aria-hidden="true" width="12" height="12" class="me-1"></i>
+                      +0.3 pts
+                    </span>
+                    <span class="text-body-secondary small ms-1">vs last period</span>
                   </div>
                 </div>
               </div>
@@ -274,12 +286,16 @@
                   <div class="card-body">
                     <div class="d-flex align-items-center justify-content-between mb-2">
                       <span class="text-body-secondary small">Avg. order value</span>
-                      <i data-lucide="wallet" aria-hidden="true" width="18" height="18" class="text-secondary"></i>
+                      <span class="d-inline-flex align-items-center justify-content-center p-2 rounded-2 bg-success-subtle text-success">
+                        <i data-lucide="wallet" aria-hidden="true" width="16" height="16"></i>
+                      </span>
                     </div>
-                    <div class="h4 mb-1">$69.58</div>
-                    <div class="small text-danger">
-                      <i data-lucide="trending-down" aria-hidden="true" width="14" height="14" class="me-1"></i>1.2% vs last period
-                    </div>
+                    <div class="h3 mb-1">$69.58</div>
+                    <span class="badge text-bg-danger">
+                      <i data-lucide="trending-down" aria-hidden="true" width="12" height="12" class="me-1"></i>
+                      1.2%
+                    </span>
+                    <span class="text-body-secondary small ms-1">vs last period</span>
                   </div>
                 </div>
               </div>
@@ -289,7 +305,7 @@
               <div class="col-12 col-lg-8">
                 <div class="card h-100">
                   <div class="card-header d-flex flex-wrap align-items-center justify-content-between gap-2">
-                    <span class="fw-semibold">Revenue trend</span>
+                    <h2 class="h6 mb-0">Revenue trend</h2>
                     <span class="small text-body-secondary d-flex align-items-center gap-3">
                       <span class="d-flex align-items-center gap-1"><i data-lucide="circle" aria-hidden="true" width="10" height="10" class="text-primary"></i> This year</span>
                       <span class="d-flex align-items-center gap-1"><i data-lucide="circle" aria-hidden="true" width="10" height="10" class="text-secondary"></i> Last year</span>
@@ -323,7 +339,7 @@
               <div class="col-12 col-lg-4">
                 <div class="card h-100">
                   <div class="card-header">
-                    <span class="fw-semibold">Sales by category</span>
+                    <h2 class="h6 mb-0">Sales by category</h2>
                   </div>
                   <div class="card-body">
                     <canvas id="category-chart" role="img" aria-label="Doughnut chart of sales by category: online store 42 percent, marketplace 28 percent, wholesale 18 percent, in-store 12 percent"></canvas>
@@ -366,7 +382,7 @@
               <div class="col-12 col-lg-8">
                 <div class="card">
                   <div class="card-header d-flex align-items-center justify-content-between">
-                    <span class="fw-semibold">Recent orders</span>
+                    <h2 class="h6 mb-0">Recent orders</h2>
                     <a href="data-table.html" class="small text-decoration-none">View all</a>
                   </div>
                   <div class="table-responsive">
@@ -524,7 +540,7 @@
               <div class="col-12 col-lg-4">
                 <div class="card h-100">
                   <div class="card-header">
-                    <span class="fw-semibold">Operational status</span>
+                    <h2 class="h6 mb-0">Operational status</h2>
                   </div>
                   <div class="card-body">
                     <div class="row text-center mb-3 g-2">
@@ -578,7 +594,7 @@
               <div class="col-12 col-lg-7">
                 <div class="card h-100">
                   <div class="card-header">
-                    <span class="fw-semibold">Recent activity</span>
+                    <h2 class="h6 mb-0">Recent activity</h2>
                   </div>
                   <ul class="list-group list-group-flush">
                     <li class="list-group-item">
@@ -632,7 +648,7 @@
               <div class="col-12 col-lg-5">
                 <div class="card h-100">
                   <div class="card-header">
-                    <span class="fw-semibold">Quick actions</span>
+                    <h2 class="h6 mb-0">Quick actions</h2>
                   </div>
                   <div class="card-body d-grid gap-2">
                     <button type="button" class="btn btn-outline-primary">
@@ -688,6 +704,12 @@
       return getComputedStyle(document.documentElement).getPropertyValue(name).trim();
     }
 
+    function hexToRgba(hex, alpha) {
+      var m = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex || '');
+      if (!m) { return 'rgba(79, 70, 229, ' + alpha + ')'; }
+      return 'rgba(' + parseInt(m[1], 16) + ', ' + parseInt(m[2], 16) + ', ' + parseInt(m[3], 16) + ', ' + alpha + ')';
+    }
+
     var reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
     function buildCharts() {
@@ -706,13 +728,53 @@
       var bg = cssVar('--bs-body-bg') || '#ffffff';
       var bodyColor = cssVar('--bs-body-color') || '#0F172A';
 
+      if (Chart.defaults) {
+        Chart.defaults.font.family = cssVar('--bs-body-font-family') || 'system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif';
+        Chart.defaults.font.size = 12;
+      }
+
+      // Doughnut center label — total revenue, drawn on canvas.
+      var centerText = {
+        id: 'centerText',
+        afterDraw: function (chart) {
+          var cfg = chart.config.options.plugins.centerText;
+          if (!cfg) { return; }
+          var area = chart.chartArea;
+          var cx = (area.left + area.right) / 2;
+          var cy = (area.top + area.bottom) / 2;
+          var ctx = chart.ctx;
+          ctx.save();
+          ctx.textAlign = 'center';
+          ctx.textBaseline = 'middle';
+          ctx.fillStyle = bodyColor;
+          ctx.font = '700 20px ' + Chart.defaults.font.family;
+          ctx.fillText(cfg.value, cx, cy - 9);
+          ctx.fillStyle = tick;
+          ctx.font = '500 11px ' + Chart.defaults.font.family;
+          ctx.fillText(cfg.label, cx, cy + 13);
+          ctx.restore();
+        }
+      };
+
       new Chart(revenueCanvas.getContext('2d'), {
         type: 'bar',
         data: {
           labels: MONTHS,
           datasets: [
-            { label: 'This year', data: THIS_YEAR, backgroundColor: primary, borderRadius: 3, maxBarThickness: 22 },
-            { label: 'Last year', data: LAST_YEAR, backgroundColor: secondary, borderRadius: 3, maxBarThickness: 22 }
+            {
+              label: 'This year', data: THIS_YEAR,
+              borderRadius: 4, maxBarThickness: 20,
+              backgroundColor: function (context) {
+                var area = context.chart.chartArea;
+                var color = context.datasetIndex === 0 ? primary : secondary;
+                if (!area) { return hexToRgba(color, 0.9); }
+                var g = context.chart.ctx.createLinearGradient(0, area.top, 0, area.bottom);
+                g.addColorStop(0, hexToRgba(color, 0.95));
+                g.addColorStop(1, hexToRgba(color, 0.55));
+                return g;
+              }
+            },
+            { label: 'Last year', data: LAST_YEAR, backgroundColor: secondary, borderRadius: 4, maxBarThickness: 20 }
           ]
         },
         options: {
@@ -721,6 +783,7 @@
           aspectRatio: 2.2,
           animation: reduceMotion ? false : { duration: 400 },
           interaction: { mode: 'index', intersect: false },
+          layout: { padding: { top: 8 } },
           plugins: {
             legend: { display: false }, // the card header legend names the series
             tooltip: {
@@ -729,7 +792,9 @@
               bodyColor: bodyColor,
               borderColor: grid,
               borderWidth: 1,
-              padding: 10,
+              cornerRadius: 8,
+              padding: { x: 12, y: 10 },
+              titleFont: { weight: '600' },
               callbacks: {
                 label: function (ctx) { return ctx.dataset.label + ': $' + ctx.parsed.y.toLocaleString(); }
               }
@@ -737,15 +802,16 @@
           },
           scales: {
             x: {
-              grid: { display: false },
-              ticks: { color: tick, font: { size: 12 } }
+              grid: { display: false, drawTicks: false },
+              ticks: { color: tick, font: { size: 12 }, maxTicksLimit: 8 }
             },
             y: {
-              grid: { color: grid },
+              grid: { color: grid, drawTicks: false },
               border: { display: false },
               ticks: {
                 color: tick,
                 font: { size: 12 },
+                padding: 10,
                 callback: function (v) { return '$' + (v / 1000) + 'k'; }
               }
             }
@@ -761,14 +827,16 @@
             data: CATEGORY_VALUES,
             backgroundColor: [primary, secondary, warning, success],
             borderColor: bg,
-            borderWidth: 2
+            borderWidth: 2,
+            hoverOffset: 6,
+            spacing: 2
           }]
         },
         options: {
           responsive: true,
           maintainAspectRatio: true,
           aspectRatio: 1.35,
-          cutout: '62%',
+          cutout: '64%',
           animation: reduceMotion ? false : { duration: 400 },
           plugins: {
             legend: { display: false }, // the legend list below names the categories
@@ -778,13 +846,16 @@
               bodyColor: bodyColor,
               borderColor: grid,
               borderWidth: 1,
-              padding: 10,
+              cornerRadius: 8,
+              padding: { x: 12, y: 10 },
               callbacks: {
                 label: function (ctx) { return ctx.label + ': ' + ctx.parsed + '%'; }
               }
-            }
+            },
+            centerText: { value: '$128,540', label: 'Total revenue' }
           }
-        }
+        },
+        plugins: [centerText]
       });
     }
 

@@ -18,6 +18,24 @@
   display: inline-flex;
   align-items: center;
   gap: $spacer * 0.5;
+  font-weight: var(--ik-font-medium);
+  color: var(--ik-text-secondary);
+  border-radius: var(--ik-nav-radius);
+  transition: color var(--ik-motion-fast) ease-in-out, background-color var(--ik-motion-fast) ease-in-out, border-color var(--ik-motion-fast) ease-in-out;
+
+  @media (prefers-reduced-motion: reduce) {
+    transition: none;
+  }
+
+  &:hover {
+    color: var(--ik-text-primary);
+    background-color: var(--ik-bg-hover);
+  }
+
+  &.active {
+    color: var(--ik-primary);
+    font-weight: var(--ik-font-semibold);
+  }
 }
 
 .nav-link [data-lucide] {
@@ -28,10 +46,10 @@
 
 .nav-tabs .nav-link.active,
 .nav-tabs .nav-item.show .nav-link {
-  font-weight: 600;
+  font-weight: var(--ik-font-semibold);
 }
 
 .nav-underline .nav-link.active,
 .nav-underline .show > .nav-link {
-  border-bottom-color: var(--bs-primary);
+  border-bottom-color: var(--ik-primary);
 }

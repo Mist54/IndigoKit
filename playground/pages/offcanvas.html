@@ -19,7 +19,7 @@
 
     <!-- Left -->
     <h2 class="h5 mt-5" id="start">Left offcanvas</h2>
-    <p class="demo-label"><code>.offcanvas-md.offcanvas-start</code> — always a drawer on small screens; at <code>md</code> and up it becomes a static sidebar slot (try resizing). A real header with a titled heading and a close button.</p>
+    <p class="demo-label"><code>.offcanvas-start</code> — the classic side drawer for navigation, details, or context panels. A real header with a titled heading and a close button; the body scrolls independently.</p>
     <button type="button" class="btn btn-primary" data-bs-toggle="offcanvas" data-bs-target="#ocStart" aria-controls="ocStart">Open left offcanvas</button>
 
     <!-- Right -->
@@ -56,17 +56,42 @@
   </div>
 
   <!-- Left offcanvas -->
-  <div class="offcanvas offcanvas-md offcanvas-start" tabindex="-1" id="ocStart" aria-labelledby="ocStartLabel">
+  <div class="offcanvas offcanvas-start" tabindex="-1" id="ocStart" aria-labelledby="ocStartLabel">
     <div class="offcanvas-header">
       <h2 class="offcanvas-title" id="ocStartLabel">Project details</h2>
       <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
     </div>
     <div class="offcanvas-body">
       <p class="text-body-secondary">A compact summary of the selected project — metadata, owners, and recent activity.</p>
-      <div class="mb-3"><span class="text-secondary small">Name</span><div class="fw-medium">IndigoKit — Data Tables</div></div>
-      <div class="mb-3"><span class="text-secondary small">Owner</span><div class="fw-medium">Ada Lovelace</div></div>
-      <div class="mb-3"><span class="text-secondary small">Status</span><div><span class="badge text-bg-primary">In progress</span></div></div>
-      <div class="mb-3"><span class="text-secondary small">Updated</span><div class="fw-medium">2 hours ago</div></div>
+      <dl class="row g-3 mb-0">
+        <div class="col-12">
+          <dt class="small text-body-secondary fw-normal mb-1">Name</dt>
+          <dd class="fw-medium mb-0">IndigoKit — Data Tables</dd>
+        </div>
+        <div class="col-12">
+          <dt class="small text-body-secondary fw-normal mb-1">Owner</dt>
+          <dd class="fw-medium mb-0">Ada Lovelace</dd>
+        </div>
+        <div class="col-12">
+          <dt class="small text-body-secondary fw-normal mb-1">Status</dt>
+          <dd class="mb-0"><span class="badge text-bg-primary">In progress</span></dd>
+        </div>
+        <div class="col-12">
+          <dt class="small text-body-secondary fw-normal mb-1">Updated</dt>
+          <dd class="fw-medium mb-0">2 hours ago</dd>
+        </div>
+      </dl>
+      <hr class="my-4">
+      <p class="text-body-secondary small mb-2">Recent activity</p>
+      <ul class="list-group list-group-flush">
+        <li class="list-group-item d-flex justify-content-between gap-2 px-0"><span>Ada updated project settings</span><small class="text-body-secondary text-nowrap">09:14</small></li>
+        <li class="list-group-item d-flex justify-content-between gap-2 px-0"><span>Alan merged pull request #412</span><small class="text-body-secondary text-nowrap">08:52</small></li>
+        <li class="list-group-item d-flex justify-content-between gap-2 px-0"><span>Grace deployed api-gateway v2.4.1</span><small class="text-body-secondary text-nowrap">08:31</small></li>
+      </ul>
+      <div class="d-flex gap-2 mt-4">
+        <button type="button" class="btn btn-primary btn-sm flex-grow-1" data-bs-dismiss="offcanvas">View project</button>
+        <button type="button" class="btn btn-outline-secondary btn-sm" data-bs-dismiss="offcanvas">Close</button>
+      </div>
     </div>
   </div>
 

@@ -10,16 +10,42 @@
 //    The 600 weight matches the IndigoKit "stronger text" hierarchy pattern
 //    (headings, active tabs, labels) and the emphasis color keeps headers
 //    at full body contrast.
+//    NOTE: scoped to thead th only — `th scope="row"` cells (invoice line
+//    items, user names, month labels) are DATA, not headers, and must keep
+//    normal case/weight/color.
 // 2. .table-group-divider emphasis — the divider is a double-width hairline
 //    using `currentcolor`, which defaults to body text; pinning it to the
 //    emphasis variable makes the section boundary intentional and
 //    theme-adaptive (same convention as the dropdown divider).
 
-.table > :not(caption) > * > th {
-  font-weight: 600;
-  color: var(--bs-emphasis-color);
+.table {
+  --bs-table-bg: transparent;
+  border-collapse: separate;
+  border-spacing: 0;
+}
+
+.table > thead > tr > th {
+  font-weight: var(--ik-table-header-weight);
+  color: var(--ik-text-primary);
+  background-color: var(--ik-table-header-bg);
+  border-bottom: 2px solid var(--ik-border-default);
+  text-transform: uppercase;
+  font-size: var(--ik-text-xs);
+  letter-spacing: 0.05em;
+}
+
+.table > tbody > tr {
+  transition: background-color var(--ik-motion-fast) ease;
+
+  @media (prefers-reduced-motion: reduce) {
+    transition: none;
+  }
+
+  &:hover > * {
+    background-color: var(--ik-table-hover-bg);
+  }
 }
 
 .table-group-divider {
-  color: var(--bs-emphasis-color);
+  color: var(--ik-text-primary);
 }

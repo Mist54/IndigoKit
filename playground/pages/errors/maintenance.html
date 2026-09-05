@@ -9,8 +9,9 @@
   <script src="../../theme.js"></script>
   <script src="../../assets/lucide.umd.js"></script>
 </head>
-<body class="min-vh-100 d-flex align-items-center justify-content-center py-4">
-  <div class="position-fixed top-0 end-0 p-3">
+<body class="min-vh-100 d-flex flex-column">
+  <!-- Theme switcher -->
+  <div class="position-fixed top-0 end-0 p-3 demo-error-theme">
     <select class="form-select form-select-sm w-auto" data-theme-switch aria-label="Theme">
       <option value="system">System</option>
       <option value="light">Light</option>
@@ -18,30 +19,57 @@
     </select>
   </div>
 
-  <div class="container">
-    <div class="row justify-content-center">
-      <div class="col-12 col-md-8 col-lg-6 text-center">
+  <!-- Main content -->
+  <main class="flex-grow-1 d-flex align-items-center justify-content-center py-5">
+    <div class="container">
+      <div class="row justify-content-center">
+        <div class="col-12 col-md-8 col-lg-5 text-center">
 
-        <a class="navbar-brand d-inline-flex align-items-center gap-2 fs-5 mb-4" href="../../index.html">
-          <i data-lucide="layers" aria-hidden="true" class="text-primary"></i>
-          IndigoKit
-        </a>
+          <!-- Brand -->
+          <a class="navbar-brand d-inline-flex align-items-center gap-2 fs-5 mb-5" href="../../index.html">
+            <i data-lucide="layers" aria-hidden="true" class="text-primary"></i>
+            IndigoKit
+          </a>
 
-        <span class="d-inline-flex align-items-center justify-content-center rounded-circle bg-info-subtle text-info-emphasis p-3 mb-3">
-          <i data-lucide="wrench" aria-hidden="true" width="24" height="24"></i>
-        </span>
+          <!-- Error code -->
+          <div class="mb-4">
+            <span class="display-1 fw-bold text-body-tertiary" aria-hidden="true">503</span>
+          </div>
 
-        <h1 class="display-6 fw-semibold mb-2">Service temporarily unavailable</h1>
-        <p class="text-body-secondary mb-4">We're performing scheduled maintenance to improve the service. Most things will be back within the hour — check the status page for updates.</p>
+          <!-- Icon -->
+          <div class="d-inline-flex align-items-center justify-content-center rounded-circle bg-info-subtle p-4 mb-4">
+            <i data-lucide="wrench" aria-hidden="true" width="32" height="32" class="text-info-emphasis"></i>
+          </div>
 
-        <div class="d-flex justify-content-center gap-2 flex-wrap">
-          <a href="../faq.html" class="btn btn-primary">Read the FAQ</a>
-          <a href="../../index.html" class="btn btn-outline-secondary">Check back</a>
+          <!-- Content -->
+          <h1 class="h3 fw-semibold mb-2">Scheduled maintenance</h1>
+          <p class="text-body-secondary mb-4 lead demo-error-lead">
+            We're performing scheduled maintenance to improve the service. Most things will be back within the hour — check the status page for updates.
+          </p>
+
+          <!-- Actions -->
+          <div class="d-flex justify-content-center gap-3">
+            <a href="../faq.html" class="btn btn-primary px-4">
+              <i data-lucide="book-open" aria-hidden="true" class="me-2" width="16" height="16"></i>
+              Read the FAQ
+            </a>
+            <a href="../../index.html" class="btn btn-outline-secondary px-4">
+              <i data-lucide="home" aria-hidden="true" class="me-2" width="16" height="16"></i>
+              Back to dashboard
+            </a>
+          </div>
+
         </div>
-
       </div>
     </div>
-  </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="py-4 text-center text-body-tertiary small border-top">
+    <div class="container">
+      <span>&copy; 2026 IndigoKit</span>
+    </div>
+  </footer>
 
   <script>lucide.createIcons();</script>
 </body>
