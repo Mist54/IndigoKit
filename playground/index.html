@@ -12,6 +12,9 @@
   <script src="assets/lucide.umd.js"></script>
   <script src="../node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
   <script src="../dist/js/indigokit.js"></script>
+  <!-- Optional page-level chart library (Task 057 pattern): loaded only by
+       dashboards that chart. Never bundled into indigokit.js. -->
+  <script src="../node_modules/chart.js/dist/chart.umd.min.js"></script>
 </head>
 <body>
   <div class="mu-app">
@@ -292,6 +295,86 @@
               </div>
             </div>
 
+            <!-- Revenue trend + channel charts -->
+            <div class="row g-3 mb-4">
+              <div class="col-12 col-lg-8">
+                <div class="card h-100">
+                  <div class="card-header d-flex flex-wrap align-items-center justify-content-between gap-2">
+                    <h2 class="h6 mb-0">Revenue trend</h2>
+                    <span class="small text-body-secondary d-flex align-items-center gap-3">
+                      <span class="d-flex align-items-center gap-1"><i data-lucide="circle" aria-hidden="true" width="10" height="10" class="text-primary"></i> This month</span>
+                      <span class="d-flex align-items-center gap-1"><i data-lucide="circle" aria-hidden="true" width="10" height="10" class="text-secondary"></i> Last month</span>
+                    </span>
+                  </div>
+                  <div class="card-body">
+                    <canvas id="dashboard-revenue-chart" role="img" aria-label="Area chart of daily revenue over the last two weeks, this month consistently above last month and rising through the period"></canvas>
+                    <table class="visually-hidden">
+                      <caption>Daily revenue in US dollars, this month and last month</caption>
+                      <thead>
+                        <tr><th scope="col">Day</th><th scope="col">This month</th><th scope="col">Last month</th></tr>
+                      </thead>
+                      <tbody>
+                        <tr><th scope="row">1</th><td>$3,200</td><td>$2,800</td></tr>
+                        <tr><th scope="row">2</th><td>$3,400</td><td>$3,000</td></tr>
+                        <tr><th scope="row">3</th><td>$3,100</td><td>$2,700</td></tr>
+                        <tr><th scope="row">4</th><td>$3,600</td><td>$3,100</td></tr>
+                        <tr><th scope="row">5</th><td>$3,900</td><td>$3,300</td></tr>
+                        <tr><th scope="row">6</th><td>$3,700</td><td>$3,100</td></tr>
+                        <tr><th scope="row">7</th><td>$4,100</td><td>$3,500</td></tr>
+                        <tr><th scope="row">8</th><td>$4,300</td><td>$3,700</td></tr>
+                        <tr><th scope="row">9</th><td>$4,000</td><td>$3,400</td></tr>
+                        <tr><th scope="row">10</th><td>$4,500</td><td>$3,800</td></tr>
+                        <tr><th scope="row">11</th><td>$4,700</td><td>$4,000</td></tr>
+                        <tr><th scope="row">12</th><td>$4,400</td><td>$3,800</td></tr>
+                        <tr><th scope="row">13</th><td>$4,900</td><td>$4,200</td></tr>
+                        <tr><th scope="row">14</th><td>$5,200</td><td>$4,400</td></tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+              <div class="col-12 col-lg-4">
+                <div class="card h-100">
+                  <div class="card-header">
+                    <h2 class="h6 mb-0">Sales by channel</h2>
+                  </div>
+                  <div class="card-body">
+                    <canvas id="dashboard-channel-chart" role="img" aria-label="Doughnut chart of sales by channel: web 48 percent, mobile 32 percent, partner 12 percent, reseller 8 percent"></canvas>
+                    <ul class="list-unstyled small mb-0 mt-3">
+                      <li class="d-flex justify-content-between align-items-center py-1">
+                        <span class="d-flex align-items-center gap-2"><span class="badge rounded-pill bg-primary" aria-hidden="true">&nbsp;</span>Web</span>
+                        <span class="fw-semibold">48%</span>
+                      </li>
+                      <li class="d-flex justify-content-between align-items-center py-1">
+                        <span class="d-flex align-items-center gap-2"><span class="badge rounded-pill bg-info" aria-hidden="true">&nbsp;</span>Mobile</span>
+                        <span class="fw-semibold">32%</span>
+                      </li>
+                      <li class="d-flex justify-content-between align-items-center py-1">
+                        <span class="d-flex align-items-center gap-2"><span class="badge rounded-pill bg-warning" aria-hidden="true">&nbsp;</span>Partner</span>
+                        <span class="fw-semibold">12%</span>
+                      </li>
+                      <li class="d-flex justify-content-between align-items-center py-1">
+                        <span class="d-flex align-items-center gap-2"><span class="badge rounded-pill bg-success" aria-hidden="true">&nbsp;</span>Reseller</span>
+                        <span class="fw-semibold">8%</span>
+                      </li>
+                    </ul>
+                    <table class="visually-hidden">
+                      <caption>Sales by channel as a percentage of total revenue</caption>
+                      <thead>
+                        <tr><th scope="col">Channel</th><th scope="col">Share</th></tr>
+                      </thead>
+                      <tbody>
+                        <tr><th scope="row">Web</th><td>48%</td></tr>
+                        <tr><th scope="row">Mobile</th><td>32%</td></tr>
+                        <tr><th scope="row">Partner</th><td>12%</td></tr>
+                        <tr><th scope="row">Reseller</th><td>8%</td></tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+            </div>
+
             <!-- Orders + activity -->
             <div class="row g-3 mb-4">
               <div class="col-12 col-lg-8">
@@ -517,5 +600,191 @@
   </div>
 
   <script>lucide.createIcons();</script>
+
+  <script>
+  (function () {
+    'use strict';
+
+    // Chart.js integration (Task 057 pattern) — page-level and
+    // guarded: if the optional chart library is absent the native
+    // fallbacks (the visually-hidden data tables above) remain.
+    var revenueCanvas = document.getElementById('dashboard-revenue-chart');
+    var channelCanvas = document.getElementById('dashboard-channel-chart');
+    if (!revenueCanvas || !channelCanvas || !window.Chart) { return; }
+
+    var DAYS = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13', '14'];
+    var THIS_MONTH = [3200, 3400, 3100, 3600, 3900, 3700, 4100, 4300, 4000, 4500, 4700, 4400, 4900, 5200];
+    var LAST_MONTH = [2800, 3000, 2700, 3100, 3300, 3100, 3500, 3700, 3400, 3800, 4000, 3800, 4200, 4400];
+    var CHANNELS = ['Web', 'Mobile', 'Partner', 'Reseller'];
+    var CHANNEL_VALUES = [48, 32, 12, 8];
+
+    function cssVar(name) {
+      return getComputedStyle(document.documentElement).getPropertyValue(name).trim();
+    }
+
+    function hexToRgba(hex, alpha) {
+      var m = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex || '');
+      if (!m) { return 'rgba(79, 70, 229, ' + alpha + ')'; }
+      return 'rgba(' + parseInt(m[1], 16) + ', ' + parseInt(m[2], 16) + ', ' + parseInt(m[3], 16) + ', ' + alpha + ')';
+    }
+
+    var reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    function buildCharts() {
+      // Never leave a duplicate instance on the same canvas.
+      var existing = Chart.getChart(revenueCanvas);
+      if (existing) { existing.destroy(); }
+      existing = Chart.getChart(channelCanvas);
+      if (existing) { existing.destroy(); }
+
+      var primary = cssVar('--bs-primary') || '#4F46E5';
+      var secondary = cssVar('--bs-secondary') || '#64748B';
+      var info = cssVar('--bs-info') || '#0EA5E9';
+      var warning = cssVar('--bs-warning') || '#F59E0B';
+      var success = cssVar('--bs-success') || '#10B981';
+      var grid = cssVar('--bs-border-color') || '#dee2e6';
+      var tick = cssVar('--bs-secondary-color') || 'rgba(0,0,0,0.75)';
+      var bg = cssVar('--bs-body-bg') || '#ffffff';
+      var bodyColor = cssVar('--bs-body-color') || '#0F172A';
+
+      if (Chart.defaults) {
+        Chart.defaults.font.family = cssVar('--bs-body-font-family') || 'system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif';
+        Chart.defaults.font.size = 12;
+      }
+
+      // Doughnut center label — total revenue, drawn on canvas.
+      var centerText = {
+        id: 'centerText',
+        afterDraw: function (chart) {
+          var cfg = chart.config.options.plugins.centerText;
+          if (!cfg) { return; }
+          var area = chart.chartArea;
+          var cx = (area.left + area.right) / 2;
+          var cy = (area.top + area.bottom) / 2;
+          var ctx = chart.ctx;
+          ctx.save();
+          ctx.textAlign = 'center';
+          ctx.textBaseline = 'middle';
+          ctx.fillStyle = bodyColor;
+          ctx.font = '700 20px ' + Chart.defaults.font.family;
+          ctx.fillText(cfg.value, cx, cy - 9);
+          ctx.fillStyle = tick;
+          ctx.font = '500 11px ' + Chart.defaults.font.family;
+          ctx.fillText(cfg.label, cx, cy + 13);
+          ctx.restore();
+        }
+      };
+
+      new Chart(revenueCanvas.getContext('2d'), {
+        type: 'line',
+        data: {
+          labels: DAYS,
+          datasets: [
+            {
+              label: 'This month', data: THIS_MONTH,
+              borderColor: primary, borderWidth: 2.5, tension: 0.35,
+              pointRadius: 0, pointHoverRadius: 4,
+              fill: true,
+              backgroundColor: function (context) {
+                var area = context.chart.chartArea;
+                if (!area) { return hexToRgba(primary, 0); }
+                var g = context.chart.ctx.createLinearGradient(0, area.top, 0, area.bottom);
+                g.addColorStop(0, hexToRgba(primary, 0.16));
+                g.addColorStop(1, hexToRgba(primary, 0));
+                return g;
+              }
+            },
+            { label: 'Last month', data: LAST_MONTH, borderColor: secondary, borderWidth: 2, borderDash: [5, 5], tension: 0.35, pointRadius: 0, pointHoverRadius: 4 }
+          ]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: true,
+          aspectRatio: 2.2,
+          animation: reduceMotion ? false : { duration: 400 },
+          interaction: { mode: 'index', intersect: false },
+          layout: { padding: { top: 8 } },
+          plugins: {
+            legend: { display: false }, // the card header legend names the series
+            tooltip: {
+              backgroundColor: bg,
+              titleColor: bodyColor,
+              bodyColor: bodyColor,
+              borderColor: grid,
+              borderWidth: 1,
+              cornerRadius: 8,
+              padding: { x: 12, y: 10 },
+              titleFont: { weight: '600' },
+              callbacks: {
+                label: function (ctx) { return ctx.dataset.label + ': $' + ctx.parsed.y.toLocaleString(); }
+              }
+            }
+          },
+          scales: {
+            x: {
+              grid: { display: false, drawTicks: false },
+              ticks: { color: tick, font: { size: 12 }, maxTicksLimit: 8 }
+            },
+            y: {
+              grid: { color: grid, drawTicks: false },
+              border: { display: false },
+              ticks: {
+                color: tick,
+                font: { size: 12 },
+                padding: 10,
+                callback: function (v) { return '$' + (v / 1000) + 'k'; }
+              }
+            }
+          }
+        }
+      });
+
+      new Chart(channelCanvas.getContext('2d'), {
+        type: 'doughnut',
+        data: {
+          labels: CHANNELS,
+          datasets: [{
+            data: CHANNEL_VALUES,
+            backgroundColor: [primary, info, warning, success],
+            borderColor: bg,
+            borderWidth: 2,
+            hoverOffset: 6,
+            spacing: 2
+          }]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: true,
+          aspectRatio: 1.35,
+          cutout: '64%',
+          animation: reduceMotion ? false : { duration: 400 },
+          plugins: {
+            legend: { display: false }, // the legend list below names the channels
+            tooltip: {
+              backgroundColor: bg,
+              titleColor: bodyColor,
+              bodyColor: bodyColor,
+              borderColor: grid,
+              borderWidth: 1,
+              cornerRadius: 8,
+              padding: { x: 12, y: 10 },
+              callbacks: {
+                label: function (ctx) { return ctx.label + ': ' + ctx.parsed + '%'; }
+              }
+            },
+            centerText: { value: '$84,250', label: 'Total revenue' }
+          }
+        },
+        plugins: [centerText]
+      });
+    }
+
+    buildCharts();
+
+    // Theme changes re-render the charts with the current tokens.
+    new MutationObserver(function () { buildCharts(); })
+      .observe(document.documentElement, { attributes: true, attributeFilter: ['data-bs-theme'] });
+  })();
+  </script>
 </body>
 </html>

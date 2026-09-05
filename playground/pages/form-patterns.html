@@ -7,6 +7,7 @@
   <link rel="stylesheet" href="../../dist/css/indigokit.css">
   <!-- Optional Select2 theme — loaded only on pages that opt into
        Select2 (Task 057). Never part of indigokit.css. -->
+  <link rel="stylesheet" href="../../node_modules/select2/dist/css/select2.min.css">
   <link rel="stylesheet" href="../../dist/css/indigokit-select2.css">
   <link rel="stylesheet" href="../playground.css">
   <script src="../theme.js"></script>
@@ -123,12 +124,12 @@
                   </div>
                 </li>
                 <li>
-                  <button type="button" class="mu-sidebar-link" data-bs-toggle="collapse" data-bs-target="#nav-pages" aria-expanded="true" aria-controls="nav-pages">
+                  <button type="button" class="mu-sidebar-link" data-bs-toggle="collapse" data-bs-target="#nav-pages" aria-expanded="false" aria-controls="nav-pages">
                     <i data-lucide="files" aria-hidden="true"></i>
                     <span class="mu-sidebar-link-text">Pages</span>
                     <i data-lucide="chevron-right" class="mu-sidebar-chevron" aria-hidden="true"></i>
                   </button>
-                  <div class="collapse show" id="nav-pages">
+                  <div class="collapse" id="nav-pages">
                     <ul class="mu-sidebar-nested">
                       <li><a class="mu-sidebar-link" href="profile.html"><span class="mu-sidebar-link-text">Profile</span></a></li>
                       <li><a class="mu-sidebar-link" href="settings.html"><span class="mu-sidebar-link-text">Settings</span></a></li>
@@ -179,7 +180,7 @@
                 <li><a class="mu-sidebar-link" href="forms.html"><i data-lucide="text-cursor-input" aria-hidden="true"></i><span class="mu-sidebar-link-text">Forms</span></a></li>
                 <li><a class="mu-sidebar-link" href="tables.html"><i data-lucide="table" aria-hidden="true"></i><span class="mu-sidebar-link-text">Tables</span></a></li>
                 <li><a class="mu-sidebar-link" href="data-table.html"><i data-lucide="table-2" aria-hidden="true"></i><span class="mu-sidebar-link-text">Data table</span></a></li>
-                <li><a class="mu-sidebar-link active" href="form-patterns.html" aria-current="page"><span class="mu-sidebar-link-text">Form patterns</span></a></li>
+                <li><a class="mu-sidebar-link active" href="form-patterns.html" aria-current="page"><i data-lucide="file-text" aria-hidden="true"></i><span class="mu-sidebar-link-text">Form patterns</span></a></li>
                 <li><a class="mu-sidebar-link" href="progress.html"><i data-lucide="activity" aria-hidden="true"></i><span class="mu-sidebar-link-text">Progress</span></a></li>
                 <li><a class="mu-sidebar-link" href="loading.html"><i data-lucide="loader" aria-hidden="true"></i><span class="mu-sidebar-link-text">Loading</span></a></li>
                 <li><a class="mu-sidebar-link" href="toasts.html"><i data-lucide="message-square" aria-hidden="true"></i><span class="mu-sidebar-link-text">Toasts</span></a></li>
@@ -361,7 +362,7 @@
                 <div class="col-12 col-md-4">
                   <div class="card h-100">
                     <div class="card-header">
-                      <h3 class="h6 mb-0">Searchable select</h3>
+                      <h2 class="h6 mb-0">Searchable select</h2>
                     </div>
                     <div class="card-body">                       <label class="form-label" id="lbl-s2-owner" for="s2-owner">Assign owner</label>                       <select class="form-select" id="s2-owner" data-mu-select2 aria-labelledby="lbl-s2-owner">
                         <option value="" selected disabled>Search a team member…</option>
@@ -388,7 +389,7 @@
                 <div class="col-12 col-md-4">
                   <div class="card h-100">
                     <div class="card-header">
-                      <h3 class="h6 mb-0">Multi-select</h3>
+                      <h2 class="h6 mb-0">Multi-select</h2>
                     </div>
                     <div class="card-body">                       <label class="form-label" id="lbl-s2-channels" for="s2-channels">Marketing channels</label>                       <select class="form-select" id="s2-channels" data-mu-select2 aria-labelledby="lbl-s2-channels" multiple>
                         <option selected>Email</option>
@@ -406,7 +407,7 @@
                 <div class="col-12 col-md-4">
                   <div class="card h-100">
                     <div class="card-header">
-                      <h3 class="h6 mb-0">Tagging</h3>
+                      <h2 class="h6 mb-0">Tagging</h2>
                     </div>
                     <div class="card-body">                       <label class="form-label" id="lbl-s2-skills" for="s2-skills">Skills</label>                       <select class="form-select" id="s2-skills" data-mu-select2 aria-labelledby="lbl-s2-skills" data-mu-select2-tags="true" multiple>
                         <option selected>Frontend</option>

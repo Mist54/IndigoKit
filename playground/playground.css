@@ -257,4 +257,30 @@
   height: 7rem;
 }
 
+/* Error pages — fixed theme-switcher elevation + constrained lead text.
+   The switcher is the playground's fixed control raised above the
+   centered card; the lead is capped so error copy never stretches on
+   wide screens. Playground presentation only — no inline styles. */
+.demo-error-theme { z-index: 10; }
+.demo-error-lead  { max-width: 28rem; margin-left: auto; margin-right: auto; }
+
+/* Landing page — sticky header elevation above the hero section and
+   feature-icon sizing (the lucide default is 24px; 28px balances the
+   feature tiles). Playground presentation only. */
+.demo-landing-header { z-index: 1030; }
+.demo-feature-icon   { width: 1.75rem; height: 1.75rem; }
+
+/* Carousel page — caption slides: tinted gradient surfaces with a dark
+   bottom scrim so the white caption text reads on any slide. Playground
+   presentation only; the framework carousel is untouched. */
+.demo-caption-slide { min-height: 14rem; }
+.demo-caption-slide-1 { background: linear-gradient(135deg, #eef2ff 0%, #c7d2fe 100%); }
+.demo-caption-slide-2 { background: linear-gradient(135deg, #ecfdf5 0%, #6ee7b7 100%); }
+.demo-caption-slide-3 { background: linear-gradient(135deg, #fef3c7 0%, #fbbf24 100%); }
+.demo-caption-scrim  { background: linear-gradient(transparent, rgba(15, 23, 42, 0.7)); }
+
+/* Toasts page — thin progress track for the progress-toast demo (playground
+   presentation only; keeps the demo free of inline styles). */
+.demo-progress-thin { height: 6px; }
+
 
