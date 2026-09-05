@@ -49,8 +49,11 @@
     "css-framework",
     "accessible"
   ],
-  "author": "",
+  "author": "Mist54",
   "license": "ISC",
+  "publishConfig": {
+    "access": "public"
+  },
   "type": "commonjs",
   "peerDependencies": {
     "bootstrap": "^5.3.8",
