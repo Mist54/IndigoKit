@@ -6,20 +6,30 @@ IndigoKit keeps Bootstrap's familiar class names as the public API and adds a sm
 
 ## Status
 
-- **v1.1.0** — Bug fixes and improvements (double scrollbar, sidebar scroll, button foreground colors, carousel quality, layout examples).
+- **v1.1.0** — UI refinement, design tokens, component polish, bug fixes.
 - Component coverage: buttons, cards, alerts, badges, dropdowns, modals, tabs, breadcrumbs, pagination, forms, tables, progress, loading, toasts, list groups, empty states, tooltips/popovers, accordion, offcanvas, carousel, scrollspy, navigation patterns, and the application shell — plus the data-table and form-patterns pages.
-- Application examples: dashboard, analytics dashboard, profile, settings, pricing, FAQ, invoice, user list, products, five auth pages, four error pages — all built from Bootstrap classes + IndigoKit shell, with zero page-specific CSS.
+- Application examples: dashboard, analytics dashboard, sales dashboard, profile, settings, pricing, FAQ, invoice, user list, products, five auth pages, four error pages — all built from Bootstrap classes + IndigoKit shell, with zero page-specific CSS.
 - Layout examples: application shell, top navigation layout, landing page layout.
 
 ## What's New in v1.1.0
 
-- **Fixed double scrollbar** — `html, body` now have `overflow: hidden` to prevent page-level scrollbar alongside `.mu-app-main`
-- **Fixed sidebar scroll** — `.mu-sidebar` uses `flex: 1 1 auto` instead of `height: 100%` for proper containment
-- **Fixed button foreground colors** — `.btn-success`, `.btn-danger`, `.btn-info` now show white text consistently across all states
-- **Improved carousel** — Added proper horizontal padding to prevent text/control overlap
-- **Added icons to sidebar** — Component navigation now shows Lucide icons
-- **Added layout examples** — Top navigation layout and landing page layout demos
-- **Scroll anchoring fixes** — Added `overflow-anchor: none` and `overscroll-behavior: contain` to prevent scroll lock during collapse transitions
+- **Design token system** — 50+ `--ik-*` CSS custom properties for spacing, color, typography, shadows, and component tokens. Consumers can customize without touching source.
+- **Button transitions** — Smooth color/bg/border transitions on hover (5-property), subtle lift effect, proper reduced-motion support.
+- **Card refinements** — `--ik-card-radius`, `--ik-card-shadow`, `--ik-card-padding` tokens. Interactive cards with hover lift effect.
+- **Table refinements** — Styled headers (600 weight, uppercase, subtle bg), row hover transitions, reduced-motion support.
+- **Nav refinements** — Flex alignment, icon scaling, hover transitions, active tab weight, underline indicator.
+- **Form refinements** — Tighter label spacing, focused border/glow using `--ik-primary-ghost`, reduced-motion support.
+- **Collapsed sidebar tooltips** — Plain nav links show a tooltip on hover in collapsed mode (matching flyout design).
+- **Error pages** — Redesigned 404, 403, 500, and maintenance pages with professional, minimalist design.
+- **Dark mode** — Full `--ik-*` dark mode overrides for colors, borders, shadows, and component tokens.
+- **Reduced-motion** — All component transitions respect `prefers-reduced-motion: reduce`.
+- **Fixed double scrollbar** — `html:has(.mu-app)` prevents page-level scrollbar on shell pages.
+- **Fixed sidebar scroll** — `overscroll-behavior: contain` prevents scroll cross-contamination.
+- **Fixed button foreground colors** — `.btn-success`, `.btn-danger`, `.btn-info` show white text consistently across all states.
+- **Fixed Pages section bug** — Sidebar "Pages" group no longer expands incorrectly on non-Pages pages.
+- **Chart.js on all three dashboards** — Revenue trend area chart + sales-by-channel doughnut on the main dashboard, line chart on Analytics, bar + category doughnut on Sales. All charts resolve IndigoKit tokens (`--bs-*` CSS variables), re-render on `data-bs-theme` change, respect `prefers-reduced-motion`, never duplicate instances, and keep visually-hidden data-table fallbacks (content survives without Chart.js). Doughnuts show a canvas-drawn center total.
+- **Select2 dark mode** — the optional Select2 integration themes correctly in light and dark (explicit `[data-bs-theme="dark"]` overrides), with proper dropdown positioning above overlays.
+- **UI consistency pass** — every component page shares one header pattern, all card headers use semantic `h2` titles, and all three dashboards share the same KPI card language (icon tile + value + trend badge).
 
 ## Philosophy
 
@@ -35,9 +45,7 @@ IndigoKit keeps Bootstrap's familiar class names as the public API and adds a sm
 ## Quick start
 
 ```bash
-npm install
-npm run build:css   # src/scss → dist/css/indigokit.css
-npm run build:js    # src/js → dist/js/indigokit.js
+npm install indigokit
 ```
 
 ```html
@@ -46,7 +54,7 @@ npm run build:js    # src/js → dist/js/indigokit.js
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="dist/css/indigokit.css">
+  <link rel="stylesheet" href="node_modules/indigokit/dist/css/indigokit.css">
 </head>
 <body>
   <div class="card" style="max-width: 24rem;">
@@ -60,6 +68,36 @@ npm run build:js    # src/js → dist/js/indigokit.js
 </body>
 </html>
 ```
+
+### Local development
+
+```bash
+npm install
+npm run build:css   # src/scss → dist/css/indigokit.css
+npm run build:js    # src/js → dist/js/indigokit.js
+```
+
+## Design Tokens
+
+IndigoKit provides `--ik-*` CSS custom properties that sit on top of Bootstrap's `--bs-*` variables:
+
+```css
+/* Customize IndigoKit without touching source */
+:root {
+  --ik-primary: #10B981;      /* Change primary color */
+  --ik-card-radius: 1rem;     /* Change card radius */
+  --ik-btn-radius: 9999px;    /* Pill buttons */
+}
+```
+
+Available token categories:
+- **Spacing** — `--ik-space-1` through `--ik-space-12` (4px base)
+- **Colors** — `--ik-primary`, `--ik-text-primary`, `--ik-bg-page`, `--ik-border-*`
+- **Shadows** — `--ik-shadow-sm` through `--ik-shadow-xl`
+- **Radius** — `--ik-radius-sm` through `--ik-radius-full`
+- **Typography** — `--ik-text-xs` through `--ik-text-4xl`, `--ik-font-*`
+- **Motion** — `--ik-motion-fast` (125ms), `--ik-motion-normal` (200ms), `--ik-motion-slow` (300ms)
+- **Components** — `--ik-card-*`, `--ik-table-*`, `--ik-input-*`, `--ik-btn-*`, `--ik-badge-*`, `--ik-nav-*`, `--ik-stat-*`
 
 ## Documentation
 

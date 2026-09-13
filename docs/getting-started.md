@@ -21,7 +21,7 @@ Then link the compiled output (either local or via CDN):
 <script src="node_modules/indigokit/dist/js/indigokit.js"></script>
 
 <!-- or CDN (unpkg / jsdelivr) -->
-<link rel="stylesheet" href="https://unpkg.com/indigokit@1.0.0/dist/css/indigokit.min.css">
+<link rel="stylesheet" href="https://unpkg.com/indigokit@1.1.0/dist/css/indigokit.min.css">
 ```
 
 Interactive components (dropdowns, modals, collapse, tabs, toasts, …) are Bootstrap's JS. IndigoKit ships **no duplicate JS** for them — load Bootstrap's bundle once, before IndigoKit's script:

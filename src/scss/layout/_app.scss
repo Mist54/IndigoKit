@@ -13,11 +13,13 @@
 // naturally, short pages don't scroll, and long pages scroll
 // inside main.
 //
-// Prevent page-level scrollbars: html and body must not scroll;
-// all scroll is handled by .mu-app-main. Without this, the body
-// creates a second scrollbar alongside .mu-app-main.
+// Prevent page-level scrollbars ONLY when the shell is present:
+// html and body must not scroll when .mu-app exists; all scroll
+// is handled by .mu-app-main. Without this, the body creates a
+// second scrollbar alongside .mu-app-main. Pages without .mu-app
+// (component demos, standalone pages) keep normal body scrolling.
 // ============================================================
-html, body {
+html:has(.mu-app), body:has(.mu-app) {
   overflow: hidden;
   height: 100%;
 }

@@ -113,6 +113,11 @@
   align-items: center;
   gap: $spacer * .75; // 12px
   padding: $spacer * .5 $spacer * .75; // 8px 12px
+  // Touch target: minimum 44px height for mobile (UX priority 2).
+  // The padding provides 8px top + 8px bottom = 16px, plus the
+  // 20px icon = 36px. Adding min-height ensures the tap target
+  // meets WCAG 2.5.8 on touch devices.
+  min-height: 2.75rem; // 44px
   // Full-row geometry for group toggles (Task 055B): <button>
   // elements size to their content by default, so the group
   // toggles shrink-wrapped to their label while the sibling
@@ -145,10 +150,14 @@
   // gray hover surface (invisible in light mode) — the active
   // pill is the state marker and intentionally doesn't change on
   // hover (same rule in the dark theme, base/_base.scss).
+  //
+  // Micro-interaction: subtle translateX on hover provides spatial
+  // feedback without animating layout properties (UX priority 2).
   &:not(:disabled):not(.active):hover {
     color: var(--bs-body-color);
     text-decoration: none;
     background-color: rgba($mu-slate, .08);
+    transform: translateX(2px);
   }
 
   // Disabled items: real <button disabled> elements (native
@@ -157,10 +166,19 @@
   // above the disabled-state recommendation.
   &:disabled {
     color: var(--bs-secondary-color);
+    cursor: not-allowed;
 
     svg {
       color: var(--bs-secondary-color);
     }
+  }
+
+  // Focus state: visible focus ring for keyboard navigation
+  // (UX priority 1 - Accessibility). Uses the global indigo
+  // focus ring for consistency across all interactive elements.
+  &:focus-visible {
+    outline: 2px solid $mu-indigo;
+    outline-offset: 2px;
   }
 
   // Active: solid indigo pill — clear and enterprise-standard.
@@ -417,7 +435,8 @@
   z-index: $zindex-dropdown;
   min-width: 11rem;
   padding: $spacer * .25; // 4px, like .dropdown-menu
-  background-color: var(--bs-body-bg);
+  // Match the sidebar surface so the flyout feels like an extension of the rail.
+  background-color: var(--bs-tertiary-bg);
   border: 1px solid var(--bs-border-color);
   border-radius: $border-radius;
   box-shadow: var(--bs-box-shadow);
@@ -429,6 +448,7 @@
     font-weight: $font-weight-semibold;
     letter-spacing: .04em;
     text-transform: uppercase;
+    // Match the sidebar label color for consistency.
     color: var(--bs-secondary-color);
   }
 
@@ -442,6 +462,36 @@
   .mu-sidebar-link {
     padding: $spacer * .375 $spacer * .75; // 6px 12px
     font-weight: $font-weight-normal;
+  }
+}
+
+// ------------------------------------------------------------
+// Collapsed-rail tooltip — plain links without sub-sections
+// ------------------------------------------------------------
+// When hovering a plain nav link (no sub-sections) in collapsed
+// mode, show a compact tooltip with just the link's title. This
+// is a smaller variant of the flyout panel — single label, no
+// nested list. Styled to match the sidebar's appearance so it
+// feels like an extension of the rail.
+.mu-sidebar-tooltip {
+  min-width: 11rem; // Match the flyout width for visual consistency
+  padding: $spacer * .5 $spacer; // 8px 16px — spacious and professional
+  // Match the sidebar surface so the tooltip feels like part of the rail.
+  background-color: var(--bs-tertiary-bg);
+  border: 1px solid var(--bs-border-color);
+  border-radius: $border-radius;
+  box-shadow: var(--bs-box-shadow);
+
+  .mu-sidebar-flyout-label {
+    padding: $spacer * .25 0; // 4px 0 — clear vertical spacing
+    font-size: .875rem; // 14px — readable but compact
+    font-weight: $font-weight-medium;
+    letter-spacing: normal;
+    text-transform: none;
+    white-space: nowrap;
+    // Match the sidebar link text color for visual consistency.
+    color: var(--bs-body-color);
+    line-height: 1.4;
   }
 }
 

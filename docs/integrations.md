@@ -32,7 +32,7 @@ runs.
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.5.1/dist/chart.umd.min.js"></script>
 ```
 
-The reference pattern lives in `playground/pages/dashboard-analytics.html`:
+The reference pattern lives in the three dashboards — `playground/index.html` (area chart + channel doughnut), `playground/pages/dashboard-analytics.html` (line chart), and `playground/pages/dashboard-sales.html` (bar chart + category doughnut). `dashboard-analytics.html` is the minimal example:
 
 1. A `<canvas>` with `role="img"` and a descriptive `aria-label`.
 2. A small guarded inline script — `if (!canvas || !window.Chart) return;` — so

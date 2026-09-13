@@ -12,7 +12,26 @@
 //    user accidentally breaks a 100%-width control's layout.
 
 .form-label {
-  font-weight: 500;
+  font-weight: var(--ik-label-weight);
+  font-size: var(--ik-label-size);
+  color: var(--ik-text-secondary);
+  margin-bottom: 0.375rem; // tighter than Bootstrap's 0.5rem
+}
+
+.form-control,
+.form-select {
+  border-radius: var(--ik-input-radius);
+  border-color: var(--ik-input-border);
+  transition: border-color var(--ik-motion-fast) ease, box-shadow var(--ik-motion-fast) ease;
+
+  @media (prefers-reduced-motion: reduce) {
+    transition: none;
+  }
+
+  &:focus {
+    border-color: var(--ik-primary);
+    box-shadow: 0 0 0 3px var(--ik-primary-ghost);
+  }
 }
 
 textarea.form-control {

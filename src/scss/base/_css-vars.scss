@@ -1,0 +1,157 @@
+// ============================================================
+// IndigoKit — CSS Custom Properties Output
+// ============================================================
+// Outputs the IndigoKit token system as CSS custom properties.
+// These sit on top of Bootstrap's --bs-* variables and provide
+// a consistent API for IndigoKit-specific styling.
+// ============================================================
+
+:root {
+  // ----------------------------------------------------------
+  // Spacing Scale
+  // ----------------------------------------------------------
+  --ik-space-1: #{$ik-space-1};
+  --ik-space-2: #{$ik-space-2};
+  --ik-space-3: #{$ik-space-3};
+  --ik-space-4: #{$ik-space-4};
+  --ik-space-5: #{$ik-space-5};
+  --ik-space-6: #{$ik-space-6};
+  --ik-space-8: #{$ik-space-8};
+  --ik-space-10: #{$ik-space-10};
+  --ik-space-12: #{$ik-space-12};
+
+  // ----------------------------------------------------------
+  // Color System — Light Mode
+  // ----------------------------------------------------------
+  --ik-primary: #{$ik-primary};
+  --ik-primary-hover: #{$ik-primary-hover};
+  --ik-primary-light: #{$ik-primary-light};
+  --ik-primary-ghost: #{$ik-primary-ghost};
+
+  --ik-text-primary: #{$ik-text-primary};
+  --ik-text-secondary: #{$ik-text-secondary};
+  --ik-text-muted: #{$ik-text-muted};
+
+  --ik-bg-page: #{$ik-bg-page};
+  --ik-bg-subtle: #{$ik-bg-subtle};
+  --ik-bg-hover: #{$ik-bg-hover};
+
+  --ik-border-subtle: #{$ik-border-subtle};
+  --ik-border-default: #{$ik-border-default};
+  --ik-border-strong: #{$ik-border-strong};
+
+  // ----------------------------------------------------------
+  // Shadow Elevation
+  // ----------------------------------------------------------
+  --ik-shadow-none: #{$ik-shadow-none};
+  --ik-shadow-sm: #{$ik-shadow-sm};
+  --ik-shadow-md: #{$ik-shadow-md};
+  --ik-shadow-lg: #{$ik-shadow-lg};
+  --ik-shadow-xl: #{$ik-shadow-xl};
+
+  // ----------------------------------------------------------
+  // Border Radius
+  // ----------------------------------------------------------
+  --ik-radius-sm: #{$ik-radius-sm};
+  --ik-radius-md: #{$ik-radius-md};
+  --ik-radius-lg: #{$ik-radius-lg};
+  --ik-radius-xl: #{$ik-radius-xl};
+  --ik-radius-full: #{$ik-radius-full};
+
+  // ----------------------------------------------------------
+  // Typography
+  // ----------------------------------------------------------
+  --ik-text-xs: #{$ik-text-xs};
+  --ik-text-sm: #{$ik-text-sm};
+  --ik-text-base: #{$ik-text-base};
+  --ik-text-lg: #{$ik-text-lg};
+  --ik-text-xl: #{$ik-text-xl};
+  --ik-text-2xl: #{$ik-text-2xl};
+  --ik-text-3xl: #{$ik-text-3xl};
+  --ik-text-4xl: #{$ik-text-4xl};
+
+  --ik-font-normal: #{$ik-font-normal};
+  --ik-font-medium: #{$ik-font-medium};
+  --ik-font-semibold: #{$ik-font-semibold};
+  --ik-font-bold: #{$ik-font-bold};
+
+  // ----------------------------------------------------------
+  // Motion
+  // ----------------------------------------------------------
+  --ik-motion-fast: #{$ik-motion-fast};
+  --ik-motion-normal: #{$ik-motion-normal};
+  --ik-motion-slow: #{$ik-motion-slow};
+
+  // ----------------------------------------------------------
+  // Component Tokens
+  // ----------------------------------------------------------
+  // Card
+  --ik-card-radius: #{$ik-card-radius};
+  --ik-card-shadow: #{$ik-card-shadow};
+  --ik-card-padding: #{$ik-card-padding};
+
+  // Table
+  --ik-table-header-bg: #{$ik-table-header-bg};
+  --ik-table-header-weight: #{$ik-table-header-weight};
+  --ik-table-hover-bg: #{$ik-table-hover-bg};
+
+  // Form
+  --ik-input-radius: #{$ik-input-radius};
+  --ik-input-border: #{$ik-input-border};
+  --ik-label-weight: #{$ik-label-weight};
+  --ik-label-size: #{$ik-label-size};
+
+  // Button
+  --ik-btn-radius: #{$ik-btn-radius};
+  --ik-btn-shadow: #{$ik-btn-shadow};
+  --ik-btn-hover-shadow: #{$ik-btn-hover-shadow};
+
+  // Badge
+  --ik-badge-radius: #{$ik-badge-radius};
+  --ik-badge-padding: #{$ik-badge-padding};
+  --ik-badge-font-size: #{$ik-badge-font-size};
+  --ik-badge-font-weight: #{$ik-badge-font-weight};
+
+  // Nav
+  --ik-nav-radius: #{$ik-nav-radius};
+
+  // Stat
+  --ik-stat-label-size: #{$ik-stat-label-size};
+  --ik-stat-value-size: #{$ik-stat-value-size};
+  --ik-stat-value-weight: #{$ik-stat-value-weight};
+}
+
+// ----------------------------------------------------------
+// Dark Mode Overrides
+// ----------------------------------------------------------
+[data-bs-theme="dark"] {
+  // Color System — Dark Mode
+  --ik-primary: #{$ik-primary-light};
+  --ik-primary-hover: #{$ik-primary};
+  --ik-primary-light: #{$ik-primary};
+  --ik-primary-ghost: rgba(129, 140, 248, 0.2);
+
+  --ik-text-primary: #F8FAFC;
+  --ik-text-secondary: #CBD5E1;
+  --ik-text-muted: #64748B;
+
+  --ik-bg-page: #0F172A;
+  --ik-bg-subtle: #1E293B;
+  --ik-bg-hover: #334155;
+
+  --ik-border-subtle: #334155;
+  --ik-border-default: #475569;
+  --ik-border-strong: #64748B;
+
+  // Shadows — less visible in dark mode, use borders instead
+  --ik-shadow-sm: none;
+  --ik-shadow-md: none;
+  --ik-shadow-lg: none;
+  --ik-shadow-xl: none;
+
+  // Component Tokens — Dark Mode
+  --ik-table-header-bg: #1E293B;
+  --ik-table-hover-bg: #334155;
+
+  --ik-input-border: #475569;
+}

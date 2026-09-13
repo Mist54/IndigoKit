@@ -15,16 +15,34 @@
 //   <div class="card shadow-sm">  (emits $mu-shadow-xs)
 // ============================================================
 
+// Card refinements using IndigoKit design tokens (--ik-*).
+// These provide a more polished, enterprise-grade appearance
+// while keeping Bootstrap's class names and API.
+.card {
+  border-radius: var(--ik-card-radius);
+  box-shadow: var(--ik-card-shadow);
+  border: 1px solid var(--ik-border-subtle);
+  transition: box-shadow var(--ik-motion-fast) ease, transform var(--ik-motion-fast) ease;
+
+  @media (prefers-reduced-motion: reduce) {
+    transition: none;
+  }
+}
+
 // Card titles match the approved heading weight (600) so
 // <h5 class="card-title"> reads as IndigoKit instead of plain text.
 .card-title {
-  font-weight: $font-weight-semibold;
+  font-weight: var(--ik-font-semibold);
 }
 
-// Card subtitles use the secondary/muted text hierarchy (the
-// --bs-secondary-color token, dark-theme-safe).
+// Card subtitles use the secondary/muted text hierarchy.
 .card-subtitle {
-  color: var(--bs-secondary-color);
+  color: var(--ik-text-secondary);
+}
+
+// Card body padding uses the IndigoKit spacing token.
+.card-body {
+  padding: var(--ik-card-padding);
 }
 
 // ------------------------------------------------------------
@@ -38,17 +56,28 @@
 // clickable <div>):
 //   <a class="card mu-card-interactive" href="...">...</a>
 //
-// Treatment: subtle indigo-tinted border + XS shadow on hover.
+// Treatment: subtle indigo-tinted border + shadow on hover.
 // Static cards are NOT affected — no generic hover everywhere.
 // The anchor is keyboard-focusable and receives the global
 // :focus-visible ring around the whole card.
 .mu-card-interactive {
   text-decoration: none; // the card itself is a link — no underline
 
-  @include transition(border-color $mu-motion-fast ease-in-out, box-shadow $mu-motion-fast ease-in-out);
+  @include transition(border-color var(--ik-motion-fast) ease-in-out, box-shadow var(--ik-motion-fast) ease-in-out, transform var(--ik-motion-fast) ease-in-out);
 
+  // Enhanced hover: subtle lift + border tint provides spatial
+  // feedback (UX priority 2). The transform is minimal (2px)
+  // so it reads as elevation change, not motion.
   &:hover {
-    border-color: rgba($mu-indigo, 0.4);
-    box-shadow: $mu-shadow-xs;
+    border-color: var(--ik-primary);
+    box-shadow: var(--ik-shadow-md);
+    transform: translateY(-2px);
+  }
+
+  // Focus state: visible focus ring for keyboard navigation
+  // (UX priority 1 - Accessibility).
+  &:focus-visible {
+    outline: 2px solid var(--ik-primary);
+    outline-offset: 2px;
   }
 }

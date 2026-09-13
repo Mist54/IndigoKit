@@ -30,6 +30,32 @@
   align-items: center;
   justify-content: center;
   gap: $spacer * 0.5;
+  font-weight: var(--ik-font-medium);
+  border-radius: var(--ik-btn-radius);
+
+  // Micro-interaction: subtle lift on hover provides tactile
+  // feedback without animating layout properties (UX priority 2).
+  // Include Bootstrap's own color/bg/border transitions so hover
+  // state changes animate smoothly — replacing them would cause
+  // instant color flips.
+  transition: color var(--ik-motion-fast) ease-in-out,
+    background-color var(--ik-motion-fast) ease-in-out,
+    border-color var(--ik-motion-fast) ease-in-out,
+    box-shadow var(--ik-motion-fast) ease-in-out,
+    transform var(--ik-motion-fast) ease;
+
+  @media (prefers-reduced-motion: reduce) {
+    transition: none;
+  }
+
+  &:hover:not(:disabled):not(.active) {
+    transform: translateY(-1px);
+    box-shadow: var(--ik-btn-hover-shadow);
+  }
+
+  &:active:not(:disabled) {
+    transform: translateY(0);
+  }
 }
 
 // ------------------------------------------------------------

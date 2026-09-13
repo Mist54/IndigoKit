@@ -52,6 +52,11 @@
 @import "base/base";
 @import "base/elements";
 
+// IndigoKit CSS custom properties (--ik-* variables).
+// Outputs the token system as CSS variables for consumer
+// customization and theme-aware styling.
+@import "base/css-vars";
+
 // ------------------------------------------------------------
 // 5. IndigoKit layout system
 // ------------------------------------------------------------

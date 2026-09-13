@@ -278,3 +278,143 @@ $form-switch-color: $mu-slate !default;
 // theme-aware secondary-color token instead (same fix as the
 // dropdown header, Task 015).
 $form-floating-label-disabled-color: var(--bs-secondary-color) !default;
+
+// ============================================================
+// 10. IndigoKit CSS Custom Properties (--ik-*)
+// ------------------------------------------------------------
+// The IndigoKit design token layer. These CSS custom properties
+// sit on top of Bootstrap's --bs-* variables and provide a
+// consistent API for IndigoKit-specific styling. Components
+// should reference --ik-* variables for IndigoKit-specific
+// behavior while keeping --bs-* for Bootstrap compatibility.
+//
+// This layer enables:
+// - Consumer customization without touching source
+// - Theme-aware styling via CSS variables
+// - Consistent spacing, color, and typography across components
+// ============================================================
+
+// ------------------------------------------------------------
+// 10a. Spacing Scale
+// ------------------------------------------------------------
+// 4px base unit, tighter than Bootstrap's default for enterprise
+// density. Works with Bootstrap's spacing utilities.
+$ik-space-1:  0.25rem  !default;  // 4px
+$ik-space-2:  0.5rem   !default;  // 8px
+$ik-space-3:  0.75rem  !default;  // 12px
+$ik-space-4:  1rem     !default;  // 16px
+$ik-space-5:  1.25rem  !default;  // 20px
+$ik-space-6:  1.5rem   !default;  // 24px
+$ik-space-8:  2rem     !default;  // 32px
+$ik-space-10: 2.5rem   !default;  // 40px
+$ik-space-12: 3rem     !default;  // 48px
+
+// ------------------------------------------------------------
+// 10b. Color System
+// ------------------------------------------------------------
+// Indigo primary + slate neutrals. These extend Bootstrap's
+// semantic colors with IndigoKit-specific variables.
+$ik-primary:        #4F46E5 !default;
+$ik-primary-hover:  #4338CA !default;
+$ik-primary-light:  #818CF8 !default;
+$ik-primary-ghost:  rgba(79, 70, 229, 0.15) !default;
+
+// Neutral text hierarchy
+$ik-text-primary:   #0F172A !default;
+$ik-text-secondary: #64748B !default;
+$ik-text-muted:     #94A3B8 !default;
+
+// Surface backgrounds
+$ik-bg-page:        #FFFFFF !default;
+$ik-bg-subtle:      #F8FAFC !default;
+$ik-bg-hover:       #F1F5F9 !default;
+
+// Border hierarchy
+$ik-border-subtle:  #E2E8F0 !default;
+$ik-border-default: #CBD5E1 !default;
+$ik-border-strong:  #94A3B8 !default;
+
+// ------------------------------------------------------------
+// 10c. Shadow Elevation Scale
+// ------------------------------------------------------------
+// 5-level system for clear visual hierarchy.
+$ik-shadow-none: none !default;
+$ik-shadow-sm:   0 1px 2px rgba(0, 0, 0, 0.05) !default;
+$ik-shadow-md:   0 4px 6px rgba(0, 0, 0, 0.07) !default;
+$ik-shadow-lg:   0 10px 15px rgba(0, 0, 0, 0.1) !default;
+$ik-shadow-xl:   0 20px 25px rgba(0, 0, 0, 0.15) !default;
+
+// ------------------------------------------------------------
+// 10d. Border Radius Scale
+// ------------------------------------------------------------
+// Consistent radius language across components.
+$ik-radius-sm:    0.25rem  !default;  // 4px
+$ik-radius-md:    0.375rem !default;  // 6px
+$ik-radius-lg:    0.5rem   !default;  // 8px
+$ik-radius-xl:    0.75rem  !default;  // 12px
+$ik-radius-full:  9999px   !default;  // pill
+
+// ------------------------------------------------------------
+// 10e. Typography Scale
+// ------------------------------------------------------------
+// Extended type scale for data display and captions.
+$ik-text-xs:    0.75rem   !default;  // 12px
+$ik-text-sm:    0.875rem  !default;  // 14px
+$ik-text-base:  1rem      !default;  // 16px
+$ik-text-lg:    1.125rem  !default;  // 18px
+$ik-text-xl:    1.25rem   !default;  // 20px
+$ik-text-2xl:   1.5rem    !default;  // 24px
+$ik-text-3xl:   1.875rem  !default;  // 30px
+$ik-text-4xl:   2.25rem   !default;  // 36px
+
+// Font weights
+$ik-font-normal:   400 !default;
+$ik-font-medium:   500 !default;
+$ik-font-semibold: 600 !default;
+$ik-font-bold:     700 !default;
+
+// ------------------------------------------------------------
+// 10f. Motion Tokens
+// ------------------------------------------------------------
+// Consistent timing across all interactions.
+$ik-motion-fast:   125ms !default;
+$ik-motion-normal: 200ms !default;
+$ik-motion-slow:   300ms !default;
+
+// ------------------------------------------------------------
+// 10g. Component Tokens
+// ------------------------------------------------------------
+// Card
+$ik-card-radius:    $ik-radius-lg !default;
+$ik-card-shadow:    $ik-shadow-sm !default;
+$ik-card-padding:   $ik-space-5 !default;  // 1.25rem
+
+// Table
+$ik-table-header-bg:     $ik-bg-subtle !default;
+$ik-table-header-weight: $ik-font-semibold !default;
+$ik-table-hover-bg:      $ik-bg-hover !default;
+
+// Form
+$ik-input-radius:  $ik-radius-md !default;
+$ik-input-border:  $ik-border-default !default;
+$ik-label-weight:  $ik-font-medium !default;
+$ik-label-size:    $ik-text-sm !default;
+
+// Button
+$ik-btn-radius:       $ik-radius-md !default;
+$ik-btn-shadow:       $ik-shadow-none !default;
+$ik-btn-hover-shadow: $ik-shadow-sm !default;
+
+// Badge
+$ik-badge-radius:    $ik-radius-full !default;
+$ik-badge-padding:   0.25rem 0.625rem !default;
+$ik-badge-font-size: $ik-text-xs !default;
+$ik-badge-font-weight: $ik-font-semibold !default;
+
+// Nav
+$ik-nav-radius: $ik-radius-md !default;
+
+// Stat
+$ik-stat-label-size:  $ik-text-xs !default;
+$ik-stat-value-size:  $ik-text-2xl !default;
+$ik-stat-value-weight: $ik-font-bold !default;

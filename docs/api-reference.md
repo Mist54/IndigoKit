@@ -112,11 +112,12 @@ From `package.json` — informational; packaging comes in a later task:
 | Field | Value |
 |---|---|
 | name | `indigokit` |
-| version | `1.0.0` |
+| version | `1.1.0` |
 | license | ISC |
-| dependencies | `bootstrap` ^5.3.8, `lucide` ^1.31.0 |
-| devDependencies | `sass` ^1.102.0 |
-| scripts | `build:css` (Sass CLI → `dist/css/indigokit.css`), `build:js` (copy `src/js/indigokit.js` → `dist/js/indigokit.js`) |
+| dependencies | *(empty — zero runtime deps)* |
+| peerDependencies | `bootstrap` ^5.3.8, `chart.js` ^4.5.1, `lucide` ^1.31.0, `select2` ^4.1.0 — all optional |
+| devDependencies | `bootstrap`, `chart.js`, `jquery` ^3.7.1, `lucide`, `sass` ^1.102.0, `select2` |
+| scripts | `build` (clean → build:css → build:js), `build:css` (Sass CLI → `dist/css/` incl. Select2 theme), `build:js` (`scripts/minify-js.js` → `dist/js/`), `prepack` (build), `clean` |
 
 ## Related
 
